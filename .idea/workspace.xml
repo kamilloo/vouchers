@@ -1,7 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bb773fa9-5a05-4483-8d5f-7076b0e3f6c8" name="Default Changelist" comment="" />
+    <list default="true" id="bb773fa9-5a05-4483-8d5f-7076b0e3f6c8" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/php-docker-settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/php-test-framework.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/bootstrap.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/bootstrap.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/font-awesome.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/linearicons.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/magnific-popup.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/main.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/main.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/nice-select.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/owl.carousel.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fonts/FontAwesome.otf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fonts/Linearicons-Free.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fonts/Linearicons-Free.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fonts/Linearicons-Free.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fonts/Linearicons-Free.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fonts/Linearicons-Free.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fonts/fontawesome-webfont.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fonts/fontawesome-webfont.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fonts/fontawesome-webfont.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fonts/fontawesome-webfont.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fonts/fontawesome-webfont.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/a.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/a2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/body-bg.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/bullet.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/d.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/elements/disabled-check.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/elements/disabled-radio.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/elements/primary-check.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/elements/primary-radio.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/elements/success-check.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/elements/success-radio.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/f1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/f2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/f3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/f4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/f5.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/f6.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/f7.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/f8.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/g1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/g2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/g3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/g4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/g5.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/g6.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/g7.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/g8.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/s1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/s2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/s3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/s4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/s5.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/s6.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/s7.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/s8.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/story-bg.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/w1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/jquery.ajaxchimp.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/jquery.magnific-popup.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/jquery.nice-select.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/main.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/owl.carousel.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/vendor/bootstrap.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/vendor/jquery-2.2.4.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/default/css/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/default/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/welcome.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/welcome.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,24 +89,53 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/.env">
+        <entry file="file://$PROJECT_DIR$/resources/views/welcome.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="13" lean-forward="true" selection-start-column="13" selection-end-column="13" />
+            <state relative-caret-position="401">
+              <caret line="238" column="47" lean-forward="true" selection-start-line="238" selection-start-column="47" selection-end-line="238" selection-end-column="47" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#section#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#1;n#div#1;n#section#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#2;n#div#1;n#section#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#3;n#div#1;n#section#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#4;n#div#1;n#section#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>img</find>
+      <find>js</find>
+      <find>we g</find>
+      <find>our</find>
+      <find>Our Ama</find>
+      <find>sub</find>
+      <find>Our Un</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>Jesteśmy dla Ciebie</replace>
+    </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/.env" />
+        <option value="$PROJECT_DIR$/readme.md" />
+        <option value="$PROJECT_DIR$/docker/nginx.conf" />
+        <option value="$PROJECT_DIR$/resources/dinomuz-colorlib/02 dinomuz/index.html" />
+        <option value="$PROJECT_DIR$/routes/web.php" />
+        <option value="$PROJECT_DIR$/resources/views/welcome.blade.php" />
       </list>
     </option>
   </component>
-  <component name="PhpWorkspaceProjectConfiguration">
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="docker_php:latest">
     <include_path>
       <path value="$PROJECT_DIR$/vendor/sebastian/diff" />
       <path value="$PROJECT_DIR$/vendor/sebastian/code-unit-reverse-lookup" />
@@ -118,6 +222,7 @@
     <option name="width" value="1920" />
     <option name="height" value="1055" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -130,6 +235,22 @@
               <item name="vouchers" type="b2602c69:ProjectViewProjectNode" />
               <item name="vouchers" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="vouchers" type="b2602c69:ProjectViewProjectNode" />
+              <item name="vouchers" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="vouchers" type="b2602c69:ProjectViewProjectNode" />
+              <item name="vouchers" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="vouchers" type="b2602c69:ProjectViewProjectNode" />
+              <item name="vouchers" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -138,14 +259,20 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/public" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="php.test.frameworks.configurable" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public/default" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public" />
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
@@ -161,11 +288,20 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="PHPUnit.tests">
     <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner scope="XML" />
       <method v="2" />
     </configuration>
+    <configuration name="tests" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner directory="$PROJECT_DIR$/tests" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="PHPUnit.tests" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -177,12 +313,17 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1555134343845</updated>
-      <workItem from="1555134344967" duration="921000" />
+      <workItem from="1555134344967" duration="3430000" />
     </task>
     <servers />
   </component>
+  <component name="TestHistory">
+    <history-entry file="tests - 2019.04.13 at 10h 06m 08s.xml">
+      <configuration name="tests" configurationId="PHPUnitRunConfigurationType" />
+    </history-entry>
+  </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="921000" />
+    <option name="totallyTimeSpent" value="3430000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1920" y="25" width="1920" height="1055" extended-state="6" />
@@ -199,7 +340,7 @@
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32919255" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -223,8 +364,90 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.env">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="13" lean-forward="true" selection-start-column="13" selection-end-column="13" />
+        <state relative-caret-position="783">
+          <caret line="29" column="18" lean-forward="true" selection-start-line="29" selection-start-column="18" selection-end-line="29" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/readme.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor>
+            <caret column="11" lean-forward="true" selection-start-column="11" selection-end-column="11" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docker/xdebug.ini">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docker/docker-compose.yml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docker/Dockerfile">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docker/nginx.conf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="20" column="1" lean-forward="true" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/Feature/ExampleTest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="21" selection-start-line="21" selection-end-line="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/dinomuz-colorlib/02 dinomuz/generic.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/default/css/app.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/default/js/app.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/css/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="594">
+          <caret line="22" column="27" lean-forward="true" selection-start-line="22" selection-start-column="27" selection-end-line="22" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/dinomuz-colorlib/02 dinomuz/elements.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-891" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/dinomuz-colorlib/02 dinomuz/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="486">
+          <caret line="42" column="51" lean-forward="true" selection-start-line="42" selection-start-column="51" selection-end-line="42" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/web.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/welcome.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="401">
+          <caret line="238" column="47" lean-forward="true" selection-start-line="238" selection-start-column="47" selection-end-line="238" selection-end-column="47" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#section#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#div#1;n#section#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#2;n#div#1;n#section#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#3;n#div#1;n#section#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#4;n#div#1;n#section#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
