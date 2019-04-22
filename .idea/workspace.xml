@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bb773fa9-5a05-4483-8d5f-7076b0e3f6c8" name="Default Changelist" comment="" />
+    <list default="true" id="bb773fa9-5a05-4483-8d5f-7076b0e3f6c8" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/resources/views/welcome.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/welcome.blade.php" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,8 +43,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/welcome.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="441">
-              <caret line="316" column="32" lean-forward="true" selection-start-line="316" selection-start-column="32" selection-end-line="316" selection-end-column="32" />
+            <state relative-caret-position="384">
+              <caret line="316" column="76" lean-forward="true" selection-start-line="316" selection-start-column="76" selection-end-line="316" selection-end-column="76" />
             </state>
           </provider>
         </entry>
@@ -394,7 +396,7 @@
       <workItem from="1555828844181" duration="491000" />
       <workItem from="1555935123868" duration="46000" />
       <workItem from="1555935327664" duration="3574000" />
-      <workItem from="1555958326713" duration="3829000" />
+      <workItem from="1555958326713" duration="4102000" />
     </task>
     <servers />
   </component>
@@ -431,13 +433,13 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="19610000" />
+    <option name="totallyTimeSpent" value="19883000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1920" y="25" width="1920" height="1055" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49896482" visible="true" weight="0.26627535" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49896482" weight="0.26627535" />
       <window_info id="Structure" order="1" sideWeight="0.5010352" side_tool="true" weight="0.26627535" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" sideWeight="0.5010352" side_tool="true" weight="0.26627535" />
@@ -698,8 +700,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/welcome.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="441">
-          <caret line="316" column="32" lean-forward="true" selection-start-line="316" selection-start-column="32" selection-end-line="316" selection-end-column="32" />
+        <state relative-caret-position="384">
+          <caret line="316" column="76" lean-forward="true" selection-start-line="316" selection-start-column="76" selection-end-line="316" selection-end-column="76" />
         </state>
       </provider>
     </entry>

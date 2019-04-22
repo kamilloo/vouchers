@@ -312,10 +312,10 @@
             <div class="row justify-content-center">
                 <div class="col-lg-6">
                     <div id="mc_embed_signup">
-                        <form target="_blank" novalidate action="https://spondonit.us12.list-manage.com/subscribe/post?u=2e0c9d65f6bc223cc7951eab7&id=6cda572e7f" method="get" class="subscription relative">
+                        <form target="_blank" novalidate action="https://gmail.us20.list-manage.com/subscribe/post?u=2e0c9d65f6bc223cc7951eab7&amp;id=6cda572e7f" method="get" class="subscription relative">
                             <input type="email" name="EMAIL" placeholder="Podaj adres email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email address'" required>
                             <div style="position: absolute; left: -5000px;">
-                                <input type="text" name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="">
+                                <input type="text" name="b_2e0c9d65f6bc223cc7951eab7_6cda572e7f" tabindex="-1" value="">
                             </div>
                             <button class="primary-btn hover d-inline-flex align-items-center"><span class="mr-10">Get Started</span><span class="lnr lnr-arrow-right"></span></button>
                             <div class="info"></div>
