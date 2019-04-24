@@ -11,8 +11,4 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
-
-Route::post('contact/send', 'ContactController@send')->name('contact.send');
+Route::get('/', 'WelcomeController@index')->name('welcome');

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ContractSend extends FormRequest
+class WelcomeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,17 +23,6 @@ class ContractSend extends FormRequest
      */
     public function rules()
     {
-        return [
-            'email' => ['required', 'email']
-        ];
-    }
-
-    public function messages()
-    {
-
-        return [
-            'email.required' => 'Please enter a value',
-            'email.email' => 'the domainportion of the email address is invalid',
-        ];
+        return [];
     }
 }
