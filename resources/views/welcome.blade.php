@@ -238,38 +238,31 @@
         </div>
         <div class="active-works-carousel mt-40">
             <div class="item">
-                <div class="thumb" style="background: url(img/w1.jpg);"></div>
+                <div class="thumb" style="background: url(img/templates/template-1.png);"></div>
                 <div class="caption text-center">
                     <h6 class="text-uppercase">Nowoczesny styl</h6>
-                    <p>Strona idealna dla usług opartych na branzy IT i pokrewnych.</p>
+                    <p>Strona idealna dla usług opartych na branży IT i pokrewnych.</p>
                 </div>
             </div>
             <div class="item">
-                <div class="thumb" style="background: url(img/w1.jpg);"></div>
+                <div class="thumb" style="background: url(img/templates/template-2.png);"></div>
                 <div class="caption text-center">
-                    <h6 class="text-uppercase">Nowoczesny styl</h6>
-                    <p>Strona idealna dla usług opartych na branzy IT i pokrewnych.</p>
+                    <h6 class="text-uppercase">Klasyczny styl</h6>
+                    <p>Strona idealna dla każdej branży.</p>
                 </div>
             </div>
             <div class="item">
-                <div class="thumb" style="background: url(img/w1.jpg);"></div>
+                <div class="thumb" style="background: url(img/templates/template-3.png);"></div>
                 <div class="caption text-center">
-                    <h6 class="text-uppercase">Nowoczesny styl</h6>
-                    <p>Strona idealna dla usług opartych na branzy IT i pokrewnych.</p>
+                    <h6 class="text-uppercase">Retro styl</h6>
+                    <p>Strona idealna dla usług stylowych.</p>
                 </div>
             </div>
             <div class="item">
-                <div class="thumb" style="background: url(img/w1.jpg);"></div>
+                <div class="thumb" style="background: url(img/templates/template-4.png);"></div>
                 <div class="caption text-center">
-                    <h6 class="text-uppercase">Nowoczesny styl</h6>
-                    <p>Strona idealna dla usług opartych na branzy IT i pokrewnych.</p>
-                </div>
-            </div>
-            <div class="item">
-                <div class="thumb" style="background: url(img/w1.jpg);"></div>
-                <div class="caption text-center">
-                    <h6 class="text-uppercase">Nowoczesny styl</h6>
-                    <p>Strona idealna dla usług opartych na branzy IT i pokrewnych.</p>
+                    <h6 class="text-uppercase">Elegancki styl</h6>
+                    <p>Strona idealna dla usług opartych na branży beauty i pokrewnych.</p>
                 </div>
             </div>
         </div>

@@ -12,3 +12,8 @@
 */
 
 Route::get('/', 'WelcomeController@index')->name('welcome');
+
+Route::get('/template-{id}', function ($id){
+    return view('templates.template'.$id);
+});
+
