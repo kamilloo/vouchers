@@ -17,3 +17,7 @@ Route::get('/template-{id}', function ($id){
     return view('templates.template'.$id);
 });
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

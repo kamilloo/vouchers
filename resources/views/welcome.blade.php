@@ -4,7 +4,7 @@
     <!-- Mobile Specific Meta -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon-->
-    <link rel="shortcut icon" href="img/fav.png">
+    <link rel="shortcut icon" href="welcome/img/fav.png">
     <!-- Author Meta -->
     <meta name="author" content="CodePixar">
     <!-- Meta Description -->
@@ -20,13 +20,13 @@
     <!--
     CSS
     ============================================= -->
-    <link rel="stylesheet" href="css/linearicons.css">
-    <link rel="stylesheet" href="css/owl.carousel.css">
-    <link rel="stylesheet" href="css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/nice-select.css">
-    <link rel="stylesheet" href="css/magnific-popup.css">
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="welcome/css/linearicons.css">
+    <link rel="stylesheet" href="welcome/css/owl.carousel.css">
+    <link rel="stylesheet" href="welcome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="welcome/css/nice-select.css">
+    <link rel="stylesheet" href="welcome/css/magnific-popup.css">
+    <link rel="stylesheet" href="welcome/css/bootstrap.css">
+    <link rel="stylesheet" href="welcome/css/main.css">
 </head>
 <body>
 <div class="main-wrapper-first">
@@ -35,11 +35,11 @@
             <div class="header-wrap">
                 <div class="header-top d-flex justify-content-between align-items-center">
                     <div class="logo">
-                        <a href="{{ route('welcome') }}"><img src="img/logo.png" alt=""></a>
+                        <a href="{{ route('welcome') }}"><img src="welcome/img/logo.png" alt=""></a>
                     </div>
                     <div class="main-menubar d-flex align-items-center">
                         <nav class="hide">
-                            <a href="{{ route('welcome') }}">Home</a>
+                            <a href="{{ route('home') }}">Home</a>
 {{--                            <a href="generic.html">Generic</a>--}}
 {{--                            <a href="elements.html">Elements</a>--}}
                         </nav>
@@ -118,7 +118,7 @@
 {{--            <div class="row">--}}
 {{--                <div class="col-lg-3 col-sm-6">--}}
 {{--                    <div class="single-service">--}}
-{{--                        <div class="thumb" style="background: url(img/s1.jpg);">--}}
+{{--                        <div class="thumb" style="background: url(welcome/img/s1.jpg);">--}}
 {{--                            <div class="overlay overlay-content d-flex justify-content-center align-items-center">--}}
 {{--                                <a href="#" class="primary-btn hover d-inline-flex align-items-center"><span class="mr-10">Get Started</span><span class="lnr lnr-arrow-right"></span></a>--}}
 {{--                            </div>--}}
@@ -131,7 +131,7 @@
 {{--                </div>--}}
 {{--                <div class="col-lg-3 col-sm-6">--}}
 {{--                    <div class="single-service">--}}
-{{--                        <div class="thumb" style="background: url(img/s2.jpg);">--}}
+{{--                        <div class="thumb" style="background: url(welcome/img/s2.jpg);">--}}
 {{--                            <div class="overlay overlay-content d-flex justify-content-center align-items-center">--}}
 {{--                                <a href="#" class="primary-btn hover d-inline-flex align-items-center"><span class="mr-10">Get Started</span><span class="lnr lnr-arrow-right"></span></a>--}}
 {{--                            </div>--}}
@@ -144,7 +144,7 @@
 {{--                </div>--}}
 {{--                <div class="col-lg-3 col-sm-6">--}}
 {{--                    <div class="single-service">--}}
-{{--                        <div class="thumb" style="background: url(img/s3.jpg);">--}}
+{{--                        <div class="thumb" style="background: url(welcome/img/s3.jpg);">--}}
 {{--                            <div class="overlay overlay-content d-flex justify-content-center align-items-center">--}}
 {{--                                <a href="#" class="primary-btn hover d-inline-flex align-items-center"><span class="mr-10">Get Started</span><span class="lnr lnr-arrow-right"></span></a>--}}
 {{--                            </div>--}}
@@ -157,7 +157,7 @@
 {{--                </div>--}}
 {{--                <div class="col-lg-3 col-sm-6">--}}
 {{--                    <div class="single-service">--}}
-{{--                        <div class="thumb" style="background: url(img/s4.jpg);">--}}
+{{--                        <div class="thumb" style="background: url(welcome/img/s4.jpg);">--}}
 {{--                            <div class="overlay overlay-content d-flex justify-content-center align-items-center">--}}
 {{--                                <a href="#" class="primary-btn hover d-inline-flex align-items-center"><span class="mr-10">Get Started</span><span class="lnr lnr-arrow-right"></span></a>--}}
 {{--                            </div>--}}
@@ -170,7 +170,7 @@
 {{--                </div>--}}
 {{--                <div class="col-lg-3 col-sm-6">--}}
 {{--                    <div class="single-service">--}}
-{{--                        <div class="thumb" style="background: url(img/s5.jpg);">--}}
+{{--                        <div class="thumb" style="background: url(welcome/img/s5.jpg);">--}}
 {{--                            <div class="overlay overlay-content d-flex justify-content-center align-items-center">--}}
 {{--                                <a href="#" class="primary-btn hover d-inline-flex align-items-center"><span class="mr-10">Get Started</span><span class="lnr lnr-arrow-right"></span></a>--}}
 {{--                            </div>--}}
@@ -183,7 +183,7 @@
 {{--                </div>--}}
 {{--                <div class="col-lg-3 col-sm-6">--}}
 {{--                    <div class="single-service">--}}
-{{--                        <div class="thumb" style="background: url(img/s6.jpg);">--}}
+{{--                        <div class="thumb" style="background: url(welcome/img/s6.jpg);">--}}
 {{--                            <div class="overlay overlay-content d-flex justify-content-center align-items-center">--}}
 {{--                                <a href="#" class="primary-btn hover d-inline-flex align-items-center"><span class="mr-10">Get Started</span><span class="lnr lnr-arrow-right"></span></a>--}}
 {{--                            </div>--}}
@@ -196,7 +196,7 @@
 {{--                </div>--}}
 {{--                <div class="col-lg-3 col-sm-6">--}}
 {{--                    <div class="single-service">--}}
-{{--                        <div class="thumb" style="background: url(img/s7.jpg);">--}}
+{{--                        <div class="thumb" style="background: url(welcome/img/s7.jpg);">--}}
 {{--                            <div class="overlay overlay-content d-flex justify-content-center align-items-center">--}}
 {{--                                <a href="#" class="primary-btn hover d-inline-flex align-items-center"><span class="mr-10">Get Started</span><span class="lnr lnr-arrow-right"></span></a>--}}
 {{--                            </div>--}}
@@ -209,7 +209,7 @@
 {{--                </div>--}}
 {{--                <div class="col-lg-3 col-sm-6">--}}
 {{--                    <div class="single-service">--}}
-{{--                        <div class="thumb" style="background: url(img/s8.jpg);">--}}
+{{--                        <div class="thumb" style="background: url(welcome/img/s8.jpg);">--}}
 {{--                            <div class="overlay overlay-content d-flex justify-content-center align-items-center">--}}
 {{--                                <a href="#" class="primary-btn hover d-inline-flex align-items-center"><span class="mr-10">Get Started</span><span class="lnr lnr-arrow-right"></span></a>--}}
 {{--                            </div>--}}
@@ -238,28 +238,28 @@
         </div>
         <div class="active-works-carousel mt-40">
             <div class="item">
-                <div class="thumb" style="background: url(img/templates/template-1.png);"></div>
+                <div class="thumb" style="background: url(welcome/img/templates/template-1.png);"></div>
                 <div class="caption text-center">
                     <h6 class="text-uppercase">Nowoczesny styl</h6>
                     <p>Strona idealna dla usług opartych na branży IT i pokrewnych.</p>
                 </div>
             </div>
             <div class="item">
-                <div class="thumb" style="background: url(img/templates/template-2.png);"></div>
+                <div class="thumb" style="background: url(welcome/img/templates/template-2.png);"></div>
                 <div class="caption text-center">
                     <h6 class="text-uppercase">Klasyczny styl</h6>
                     <p>Strona idealna dla każdej branży.</p>
                 </div>
             </div>
             <div class="item">
-                <div class="thumb" style="background: url(img/templates/template-3.png);"></div>
+                <div class="thumb" style="background: url(welcome/img/templates/template-3.png);"></div>
                 <div class="caption text-center">
                     <h6 class="text-uppercase">Retro styl</h6>
                     <p>Strona idealna dla usług stylowych.</p>
                 </div>
             </div>
             <div class="item">
-                <div class="thumb" style="background: url(img/templates/template-4.png);"></div>
+                <div class="thumb" style="background: url(welcome/img/templates/template-4.png);"></div>
                 <div class="caption text-center">
                     <h6 class="text-uppercase">Elegancki styl</h6>
                     <p>Strona idealna dla usług opartych na branży beauty i pokrewnych.</p>
@@ -371,7 +371,7 @@
         <div class="container">
             <div class="footer-content d-flex justify-content-between align-items-center flex-wrap">
                 <div class="logo">
-                    <img src="img/logo.png" alt="">
+                    <img src="welcome/img/logo.png" alt="">
                 </div>
                 <div class="copy-right-text">Copyright &copy; {{ \Carbon\Carbon::now()->year }}  |  All rights reserved to Dinomuz inc. This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a></div>
                 <div class="footer-social">
@@ -389,13 +389,13 @@
 
 
 
-<script src="js/vendor/jquery-2.2.4.min.js"></script>
+<script src="welcome/js/vendor/jquery-2.2.4.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
-<script src="js/vendor/bootstrap.min.js"></script>
-<script src="js/jquery.ajaxchimp.min.js"></script>
-<script src="js/owl.carousel.min.js"></script>
-<script src="js/jquery.nice-select.min.js"></script>
-<script src="js/jquery.magnific-popup.min.js"></script>
-<script src="js/main.js"></script>
+<script src="welcome/js/vendor/bootstrap.min.js"></script>
+<script src="welcome/js/jquery.ajaxchimp.min.js"></script>
+<script src="welcome/js/owl.carousel.min.js"></script>
+<script src="welcome/js/jquery.nice-select.min.js"></script>
+<script src="welcome/js/jquery.magnific-popup.min.js"></script>
+<script src="welcome/js/main.js"></script>
 </body>
 </html>
