@@ -21,3 +21,5 @@ Route::get('/template-{id}', function ($id){
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('get-started', 'Starter@getStarted')->name('get-started');
