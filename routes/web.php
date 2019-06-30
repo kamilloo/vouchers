@@ -20,6 +20,11 @@ Route::get('/template-{id}', function ($id){
 
 Auth::routes();
 
+
+Route::middleware('auth')->group(function (){
+    Route::get('/profile', 'Profile@index')->name('profile.index');
+    Route::post('/profile', 'Profile@update')->name('profile.update');
+});
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('get-started', 'Starter@getStarted')->name('get-started');
