@@ -68,17 +68,11 @@
     .profile-edit-btn{
         border: none;
         border-radius: 1.5rem;
-        width: 100%;
+        width: 70%;
         padding: 2%;
         font-weight: 600;
-        background-color: #F2F1F0;
+        color: #6c757d;
         cursor: pointer;
-        display: inline-block;
-        text-align: center;
-    }
-    .profile-edit-btn a:link, a:visited, a:hover, a:active{
-        text-decoration: none;
-        color: #6C757D;
     }
     .proile-rating{
         font-size: 12px;
@@ -129,6 +123,8 @@
     }
 </style>
 <div class="container emp-profile">
+    <form method="post">
+        @csrf
         <div class="row">
             <div class="col-md-4">
                 <div class="profile-img">
@@ -139,7 +135,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-5">
+            <div class="col-md-6">
                 <div class="profile-head">
                     <h5>
                         Kshiti Ghelani
@@ -158,20 +154,18 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="profile-edit-btn" onmouseover="editButtonFocusIn(this)" onmouseout="editButtonFocusOut(this)">
-                    <a href="{{ route('profile.edit') }}" >Edit Profile</a>
-                </div>
+            <div class="col-md-2">
+                <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Save"/>
             </div>
         </div>
         <div class="row">
             <div class="col-md-4">
                 <div class="profile-work">
-                    <p>WORK LINK</p>
+                    <p>Usługi</p>
                     <a href="">Website Link</a><br/>
                     <a href="">Bootsnipp Profile</a><br/>
                     <a href="">Bootply Profile</a>
-                    <p>SKILLS</p>
+                    <p>Umiejętności</p>
                     <a href="">Web Designer</a><br/>
                     <a href="">Web Developer</a><br/>
                     <a href="">WordPress</a><br/>
@@ -182,46 +176,23 @@
             <div class="col-md-8">
                 <div class="tab-content profile-tab" id="myTabContent">
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>User Id</label>
+                        <div class="row input-group mb-3">
+                            <div class="col-md-4">
+                                <label>Nazwa</label>
                             </div>
-                            <div class="col-md-6">
-                                <p>Kshiti123</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Name</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>Kshiti Ghelani</p>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" placeholder="Nazwa" name="name" value="you name">
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Email</label>
+                        <div class="row input-group mb-3">
+                            <div class="col-md-4">
+                                <label>Adres</label>
                             </div>
-                            <div class="col-md-6">
-                                <p>kshitighelani@gmail.com</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Phone</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>123 456 7890</p>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" placeholder="Adres" name="address" value="adress">
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Profession</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>Web Developer and Designer</p>
-                            </div>
-                        </div>
+
                     </div>
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                         <div class="row">
@@ -274,13 +245,5 @@
                 </div>
             </div>
         </div>
+    </form>
 </div>
-<script>
-    function editButtonFocusIn(button) {
-        button.style.background = "#fff";
-    }
-
-    function editButtonFocusOut(button) {
-        button.style.background = "";
-    }
-</script>
