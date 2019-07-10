@@ -50,7 +50,8 @@ class ProfileTest extends TestCase
             'description' => 'some data',
             'branch' => 'some data',
         ];
-        $response = $this->post(route('profile.update'), $incoming_data);
+        $response = $this->post(route('profile.update'), $incoming_data)
+            ->assertRedirect(route('profile.index'));
 
         $this->assertDatabaseHas('user_profiles', [
             'user_id' => $this->user->id,

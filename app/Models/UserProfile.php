@@ -6,6 +6,8 @@ use App\Models\User;
 
 class UserProfile extends Model
 {
+    protected $primaryKey = 'user_id';
+
     protected $table = 'user_profiles';
 
     protected $fillable = [
@@ -18,6 +20,7 @@ class UserProfile extends Model
         'logo',
         'description',
         'branch',
+        'user_id'
     ];
 
     public function user()
