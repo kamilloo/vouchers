@@ -10,6 +10,7 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    protected $with = ['profile'];
     /**
      * The attributes that are mass assignable.
      *
@@ -43,13 +44,5 @@ class User extends Authenticatable
     public function profile()
     {
         return $this->hasOne(UserProfile::class);
-    }
-
-    /**
-     * @return UserProfile
-     */
-    public function getProfileAttribute()
-    {
-        return $this->profile;
     }
 }

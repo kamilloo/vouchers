@@ -24,7 +24,7 @@ class ProfilePage extends Page
      */
     public function assert(Browser $browser)
     {
-        $browser->assertSee('Profile');
+        $browser->assertSee('ProfileController');
         $browser->assertSee('Imię');
         $browser->assertSee('Nazwisko');
         $browser->assertSee('Adres');

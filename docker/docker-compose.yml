@@ -4,7 +4,7 @@ services:
     image: nginx:latest
     container_name: vouchers
     ports:
-      - "8080:80"
+      - "80:80"
     volumes:
       - ../:/var/www
       - ./nginx.conf:/etc/nginx/conf.d/default.conf

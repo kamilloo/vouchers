@@ -26,5 +26,9 @@
         "vue": "^2.5.17",
         "vue-template-compiler": "^2.6.10",
         "webpack": "^4.35.3"
+    },
+    "dependencies": {
+        "cropperjs": "^1.5.3",
+        "vue-upload-component": "^2.8.20"
     }
 }

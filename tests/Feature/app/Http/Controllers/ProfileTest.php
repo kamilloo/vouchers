@@ -2,14 +2,55 @@
 
 namespace Tests\Feature\App\Http\StarterTest;
 
+use App\Models\User;
+use Illuminate\Http\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileTest extends TestCase
 {
     use RefreshDatabase;
+
+    /**
+     * @var UploadedFile
+     */
+    private $file;
+    /**
+     * @var \Illuminate\Http\Testing\FileFactory
+     */
+    private $file_factory;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->file_factory = UploadedFile::fake();
+        $this->file = $this->file_factory->image('png');
+
+    }
+
+    /**
+     * @test
+     */
+    public function index_get_redirection_for_no_login()
+    {
+        $response = $this->get(route('profile.index'));
+
+        $response->assertStatus(302);
+    }
+
+    /**
+     * @test
+     */
+    public function index_get_profile_page()
+    {
+        $this->createUserAndBe();
+        $response = $this->get(route('profile.index'));
+
+        $response->assertStatus(200);
+    }
     /**
      * @test
      */
@@ -36,6 +77,18 @@ class ProfileTest extends TestCase
     /**
      * @test
      */
+    public function update_user_not_change_data()
+    {
+        $this->user = factory(User::class)->create();
+        $this->be($this->user);
+        $response = $this->post(route('profile.update'));
+
+        $response->assertStatus(302)->assertRedirect(route('profile.index'))->assertSessionHas('success');
+    }
+
+    /**
+     * @test
+     */
     public function update_database_was_updated()
     {
         $this->createUserAndBe();
@@ -45,13 +98,12 @@ class ProfileTest extends TestCase
             'first_name' => 'some data',
             'last_name' => 'some data',
             'services' => 'some data',
-            'avatar' => 'some data',
-            'logo' => 'some data',
             'description' => 'some data',
             'branch' => 'some data',
         ];
-        $response = $this->post(route('profile.update'), $incoming_data)
-            ->assertRedirect(route('profile.index'));
+        $this->post(route('profile.update'), $incoming_data)
+            ->assertRedirect(route('profile.index'))
+            ->assertSessionHas('success');
 
         $this->assertDatabaseHas('user_profiles', [
             'user_id' => $this->user->id,
@@ -61,11 +113,16 @@ class ProfileTest extends TestCase
     /**
      * @test
      */
-    public function update_redirect_to_index()
+    public function update_logo_was_stored()
     {
         $this->createUserAndBe();
-        $response = $this->post(route('profile.update'));
+        $incoming_data = [
+            'logo' => $this->file
+        ];
+        $this->post(route('profile.update'), $incoming_data);
 
-        $response->assertStatus(302)->assertRedirect(route('profile.index'));
+        $logo_file_name = $this->user->profile->logo;
+        Storage::assertExists($logo_file_name);
+
     }
 }
