@@ -8,7 +8,7 @@
 
 @section('logo')
     <div class="profile-img">
-        <img src="{{ $guard->user()->profile->logo }}" alt=""/>
+        <img src="{{ \Storage::url($guard->user()->profile->logo) }}" alt=""/>
     </div>
 @endsection
 

@@ -58,6 +58,6 @@ class ProfileController extends Controller
      */
     protected function replaceLogo(UploadedFile $file)
     {
-        return $file->storePublicly('logos');
+        return $file->storePublicly('public/logos');
     }
 }

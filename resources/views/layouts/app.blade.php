@@ -33,7 +33,10 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                        <li class="nav-item"><a class="nav-link" href="{{ route('vouchers.index') }}">{{ __('My Vouchers') }}</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('shop') }}">{{ __('Shop') }}</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('payments.index') }}">{{ __('Payments') }}</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('wizard') }}">{{ __('Wizard') }}</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -55,6 +58,9 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('profile.index') }}">
+                                        {{ __('Profile') }}
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
