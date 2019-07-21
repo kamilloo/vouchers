@@ -25,10 +25,15 @@ Route::middleware('auth')->group(function (){
     Route::get('/profile', 'ProfileController@index')->name('profile.index');
     Route::post('/profile/edit', 'ProfileController@update')->name('profile.update');
     Route::get('/profile/edit', 'ProfileController@edit')->name('profile.edit');
-    Route::get('/vouchers', 'VoucherController@index')->name('vouchers.index');
     Route::get('/payments', 'VoucherController@index')->name('payments.index');
     Route::get('/wizard', 'VoucherController@index')->name('wizard');
     Route::get('/shop', 'VoucherController@index')->name('shop');
+
+
+    Route::get('/vouchers', 'VoucherController@index')->name('vouchers.index');
+    Route::get('/vouchers/{voucher}', 'VoucherController@edit')->name('vouchers.edit');
+    Route::post('/vouchers/{voucher}', 'VoucherController@update')->name('vouchers.update');
+
 
 });
 Route::get('/home', 'HomeController@index')->name('home');
