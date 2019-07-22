@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdate;
+use App\Http\Requests\VoucherUpdate;
 use App\Models\UserProfile;
 use App\Models\Voucher;
 use Illuminate\Contracts\Auth\Guard;
@@ -13,6 +14,11 @@ use Illuminate\Support\Arr;
 
 class VoucherController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Voucher::class);
+    }
+
     public function index(Guard $guard)
     {
         $vouchers = Voucher::Mine()->get();
@@ -24,42 +30,16 @@ class VoucherController extends Controller
         return view('vouchers.edit', compact('voucher'));
     }
 
-    public function update(ProfileUpdate $request, Guard $guard, FilesystemManager $file_manager)
+    public function update(VoucherUpdate $request, Voucher $voucher, FilesystemManager $file_manager)
     {
-        $profile_attributes = $request->only([
-            'address',
-            'company_name',
-            'first_name',
-            'last_name',
-            'services',
-            'description',
-            'branch'
+        $voucher_attributes = $request->only([
+            'title',
+            'type',
+            'price',
+            'service'
         ]);
+        $voucher->update($voucher_attributes);
 
-        $file = $request->file('logo');
-        if (!empty($file))
-        {
-            $logo = $this->replaceLogo($file);
-            Arr::set($profile_attributes, 'logo', $logo);
-        }
-
-        $profile = $guard->user()->profile()->first();
-        if (empty($profile))
-        {
-            $guard->user()->profile()->save(new UserProfile($profile_attributes));
-        }else{
-            $profile->update($profile_attributes);
-        }
-        return redirect(route('profile.index'))->with('success', 'Your profile was updated!');
-    }
-
-    /**
-     * @param ProfileUpdate $request
-     *
-     * @return false|string
-     */
-    protected function replaceLogo(UploadedFile $file)
-    {
-        return $file->storePublicly('public/logos');
+        return redirect(route('vouchers.index'))->with('success', 'Your profile was updated!');
     }
 }

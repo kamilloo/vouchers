@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\App\Http\StarterTest;
 
+use App\Models\Enums\VoucherType;
 use App\Models\User;
 use App\Models\Voucher;
 use Illuminate\Http\UploadedFile;
@@ -43,20 +44,32 @@ class VoucherControllerTest extends TestCase
      */
     public function index_get_vouchers_list()
     {
-        $response = $this->get(route('vouchers.index'));
+        $response = $this->get(route('vouchers.index'))
+            ->assertViewHas('vouchers');
 
         $response->assertStatus(200);
+    }
+
+
+    /**
+     * @test
+     */
+    public function update_got_403_authorization_denied()
+    {
+        $this->voucher = factory(Voucher::class)->create();
+        $response = $this->post(route('vouchers.update', $this->voucher));
+        $response->assertStatus(403);
     }
 
     /**
      * @test
      */
-    public function update_incoming_data()
+    public function update_validation_exception()
     {
         $this->voucher = factory(Voucher::class)->state('mine')->create();
         $redirect_url = route('vouchers.edit', $this->voucher);
         $response = $this->call(Request::METHOD_POST, route('vouchers.update', $this->voucher), [
-            'address' => false
+            'type' => false
         ], [],[],['HTTP_REFERER' => $redirect_url]);
 
         $response->assertStatus(302)->assertRedirect($redirect_url);
@@ -65,9 +78,14 @@ class VoucherControllerTest extends TestCase
     /**
      * @test
      */
-    public function update_user_not_change_data()
+    public function update_voucher_was_updated()
     {
-        $response = $this->post(route('vouchers.update'));
+        $this->voucher = factory(Voucher::class)->state('mine')->create();
+        $response = $this->post(route('vouchers.update', $this->voucher), [
+            'title' => 'title',
+            'type' => VoucherType::SERVICE,
+            'service' => 'service'
+        ]);
 
         $response->assertStatus(302)->assertRedirect(route('vouchers.index'))->assertSessionHas('success');
     }
@@ -77,38 +95,19 @@ class VoucherControllerTest extends TestCase
      */
     public function update_database_was_updated()
     {
-        $this->createUserAndBe();
+        $this->voucher = factory(Voucher::class)->state('mine')->create();
         $incoming_data = [
-            'address' => 'some data',
-            'company_name' => 'some data',
-            'first_name' => 'some data',
-            'last_name' => 'some data',
-            'services' => 'some data',
-            'description' => 'some data',
-            'branch' => 'some data',
+            'title' => 'title',
+            'type' => VoucherType::SERVICE,
+            'service' => 'service'
         ];
-        $this->post(route('vouchers.update'), $incoming_data)
-            ->assertRedirect(route('vouchers.index'))
+        $response = $this->post(route('vouchers.update', $this->voucher), $incoming_data);
+
+        $response->assertStatus(302)->assertRedirect(route('vouchers.index'))
             ->assertSessionHas('success');
 
-        $this->assertDatabaseHas('user_voucherss', [
+        $this->assertDatabaseHas('vouchers', [
             'user_id' => $this->user->id,
         ] + $incoming_data);
-    }
-
-    /**
-     * @test
-     */
-    public function update_logo_was_stored()
-    {
-        $this->createUserAndBe();
-        $incoming_data = [
-            'logo' => $this->file
-        ];
-        $this->post(route('vouchers.update'), $incoming_data);
-
-        $logo_file_name = $this->user->vouchers->logo;
-        Storage::assertExists($logo_file_name);
-
     }
 }

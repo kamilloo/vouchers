@@ -10,6 +10,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 abstract class Model extends VendorModel
 {
+    protected $guarded = [''];
+
     public function scopeMine(Builder $query): Builder
     {
         return $query->whereUserId(auth()->id());
