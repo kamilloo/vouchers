@@ -30,10 +30,7 @@ Route::middleware('auth')->group(function (){
     Route::get('/shop', 'VoucherController@index')->name('shop');
 
 
-    Route::get('/vouchers', 'VoucherController@index')->name('vouchers.index');
-    Route::get('/vouchers/{voucher}', 'VoucherController@edit')->name('vouchers.edit');
-    Route::post('/vouchers/{voucher}', 'VoucherController@update')->name('vouchers.update');
-
+    Route::resource('/vouchers', 'VoucherController');
 
 });
 Route::get('/home', 'HomeController@index')->name('home');

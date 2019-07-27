@@ -2,8 +2,8 @@
 
 @section('content')
     <div class="container">
-        <div class="row justify-content-center pb-md-5  pb-1">
-            <div class="col-md-8">
+        <div class="container emp-profile">
+            <div class="col-md-12">
                 @yield('list')
                 @yield('form')
             </div>

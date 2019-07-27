@@ -2,12 +2,12 @@
 
 
 @section('list')
-    <form method="post" enctype="multipart/form-data" action=" {{ route('vouchers.update', $voucher) }}">
+    <form method="post" action="{{ route('vouchers.store') }}" enctype="multipart/form-data">
         {{ csrf_field() }}
-        @method('put')
+        @method('post')
         <div class="form-group">
             <label for="title">Title</label>
-            <input type="text" class="form-control" id="title" name="title" dusk="title" placeholder="Title" value="{{ old('title') ?? $voucher->title }}">
+            <input type="text" class="form-control" id="title" name="title" dusk="title" placeholder="Title" value="{{ old('title') }}">
             @if($errors->first('title'))
                 <span>{{ $errors->first('title') }}</span>
             @endif
@@ -24,14 +24,14 @@
         </div>
         <div class="form-group">
             <label for="price">Price</label>
-            <input type="number" class="form-control" id="price" name="price" dusk="price" placeholder="Price" value="{{ old('price') ?? $voucher->price }}">
+            <input type="number" class="form-control" id="price" name="price" dusk="price" placeholder="Price" value="{{ old('price') }}">
             @if($errors->first('price'))
             <span>{{ $errors->first('price') }}</span>
             @endif
         </div>
         <div class="form-group">
             <label for="service">Service</label>
-            <input type="text" class="form-control" id="service" name="service" dusk="service" placeholder="Service" value="{{ old('service') ?? $voucher->service }}">
+            <input type="text" class="form-control" id="service" name="service" dusk="service" placeholder="Service" value="{{ old('service') }}">
             @if($errors->first('service'))
             <span>{{ $errors->first('service') }}</span>
             @endif

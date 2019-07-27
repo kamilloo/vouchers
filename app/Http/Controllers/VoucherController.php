@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdate;
+use App\Http\Requests\VoucherStore;
 use App\Http\Requests\VoucherUpdate;
 use App\Models\UserProfile;
 use App\Models\Voucher;
@@ -25,6 +26,23 @@ class VoucherController extends Controller
         return view('vouchers.index', compact('vouchers'));
     }
 
+    public function create()
+    {
+        return view('vouchers.create');
+    }
+
+    public function store(VoucherStore $request, Guard $guard)
+    {
+        $voucher_attributes = $request->only([
+            'title',
+            'type',
+            'price',
+            'service'
+        ]);
+        $guard->user()->vouchers()->create($voucher_attributes);
+        return redirect(route('vouchers.index'))->with('success', 'Your Voucher was updated!');
+    }
+
     public function edit(Voucher $voucher)
     {
         return view('vouchers.edit', compact('voucher'));
@@ -41,5 +59,11 @@ class VoucherController extends Controller
         $voucher->update($voucher_attributes);
 
         return redirect(route('vouchers.index'))->with('success', 'Your profile was updated!');
+    }
+
+    public function destroy(Voucher $voucher)
+    {
+        $voucher->delete();
+        return redirect(route('vouchers.index'))->with('info', 'Your Voucher was deleted');
     }
 }

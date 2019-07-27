@@ -50,6 +50,50 @@ class VoucherControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
+    /**
+     * @test
+     */
+    public function index_get_vouchers_create()
+    {
+        $response = $this->get(route('vouchers.create'))
+            ->assertViewIs('vouchers.create');
+
+        $response->assertStatus(200);
+    }
+
+    /**
+     * @test
+     */
+    public function store_validation_exception()
+    {
+        $redirect_url = route('vouchers.create');
+        $response = $this->call(Request::METHOD_POST, route('vouchers.store'), [
+            'type' => false
+        ], [],[],['HTTP_REFERER' => $redirect_url]);
+
+        $response->assertStatus(302)->assertRedirect($redirect_url);
+    }
+
+    /**
+     * @test
+     */
+    public function store_add_voucher_do_db()
+    {
+        $incoming_data = [
+            'title' => 'title',
+            'type' => VoucherType::SERVICE,
+            'service' => 'service'
+        ];
+        $response = $this->post(route('vouchers.store'), $incoming_data);
+
+        $response->assertStatus(302)->assertRedirect(route('vouchers.index'))
+            ->assertSessionHas('success');
+
+        $this->assertDatabaseHas('vouchers', [
+                'user_id' => $this->user->id,
+            ] + $incoming_data);
+    }
+
 
     /**
      * @test
@@ -57,7 +101,7 @@ class VoucherControllerTest extends TestCase
     public function update_got_403_authorization_denied()
     {
         $this->voucher = factory(Voucher::class)->create();
-        $response = $this->post(route('vouchers.update', $this->voucher));
+        $response = $this->put(route('vouchers.update', $this->voucher));
         $response->assertStatus(403);
     }
 
@@ -68,7 +112,7 @@ class VoucherControllerTest extends TestCase
     {
         $this->voucher = factory(Voucher::class)->state('mine')->create();
         $redirect_url = route('vouchers.edit', $this->voucher);
-        $response = $this->call(Request::METHOD_POST, route('vouchers.update', $this->voucher), [
+        $response = $this->call(Request::METHOD_PUT, route('vouchers.update', $this->voucher), [
             'type' => false
         ], [],[],['HTTP_REFERER' => $redirect_url]);
 
@@ -81,7 +125,7 @@ class VoucherControllerTest extends TestCase
     public function update_voucher_was_updated()
     {
         $this->voucher = factory(Voucher::class)->state('mine')->create();
-        $response = $this->post(route('vouchers.update', $this->voucher), [
+        $response = $this->put(route('vouchers.update', $this->voucher), [
             'title' => 'title',
             'type' => VoucherType::SERVICE,
             'service' => 'service'
@@ -101,7 +145,7 @@ class VoucherControllerTest extends TestCase
             'type' => VoucherType::SERVICE,
             'service' => 'service'
         ];
-        $response = $this->post(route('vouchers.update', $this->voucher), $incoming_data);
+        $response = $this->put(route('vouchers.update', $this->voucher), $incoming_data);
 
         $response->assertStatus(302)->assertRedirect(route('vouchers.index'))
             ->assertSessionHas('success');
@@ -109,5 +153,23 @@ class VoucherControllerTest extends TestCase
         $this->assertDatabaseHas('vouchers', [
             'user_id' => $this->user->id,
         ] + $incoming_data);
+    }
+
+    /**
+     * @test
+     */
+    public function delete_voucher_was_removed()
+    {
+        $this->voucher = factory(Voucher::class)->state('mine')->create();
+
+        $response = $this->delete(route('vouchers.destroy', $this->voucher));
+
+        $response->assertStatus(302)
+            ->assertRedirect(route('vouchers.index'))
+            ->assertSessionHas('info');
+
+        $this->assertDatabaseMissing('vouchers', [
+                'id' => $this->voucher->id,
+            ]);
     }
 }

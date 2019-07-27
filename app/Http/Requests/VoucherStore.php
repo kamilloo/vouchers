@@ -6,7 +6,7 @@ use App\Models\Enums\VoucherType;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class VoucherUpdate extends Request
+class VoucherStore extends Request
 {
     /*
      * Get the validation rules that apply to the request.

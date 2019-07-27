@@ -20,12 +20,22 @@ class VoucherPolicy
         //
     }
 
+    public function create(User $user)
+    {
+        return true;
+    }
+
     public function edit(User $user, Voucher $voucher)
     {
         return $voucher->isOwn($user);
     }
 
     public function update(User $user, Voucher $voucher)
+    {
+        return $voucher->isOwn($user);
+    }
+
+    public function delete(User $user, Voucher $voucher)
     {
         return $voucher->isOwn($user);
     }

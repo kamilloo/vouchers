@@ -17,8 +17,8 @@ class CreateVouchersTable extends Migration
             $table->bigIncrements('id');
             $table->string('type');
             $table->string('title');
-            $table->string('price');
-            $table->string('service');
+            $table->string('price')->nullable()->default(null);
+            $table->string('service')->nullable()->default(null);
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
 
