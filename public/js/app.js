@@ -55828,6 +55828,12 @@ window.editButtonFocusOut = function (button) {
   button.style.background = "";
 };
 
+$('#confirm-delete').on('show.bs.modal', function (e) {
+  $(this).find('.btn-ok').click(function () {
+    $('form').submit();
+  });
+});
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":

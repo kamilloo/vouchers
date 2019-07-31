@@ -36,3 +36,7 @@ Route::middleware('auth')->group(function (){
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('get-started', 'Starter@getStarted')->name('get-started');
+
+Route::get('checkout', 'CheckoutController@start')->name('checkout.start');
+Route::post('checkout', 'CheckoutController@proceed')->name('checkout.proceed');
+Route::get('checkout/confirmation', 'CheckoutController@confirmation')->name('checkout.confirmation');
