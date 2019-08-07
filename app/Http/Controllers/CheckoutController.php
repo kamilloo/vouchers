@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Checkout;
 use App\Models\Voucher;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class CheckoutController extends Controller
@@ -16,7 +17,8 @@ class CheckoutController extends Controller
 
     public function proceed(Checkout $request)
     {
-        return redirect()->route('checkout.confirmation');
+        Order::create($request->only(array_keys($request->rules())));
+        return redirect()->route('checkout.confirmation')->with('success', 'Your order was placed.');
     }
 
     public function confirmation()

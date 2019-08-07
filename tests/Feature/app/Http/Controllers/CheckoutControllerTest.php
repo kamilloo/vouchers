@@ -2,9 +2,11 @@
 
 namespace Tests\Feature\App\Http\StarterTest;
 
+use App\Models\Enums\DeliveryType;
 use App\Models\Enums\VoucherType;
 use App\Models\User;
 use App\Models\Voucher;
+use Faker\Factory;
 use Illuminate\Http\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Tests\TestCase;
@@ -68,19 +70,22 @@ class VoucherControllerTest extends TestCase
     public function proceed_add_order_to_db()
     {
         $this->voucher = $this->createVoucher();
+        $faker = Factory::create();
         $incoming_data = [
             'voucher_id' => $this->voucher->id,
-            'type' => VoucherType::SERVICE,
-            'service' => 'service'
+            'delivery' => DeliveryType::ONLINE,
+            'price' => 300,
+            'first_name' => $faker->firstName,
+            'last_name' => $faker->lastName,
+            'phone' => $faker->phoneNumber,
+            'email' => $faker->email,
         ];
         $response = $this->post(route('checkout.proceed'), $incoming_data);
 
         $response->assertStatus(302)->assertRedirect(route('checkout.confirmation'))
             ->assertSessionHas('success');
 
-        $this->assertDatabaseHas('orders', [
-                'user_id' => ,
-            ] + $incoming_data);
+        $this->assertDatabaseHas('orders', $incoming_data);
     }
 
     protected function createVoucher()
