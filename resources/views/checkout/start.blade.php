@@ -7,34 +7,83 @@
             @csrf
             <div class="row">
                 <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12">
-                    <div class="box">
-                        <h3 class="box-title">Select you voucher</h3>
-                        @foreach($vouchers as $voucher)
-                            <div class="plan-selection">
-                                <div class="plan-data">
-                                    <input id="voucher-{{ $voucher->id }}" name="voucher_id" type="radio" class="with-font" value="{{ $voucher->id }}" />
-                                    <label for="voucher-{{ $voucher->id }}">{{ $voucher->title }}</label>
-                                    <p class="plan-text">
-                                        {{ $voucher->service }} | {{ $voucher->type }}</p>
-                                    <span class="plan-price">{{ $voucher->price }}</span>
+
+                    <!-- Stepers Wrapper -->
+                    <ul class="stepper stepper-horizontal">
+
+                        <!-- First Step -->
+                        <li class="completed">
+                            <a href="#!">
+                                <span class="circle">1</span>
+                                <span class="label">First step</span>
+                            </a>
+                        </li>
+
+                        <!-- Second Step -->
+                        <li class="active">
+                            <a href="#!">
+                                <span class="circle">2</span>
+                                <span class="label">Second step</span>
+                            </a>
+                        </li>
+
+                        <!-- Third Step -->
+                        <li class="warning">
+                            <a href="#!">
+                                <span class="circle"><i class="fas fa-exclamation"></i></span>
+                                <span class="label">Third step</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                    <!-- /.Stepers Wrapper -->
+
+                    <div id="select-box" class="collapse multi-collapse">
+                        <div class="box">
+                            <h3 class="box-title">Select you voucher</h3>
+                            @foreach($vouchers as $voucher)
+                                <div class="plan-selection">
+                                    <div class="plan-data">
+                                        <input id="voucher-{{ $voucher->id }}" name="voucher_id" type="radio" class="with-font" value="{{ $voucher->id }}" />
+                                        <label for="voucher-{{ $voucher->id }}">{{ $voucher->title }}</label>
+                                        <p class="plan-text">
+                                            {{ $voucher->service }} | {{ $voucher->type }}</p>
+                                        <span class="plan-price">{{ $voucher->price }}</span>
+                                    </div>
                                 </div>
-                            </div>
-                        @endforeach
-                    </div>
-                    <div class="box">
-                        <h3 class="box-title">Select delivery option</h3>
-                        @foreach(\App\Models\Enums\DeliveryType::all() as $delivery)
-                            <div class="plan-selection">
-                                <div class="plan-data">
-                                    <input id="box-{{ $delivery }}"  name="delivery" type="radio" class="with-font" value="{{ $delivery }}" />
-                                    <label for="box-{{ $delivery }}">{{ $delivery }}</label>
-                                    <p class="plan-text">Send online.</p>
-                                    <span class="plan-price secure-price">$100</span>
+                            @endforeach
+                        </div>
+                        <div class="box">
+                            <h3 class="box-title">Select delivery option</h3>
+                            @foreach(\App\Models\Enums\DeliveryType::all() as $delivery)
+                                <div class="plan-selection">
+                                    <div class="plan-data">
+                                        <input id="box-{{ $delivery }}"  name="delivery" type="radio" class="with-font" value="{{ $delivery }}" />
+                                        <label for="box-{{ $delivery }}">{{ $delivery }}</label>
+                                        <p class="plan-text">Send online.</p>
+                                        <span class="plan-price secure-price">$100</span>
+                                    </div>
                                 </div>
-                            </div>
-                        @endforeach
+                            @endforeach
+                        </div>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-lg mb30">Continue With Plans</button>
+                    <div id="details-box"  class="collapse multi-collapse">
+                        <div class="box">
+                            <h3 class="box-title">Your details</h3>
+                            @foreach(\App\Models\Enums\DeliveryType::all() as $delivery)
+                                <div class="plan-selection">
+                                    <div class="plan-data">
+                                        <input id="box-{{ $delivery }}"  name="delivery" type="radio" class="with-font" value="{{ $delivery }}" />
+                                        <label for="box-{{ $delivery }}">{{ $delivery }}</label>
+                                        <p class="plan-text">Send online.</p>
+                                        <span class="plan-price secure-price">$100</span>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn btn-primary btn-lg mb30" data-toggle="collapse" data-target="#select-box" aria-expanded="false" aria-controls="select-box">Continue With Plans</button>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-5 col-xs-12">
 

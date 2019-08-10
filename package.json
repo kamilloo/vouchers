@@ -28,7 +28,9 @@
         "webpack": "^4.35.3"
     },
     "dependencies": {
+        "@jkryszto/mdb-for-laravel": "^1.0.0",
         "cropperjs": "^1.5.3",
+        "mdbootstrap": "^4.8.7",
         "vue-upload-component": "^2.8.20"
     }
 }

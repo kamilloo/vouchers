@@ -50,3 +50,9 @@ $('#confirm-delete').on('show.bs.modal', function(e) {
         $('form').submit();
     })
 });
+
+window.mdbStepper = require('mdbootstrap');
+
+$(document).ready(function () {
+    $('.stepper').mdbStepper();
+})

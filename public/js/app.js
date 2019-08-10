@@ -55833,6 +55833,10 @@ $('#confirm-delete').on('show.bs.modal', function (e) {
     $('form').submit();
   });
 });
+window.mdbStepper = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module 'mdbootstrap'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+$(document).ready(function () {
+  $('.stepper').mdbStepper();
+});
 
 /***/ }),
 
