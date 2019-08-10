@@ -20,8 +20,8 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
-// Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-//
+Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+
 Vue.component('todo-list', require('./components/TodoList.vue').default);
 Vue.component('todo-item', require('./components/TodoItem.vue').default);
 Vue.component('avatar', require('./components/Avatar.vue').default);
@@ -34,6 +34,13 @@ Vue.component('avatar', require('./components/Avatar.vue').default);
 
 const app = new Vue({
     el: '#app',
+    data: {
+        vouchers : {},
+        deliveryTypes: {},
+        selectedVoucher : {},
+        selectedDelivery: {},
+        total: ''
+    },
 });
 
 window.editButtonFocusIn = function(button) {
@@ -51,8 +58,35 @@ $('#confirm-delete').on('show.bs.modal', function(e) {
     })
 });
 
-window.mdbStepper = require('mdbootstrap');
+import Stepper from 'bs-stepper'
 
-$(document).ready(function () {
-    $('.stepper').mdbStepper();
+var stepper;
+// Vanilla JavaScript
+document.addEventListener('DOMContentLoaded', function () {
+    stepper = new Stepper(document.querySelector('.bs-stepper'),{
+        linear: false,
+        animation: true,
+        selectors: {
+            steps: '.step',
+            trigger: '.step-trigger',
+            stepper: '.bs-stepper'
+        }
+    })
 })
+
+window.stepper_next = function ()
+{
+    stepper.next();
+}
+
+window.stepper_previous = function () {
+    stepper.previous();
+}
+
+window.init_data = function (data) {
+    app.vouchers = data
+}
+
+
+
+
