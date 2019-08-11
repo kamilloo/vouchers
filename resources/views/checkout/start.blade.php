@@ -1,7 +1,7 @@
 @extends('layouts.frontend')
 
 @section('content')
-<div class="content" onclick="init_data({{ $vouchers }})">
+<div class="content">
     <div class="container">
         <form action="{{ route('checkout.proceed') }}" method="post" >
             @csrf
@@ -56,7 +56,7 @@
                                     @foreach(\App\Models\Enums\DeliveryType::all() as $delivery)
                                         <div class="plan-selection">
                                             <div class="plan-data">
-                                                <input id="box-{{ $delivery }}"  name="delivery" type="radio" class="with-font" value="{{ $delivery }}" />
+                                                <input v-model="selectedDelivery.type" id="box-{{ $delivery }}"  name="delivery" type="radio" class="with-font" value="{{ $delivery }}" />
                                                 <label for="box-{{ $delivery }}">{{ $delivery }}</label>
                                                 <p class="plan-text">Send online.</p>
                                                 <span class="plan-price secure-price">$100</span>
@@ -102,34 +102,12 @@
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-5 col-xs-12">
 
-                    <div class="widget">
-                        <h4 class="widget-title">Wish list</h4>
-                        <div class="summary-block">
-                            <div class="summary-content">
-                                <div class="summary-head"><h5 class="summary-title">@{{ selectedVoucher.name }}</h5></div>
-                                <div class="summary-price">
-                                    <p class="summary-text">$@{{ selectedVoucher.price }}</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="summary-block">
-                            <div class="summary-content">
-                                <div class="summary-head"> <h5 class="summary-title">@{{ selectedDelivery.type }}</h5></div>
-                                <div class="summary-price">
-                                    <p class="summary-text">$@{{ selectedDelivery.price }}</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="summary-block">
-                            <div class="summary-content">
-                                <div class="summary-head"> <h5 class="summary-title">Total</h5></div>
-                                <div class="summary-price">
-                                    <p class="summary-text">$@{{ total }}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+                    <checkout-form
+                            :delivery-types="{{ json_encode(\App\Models\Enums\DeliveryType::all()) }}"
+                            :vouchers="{{ json_encode($vouchers) }}"
+                            :selected-voucher="selectedVoucher"
+                            :selected-delivery="selectedDelivery"
+                    ></checkout-form>
                 </div>
             </div>
         </form>

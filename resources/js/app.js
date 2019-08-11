@@ -25,6 +25,7 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 Vue.component('todo-list', require('./components/TodoList.vue').default);
 Vue.component('todo-item', require('./components/TodoItem.vue').default);
 Vue.component('avatar', require('./components/Avatar.vue').default);
+Vue.component('checkout-form', require('./components/CheckoutForm.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -35,11 +36,8 @@ Vue.component('avatar', require('./components/Avatar.vue').default);
 const app = new Vue({
     el: '#app',
     data: {
-        vouchers : {},
-        deliveryTypes: {},
         selectedVoucher : {},
         selectedDelivery: {},
-        total: ''
     },
 });
 
@@ -81,10 +79,6 @@ window.stepper_next = function ()
 
 window.stepper_previous = function () {
     stepper.previous();
-}
-
-window.init_data = function (data) {
-    app.vouchers = data
 }
 
 
