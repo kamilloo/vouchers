@@ -3,7 +3,7 @@
         <h4 class="widget-title">Wish list</h4>
         <div class="summary-block">
             <div class="summary-content">
-                <div class="summary-head"><h5 class="summary-title">{{ selectedVoucher.name }}</h5></div>
+                <div class="summary-head"><h5 class="summary-title" :data-selected-voucher="selectedVoucher.id">{{ selectedVoucher.name }}</h5></div>
                 <div class="summary-price">
                     <p class="summary-text">${{ selectedVoucher.price }}</p>
                 </div>
@@ -21,7 +21,8 @@
             <div class="summary-content">
                 <div class="summary-head"> <h5 class="summary-title">Total</h5></div>
                 <div class="summary-price">
-                    <p class="summary-text">$@{{ total }}</p>
+                    <p class="summary-text">${{ total }}</p>
+                    <input type="hidden" name="price" v-model="total">
                 </div>
             </div>
         </div>
@@ -44,14 +45,15 @@
          this.computePrice();
      },
      updated() {
-         if (this.selectedDelivery.type = this.deliveryTypes.POST)
+         if (this.selectedDelivery.type == this.deliveryTypes.POST)
          {
              this.selectedDelivery.price = 100;
          }else {
              this.selectedDelivery.price = 0
          }
          let selectedVoucher = this.vouchers.find(this.getSelectedVoucher);
-         if (selectedVoucher.length)
+
+         if (typeof selectedVoucher !== 'undefined')
          {
              this.selectedVoucher.name = selectedVoucher.title;
              this.selectedVoucher.price = selectedVoucher.price;
@@ -62,8 +64,7 @@
      },
      methods: {
          computePrice() {
-             console.log('compute price');
-             this.total = this.selectedDelivery.price + this.selectedVoucher.price;
+             this.total = parseFloat(this.selectedDelivery.price) + parseFloat(this.selectedVoucher.price);
          },
          getSelectedVoucher(voucher){
              return voucher.id == this.selectedVoucher.id;

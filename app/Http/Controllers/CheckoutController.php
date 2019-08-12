@@ -17,7 +17,8 @@ class CheckoutController extends Controller
 
     public function proceed(Checkout $request)
     {
-        Order::create($request->only(array_keys($request->rules())));
+        $order_details = $request->only(array_keys($request->rules()));
+        Order::create($order_details);
         return redirect()->route('checkout.confirmation')->with('success', 'Your order was placed.');
     }
 
