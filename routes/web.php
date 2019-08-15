@@ -31,12 +31,22 @@ Route::middleware('auth')->group(function (){
 
 
     Route::resource('/vouchers', 'VoucherController');
+    Route::resource('/orders', 'OrderController');
 
 });
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('get-started', 'Starter@getStarted')->name('get-started');
 
-Route::get('checkout', 'CheckoutController@start')->name('checkout.start');
-Route::post('checkout', 'CheckoutController@proceed')->name('checkout.proceed');
-Route::get('checkout/confirmation', 'CheckoutController@confirmation')->name('checkout.confirmation');
+Route::get('checkout/{merchant}', 'CheckoutController@start')->name('checkout.start');
+Route::post('checkout/{merchant}', 'CheckoutController@proceed')->name('checkout.proceed');
+Route::get('checkout/{merchant}/confirmation', 'CheckoutController@confirmation')->name('checkout.confirmation');
+
+
+Route::get('payment/{merchant}/create/{order}', 'PaymentController@create')->name('payment.create');
+Route::get('payment/{merchant}/callback-return', 'PaymentController@return')->name('payment.return');
+Route::post('payment/callback-status', 'PaymentController@status')->name('payment.status');
+
+//Route::get('voucher/download');
+//Route::get('voucher/send');
+//Route::get('voucher/push');

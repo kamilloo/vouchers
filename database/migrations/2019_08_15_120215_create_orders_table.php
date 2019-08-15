@@ -15,6 +15,7 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('merchant_id');
             $table->unsignedBigInteger('voucher_id');
             $table->string('delivery')->default(\App\Models\Enums\DeliveryType::ONLINE);
             $table->float('price');
@@ -25,6 +26,8 @@ class CreateOrdersTable extends Migration
             $table->string('status')->default(\App\Models\Enums\StatusType::NEW);
             $table->boolean('paid')->default(\App\Models\Enums\PaymentStatus::WAITING_FOR_PAY);
             $table->timestamps();
+
+            $table->foreign('merchant_id')->references('id')->on('merchants');
         });
     }
 

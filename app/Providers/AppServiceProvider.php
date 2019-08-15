@@ -2,10 +2,14 @@
 
 namespace App\Providers;
 
+use App\Contractors\IPaymentGateway;
+use Domain\Payments\PaymentGateway;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
+    i
+
     /**
      * Register any application services.
      *
@@ -16,6 +20,8 @@ class AppServiceProvider extends ServiceProvider
         if ($this->app->environment() !== 'production') {
             $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
         }
+
+        $this->app->bind(IPaymentGateway::class, PaymentGateway::class);
     }
 
     /**

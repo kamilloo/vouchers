@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
-class Order extends Model
+use App\Contractors\IOrder;
+
+class Order extends Model implements IOrder
 {
     //
 }
