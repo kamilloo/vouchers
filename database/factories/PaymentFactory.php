@@ -23,5 +23,6 @@ $factory->define(\App\Models\Payment::class, function (Faker $faker) {
         'order_id' => function(){
             return factory(\App\Models\Order::class)->create()->id;
         },
+        'payment_link' => $faker->url
     ];
 });

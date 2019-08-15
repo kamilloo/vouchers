@@ -1,7 +1,8 @@
 <?php
 
-namespace Tests\Feature\App\Http\StarterTest;
+namespace Tests\Feature\App\Http\Controllers\PaymentController\CallbackReturn;
 
+use App\Contractors\IPaymentGateway;
 use App\Models\Enums\DeliveryType;
 use App\Models\Enums\VoucherType;
 use App\Models\Merchant;
@@ -42,14 +43,25 @@ class PaymentControllerTest extends TestCase
      * Payment
      */
     private $payment;
+    /**
+     * @var IPaymentGateway|\Mockery\MockInterface
+     */
+    private $payment_gateway;
 
     protected function setUp(): void
     {
         parent::setUp();
-        $this->payment_url = 'payment_url';
         $this->merchant = factory(Merchant::class)->create();
         $this->order = factory(Order::class)->create();
-        $this->payment = factory(Payment::class)->create();
+        $this->payment = factory(Payment::class)->create([
+            'payment_link' => $this->payment_url
+        ]);
+
+        $this->payment_url = route('payment.return', [
+            'merchant' => $this->merchant,
+        ]);
+
+        $this->payment_gateway = \Mockery::mock(IPaymentGateway::class);
     }
 
     /**
@@ -57,7 +69,8 @@ class PaymentControllerTest extends TestCase
      */
     public function create_redirect_to_payment_gateway()
     {
-        $response = $this->get(route('payment.create', [
+        $this->mockPaymentGatewayMethodVerify();
+        $response = $this->get(route('payment.return', [
             'merchant' => $this->merchant,
             'order' => $this->order]));
         $response->assertStatus(302)
@@ -69,27 +82,15 @@ class PaymentControllerTest extends TestCase
      */
     public function create_add_payment_to_db()
     {
-        $this->voucher = $this->createVoucher();
-        $faker = Factory::create();
-        $incoming_data = [
-            'voucher_id' => $this->voucher->id,
-            'delivery' => DeliveryType::ONLINE,
-            'price' => 300,
-            'first_name' => $faker->firstName,
-            'last_name' => $faker->lastName,
-            'phone' => $faker->phoneNumber,
-            'email' => $faker->email,
-        ];
-        $response = $this->post(route('checkout.proceed'), $incoming_data);
-
-        $response->assertStatus(302)->assertRedirect(route('checkout.confirmation'))
-            ->assertSessionHas('success');
-
-        $this->assertDatabaseHas('payments', $incoming_data);
+        $this->markTestSkipped('need implement payment gateway');
     }
 
-    protected function createVoucher()
+
+    protected function mockPaymentGatewayMethodVerify(): void
     {
-        return factory(Voucher::class)->create();
+        $this->app->instance(IPaymentGateway::class, $this->payment_gateway);
+        $this->payment_gateway->shouldReceive('verify')
+            ->once()
+            ->andReturn(true);
     }
 }

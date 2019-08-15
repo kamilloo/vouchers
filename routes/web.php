@@ -44,8 +44,11 @@ Route::get('checkout/{merchant}/confirmation', 'CheckoutController@confirmation'
 
 
 Route::get('payment/{merchant}/create/{order}', 'PaymentController@create')->name('payment.create');
-Route::get('payment/{merchant}/callback-return', 'PaymentController@return')->name('payment.return');
-Route::post('payment/callback-status', 'PaymentController@status')->name('payment.status');
+Route::get('payment/{payment}/callback-return', 'PaymentController@callbackReturn')->name('payment.return');
+Route::post('payment/{payment}/callback-status', 'PaymentController@callbackStatus')->name('payment.status');
+
+
+Route::get('payment/{payment}/recap', 'PaymentController@recap')->name('payment.recap');
 
 //Route::get('voucher/download');
 //Route::get('voucher/send');

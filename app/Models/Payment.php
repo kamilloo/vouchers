@@ -2,7 +2,14 @@
 
 namespace App\Models;
 
-class Payment extends Model
+use App\Contractors\IPayment;
+
+class Payment extends Model implements IPayment
 {
-    //
+    protected $link;
+
+    public function link(): string
+    {
+        return $this->payment_link ?? 'payment_url';
+    }
 }
