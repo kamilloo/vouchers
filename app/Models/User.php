@@ -50,4 +50,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Voucher::class);
     }
+
+    public function merchant()
+    {
+        return $this->hasOne(Merchant::class);
+    }
+
+    public function isMerchant()
+    {
+        return $this->merchant()->count() > 0;
+    }
 }

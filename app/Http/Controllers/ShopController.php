@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdate;
+use App\Http\Requests\ShopChangeTemplate;
+use App\Models\Merchant;
 use App\Models\Template;
 use App\Models\UserProfile;
 use Illuminate\Contracts\Auth\Guard;
@@ -16,42 +18,38 @@ class ShopController extends Controller
     public function index(Guard $guard)
     {
         $templates = Template::all();
-        return view('shop.index', compact('guard', 'templates'));
+
+        $merchant = Merchant::mine()->first();
+        $my_template = optional($merchant)->template ?? Template::first();
+        return view('shop.index', compact('guard', 'templates', 'my_template'));
     }
 
-    public function edit(Guard $guard)
+    public function changeTemplate(ShopChangeTemplate $request, Guard $guard)
     {
-        return view('profile.edit', compact('guard'));
+        $user = $guard->user();
+        if ($user->isMerchant())
+        {
+            $user->merchant->update([
+                'template_id' => $request->template_id
+            ]);
+            return redirect(route('shop.index'))
+                ->with('success', 'Well done!, you changed your shop design.');
+        }
+        return redirect(route('shop.index'))
+            ->with('warning', 'Ups!, Something went wrong.');
+
     }
 
-    public function update(ProfileUpdate $request, Guard $guard, FilesystemManager $file_manager)
+    public function customTemplate()
     {
-        $profile_attributes = $request->only([
-            'address',
-            'company_name',
-            'first_name',
-            'last_name',
-            'services',
-            'description',
-            'branch'
-        ]);
 
-        $file = $request->file('logo');
-        if (!empty($file))
-        {
-            $logo = $this->replaceLogo($file);
-            Arr::set($profile_attributes, 'logo', $logo);
-        }
-
-        $profile = $guard->user()->profile()->first();
-        if (empty($profile))
-        {
-            $guard->user()->profile()->save(new UserProfile($profile_attributes));
-        }else{
-            $profile->update($profile_attributes);
-        }
-        return redirect(route('profile.index'))->with('success', 'Your profile was updated!');
     }
+
+    public function changeImages()
+    {
+
+    }
+
 
     /**
      * @param ProfileUpdate $request

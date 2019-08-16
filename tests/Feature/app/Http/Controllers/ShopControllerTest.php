@@ -3,6 +3,8 @@
 namespace Tests\Feature\App\Http\Controllers;
 
 use App\Models\Enums\VoucherType;
+use App\Models\Merchant;
+use App\Models\Template;
 use App\Models\User;
 use App\Models\Voucher;
 use Illuminate\Http\UploadedFile;
@@ -36,16 +38,16 @@ class ShopControllerTest extends TestCase
         $this->file_factory = UploadedFile::fake();
         $this->file = $this->file_factory->image('png');
         $this->createUserAndBe();
-
+        $this->user->merchant()->save(factory(Merchant::class)->make());
     }
 
     /**
      * @test
      */
-    public function index_get_vouchers_list()
+    public function index_get_template_list()
     {
-        $response = $this->get(route('vouchers.index'))
-            ->assertViewHas('vouchers');
+        $response = $this->get(route('shop.index'))
+            ->assertViewHas(['templates', 'my_template']);
 
         $response->assertStatus(200);
     }
@@ -53,123 +55,67 @@ class ShopControllerTest extends TestCase
     /**
      * @test
      */
-    public function index_get_vouchers_create()
+    public function changeTemplate_validation_exception()
     {
-        $response = $this->get(route('vouchers.create'))
-            ->assertViewIs('vouchers.create');
+        $template = factory(Template::class)->create();
+        $fake_template_id = $template->id;
+        $template->delete();
+        $response = $this->postJson(route('shop.change-template'),[
+            'template_id' => $fake_template_id
+        ])
+        ->assertStatus(422);
 
-        $response->assertStatus(200);
+        $this->assertArrayHasKey('template_id', $response->decodeResponseJson('errors'));
     }
 
     /**
      * @test
      */
-    public function store_validation_exception()
+    public function changeTemplate_change_template_on_db()
     {
-        $redirect_url = route('vouchers.create');
-        $response = $this->call(Request::METHOD_POST, route('vouchers.store'), [
-            'type' => false
-        ], [],[],['HTTP_REFERER' => $redirect_url]);
+        $template = factory(Template::class)->create();
 
-        $response->assertStatus(302)->assertRedirect($redirect_url);
-    }
-
-    /**
-     * @test
-     */
-    public function store_add_voucher_do_db()
-    {
-        $incoming_data = [
-            'title' => 'title',
-            'type' => VoucherType::SERVICE,
-            'service' => 'service'
-        ];
-        $response = $this->post(route('vouchers.store'), $incoming_data);
-
-        $response->assertStatus(302)->assertRedirect(route('vouchers.index'))
-            ->assertSessionHas('success');
-
-        $this->assertDatabaseHas('vouchers', [
-                'user_id' => $this->user->id,
-            ] + $incoming_data);
-    }
-
-
-    /**
-     * @test
-     */
-    public function update_got_403_authorization_denied()
-    {
-        $this->voucher = factory(Voucher::class)->create();
-        $response = $this->put(route('vouchers.update', $this->voucher));
-        $response->assertStatus(403);
-    }
-
-    /**
-     * @test
-     */
-    public function update_validation_exception()
-    {
-        $this->voucher = factory(Voucher::class)->state('mine')->create();
-        $redirect_url = route('vouchers.edit', $this->voucher);
-        $response = $this->call(Request::METHOD_PUT, route('vouchers.update', $this->voucher), [
-            'type' => false
-        ], [],[],['HTTP_REFERER' => $redirect_url]);
-
-        $response->assertStatus(302)->assertRedirect($redirect_url);
-    }
-
-    /**
-     * @test
-     */
-    public function update_voucher_was_updated()
-    {
-        $this->voucher = factory(Voucher::class)->state('mine')->create();
-        $response = $this->put(route('vouchers.update', $this->voucher), [
-            'title' => 'title',
-            'type' => VoucherType::SERVICE,
-            'service' => 'service'
+        $response = $this->postJson(route('shop.change-template'),[
+            'template_id' => $template->id
         ]);
 
-        $response->assertStatus(302)->assertRedirect(route('vouchers.index'))->assertSessionHas('success');
-    }
-
-    /**
-     * @test
-     */
-    public function update_database_was_updated()
-    {
-        $this->voucher = factory(Voucher::class)->state('mine')->create();
-        $incoming_data = [
-            'title' => 'title',
-            'type' => VoucherType::SERVICE,
-            'service' => 'service'
-        ];
-        $response = $this->put(route('vouchers.update', $this->voucher), $incoming_data);
-
-        $response->assertStatus(302)->assertRedirect(route('vouchers.index'))
-            ->assertSessionHas('success');
-
-        $this->assertDatabaseHas('vouchers', [
+        $this->assertDatabaseHas('merchants', [
             'user_id' => $this->user->id,
-        ] + $incoming_data);
+            'template_id' => $template->id
+        ]);
+
     }
+
 
     /**
      * @test
      */
-    public function delete_voucher_was_removed()
+    public function changeTemplate_redirect_to_shop_settings()
     {
-        $this->voucher = factory(Voucher::class)->state('mine')->create();
+        $template = factory(Template::class)->create();
 
-        $response = $this->delete(route('vouchers.destroy', $this->voucher));
+        $response = $this->postJson(route('shop.change-template'),[
+            'template_id' => $template->id
+        ])->assertRedirect(route('shop.index'))->assertSessionHas('success');
 
-        $response->assertStatus(302)
-            ->assertRedirect(route('vouchers.index'))
-            ->assertSessionHas('info');
-
-        $this->assertDatabaseMissing('vouchers', [
-                'id' => $this->voucher->id,
-            ]);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
