@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\App\Http\Controllers;
+namespace Tests\Feature\App\Http\Controllers\Shop\Index;
 
 use App\Models\Enums\VoucherType;
 use App\Models\Merchant;

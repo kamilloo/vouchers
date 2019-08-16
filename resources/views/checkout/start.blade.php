@@ -8,7 +8,7 @@
                 @include('layouts.flash-message')
             </div>
         </div>
-        <form action="{{ route('checkout.proceed') }}" method="post" >
+        <form action="{{ route('checkout.proceed', $merchant) }}" method="post" >
             @csrf
             <div class="row">
                 <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12">

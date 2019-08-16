@@ -15,8 +15,8 @@
                     <a href="#images" class="list-group-item list-group-item-action" data-toggle="list"  role="tab">{{ __('Images') }}</a>
                 </div>
                 <br>
+                @if(!empty($my_template))
                 <h1 class="my-4">{{ __('Your Design') }}</h1>
-
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="card h-100">
@@ -34,8 +34,7 @@
                         </div>
                     </div>
                 </div>
-
-
+                @endif
 
             </div>
             <!-- /.col-lg-3 -->
@@ -84,14 +83,14 @@
                             <div class="col-lg-4 col-md-6 mb-4">
                                 <form>
                                     <div class="form-group">
-                                        <label for="background-colour">{{ __('Background Colour') }}</label>
-                                        <input type="text" class="form-control" id="background-colour" aria-describedby="backgroud-color-help" placeholder="Backgroud colour">
-                                        <small id="backgroud-color-help" class="form-text text-muted">{{ __('You can choose page backgroud colour') }}.</small>
+                                        <label for="background-color">{{ __('Background Color') }}</label>
+                                        <input type="text" class="form-control" id="background-color" aria-describedby="background-color-help" placeholder="Background color">
+                                        <small id="backgroudd-color-help" class="form-text text-muted">{{ __('You can choose page background color') }}.</small>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="welcoming">{{ __('Welcoming') }}</label>
-                                        <input type="text" class="form-control" id="welcoming" aria-describedby="welcoming-help" placeholder="{{ __('Welcome your clients') }}">
+                                        <input type="radio" class="form-control" id="welcoming" aria-describedby="welcoming-help" name="welcoming" placeholder="{{ __('Welcome your clients') }}">
                                         <small id="welcoming-help" class="form-text text-muted">{{ __('Welcome Your Clients') }}.</small>
                                     </div>
 
