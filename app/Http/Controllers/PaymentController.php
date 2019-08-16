@@ -27,7 +27,7 @@ class PaymentController extends Controller
 
         if ($verify)
         {
-            return redirect()->route('payment.return', [
+            return redirect()->route('payment.recap', [
                 'payment' => $payment,
             ]);
         }
@@ -40,8 +40,8 @@ class PaymentController extends Controller
         return ;
     }
 
-    public function recap(Merchant $merchant, Order $order, IPaymentGateway $payment_gateway)
+    public function recap(Payment $payment)
     {
-        return view('payment.recap');
+        return view('payment.recap')->with(['success' => 'Congratulation!, you bought voucher successful.']);
     }
 }

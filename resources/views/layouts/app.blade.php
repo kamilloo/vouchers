@@ -34,8 +34,8 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item"><a class="nav-link" href="{{ route('vouchers.index') }}">{{ __('My Vouchers') }}</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ route('shop') }}">{{ __('Shop') }}</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ route('payments.index') }}">{{ __('IPayment') }}</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('shop.index') }}">{{ __('Shop') }}</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('payments.index') }}">{{ __('Payments') }}</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('wizard') }}">{{ __('Wizard') }}</a></li>
                     </ul>
 

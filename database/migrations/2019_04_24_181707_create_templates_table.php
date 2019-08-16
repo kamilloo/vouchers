@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAppModelsTemplatesTable extends Migration
+class CreateTemplatesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,13 @@ class CreateAppModelsTemplatesTable extends Migration
      */
     public function up()
     {
-        Schema::create('app_models_templates', function (Blueprint $table) {
+        Schema::create('templates', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('title');
+            $table->string('description');
+            $table->float('price')->default(0);
+            $table->string('thumbnail')->nullable()->default(null);
+            $table->float('review')->nullable()->default(null);
             $table->timestamps();
         });
     }
@@ -26,6 +31,6 @@ class CreateAppModelsTemplatesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('app_models_templates');
+        Schema::dropIfExists('templates');
     }
 }

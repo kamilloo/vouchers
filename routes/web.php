@@ -27,8 +27,11 @@ Route::middleware('auth')->group(function (){
     Route::get('/profile/edit', 'ProfileController@edit')->name('profile.edit');
     Route::get('/payments', 'VoucherController@index')->name('payments.index');
     Route::get('/wizard', 'VoucherController@index')->name('wizard');
-    Route::get('/shop', 'VoucherController@index')->name('shop');
 
+    Route::get('/shop', 'ShopController@index')->name('shop.index');
+    Route::post('/shop/change-template', 'ShopController@changeTemplate')->name('shop.change-template');
+    Route::post('/shop/custom-template', 'ShopController@customTemplate')->name('shop.custom-template');
+    Route::post('/shop/change-images', 'ShopController@changeImages')->name('shop.change-images');
 
     Route::resource('/vouchers', 'VoucherController');
     Route::resource('/orders', 'OrderController');

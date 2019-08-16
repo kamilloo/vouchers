@@ -16,9 +16,11 @@ class CreateMerchantsTable extends Migration
         Schema::create('merchants', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('template_id');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('template_id')->references('id')->on('templates')->onDelete('set null');
         });
     }
 

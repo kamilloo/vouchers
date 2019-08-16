@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\App\Http\Controllers\PaymentController\CallbackReturn;
+namespace Tests\Feature\App\Http\Controllers\PaymentController\Recap;
 
 use App\Contractors\IPaymentGateway;
 use App\Models\Enums\DeliveryType;
@@ -57,11 +57,6 @@ class PaymentControllerTest extends TestCase
             'payment_link' => $this->payment_url
         ]);
 
-        $this->payment_url = route('payment.recap', [
-            'merchant' => $this->merchant,
-        ]);
-
-        $this->payment_gateway = \Mockery::mock(IPaymentGateway::class);
     }
 
     /**
@@ -69,26 +64,10 @@ class PaymentControllerTest extends TestCase
      */
     public function create_redirect_to_payment_gateway()
     {
-        $this->mockPaymentGatewayMethodVerify();
-        $response = $this->get(route('payment.return', $this->payment));
-        $response->assertStatus(302)
-            ->assertRedirect($this->payment_url);
+        $response = $this->get(route('payment.recap', $this->payment));
+        $response->assertStatus(200)
+            ->assertViewIs('payment.recap')
+            ->assertViewHas('success');
     }
 
-    /**
-     * @test
-     */
-    public function create_add_payment_to_db()
-    {
-        $this->markTestSkipped('need implement payment gateway');
-    }
-
-
-    protected function mockPaymentGatewayMethodVerify(): void
-    {
-        $this->app->instance(IPaymentGateway::class, $this->payment_gateway);
-        $this->payment_gateway->shouldReceive('verify')
-            ->once()
-            ->andReturn(true);
-    }
 }
