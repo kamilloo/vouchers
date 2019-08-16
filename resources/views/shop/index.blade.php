@@ -81,16 +81,17 @@
                     <div class="tab-pane" id="customs" role="tabpanel">
                         <div class="row">
                             <div class="col-lg-4 col-md-6 mb-4">
-                                <form>
-                                    <div class="form-group">
+                                <form method="post" action="{{ route('shop.custom-template') }}">
+                                @csrf
+                                <div class="form-group">
                                         <label for="background-color">{{ __('Background Color') }}</label>
-                                        <input type="text" class="form-control" id="background-color" aria-describedby="background-color-help" placeholder="Background color">
+                                        <input type="text" class="form-control" id="background-color" aria-describedby="background-color-help" name="background_color" placeholder="Background color" value="{{ old('background_color', $shop_style->background_color) }}">
                                         <small id="backgroudd-color-help" class="form-text text-muted">{{ __('You can choose page background color') }}.</small>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="welcoming">{{ __('Welcoming') }}</label>
-                                        <input type="radio" class="form-control" id="welcoming" aria-describedby="welcoming-help" name="welcoming" placeholder="{{ __('Welcome your clients') }}">
+                                        <input type="text" class="form-control" id="welcoming" aria-describedby="welcoming-help" name="welcoming" placeholder="{{ __('Welcome your clients') }}" value="{{ old('welcoming', $shop_style->welcoming) }}">
                                         <small id="welcoming-help" class="form-text text-muted">{{ __('Welcome Your Clients') }}.</small>
                                     </div>
 
@@ -104,15 +105,26 @@
                     <div class="tab-pane" id="images" role="tabpanel">
                         <div class="row">
                             <div class="col-lg-4 col-md-6 mb-4">
-                                <form>
+                                <form method="post" action="{{ route('shop.change-images') }}" enctype="multipart/form-data">
+                                    @csrf
                                     <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="show-logo" name="show_logo">
-                                        <label class="form-check-label" for="show-logo">{{ __('Show my logo') }}</label>
+                                        <input type="checkbox" class="form-check-input" id="logo-enabled" name="logo_enabled" value="1" @if($shop_images->logo_enabled) checked @endif>
+                                        <label class="form-check-label" for="logo-enabled">{{ __('Show my logo') }} checked</label>
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleFormControlFile1">Example file input</label>
-                                        <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                                        <label for="logo">{{ __('Add Logo') }}</label>
+                                        <input type="file" class="form-control-file" id="logo" name="logo">
                                     </div>
+
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="front-enabled" name="front_enabled" value="1" @if($shop_images->front_enabled) checked @endif>
+                                        <label class="form-check-label" for="front-enabled">{{ __('Show my Main Picture') }}</label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="front">{{ __('Add Picture') }}</label>
+                                        <input type="file" class="form-control-file" id="front" name="front">
+                                    </div>
+
                                     <button type="submit" class="btn btn-primary">Submit</button>
 
                                 </form>

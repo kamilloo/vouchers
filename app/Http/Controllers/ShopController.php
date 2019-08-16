@@ -25,7 +25,10 @@ class ShopController extends Controller
 
         $merchant = Merchant::mine()->first();
         $my_template = optional($merchant)->template ?? Template::first();
-        return view('shop.index', compact('guard', 'templates', 'my_template'));
+        $shop_style = optional($merchant)->shopStyles ?? new ShopStyle;
+        $shop_images = optional($merchant)->shopImages ?? new ShopImage();
+
+        return view('shop.index', compact('guard', 'templates', 'my_template', 'shop_style', 'shop_images'));
     }
 
     public function changeTemplate(ShopChangeTemplate $request, Guard $guard)
