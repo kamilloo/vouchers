@@ -1,4 +1,4 @@
-@extends('vouchers.layout')
+@extends('layouts.crud')
 
 
 @section('list')

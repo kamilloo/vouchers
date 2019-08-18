@@ -10,17 +10,18 @@ use Illuminate\Http\Request;
 
 class CheckoutController extends Controller
 {
-    public function start(Merchant $merchant)
+    public function start(Merchant $merchant, Voucher $voucher)
     {
-        $vouchers = Voucher::all();
-        return view('checkout.start', compact('vouchers', 'merchant'));
+        $vouchers = $voucher->forMerchant($merchant)->get();
+        return view('templates.template'. $merchant->template->id, compact('vouchers', 'merchant'));
+//        return view('checkout.start', compact('vouchers', 'merchant'));
     }
 
-    public function proceed(Checkout $request)
+    public function proceed(Checkout $request, Merchant $merchant)
     {
         $order_details = $request->only(array_keys($request->rules()));
-        Order::create($order_details);
-        return redirect()->route('checkout.confirmation')->with('success', 'Your order was placed.');
+        $merchant->orders()->create($order_details);
+        return redirect()->route('checkout.confirmation', $merchant)->with('success', 'Your order was placed.');
     }
 
     public function confirmation()

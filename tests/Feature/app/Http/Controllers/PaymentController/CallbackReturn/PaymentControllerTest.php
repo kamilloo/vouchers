@@ -58,7 +58,7 @@ class PaymentControllerTest extends TestCase
         ]);
 
         $this->payment_url = route('payment.recap', [
-            'merchant' => $this->merchant,
+            'payment' => $this->payment,
         ]);
 
         $this->payment_gateway = \Mockery::mock(IPaymentGateway::class);

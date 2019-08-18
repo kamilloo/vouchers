@@ -25,8 +25,7 @@ Route::middleware('auth')->group(function (){
     Route::get('/profile', 'ProfileController@index')->name('profile.index');
     Route::post('/profile/edit', 'ProfileController@update')->name('profile.update');
     Route::get('/profile/edit', 'ProfileController@edit')->name('profile.edit');
-    Route::get('/payments', 'VoucherController@index')->name('payments.index');
-    Route::get('/wizard', 'VoucherController@index')->name('wizard');
+    Route::get('/wizard', 'WizardController@index')->name('wizard');
 
     Route::get('/shop', 'ShopController@index')->name('shop.index');
     Route::post('/shop/change-template', 'ShopController@changeTemplate')->name('shop.change-template');
@@ -35,6 +34,7 @@ Route::middleware('auth')->group(function (){
 
     Route::resource('/vouchers', 'VoucherController');
     Route::resource('/orders', 'OrderController');
+    Route::resource('/payments', 'TransactionController');
 
 });
 Route::get('/home', 'HomeController@index')->name('home');

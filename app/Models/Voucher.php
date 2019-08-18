@@ -13,4 +13,16 @@ class Voucher extends Model
     {
         return $this->user_id === $user->id;
     }
+
+    public function merchants()
+    {
+        return $this->belongsToMany(Merchant::class);
+    }
+
+    public function scopeForMerchant($query, Merchant $merchant)
+    {
+        return $query->whereHas('merchants', function ($query) use ($merchant){
+            $query->where('id', $merchant->id);
+        });
+    }
 }

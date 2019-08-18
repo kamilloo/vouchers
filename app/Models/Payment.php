@@ -12,4 +12,16 @@ class Payment extends Model implements IPayment
     {
         return $this->payment_link ?? 'payment_url';
     }
+
+    public function scopeToMe($query)
+    {
+        return $query->whereHas('order.merchant.user', function ($query){
+            return $query->where('id', auth()->id());
+        });
+    }
+
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
+    }
 }

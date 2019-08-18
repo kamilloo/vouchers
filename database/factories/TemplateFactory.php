@@ -18,6 +18,7 @@ use Faker\Generator as Faker;
 $factory->define(\App\Models\Template::class, function (Faker $faker) {
     return [
         'title' => $faker->title,
+        'slug' => $faker->slug,
         'price' => $faker->randomFloat(2,1,6),
         'review' => $faker->randomFloat(2,1,5),
         'description' => $faker->text,

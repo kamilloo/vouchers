@@ -2,8 +2,8 @@
 
 
 @section('list')
-    <div class="btn-group" role="group" aria-label="Add Voucher">
-        <a href="{{ route('vouchers.create') }}" type="button" class="btn btn-outline-info">Add Voucher</a>
+    <div class="btn-group" role="group" aria-label="Add Order">
+        <a href="{{ route('orders.create') }}" type="button" class="btn btn-outline-info">Add Order</a>
     </div>
     <table class="table table-striped table-light">
         <thead>
@@ -16,16 +16,16 @@
         </tr>
         </thead>
         <tbody>
-        @foreach($vouchers as $voucher)
+        @foreach($orders as $order)
             <tr>
-                <th scope="row">{{ $voucher->id }}</th>
-                <td>{{ $voucher->title }}</td>
-                <td>{{ $voucher->type }}</td>
-                <td>{{ $voucher->price }}</td>
+                <th scope="row">{{ $order->id }}</th>
+                <td>{{ $order->title }}</td>
+                <td>{{ $order->type }}</td>
+                <td>{{ $order->price }}</td>
                 <td>
                     <span class="btn-group">
-                        <a class="btn btn-outline-info mr-1" href="{{ route('vouchers.edit', $voucher) }}">Edycja</a>
-                        <form action="{{ route('vouchers.destroy', $voucher) }}" method="post" >
+                        <a class="btn btn-outline-info mr-1" href="{{ route('orders.edit', $order) }}">Edycja</a>
+                        <form action="{{ route('orders.destroy', $order) }}" method="post" >
                             @method('delete')
                             @csrf
                             <button type="button" class="btn btn-outline-danger mr-1" data-toggle="modal" data-target="#confirm-delete">Delete</button>
