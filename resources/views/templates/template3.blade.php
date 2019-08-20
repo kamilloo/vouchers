@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Contact V3</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.checkout')
+
+@section('head')
     <!--===============================================================================================-->
     <link rel="icon" type="image/png" href="template3/images/icons/favicon.ico"/>
     <!--===============================================================================================-->
@@ -20,8 +17,9 @@
     <link rel="stylesheet" type="text/css" href="template3/css/util.css">
     <link rel="stylesheet" type="text/css" href="template3/css/main.css">
     <!--===============================================================================================-->
-</head>
-<body>
+@endsection
+
+@section('content')
 
 <div class="bg-contact3" style="background-image: url('template3/images/bg-01.jpg');">
     <div class="container-contact3">
@@ -97,15 +95,4 @@
 <!--===============================================================================================-->
 <script src="template3/js/main.js"></script>
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'UA-23581568-13');
-</script>
-
-</body>
-</html>
+@endsection

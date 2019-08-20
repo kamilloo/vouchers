@@ -1,10 +1,6 @@
+@extends('layouts.checkout')
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Contact V1</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+@section('head')
     <!--===============================================================================================-->
     <link rel="icon" type="image/png" href="template1/images/icons/favicon.ico"/>
     <!--===============================================================================================-->
@@ -21,8 +17,9 @@
     <link rel="stylesheet" type="text/css" href="template1/css/util.css">
     <link rel="stylesheet" type="text/css" href="template1/css/main.css">
     <!--===============================================================================================-->
-</head>
-<body>
+@endsection
+
+@section('content')
 
 <div class="contact1">
     <div class="container-contact1">
@@ -97,6 +94,4 @@
 
 <!--===============================================================================================-->
 <script src="template1/js/main.js"></script>
-
-</body>
-</html>
+@endsection

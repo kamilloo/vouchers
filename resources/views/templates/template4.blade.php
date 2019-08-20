@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Contact V4</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.checkout')
+
+@section('head')
     <!--===============================================================================================-->
     <link rel="icon" type="image/png" href="template4/images/icons/favicon.ico"/>
     <!--===============================================================================================-->
@@ -24,9 +21,9 @@
     <link rel="stylesheet" type="text/css" href="template4/css/util.css">
     <link rel="stylesheet" type="text/css" href="template4/css/main.css">
     <!--===============================================================================================-->
-</head>
-<body>
+@endsection
 
+@section('content')
 
 <div class="container-contact100">
     <div class="wrap-contact100">
@@ -101,15 +98,4 @@
 <!--===============================================================================================-->
 <script src="template4/js/main.js"></script>
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'UA-23581568-13');
-</script>
-
-</body>
-</html>
+@endsection
