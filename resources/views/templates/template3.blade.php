@@ -22,55 +22,158 @@
 @section('content')
 
 <div class="bg-contact3" style="background-image: url('template3/images/bg-01.jpg');">
+
     <div class="container-contact3">
+        <div class="row justify-content-center" style="width: 100%">
+            <div class="col-md-6">
+                @include('layouts.flash-message')
+            </div>
+        </div>
         <div class="wrap-contact3">
-            <form class="contact3-form validate-form">
-					<span class="contact3-form-title">
+
+            <form class="contact3-form validate-form" action="{{ route('checkout.proceed', $merchant) }}" method="post" >
+                @csrf
+                <span class="contact3-form-title">
 						Podaruj prezent
 					</span>
+                <div class="row">
+                    <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12">
+                        <div class="bs-stepper">
+                            <div class="bs-stepper-header" role="tablist">
+                                <!-- your steps here -->
+                                <div class="step" data-target="#vouchers-part">
+                                    <button type="button" class="step-trigger" role="tab" aria-controls="vouchers-part" id="vouchers-part-trigger">
+                                        <span class="bs-stepper-circle">1</span>
+                                        <span class="bs-stepper-label">Logins</span>
+                                    </button>
+                                </div>
+                                <div class="line"></div>
+                                <div class="step" data-target="#delivery-part">
+                                    <button type="button" class="step-trigger" role="tab" aria-controls="delivery-part" id="delivery-part-trigger">
+                                        <span class="bs-stepper-circle">2</span>
+                                        <span class="bs-stepper-label">Delivery</span>
+                                    </button>
+                                </div>
+                                <div class="line"></div>
+                                <div class="step" data-target="#information-part">
+                                    <button type="button" class="step-trigger" role="tab" aria-controls="information-part" id="information-part-trigger">
+                                        <span class="bs-stepper-circle">3</span>
+                                        <span class="bs-stepper-label">Personal details</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="bs-stepper-content">
+                                <!-- your steps content here -->
+                                <div id="vouchers-part" class="content" role="tabpanel" aria-labelledby="vouchers-part-trigger">
+                                    <div class="">
+                                        <h3 class="box-title">Select you voucher</h3>
+                                        @foreach($vouchers as $voucher)
+                                            <div class="plan-selection">
+                                                <div class="plan-data">
+                                                    <input v-model="selectedVoucher.id" id="voucher-{{ $voucher->id }}" name="voucher_id" type="radio" class="with-font" value="{{ $voucher->id }}" />
+                                                    <label for="voucher-{{ $voucher->id }}">{{ $voucher->title }}</label>
+                                                    <p class="plan-text">
+                                                        {{ $voucher->service }} | {{ $voucher->type }}</p>
+                                                    <span class="plan-price">{{ $voucher->price }}</span>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                        @if($errors->first('voucher_id'))
+                                            <span>{{ $errors->first('voucher_id') }}</span>
+                                        @endif
+                                    </div>
+                                    <div class="container-contact3-form-btn">
+                                            <button type="button" class="contact3-form-btn" onclick="stepper_next()">Continue With Plans</button>
+                                    </div>
+                                </div>
+                                <div id="delivery-part" class="content" role="tabpanel" aria-labelledby="delivery-part-trigger">
+                                    <div class="">
 
-                <div class="wrap-contact3-form-radio">
-                    <div class="contact3-form-radio m-r-42">
-                        <input class="input-radio3" id="radio1" type="radio" name="choice" value="say-hi" checked="checked">
-                        <label class="label-radio3" for="radio1">
-                            Kwota
-                        </label>
+                                        <h3 class="box-title">Select delivery option</h3>
+                                        @foreach(\App\Models\Enums\DeliveryType::all() as $delivery)
+                                            <div class="plan-selection">
+                                                <div class="plan-data">
+                                                    <input v-model="selectedDelivery.type" id="box-{{ $delivery }}"  name="delivery" type="radio" class="with-font" value="{{ $delivery }}" />
+                                                    <label for="box-{{ $delivery }}">{{ $delivery }}</label>
+                                                    <p class="plan-text">Send online.</p>
+                                                    <span class="plan-price secure-price">$100</span>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                        @if($errors->first('delivery'))
+                                            <span>{{ $errors->first('delivery') }}</span>
+                                        @endif
+                                    </div>
+                                    <div class="container-contact3-form-btn">
+                                            <button type="button" class="contact3-form-btn" onclick="stepper_previous()">Back to Plans</button>
+                                    </div>
+                                    <div class="container-contact3-form-btn">
+                                            <button type="button" class="contact3-form-btn" onclick="stepper_next()">Continue With Plans</button>
+                                    </div>
+
+
+                                </div>
+                                <div id="information-part" class="content" role="tabpanel" aria-labelledby="information-part-trigger">
+{{--                                        <h3 class="box-title">Your details</h3>--}}
+
+
+                                        <div class="wrap-input3 validate-input" data-validate="Name is required">
+                                            <input type="text" id="first-name" class="input3" aria-describedby="first-name-helper" name="first_name" value="{{ old('first_name') }}" placeholder="Osoba obdarowana">
+                                            <span class="focus-input3"></span>
+                                            @if($errors->first('first_name'))
+                                                <span>{{ $errors->first('first_name') }}</span>
+                                            @endif
+                                        </div>
+                                        <div class="wrap-input3 validate-input" data-validate = "Wybót usługi jest wymagany">
+                                            <input type="text" id="last-name" class="input3" aria-describedby="last-name-helper" name="last_name" value="{{ old('last_name') }}" placeholder="Last Name">
+                                            <span class="focus-input3"></span>
+                                            @if($errors->first('last_name'))
+                                                <span>{{ $errors->first('last_name') }}</span>
+                                            @endif
+                                        </div>
+
+                                        <div class="wrap-input3 validate-input" data-validate = "Wybót usługi jest wymagany">
+                                            <input type="email" id="email" class="input3" aria-describedby="email-helper" name="email" value="{{ old('email') }}" placeholder="Email">
+                                            <span class="focus-input3"></span>
+                                            @if($errors->first('email'))
+                                                <span>{{ $errors->first('email') }}</span>
+                                            @endif
+                                        </div>
+
+                                        <div class="wrap-input3 validate-input" data-validate = "Wybót usługi jest wymagany">
+                                            <input type="text" id="phone" class="input3" aria-describedby="phone-helper" name="phone" value="{{ old('phone') }}" placeholder="Phone">
+                                            <span class="focus-input3"></span>
+                                            @if($errors->first('phone'))
+                                                <span>{{ $errors->first('phone') }}</span>
+                                            @endif
+                                        </div>
+
+
+                                        <div class="container-contact3-form-btn">
+                                                <button type="button" class="contact3-form-btn" onclick="stepper_previous()">Back to Plans</button>
+                                        </div>
+                                        <div class="container-contact3-form-btn">
+                                                <button type="submit" class="contact3-form-btn" onclick="stepper_next()">Confirm Order</button>
+                                        </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+
                     </div>
+                    <div class="col-lg-4 col-md-4 col-sm-5 col-xs-12">
 
-                    <div class="contact3-form-radio">
-                        <input class="input-radio3" id="radio2" type="radio" name="choice" value="get-quote">
-                        <label class="label-radio3" for="radio2">
-                            Wybierz usługę
-                        </label>
+                        <checkout-form
+                            :delivery-types="{{ json_encode(\App\Models\Enums\DeliveryType::all()) }}"
+                            :vouchers="{{ json_encode($vouchers) }}"
+                            :selected-voucher="selectedVoucher"
+                            :selected-delivery="selectedDelivery"
+                        ></checkout-form>
                     </div>
                 </div>
-
-                <div class="wrap-input3 validate-input" data-validate="Name is required">
-                    <input class="input3" type="text" name="name" placeholder="Osoba obdarowana">
-                    <span class="focus-input3"></span>
-                </div>
-
-                <div class="wrap-input3 input3-select">
-                    <div>
-                        <select class="selection-2" name="service">
-                            <option>Przykładowa usługa</option>
-                            <option>Kolejna usługa</option>
-                            <option>Inna usługa</option>
-                        </select>
-                    </div>
-                    <span class="focus-input3"></span>
-                </div>
-
-                <div class="wrap-input3 validate-input" data-validate = "Message is required">
-                    <input class="input3" type="text" name="amount" placeholder="Kwota">
-                    <span class="focus-input3"></span>
-                </div>
-
-                <div class="container-contact3-form-btn">
-                    <button class="contact3-form-btn">
-                        Przejdź dalej
-                    </button>
-                </div>
+                <stepper></stepper>
             </form>
         </div>
     </div>

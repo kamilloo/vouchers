@@ -22,44 +22,191 @@
 @section('content')
 
 <div class="contact1">
+    <div class="justify-content-center" style="width: 100%;">
+        <div class="col-md-12">
+            @include('layouts.flash-message')
+        </div>
+    </div>
     <div class="container-contact1">
+
         <div class="contact1-pic js-tilt" data-tilt>
             <img src="template1/images/img-01.png" alt="IMG">
+
+            <div class="col-xs-12 m-t-30">
+
+                <checkout-form
+                    :delivery-types="{{ json_encode(\App\Models\Enums\DeliveryType::all()) }}"
+                    :vouchers="{{ json_encode($vouchers) }}"
+                    :selected-voucher="selectedVoucher"
+                    :selected-delivery="selectedDelivery"
+                ></checkout-form>
+            </div>
         </div>
 
-        <form class="contact1-form validate-form">
+        <form class="contact1-form validate-form" action="{{ route('checkout.proceed', $merchant) }}" method="post" >
 				<span class="contact1-form-title">
                     Podaruj prezent
 				</span>
 
-            <div class="wrap-input1 validate-input" data-validate = "Name is required">
-                <input class="input1" type="text" name="type" placeholder="Wybierz rodzaj bonu">
-                <span class="shadow-input1"></span>
-            </div>
+            @csrf
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="bs-stepper">
+                        <div class="bs-stepper-header" role="tablist">
+                            <!-- your steps here -->
+                            <div class="step" data-target="#vouchers-part">
+                                <button type="button" class="step-trigger" role="tab" aria-controls="vouchers-part" id="vouchers-part-trigger">
+                                    <span class="bs-stepper-circle">1</span>
+                                    <span class="bs-stepper-label">Logins</span>
+                                </button>
+                            </div>
+                            <div class="line"></div>
+                            <div class="step" data-target="#delivery-part">
+                                <button type="button" class="step-trigger" role="tab" aria-controls="delivery-part" id="delivery-part-trigger">
+                                    <span class="bs-stepper-circle">2</span>
+                                    <span class="bs-stepper-label">Delivery</span>
+                                </button>
+                            </div>
+                            <div class="line"></div>
+                            <div class="step" data-target="#information-part">
+                                <button type="button" class="step-trigger" role="tab" aria-controls="information-part" id="information-part-trigger">
+                                    <span class="bs-stepper-circle">3</span>
+                                    <span class="bs-stepper-label">Personal details</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="bs-stepper-content">
+                            <!-- your steps content here -->
+                            <div id="vouchers-part" class="content" role="tabpanel" aria-labelledby="vouchers-part-trigger">
+                                <div class="box">
+                                    <h3 class="box-title">Select you voucher</h3>
+                                    @foreach($vouchers as $voucher)
+                                        <div class="plan-selection">
+                                            <div class="plan-data">
+                                                <input v-model="selectedVoucher.id" id="voucher-{{ $voucher->id }}" name="voucher_id" type="radio" class="with-font" value="{{ $voucher->id }}" />
+                                                <label for="voucher-{{ $voucher->id }}">{{ $voucher->title }}</label>
+                                                <p class="plan-text">
+                                                    {{ $voucher->service }} | {{ $voucher->type }}</p>
+                                                <span class="plan-price">{{ $voucher->price }}</span>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                    @if($errors->first('voucher_id'))
+                                        <span>{{ $errors->first('voucher_id') }}</span>
+                                    @endif
+                                </div>
+                                <div class="container-contact1-form-btn">
+                                    <button type="button" class="contact1-form-btn" onclick="stepper_next()">
+                                                <span>
+                                                    Continue With Plans
+                                                    <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                                                </span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="delivery-part" class="content" role="tabpanel" aria-labelledby="delivery-part-trigger">
+                                <div class="box">
 
-            <div class="wrap-input1 validate-input" data-validate = "Name is required">
-                <input class="input1" type="text" name="name" placeholder="Osoba obdarowana">
-                <span class="shadow-input1"></span>
-            </div>
+                                    <h3 class="box-title">Select delivery option</h3>
+                                    @foreach(\App\Models\Enums\DeliveryType::all() as $delivery)
+                                        <div class="plan-selection">
+                                            <div class="plan-data">
+                                                <input v-model="selectedDelivery.type" id="box-{{ $delivery }}"  name="delivery" type="radio" class="with-font" value="{{ $delivery }}" />
+                                                <label for="box-{{ $delivery }}">{{ $delivery }}</label>
+                                                <p class="plan-text">Send online.</p>
+                                                <span class="plan-price secure-price">$100</span>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                    @if($errors->first('delivery'))
+                                        <span>{{ $errors->first('delivery') }}</span>
+                                    @endif
+                                </div>
 
-            <div class="wrap-input1 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-                <input class="input1" type="text" name="service" placeholder="Wybierz usługę">
-                <span class="shadow-input1"></span>
-            </div>
+                                <div class="container-contact1-form-btn">
+                                    <button type="button" class="contact1-form-btn" onclick="stepper_previous()">
+                                                <span>
+                                                    <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
+                                                    Back to Plan
+                                                </span>
+                                    </button>
+                                </div>
+                                <br>
+                                <div class="container-contact1-form-btn">
+                                    <button type="button" class="contact1-form-btn" onclick="stepper_next()">
+                                                <span>
+                                                    Continue With Plans
+                                                    <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                                                </span>
+                                    </button>
+                                </div>
 
-            <div class="wrap-input1 validate-input" data-validate = "Kwota jest wymagana">
-                <input class="input1" type="text" name="amount" placeholder="Kwota">
-                <span class="shadow-input1"></span>
-            </div>
+                            </div>
+                            <div id="information-part" class="content" role="tabpanel" aria-labelledby="information-part-trigger">
+                                <div class="box">
+                                    <h3 class="box-title">Your details</h3>
 
-            <div class="container-contact1-form-btn">
-                <button class="contact1-form-btn">
-						<span>
-							Przejdź dalej
-							<i class="fa fa-long-arrow-right" aria-hidden="true"></i>
-						</span>
-                </button>
+
+                                    <div class="wrap-input1 validate-input" data-validate="Name is required">
+                                        <input type="text" id="first-name" class="input1" aria-describedby="first-name-helper" name="first_name" value="{{ old('first_name') }}" placeholder="First Name">
+                                        <span class="shadow-input1"></span>
+                                        @if($errors->first('first_name'))
+                                            <span>{{ $errors->first('first_name') }}</span>
+                                        @endif
+                                    </div>
+                                    <div class="wrap-input1 validate-input" data-validate = "Wybót usługi jest wymagany">
+                                        <input type="text" id="last-name" class="input1" aria-describedby="last-name-helper" name="last_name" value="{{ old('last_name') }}" placeholder="Last Name">
+                                        <span class="shadow-input1"></span>
+                                        @if($errors->first('last_name'))
+                                            <span>{{ $errors->first('last_name') }}</span>
+                                        @endif
+                                    </div>
+
+                                    <div class="wrap-input1 validate-input" data-validate = "Wybót usługi jest wymagany">
+                                        <input type="email" id="email" class="input1" aria-describedby="email-helper" name="email" value="{{ old('email') }}" placeholder="Email">
+                                        <span class="shadow-input1"></span>
+                                        @if($errors->first('email'))
+                                            <span>{{ $errors->first('email') }}</span>
+                                        @endif
+                                    </div>
+
+                                    <div class="wrap-input1 validate-input" data-validate = "Wybót usługi jest wymagany">
+                                        <input type="text" id="phone" class="input1" aria-describedby="phone-helper" name="phone" value="{{ old('phone') }}" placeholder="Phone">
+                                        <span class="shadow-input1"></span>
+                                        @if($errors->first('phone'))
+                                            <span>{{ $errors->first('phone') }}</span>
+                                        @endif
+                                    </div>
+                                    <div class="container-contact1-form-btn">
+                                            <button type="button" class="contact1-form-btn" onclick="stepper_previous()">
+                                                <span>
+                                                    <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
+                                                    Back to Plan
+                                                </span>
+                                            </button>
+                                    </div>
+                                    <br>
+                                    <div class="container-contact1-form-btn">
+                                        <button type="submit" class="contact1-form-btn" onclick="stepper_next()">
+                                            <span>
+                                                Confirm Order
+                                                    <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                                            </span>
+                                        </button>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
             </div>
+            <stepper></stepper>
+
         </form>
     </div>
 </div>
@@ -80,16 +227,6 @@
     $('.js-tilt').tilt({
         scale: 1.1
     })
-</script>
-
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'UA-23581568-13');
 </script>
 
 <!--===============================================================================================-->

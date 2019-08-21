@@ -34,7 +34,7 @@
             <span class="contact2-form-title">
 						Podaruj prezent
 					</span>
-                    <form contact2-form validate-form action="{{ route('checkout.proceed', $merchant) }}" method="post" >
+                    <form class="contact2-form validate-form" action="{{ route('checkout.proceed', $merchant) }}" method="post" >
                         @csrf
                         <div class="row">
                             <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12">
