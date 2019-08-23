@@ -20,12 +20,12 @@ class CheckoutController extends Controller
     public function proceed(Checkout $request, Merchant $merchant)
     {
         $order_details = $request->only(array_keys($request->rules()));
-        $merchant->orders()->create($order_details);
-        return redirect()->route('checkout.confirmation', $merchant)->with('success', 'Your order was placed.');
+        $order = $merchant->orders()->create($order_details);
+        return redirect()->route('checkout.confirmation', compact('merchant', 'order'))->with('success', 'Your order was placed.');
     }
 
-    public function confirmation()
+    public function confirmation(Merchant $merchant, Order $order)
     {
-        return view('checkout.confirmation');
+        return view('checkout.confirmation', compact('merchant', 'order'));
     }
 }

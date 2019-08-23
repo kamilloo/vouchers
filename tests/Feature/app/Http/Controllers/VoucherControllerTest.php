@@ -105,7 +105,7 @@ class VoucherControllerTest extends TestCase
             'type' => VoucherType::SERVICE,
             'service' => 'service'
         ];
-        $response = $this->post(route('vouchers.store'), $incoming_data);
+        $response = $this->post(route('vouchers.store'), $incoming_data)->assertStatus(302);
 
         $this->assertDatabaseHas('merchant_voucher', [
                 'merchant_id' => $this->user->merchant->id,

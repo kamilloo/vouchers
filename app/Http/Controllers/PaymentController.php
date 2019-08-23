@@ -44,4 +44,9 @@ class PaymentController extends Controller
     {
         return view('payment.recap')->with(['success' => 'Congratulation!, you bought voucher successful.']);
     }
+
+    public function sandboxGateway(Payment $payment)
+    {
+        return redirect()->route('payment.return', $payment);
+    }
 }

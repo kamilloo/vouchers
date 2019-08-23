@@ -43,12 +43,13 @@ Route::get('get-started', 'Starter@getStarted')->name('get-started');
 
 Route::get('checkout/{merchant}', 'CheckoutController@start')->name('checkout.start');
 Route::post('checkout/{merchant}', 'CheckoutController@proceed')->name('checkout.proceed');
-Route::get('checkout/{merchant}/confirmation', 'CheckoutController@confirmation')->name('checkout.confirmation');
+Route::get('checkout/{merchant}/confirmation/{order}', 'CheckoutController@confirmation')->name('checkout.confirmation');
 
 
 Route::get('payment/{merchant}/create/{order}', 'PaymentController@create')->name('payment.create');
 Route::get('payment/{payment}/callback-return', 'PaymentController@callbackReturn')->name('payment.return');
 Route::post('payment/{payment}/callback-status', 'PaymentController@callbackStatus')->name('payment.status');
+Route::get('payment/{payment}/sandbox-gateway', 'PaymentController@sandboxGateway')->name('payment.sandbox-gateway');
 
 
 Route::get('payment/{payment}/recap', 'PaymentController@recap')->name('payment.recap');

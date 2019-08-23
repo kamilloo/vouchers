@@ -6,6 +6,14 @@ use App\Models\Enums\VoucherType;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
+/**
+ * Class VoucherStore
+ * @package App\Http\Requests
+ * @method getTitleParam
+ * @method getTypeParam
+ * @method getPriceParam
+ * @method getServiceParam
+ */
 class VoucherStore extends Request
 {
     /*

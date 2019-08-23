@@ -34,16 +34,8 @@ class VoucherController extends Controller
 
     public function store(VoucherStore $request, Guard $guard, VoucherRepository $repository)
     {
-        $voucher_attributes = $request->only([
-            'title',
-            'type',
-            'price',
-            'service'
-        ]);
-        $user = $guard->user();
+        $voucher = $repository->create($request, $guard->user());
 
-        $voucher = $user->vouchers()->create($voucher_attributes);
-        $user->merchant->vouchers()->attach($voucher->id);
         return redirect(route('vouchers.index'))->with('success', 'Your Voucher was updated!');
     }
 
