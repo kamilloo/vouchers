@@ -6,6 +6,7 @@ use App\Models\Enums\VoucherType;
 use App\Models\User;
 use App\Models\Voucher;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Request;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -92,6 +93,24 @@ class VoucherControllerTest extends TestCase
         $this->assertDatabaseHas('vouchers', [
                 'user_id' => $this->user->id,
             ] + $incoming_data);
+    }
+
+    /**
+     * @test
+     */
+    public function store_add_voucher_to_merchant()
+    {
+        $incoming_data = [
+            'title' => 'title',
+            'type' => VoucherType::SERVICE,
+            'service' => 'service'
+        ];
+        $response = $this->post(route('vouchers.store'), $incoming_data);
+
+        $this->assertDatabaseHas('merchant_voucher', [
+                'merchant_id' => $this->user->merchant->id,
+                'voucher_id' => DB::table('vouchers')->latest()->first()->id
+            ]);
     }
 
 

@@ -7,6 +7,7 @@ use App\Http\Requests\VoucherStore;
 use App\Http\Requests\VoucherUpdate;
 use App\Models\UserProfile;
 use App\Models\Voucher;
+use Domain\Vouchers\VoucherRepository;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Filesystem\FilesystemManager;
 use Illuminate\Http\Request;
@@ -31,7 +32,7 @@ class VoucherController extends Controller
         return view('vouchers.create');
     }
 
-    public function store(VoucherStore $request, Guard $guard)
+    public function store(VoucherStore $request, Guard $guard, VoucherRepository $repository)
     {
         $voucher_attributes = $request->only([
             'title',
@@ -39,7 +40,10 @@ class VoucherController extends Controller
             'price',
             'service'
         ]);
-        $guard->user()->vouchers()->create($voucher_attributes);
+        $user = $guard->user();
+
+        $voucher = $user->vouchers()->create($voucher_attributes);
+        $user->merchant->vouchers()->attach($voucher->id);
         return redirect(route('vouchers.index'))->with('success', 'Your Voucher was updated!');
     }
 
