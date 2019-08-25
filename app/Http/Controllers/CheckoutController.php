@@ -26,6 +26,7 @@ class CheckoutController extends Controller
 
     public function confirmation(Merchant $merchant, Order $order)
     {
+
         return view('checkout.confirmation', compact('merchant', 'order'));
     }
 }

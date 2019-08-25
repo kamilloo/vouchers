@@ -29,7 +29,7 @@ class PaymentController extends Controller
         {
             return redirect()->route('payment.recap', [
                 'payment' => $payment,
-            ]);
+            ])->with(['success' => 'Congratulation!, you bought voucher successful.']);
         }
         return view('payment.return');
 
@@ -42,7 +42,7 @@ class PaymentController extends Controller
 
     public function recap(Payment $payment)
     {
-        return view('payment.recap')->with(['success' => 'Congratulation!, you bought voucher successful.']);
+        return view('payment.recap');
     }
 
     public function sandboxGateway(Payment $payment)

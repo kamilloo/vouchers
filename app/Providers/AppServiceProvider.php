@@ -6,6 +6,7 @@ use App\Contractors\IPaymentGateway;
 use Domain\Payments\PaymentGateway;
 use Domain\Payments\SandboxGateway;
 use Illuminate\Config\Repository;
+use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -22,9 +23,9 @@ class AppServiceProvider extends ServiceProvider
             $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
         }
 
-        $this->app->bind(IPaymentGateway::class, function (Repository $config){
-            return $config->get('payments.gateway') === 'live' ?
-                PaymentGateway::class : SandboxGateway::class;
+        $this->app->bind(IPaymentGateway::class, function (Application $app){
+            return $app['config']->get('payments.gateway') === 'live' ?
+                $app->make(PaymentGateway::class) : $app->make(SandboxGateway::class);
         });
     }
 

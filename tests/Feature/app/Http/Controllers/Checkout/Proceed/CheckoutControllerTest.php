@@ -1,10 +1,11 @@
 <?php
 
-namespace Tests\Feature\App\Http\Controllers\Checkout\Proceed\StarterTest;
+namespace Tests\Feature\App\Http\Controllers\Checkout\Proceed;
 
 use App\Models\Enums\DeliveryType;
 use App\Models\Enums\VoucherType;
 use App\Models\Merchant;
+use App\Models\Order;
 use App\Models\User;
 use App\Models\Voucher;
 use Faker\Factory;
@@ -50,8 +51,52 @@ class CheckoutControllerTest extends TestCase
     public function proceed_add_order_to_db()
     {
         $this->voucher = $this->createVoucher();
+        $incoming_data = $this->incomingData();
+        $response = $this->post(route('checkout.proceed', $this->merchant), $incoming_data);
+
+        $response->assertStatus(302)
+            ->assertSessionHas('success');
+
+        $this->assertDatabaseHas('orders', $incoming_data);
+    }
+
+
+    /**
+     * @test
+     */
+    public function proceed_redirect_to_comfimation_page()
+    {
+        $this->voucher = $this->createVoucher();
         $faker = Factory::create();
-        $incoming_data = [
+        $incoming_data = $this->incomingData();
+        $response = $this->post(route('checkout.proceed', $this->merchant), $incoming_data);
+
+        $order =  Order::latest()->first();
+
+        $response->assertStatus(302)
+            ->assertRedirect(route('checkout.confirmation', [
+                'merchant' => $this->merchant,
+                'order' => $order
+            ]))
+            ->assertSessionHas('success');
+
+    }
+
+    protected function createVoucher()
+    {
+        return factory(Voucher::class)->create();
+    }
+
+    /**
+     * @param \Faker\Generator $faker
+     *
+     * @return array
+     */
+    protected function incomingData(): array
+    {
+        $faker = Factory::create();
+
+        return [
             'voucher_id' => $this->voucher->id,
             'delivery' => DeliveryType::ONLINE,
             'price' => 300,
@@ -60,16 +105,5 @@ class CheckoutControllerTest extends TestCase
             'phone' => $faker->phoneNumber,
             'email' => $faker->email,
         ];
-        $response = $this->post(route('checkout.proceed', $this->merchant), $incoming_data);
-
-        $response->assertStatus(302)->assertRedirect(route('checkout.confirmation', $this->merchant))
-            ->assertSessionHas('success');
-
-        $this->assertDatabaseHas('orders', $incoming_data);
-    }
-
-    protected function createVoucher()
-    {
-        return factory(Voucher::class)->create();
     }
 }

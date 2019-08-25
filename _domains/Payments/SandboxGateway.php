@@ -12,9 +12,9 @@ class SandboxGateway implements IPaymentGateway
 
     public function pay(IOrder $order): IPayment
     {
-        return new Payment([
-            'payment_link' => 'sandbox-gateway'
-        ]);
+        $payment = factory(Payment::class)->create();
+        $payment->payment_link = route('payment.sandbox-gateway', $payment);
+        return $payment;
     }
 
     public function confirm(IPayment $payment): bool

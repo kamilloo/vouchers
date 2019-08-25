@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\App\Http\Controllers\Checkout\Start\StarterTest;
+namespace Tests\Feature\App\Http\Controllers\Checkout\Start;
 
 use App\Models\Enums\DeliveryType;
 use App\Models\Enums\VoucherType;
