@@ -89,7 +89,7 @@
             @yield('content')
         </main>
     </div>
-    <footer class="pt-4 border-top bg-white">
+    <footer class="pt-4 border-top bg-light">
         <div class="col-sm text-center">
             <img class="img-fluid" src="" alt="" width="24" height="24">
             <small class="d-block mb-3 text-muted">© {{ \Carbon\Carbon::today()->year }}</small>
@@ -98,12 +98,11 @@
             <div class="col-md">
                 <h5>{{ __('Features') }}</h5>
                 <ul class="list-unstyled text-small">
-                    <li><a class="text-muted" href="#">Cool stuff</a></li>
-                    <li><a class="text-muted" href="#">Random feature</a></li>
-                    <li><a class="text-muted" href="#">Team feature</a></li>
-                    <li><a class="text-muted" href="#">Stuff for developers</a></li>
-                    <li><a class="text-muted" href="#">Another one</a></li>
-                    <li><a class="text-muted" href="#">Last time</a></li>
+                    <li><a class="text-muted" href="{{ route('vouchers.index') }}">{{ __('My Vouchers') }}</a></li>
+                    <li><a class="text-muted" href="{{ route('shop.index') }}">{{ __('Shop') }}</a></li>
+                    <li><a class="text-muted" href="{{ route('payments.index') }}">{{ __('Payments') }}</a></li>
+                    <li><a class="text-muted" href="{{ route('orders.index') }}">{{ __('Orders') }}</a></li>
+                    <li><a class="text-muted" href="{{ route('wizard') }}">{{ __('Wizard') }}</a></li>
                 </ul>
             </div>
             <div class="col-md">

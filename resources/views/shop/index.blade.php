@@ -1,21 +1,17 @@
-@extends('layouts.app')
+@extends('layouts.crud')
 
-@section('content')
+@section('list')
+    <div class="px-3">
 
-    <!-- Page Content -->
-    <div class="container">
+        <div class="col-lg-3">
 
-        <div class="row">
-
-            <div class="col-lg-3">
-
-                <div class="list-group"  id="design-list" role="tablist">
-                    <a href="#designs" class="list-group-item list-group-item-action active" data-toggle="list"  role="tab">{{ __('Designs') }}</a>
-                    <a href="#customs" class="list-group-item list-group-item-action" data-toggle="list"  role="tab">{{ __('Customs') }}</a>
-                    <a href="#images" class="list-group-item list-group-item-action" data-toggle="list"  role="tab">{{ __('Images') }}</a>
-                </div>
-                <br>
-                @if(!empty($my_template))
+            <div class="list-group"  id="design-list" role="tablist">
+                <a href="#designs" class="list-group-item list-group-item-action active" data-toggle="list"  role="tab">{{ __('Designs') }}</a>
+                <a href="#customs" class="list-group-item list-group-item-action" data-toggle="list"  role="tab">{{ __('Customs') }}</a>
+                <a href="#images" class="list-group-item list-group-item-action" data-toggle="list"  role="tab">{{ __('Images') }}</a>
+            </div>
+            <br>
+            @if(!empty($my_template))
                 <h1 class="my-4">{{ __('Your Design') }}</h1>
                 <div class="row">
                     <div class="col-sm-12">
@@ -34,12 +30,13 @@
                         </div>
                     </div>
                 </div>
-                @endif
+            @endif
 
-            </div>
-            <!-- /.col-lg-3 -->
+        </div>
+        <!-- /.col-lg-3 -->
+    </div>
+    <div class="row py-3 px-3 border bg-white rounded-sm">
 
-            <div class="col-lg-9">
                 <div class="tab-content">
                     <div class="tab-pane active" id="designs" role="tabpanel">
                         <form method="post" action="{{ route('shop.change-template') }}">
@@ -79,8 +76,6 @@
 
                     </div>
                     <div class="tab-pane" id="customs" role="tabpanel">
-                        <div class="row">
-                            <div class="col-lg-4 col-md-6 mb-4">
                                 <form method="post" action="{{ route('shop.custom-template') }}">
                                 @csrf
                                 <div class="form-group">
@@ -98,13 +93,8 @@
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </form>
 
-                            </div>
-                        </div>
-
                     </div>
                     <div class="tab-pane" id="images" role="tabpanel">
-                        <div class="row">
-                            <div class="col-lg-4 col-md-6 mb-4">
                                 <form method="post" action="{{ route('shop.change-images') }}" enctype="multipart/form-data">
                                     @csrf
                                     <div class="form-check">
@@ -128,20 +118,8 @@
                                     <button type="submit" class="btn btn-primary">Submit</button>
 
                                 </form>
-                            </div>
-                        </div>
                     </div>
                 </div>
-
-                <!-- /.row -->
-
-            </div>
-            <!-- /.col-lg-9 -->
-
-        </div>
-        <!-- /.row -->
-
     </div>
-    <!-- /.container -->
 
 @endsection

@@ -2,6 +2,11 @@
 
 
 @section('list')
+    <div class="px-3">
+        <h1 class="display-4">{{ __('Edit Voucher') }}</h1>
+    </div>
+    <div class="row py-3 px-3 border bg-white rounded-sm">
+        <div class="col">
     <form method="post" enctype="multipart/form-data" action=" {{ route('vouchers.update', $voucher) }}">
         {{ csrf_field() }}
         @method('put')
@@ -37,10 +42,16 @@
             @endif
         </div>
         <div class="form-group">
-            <label for="file-sample">Add Sample</label>
-            <input type="file" class="form-control-file" id="file-sample" name="file-sample">
+            <label for="file-sample">Edit Sample</label>
+            <div class="input-group">
+                <div class="custom-file">
+                    <input type="file" id="file-sample" name="file-sample">
+                    <label class="custom-file-label" for="file-sample">Choose file</label>
+                </div>
+            </div>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-
+        </div>
+    </div>
 @endsection

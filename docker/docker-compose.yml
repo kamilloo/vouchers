@@ -49,8 +49,8 @@ services:
     container_name: vouchers_test_mysql
     environment:
       MYSQL_DATABASE: 'vouchers_test'
-      MYSQL_USER: 'root'
-      MYSQL_PASSWORD: 'root'
+      MYSQL_USER: 'app'
+      MYSQL_PASSWORD: 'app'
       MYSQL_ROOT_PASSWORD: 'root'
     ports:
       - '3106:3306'

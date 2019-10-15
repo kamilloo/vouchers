@@ -1792,6 +1792,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -42062,7 +42063,144 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "profile-img" }, [
-    _c("img", { attrs: { src: _vm.filepath, alt: "" } }),
+    _c("div", { staticClass: "example-avatar" }, [
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.$refs.upload && _vm.$refs.upload.dropActive,
+              expression: "$refs.upload && $refs.upload.dropActive"
+            }
+          ],
+          staticClass: "drop-active"
+        },
+        [_c("h3", [_vm._v("Drop files to upload")])]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: !_vm.edit,
+              expression: "!edit"
+            }
+          ],
+          staticClass: "avatar-upload"
+        },
+        [
+          _c("div", { staticClass: "text-center p-2" }, [
+            _c("label", { attrs: { for: "avatar" } }, [
+              _c("img", {
+                staticClass: "rounded-circle",
+                attrs: {
+                  src: _vm.files.length
+                    ? _vm.files[0].url
+                    : "https://www.gravatar.com/avatar/default?s=200&r=pg&d=mm"
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "text-center p-2" },
+            [
+              _c(
+                "file-upload",
+                {
+                  ref: "upload",
+                  staticClass: "btn btn-primary",
+                  attrs: {
+                    extensions: "gif,jpg,jpeg,png,webp",
+                    accept: "image/png,image/gif,image/jpeg,image/webp",
+                    name: "avatar",
+                    "post-action": "/upload/post",
+                    drop: !_vm.edit
+                  },
+                  on: {
+                    "input-filter": _vm.inputFilter,
+                    "input-file": _vm.inputFile
+                  },
+                  model: {
+                    value: _vm.files,
+                    callback: function($$v) {
+                      _vm.files = $$v
+                    },
+                    expression: "files"
+                  }
+                },
+                [
+                  _vm._v(
+                    "\n                    Upload avatar\n                "
+                  )
+                ]
+              )
+            ],
+            1
+          )
+        ]
+      )
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.files.length && _vm.edit,
+            expression: "files.length && edit"
+          }
+        ],
+        staticClass: "avatar-edit"
+      },
+      [
+        _vm.files.length
+          ? _c("div", { staticClass: "avatar-edit-image" }, [
+              _c("img", { ref: "editImage", attrs: { src: _vm.files[0].url } })
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _c("div", { staticClass: "text-center p-4" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-secondary",
+              attrs: { type: "button" },
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  return _vm.$refs.upload.clear($event)
+                }
+              }
+            },
+            [_vm._v("Cancel")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary",
+              attrs: { type: "submit" },
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  return _vm.editSave($event)
+                }
+              }
+            },
+            [_vm._v("Save")]
+          )
+        ])
+      ]
+    ),
     _vm._v(" "),
     _vm._m(0)
   ])
@@ -42072,9 +42210,18 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "file btn btn-lg btn-primary" }, [
-      _vm._v("\n            Change Photo\n            "),
-      _c("input", { attrs: { type: "file", name: "logo" } })
+    return _c("div", { staticClass: "pt-5" }, [
+      _vm._v("\n            Source code: "),
+      _c(
+        "a",
+        {
+          attrs: {
+            href:
+              "https://github.com/lian-yue/vue-upload-component/blob/master/docs/views/examples/Avatar.vue"
+          }
+        },
+        [_vm._v("/docs/views/examples/Avatar.vue")]
+      )
     ])
   }
 ]

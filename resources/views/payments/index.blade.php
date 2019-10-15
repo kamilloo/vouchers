@@ -2,11 +2,14 @@
 
 
 @section('list')
-    <div class="btn-group" role="group" aria-label="Add Payment">
-        <a href="{{ route('payments.create') }}" type="button" class="btn btn-outline-info">Add Payment</a>
+    <div class="row mb-4">
+        <div class="btn-group" role="group" aria-label="Add Payment">
+            <a href="{{ route('payments.create') }}" type="button" class="btn btn-outline-info">Add Payment</a>
+        </div>
     </div>
-    <table class="table table-striped table-light">
-        <thead>
+    <div class="row ">
+    <table class="table table-striped table-hover">
+        <thead class="thead-light">
         <tr>
             <th scope="col">#</th>
             <th scope="col">Title</th>
@@ -37,5 +40,5 @@
         </tbody>
 
     </table>
-
+    </div>
 @endsection

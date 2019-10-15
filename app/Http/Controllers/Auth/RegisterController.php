@@ -71,6 +71,7 @@ class RegisterController extends Controller
         ]);
 
         $user->merchant()->create();
+        $user->profile()->create();
 
         return $user;
     }
