@@ -16,7 +16,7 @@
 }
 
 body{
-  background: -webkit-linear-gradient($blue, $cyan);
+  background: -webkit-linear-gradient(left, $blue, $cyan);
 }
 .emp-profile{
   padding: 3%;
@@ -30,7 +30,7 @@ body{
 }
 .profile-img img{
   width: 70%;
-  height: 100%;
+  //height: 100%;
     }
 .profile-img .file {
   position: relative;

@@ -20,7 +20,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
+    <div id="app" class="min-vh-100 pb-5">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -79,7 +79,7 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <main class="py-4" class="container-fluid">
             <div class="row justify-content-center">
                 <div class="col-md-6">
                     @include('layouts.flash-message')
@@ -89,39 +89,41 @@
             @yield('content')
         </main>
     </div>
-    <footer class="pt-4 border-top bg-light">
-        <div class="col-sm text-center">
-            <img class="img-fluid" src="" alt="" width="24" height="24">
-            <small class="d-block mb-3 text-muted">© {{ \Carbon\Carbon::today()->year }}</small>
-        </div>
-        <div class="row mx-5">
-            <div class="col-md">
-                <h5>{{ __('Features') }}</h5>
-                <ul class="list-unstyled text-small">
-                    <li><a class="text-muted" href="{{ route('vouchers.index') }}">{{ __('My Vouchers') }}</a></li>
-                    <li><a class="text-muted" href="{{ route('shop.index') }}">{{ __('Shop') }}</a></li>
-                    <li><a class="text-muted" href="{{ route('payments.index') }}">{{ __('Payments') }}</a></li>
-                    <li><a class="text-muted" href="{{ route('orders.index') }}">{{ __('Orders') }}</a></li>
-                    <li><a class="text-muted" href="{{ route('wizard') }}">{{ __('Wizard') }}</a></li>
-                </ul>
+    <footer class="pt-2 border-top bg-light mt-n5">
+        <div class="container-fluid">
+            <div class="col-sm text-center mb-3">
+                <img class="img-fluid" src="{{ config('app.name', 'Voucher') }}" alt="Voucher" width="24" height="24">
+                <span class="text-muted">© {{ \Carbon\Carbon::today()->year }}</span>
             </div>
-            <div class="col-md">
-                <h5>{{ __('Profile') }}</h5>
-                <ul class="list-unstyled text-small">
-                    <li><a class="text-muted" href="#">Resource</a></li>
-                    <li><a class="text-muted" href="#">Resource name</a></li>
-                    <li><a class="text-muted" href="#">Another resource</a></li>
-                    <li><a class="text-muted" href="#">Final resource</a></li>
-                </ul>
-            </div>
-            <div class="col-md">
-                <h5>{{ __('About') }}</h5>
-                <ul class="list-unstyled text-small">
-                    <li><a class="text-muted" href="#">Team</a></li>
-                    <li><a class="text-muted" href="#">Locations</a></li>
-                    <li><a class="text-muted" href="#">Privacy</a></li>
-                    <li><a class="text-muted" href="#">Terms</a></li>
-                </ul>
+            <div class="row mx-5">
+                <div class="col-md">
+                    <h5>{{ __('Features') }}</h5>
+                    <ul class="list-unstyled text-small">
+                        <li><a class="text-muted" href="{{ route('vouchers.index') }}">{{ __('My Vouchers') }}</a></li>
+                        <li><a class="text-muted" href="{{ route('shop.index') }}">{{ __('Shop') }}</a></li>
+                        <li><a class="text-muted" href="{{ route('payments.index') }}">{{ __('Payments') }}</a></li>
+                        <li><a class="text-muted" href="{{ route('orders.index') }}">{{ __('Orders') }}</a></li>
+                        <li><a class="text-muted" href="{{ route('wizard') }}">{{ __('Wizard') }}</a></li>
+                    </ul>
+                </div>
+                <div class="col-md">
+                    <h5>{{ __('Profile') }}</h5>
+                    <ul class="list-unstyled text-small">
+                        <li><a class="text-muted" href="#">Resource</a></li>
+                        <li><a class="text-muted" href="#">Resource name</a></li>
+                        <li><a class="text-muted" href="#">Another resource</a></li>
+                        <li><a class="text-muted" href="#">Final resource</a></li>
+                    </ul>
+                </div>
+                <div class="col-md">
+                    <h5>{{ __('About') }}</h5>
+                    <ul class="list-unstyled text-small">
+                        <li><a class="text-muted" href="#">Team</a></li>
+                        <li><a class="text-muted" href="#">Locations</a></li>
+                        <li><a class="text-muted" href="#">Privacy</a></li>
+                        <li><a class="text-muted" href="#">Terms</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </footer>

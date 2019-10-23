@@ -7,7 +7,9 @@ use App\Http\Requests\VoucherStore;
 use App\Models\User;
 use App\Models\Voucher;
 use Illuminate\Database\Connection;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Log\Logger;
+use Illuminate\Support\Arr;
 use Throwable;
 
 class VoucherRepository implements IVoucherRepository
@@ -38,6 +40,13 @@ class VoucherRepository implements IVoucherRepository
                     'service' => $request->getServiceParam()
                 ];
 
+                $file = $request->file('file-name');
+                if (!empty($file))
+                {
+                    $logo = $this->replaceLogo($file);
+                    Arr::set($voucher_attributes, 'file', $logo);
+                }
+
                 $voucher = $user->vouchers()->create($voucher_attributes);
                 $user->merchant->vouchers()->attach($voucher->getKey());
                 return $voucher;
@@ -53,4 +62,10 @@ class VoucherRepository implements IVoucherRepository
 
 
     }
+
+    protected function replaceLogo(UploadedFile $file)
+    {
+        return $file->storePublicly('public/vouchers');
+    }
 }
+

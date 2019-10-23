@@ -10654,7 +10654,7 @@ a.text-dark:focus {
 }
 
 body {
-  background: -webkit-linear-gradient(#3490dc, #6cb2eb);
+  background: -webkit-linear-gradient(left, #3490dc, #6cb2eb);
 }
 
 .emp-profile {
@@ -10671,7 +10671,6 @@ body {
 
 .profile-img img {
   width: 70%;
-  height: 100%;
 }
 
 .profile-img .file {

@@ -28,6 +28,7 @@ class VoucherStore extends Request
             'type' => ['required', Rule::in(VoucherType::all())],
             'price' => [Rule::requiredIf($this->type === VoucherType::QUOTE), 'numeric'],
             'service' => ['nullable', Rule::requiredIf(0), 'string'],
+            'file-name' => ['nullable', 'file'],
         ];
     }
 }

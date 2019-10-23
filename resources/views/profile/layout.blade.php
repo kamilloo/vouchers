@@ -4,6 +4,7 @@
     <form method="post" enctype="multipart/form-data" action="{{ route('profile.update') }}">
         @csrf
     <div class="container emp-profile">
+
         <div class="row">
             <div class="col-md-4">
                 @yield('logo')

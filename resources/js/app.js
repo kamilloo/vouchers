@@ -24,7 +24,8 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 
 Vue.component('todo-list', require('./components/TodoList.vue').default);
 Vue.component('todo-item', require('./components/TodoItem.vue').default);
-Vue.component('avatar', require('./components/Avatar.vue').default);
+// Vue.component('avatar', require('./components/Avatar.vue').default);
+Vue.component('file-upload', require('./components/FileUpload.vue').default);
 Vue.component('checkout-form', require('./components/CheckoutForm.vue').default);
 Vue.component('stepper', require('./components/Stepper.vue').default);
 

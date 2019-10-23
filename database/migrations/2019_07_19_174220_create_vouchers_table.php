@@ -19,6 +19,7 @@ class CreateVouchersTable extends Migration
             $table->string('title');
             $table->string('price')->nullable()->default(null);
             $table->string('service')->nullable()->default(null);
+            $table->string('file')->nullable()->default(null);
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
 

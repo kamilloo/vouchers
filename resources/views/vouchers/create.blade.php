@@ -42,13 +42,8 @@
                     @endif
                 </div>
                 <div class="form-group">
-                    <label for="file-sample">Add Sample</label>
-                    <div class="input-group">
-                        <div class="custom-file">
-                            <input type="file" id="file-sample" name="file-sample">
-                            <label class="custom-file-label" for="file-sample">Choose file</label>
-                        </div>
-                    </div>
+                    <file-upload file-preview-width="400" file-name="file-name"></file-upload>
+
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>

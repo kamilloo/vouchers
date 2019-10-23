@@ -95,6 +95,31 @@ class VoucherControllerTest extends TestCase
             ] + $incoming_data);
     }
 
+
+    /**
+     * @test
+     */
+    public function store_file_for_voucher_db()
+    {
+        $incoming_data = [
+            'file-name' => $this->file,
+            'title' => 'title',
+            'type' => VoucherType::SERVICE,
+            'service' => 'service'
+        ];
+        $response = $this->post(route('vouchers.store'), $incoming_data);
+
+        $response->assertStatus(302)->assertRedirect(route('vouchers.index'))
+            ->assertSessionHas('success');
+
+
+        $voucher = Voucher::latest()->first();
+
+        $this->assertContains('public/vouchers', $voucher->file);
+
+        Storage::assertExists($voucher->file);
+    }
+
     /**
      * @test
      */

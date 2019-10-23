@@ -2,7 +2,7 @@
 
 
 @section('logo')
-    <avatar filepath="{{ \Storage::url($guard->user()->profile->logo) }}" ></avatar>
+    <file-upload ></file-upload>
 @endsection
 
 @section('form.button')
