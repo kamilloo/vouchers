@@ -2,7 +2,7 @@
 
 
 @section('logo')
-    <file-upload ></file-upload>
+    <file-upload  file-preview-width="200" file-name="logo" file-src="/storage/logos/7wP5bh7oA2tAANeIztCMvhUtjJQwSPe9J3YAXQTl.jpeg"></file-upload>
 @endsection
 
 @section('form.button')

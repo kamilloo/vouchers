@@ -1859,6 +1859,8 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 //
 //
 //
+//
+//
 
 Vue.use(vue_image_upload_resize__WEBPACK_IMPORTED_MODULE_0___default.a);
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1869,6 +1871,10 @@ Vue.use(vue_image_upload_resize__WEBPACK_IMPORTED_MODULE_0___default.a);
       "default": ''
     },
     fileName: {
+      type: String,
+      "default": ''
+    },
+    fileSrc: {
       type: String,
       "default": ''
     },
@@ -38551,6 +38557,18 @@ var render = function() {
     "div",
     { staticClass: "text-center", attrs: { id: "image-uploader" } },
     [
+      _c("img", {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: !_vm.hasImage && _vm.fileSrc,
+            expression: "!hasImage && fileSrc"
+          }
+        ],
+        attrs: { src: _vm.fileSrc, width: _vm.filePreviewWidth }
+      }),
+      _vm._v(" "),
       _c(
         "image-uploader",
         {

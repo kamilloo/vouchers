@@ -1,5 +1,7 @@
 <template>
     <div id="image-uploader" class="text-center">
+        <img v-show="!hasImage && fileSrc" :src="fileSrc" :width="filePreviewWidth">
+
         <image-uploader
                 :preview="true"
                 :maxWidth="600"
@@ -38,6 +40,10 @@
                 default: '',
             },
             fileName: {
+                type: String,
+                default: '',
+            },
+            fileSrc: {
                 type: String,
                 default: '',
             },
