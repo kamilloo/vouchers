@@ -117,6 +117,6 @@ class ShopController extends Controller
      */
     protected function uploadImage(UploadedFile $file)
     {
-        return $file->storePublicly('public/merchant');
+        return $file->storePublicly('storage/merchant');
     }
 }

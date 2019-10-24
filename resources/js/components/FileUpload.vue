@@ -13,8 +13,9 @@
                 outputFormat="verbose"
                 @input="setImage"
                 :maxSize="200"
+                :id="id"
         >
-            <label for="fileInput" class="d-block" slot="upload-label">
+            <label :for="id" class="d-block" slot="upload-label">
 
                 <figure>
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
@@ -35,10 +36,6 @@
     export default {
         name: "FileUpload",
         props: {
-            filepath: {
-                type: String,
-                default: '',
-            },
             fileName: {
                 type: String,
                 default: '',
@@ -51,8 +48,13 @@
                 type: String,
                 default: '',
             },
+            id: {
+                type: String,
+                default: 'fileInput',
+            },
         },
         mounted (){
+
             [...document.getElementsByClassName("img-preview")].forEach(
                 (element, index, array) => {
                     element.width = this.filePreviewWidth;
@@ -71,7 +73,7 @@
             setImage: function(output) {
                 this.hasImage = true;
                 this.image = output;
-                let logo = document.getElementById('fileInput');
+                let logo = document.getElementById(this.id);
                 logo.name = this.fileName;
             }
         }
@@ -81,7 +83,7 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
 
-    #fileInput {
+    .fileinput {
         display: none;
     }
     h1,

@@ -1861,15 +1861,12 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 //
 //
 //
+//
 
 Vue.use(vue_image_upload_resize__WEBPACK_IMPORTED_MODULE_0___default.a);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "FileUpload",
   props: {
-    filepath: {
-      type: String,
-      "default": ''
-    },
     fileName: {
       type: String,
       "default": ''
@@ -1881,6 +1878,10 @@ Vue.use(vue_image_upload_resize__WEBPACK_IMPORTED_MODULE_0___default.a);
     filePreviewWidth: {
       type: String,
       "default": ''
+    },
+    id: {
+      type: String,
+      "default": 'fileInput'
     }
   },
   mounted: function mounted() {
@@ -1900,7 +1901,7 @@ Vue.use(vue_image_upload_resize__WEBPACK_IMPORTED_MODULE_0___default.a);
     setImage: function setImage(output) {
       this.hasImage = true;
       this.image = output;
-      var logo = document.getElementById('fileInput');
+      var logo = document.getElementById(this.id);
       logo.name = this.fileName;
     }
   }
@@ -6908,7 +6909,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n#fileInput {\n    display: none;\n}\nh1,\nh2 {\n    font-weight: normal;\n}\nul {\n    list-style-type: none;\n    padding: 0;\n}\nli {\n    display: inline-block;\n    margin: 0 10px;\n}\na {\n    color: #42b983;\n}\n.my-8 {\n    margin-top: 4rem;\n    margin-bottom: 4rem;\n}\n", ""]);
+exports.push([module.i, "\n.fileinput {\n    display: none;\n}\nh1,\nh2 {\n    font-weight: normal;\n}\nul {\n    list-style-type: none;\n    padding: 0;\n}\nli {\n    display: inline-block;\n    margin: 0 10px;\n}\na {\n    color: #42b983;\n}\n.my-8 {\n    margin-top: 4rem;\n    margin-bottom: 4rem;\n}\n", ""]);
 
 // exports
 
@@ -38581,7 +38582,8 @@ var render = function() {
             debug: 1,
             autoRotate: true,
             outputFormat: "verbose",
-            maxSize: 200
+            maxSize: 200,
+            id: _vm.id
           },
           on: { input: _vm.setImage }
         },
@@ -38590,7 +38592,7 @@ var render = function() {
             "label",
             {
               staticClass: "d-block",
-              attrs: { slot: "upload-label", for: "fileInput" },
+              attrs: { slot: "upload-label", for: _vm.id },
               slot: "upload-label"
             },
             [

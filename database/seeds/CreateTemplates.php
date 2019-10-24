@@ -11,6 +11,16 @@ class CreateTemplates extends Seeder
      */
     public function run()
     {
-        factory(\App\Models\Template::class,3)->create();
+        for($i = 1; $i < 5; $i++)
+        {
+//            \DB::table('templates')->truncate();
+            \App\Models\Template::create([
+                'title' => 'title'.$i,
+                'slug' => 'title'.$i,
+                'description' => 'title'.$i,
+                'price' => 100,
+                'thumbnail' => "/storage/templates/template-{$i}.png",
+            ]);
+        }
     }
 }
