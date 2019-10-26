@@ -43,29 +43,7 @@
                         <div class="row">
                             @foreach($templates as $template)
                                 <div class="col-lg-4 col-md-6 mb-4">
-                                    <div class="card h-100">
-
-                                        <div class="position-absolute">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="template_id" id="template-radio-{{ $template->id  }}" value="{{ $template->id }}">
-                                                <label class="form-check-label" for="template-radio-{{ $template->id  }}">
-                                                    << {{ $template->title }} >>
-                                                </label>
-                                            </div>
-                                        </div>
-
-                                        <a href="#"><img class="card-img-top" src="{{ $template->thumbnail }}" alt=""></a>
-                                        <div class="card-body">
-                                            <h4 class="card-title">
-                                                <a href="#">{{ $template->title }}</a>
-                                            </h4>
-                                            <h5>${{ $template->price }}</h5>
-                                            <p class="card-text">{{ $template->description }}</p>
-                                        </div>
-                                        <div class="card-footer">
-                                            <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                                        </div>
-                                    </div>
+                                    <template-checkbox :checked="{{ !empty($my_template) }}" :template="{{ $template }}"></template-checkbox>
                                 </div>
                             @endforeach
                         </div>

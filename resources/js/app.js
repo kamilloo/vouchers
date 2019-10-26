@@ -28,6 +28,7 @@ Vue.component('todo-item', require('./components/TodoItem.vue').default);
 Vue.component('file-upload', require('./components/FileUpload.vue').default);
 Vue.component('checkout-form', require('./components/CheckoutForm.vue').default);
 Vue.component('stepper', require('./components/Stepper.vue').default);
+Vue.component('template-checkbox', require('./components/TemplateCheckbox.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
