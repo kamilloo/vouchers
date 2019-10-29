@@ -12,26 +12,8 @@
             </div>
             <br>
             @if(!empty($my_template))
-                <h1 class="my-4">{{ __('Your Design') }}</h1>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="{{ $my_template->thumbnail }}" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="#">{{ $my_template->title }}</a>
-                                </h4>
-                                <h5>${{ $my_template->price }}</h5>
-                                <p class="card-text">{{ $my_template->description }}</p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <my-template :templates="{{ $templates }}" translate="{{ __('Your Design') }}" :checked="checked" :template="{{ $my_template }}" ></my-template>
             @endif
-
         </div>
         <!-- /.col-lg-3 -->
         <div class="col-md-9 py-3 px-3 border bg-white rounded-sm">
@@ -43,7 +25,7 @@
                         <div class="row">
                             @foreach($templates as $template)
                                 <div class="col-lg-4 col-md-6 mb-4">
-                                    <template-checkbox :checked="{{ !empty($my_template) }}" :template="{{ $template }}"></template-checkbox>
+                                    <template-checkbox :checked="checked" @change="changeValue" :template="{{ $template }} "></template-checkbox>
                                 </div>
                             @endforeach
                         </div>
