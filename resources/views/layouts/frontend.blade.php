@@ -18,11 +18,31 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet">
 
 </head>
 <body>
     <div id="app">
         @yield('content')
     </div>
+    <footer class="pt-2 border-top bg-light mt-n5">
+        <div class="container-fluid">
+            <div class="col-sm text-center mb-3">
+                <img class="img-fluid" src="{{ config('app.name', 'Voucher') }}" alt="Voucher" width="24" height="24">
+                <span class="text-muted">© {{ \Carbon\Carbon::today()->year }}</span>
+            </div>
+            <div class="row text-center mx-5">
+                <div class="col-sm text-center mb-3">
+                    <ul class="list-unstyled text-small">
+                    <li><a class="text-muted" href="#">Team</a></li>
+                    <li><a class="text-muted" href="#">Locations</a></li>
+                    <li><a class="text-muted" href="#">Privacy</a></li>
+                    <li><a class="text-muted" href="#">Terms</a></li>
+                </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
 </body>
 </html>

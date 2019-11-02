@@ -54,6 +54,6 @@ Route::get('payment/{payment}/sandbox-gateway', 'PaymentController@sandboxGatewa
 
 Route::get('payment/{payment}/recap', 'PaymentController@recap')->name('payment.recap');
 
-//Route::get('voucher/download');
-//Route::get('voucher/send');
-//Route::get('voucher/push');
+Route::get('voucher/order/{order}/download', 'VoucherOrderController@download')->name('voucher.download');
+Route::get('voucher/order/{order}/send', 'VoucherOrderController@send')->name('voucher.send');
+Route::get('voucher/order/{order}/push', 'VoucherOrderController@push')->name('voucher.push');

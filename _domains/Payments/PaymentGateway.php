@@ -5,12 +5,13 @@ namespace Domain\Payments;
 use App\Contractors\IOrder;
 use App\Contractors\IPayment;
 use App\Contractors\IPaymentGateway;
+use App\Models\Merchant;
 use App\Models\Payment;
 
 class PaymentGateway implements IPaymentGateway
 {
 
-    public function pay(IOrder $order): IPayment
+    public function pay(IOrder $order, Merchant $merchant): IPayment
     {
         return new Payment();
     }

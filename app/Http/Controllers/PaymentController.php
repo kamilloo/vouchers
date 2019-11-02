@@ -16,7 +16,7 @@ class PaymentController extends Controller
 {
     public function create(Merchant $merchant, Order $order, IPaymentGateway $payment_gateway)
     {
-        $payment = $payment_gateway->pay($order);
+        $payment = $payment_gateway->pay($order, $merchant);
 
         return redirect()->away($payment->link());
     }
@@ -27,8 +27,9 @@ class PaymentController extends Controller
 
         if ($verify)
         {
+            $order = $payment->order;
             return redirect()->route('payment.recap', [
-                'payment' => $payment,
+                'order' => $order,
             ])->with(['success' => 'Congratulation!, you bought voucher successful.']);
         }
         return view('payment.return');
@@ -42,7 +43,8 @@ class PaymentController extends Controller
 
     public function recap(Payment $payment)
     {
-        return view('payment.recap');
+        $order = $payment->order;
+        return view('payment.recap', compact('order'));
     }
 
     public function sandboxGateway(Payment $payment)
