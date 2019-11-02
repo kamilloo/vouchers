@@ -18,6 +18,7 @@ class CreateTemplatesTable extends Migration
             $table->string('title');
             $table->string('slug');
             $table->string('description');
+            $table->string('file_name');
             $table->float('price')->default(0);
             $table->string('thumbnail')->nullable()->default(null);
             $table->float('review')->nullable()->default(null);

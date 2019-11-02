@@ -21,9 +21,8 @@
 
 @section('content')
 
-<div class="bg-contact3" style="background-image: url('template3/images/bg-01.jpg');">
-
-    <div class="container-contact3">
+<div class="bg-contact3" @if($custom_background_image)style="background-image:url({{  asset($custom_background_image) }});" @else style="background-image: url('template3/images/bg-01.jpg');" @endif>
+    <div class="container-contact3" @if($custom_background) style="background: {{ $custom_background }};" @endif>
         <div class="row justify-content-center" style="width: 100%">
             <div class="col-md-6">
                 @include('layouts.flash-message')
@@ -34,7 +33,7 @@
             <form class="contact3-form validate-form" action="{{ route('checkout.proceed', $merchant) }}" method="post" >
                 @csrf
                 <span class="contact3-form-title">
-						Podaruj prezent
+                        {{ $custom_welcoming ?? __('Podaruj prezent') }}
 					</span>
                 <div class="row">
                     <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12">
@@ -65,7 +64,7 @@
                             <div class="bs-stepper-content">
                                 <!-- your steps content here -->
                                 <div id="vouchers-part" class="content" role="tabpanel" aria-labelledby="vouchers-part-trigger">
-                                    <div class="">
+                                    <div class="box">
                                         <h3 class="box-title">Select you voucher</h3>
                                         @foreach($vouchers as $voucher)
                                             <div class="plan-selection">
@@ -73,8 +72,12 @@
                                                     <input v-model="selectedVoucher.id" id="voucher-{{ $voucher->id }}" name="voucher_id" type="radio" class="with-font" value="{{ $voucher->id }}" />
                                                     <label for="voucher-{{ $voucher->id }}">{{ $voucher->title }}</label>
                                                     <p class="plan-text">
-                                                        {{ $voucher->service }} | {{ $voucher->type }}</p>
-                                                    <span class="plan-price">{{ $voucher->price }}</span>
+                                                        @if($voucher->type == \App\Models\Enums\VoucherType::QUOTE )
+                                                            {{ __('You can used full quote whatever.') }}
+                                                        @else
+                                                            Your service: {{ $voucher->service }}</p>
+                                                        @endif
+                                                    <span class="plan-price">{{ $voucher->price }} $</span>
                                                 </div>
                                             </div>
                                         @endforeach
@@ -87,23 +90,8 @@
                                     </div>
                                 </div>
                                 <div id="delivery-part" class="content" role="tabpanel" aria-labelledby="delivery-part-trigger">
-                                    <div class="">
+                                    @include('templates.common.delivery-choose')
 
-                                        <h3 class="box-title">Select delivery option</h3>
-                                        @foreach(\App\Models\Enums\DeliveryType::all() as $delivery)
-                                            <div class="plan-selection">
-                                                <div class="plan-data">
-                                                    <input v-model="selectedDelivery.type" id="box-{{ $delivery }}"  name="delivery" type="radio" class="with-font" value="{{ $delivery }}" />
-                                                    <label for="box-{{ $delivery }}">{{ $delivery }}</label>
-                                                    <p class="plan-text">Send online.</p>
-                                                    <span class="plan-price secure-price">$100</span>
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                        @if($errors->first('delivery'))
-                                            <span>{{ $errors->first('delivery') }}</span>
-                                        @endif
-                                    </div>
                                     <div class="container-contact3-form-btn">
                                             <button type="button" class="contact3-form-btn" onclick="stepper_previous()">Back to Plans</button>
                                     </div>
@@ -171,6 +159,11 @@
                             :selected-voucher="selectedVoucher"
                             :selected-delivery="selectedDelivery"
                         ></checkout-form>
+                        @if($custom_logo)
+                        <img class="img-fluid" src="{{ asset($custom_logo) }}">
+                        @else
+                            <img class="img-fluid" src="">
+                        @endif
                     </div>
                 </div>
                 <stepper></stepper>

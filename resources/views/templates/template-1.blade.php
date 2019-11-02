@@ -21,7 +21,8 @@
 
 @section('content')
 
-<div class="contact1">
+<div class="contact1" @if($custom_background_image)style="background-image:url({{  asset($custom_background_image) }});" @else style="background-image: url('template2/images/bg-01.jpg');" @endif>
+    <div class="outline-contact1" @if($custom_background) style="background: {{ $custom_background }};" @endif>
     <div class="justify-content-center" style="width: 100%;">
         <div class="col-md-12">
             @include('layouts.flash-message')
@@ -30,7 +31,12 @@
     <div class="container-contact1">
 
         <div class="contact1-pic js-tilt" data-tilt>
-            <img src="template1/images/img-01.png" alt="IMG">
+            @if($custom_logo)
+                <img class="img-fluid" src="{{ asset($custom_logo) }}">
+            @else
+                <img class="img-fluid" src="template1/images/img-01.png" alt="logo">
+            @endif
+
 
             <div class="col-xs-12 m-t-30">
 
@@ -45,7 +51,7 @@
 
         <form class="contact1-form validate-form" action="{{ route('checkout.proceed', $merchant) }}" method="post" >
 				<span class="contact1-form-title">
-                    Podaruj prezent
+                    {{ $custom_welcoming ?? __('Podaruj prezent') }}
 				</span>
 
             @csrf
@@ -86,8 +92,12 @@
                                                 <input v-model="selectedVoucher.id" id="voucher-{{ $voucher->id }}" name="voucher_id" type="radio" class="with-font" value="{{ $voucher->id }}" />
                                                 <label for="voucher-{{ $voucher->id }}">{{ $voucher->title }}</label>
                                                 <p class="plan-text">
-                                                    {{ $voucher->service }} | {{ $voucher->type }}</p>
-                                                <span class="plan-price">{{ $voucher->price }}</span>
+                                                    @if($voucher->type == \App\Models\Enums\VoucherType::QUOTE )
+                                                        {{ __('You can used full quote whatever.') }}
+                                                    @else
+                                                    Your service: {{ $voucher->service }}</p>
+                                                    @endif
+                                                <span class="plan-price">{{ $voucher->price }} $</span>
                                             </div>
                                         </div>
                                     @endforeach
@@ -105,23 +115,7 @@
                                 </div>
                             </div>
                             <div id="delivery-part" class="content" role="tabpanel" aria-labelledby="delivery-part-trigger">
-                                <div class="box">
-
-                                    <h3 class="box-title">Select delivery option</h3>
-                                    @foreach(\App\Models\Enums\DeliveryType::all() as $delivery)
-                                        <div class="plan-selection">
-                                            <div class="plan-data">
-                                                <input v-model="selectedDelivery.type" id="box-{{ $delivery }}"  name="delivery" type="radio" class="with-font" value="{{ $delivery }}" />
-                                                <label for="box-{{ $delivery }}">{{ $delivery }}</label>
-                                                <p class="plan-text">Send online.</p>
-                                                <span class="plan-price secure-price">$100</span>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                    @if($errors->first('delivery'))
-                                        <span>{{ $errors->first('delivery') }}</span>
-                                    @endif
-                                </div>
+                                @include('templates.common.delivery-choose')
 
                                 <div class="container-contact1-form-btn">
                                     <button type="button" class="contact1-form-btn" onclick="stepper_previous()">
@@ -208,6 +202,7 @@
             <stepper></stepper>
 
         </form>
+    </div>
     </div>
 </div>
 

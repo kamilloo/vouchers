@@ -13,8 +13,18 @@ class CheckoutController extends Controller
     public function start(Merchant $merchant, Voucher $voucher)
     {
         $vouchers = $voucher->forMerchant($merchant)->get();
-        return view('templates.template'. $merchant->template->id, compact('vouchers', 'merchant'));
-//        return view('checkout.start', compact('vouchers', 'merchant'));
+        $custom_logo = $merchant->shopImages->logo_enabled ? $merchant->shopImages->logo : null;
+        $custom_background_image = $merchant->shopImages->front_enabled ? $merchant->shopImages->front : null;
+        $custom_welcoming = $merchant->shopStyles->welcoming;
+        $custom_background = $merchant->shopStyles->background_color;
+        return view('templates.'. $merchant->template->file_name, compact(
+            'vouchers',
+            'merchant',
+            'custom_logo',
+            'custom_background_image',
+            'custom_welcoming',
+            'custom_background'
+        ));
     }
 
     public function proceed(Checkout $request, Merchant $merchant)

@@ -25,7 +25,8 @@
 
 @section('content')
 
-<div class="container-contact100">
+<div class="contact100" @if($custom_background_image)style="background-image:url({{  asset($custom_background_image) }});" @else style="background-image: url('template2/images/bg-01.jpg');" @endif>
+<div class="container-contact100" @if($custom_background) style="background: {{ $custom_background }};" @endif>
     <div class="wrap-contact100">
         <div class="row justify-content-center" style="width: 100%">
             <div class="col-md-6">
@@ -34,7 +35,7 @@
         </div>
         <form class="contact100-form validate-form" action="{{ route('checkout.proceed', $merchant) }}" method="post" >
             	<span class="contact100-form-title">
-					Podaruj prezent
+                    {{ $custom_welcoming ?? __('Podaruj prezent') }}
 				</span>
             @csrf
             <div class="row">
@@ -74,8 +75,12 @@
                                                 <input v-model="selectedVoucher.id" id="voucher-{{ $voucher->id }}" name="voucher_id" type="radio" class="with-font" value="{{ $voucher->id }}" />
                                                 <label for="voucher-{{ $voucher->id }}">{{ $voucher->title }}</label>
                                                 <p class="plan-text">
-                                                    {{ $voucher->service }} | {{ $voucher->type }}</p>
-                                                <span class="plan-price">{{ $voucher->price }}</span>
+                                                    @if($voucher->type == \App\Models\Enums\VoucherType::QUOTE )
+                                                        {{ __('You can used full quote whatever.') }}
+                                                    @else
+                                                        Your service: {{ $voucher->service }}</p>
+                                                    @endif
+                                                <span class="plan-price">{{ $voucher->price }} $</span>
                                             </div>
                                         </div>
                                     @endforeach
@@ -96,23 +101,8 @@
                                 </div>
                             </div>
                             <div id="delivery-part" class="content" role="tabpanel" aria-labelledby="delivery-part-trigger">
-                                <div class="box">
+                                @include('templates.common.delivery-choose')
 
-                                    <h3 class="box-title">Select delivery option</h3>
-                                    @foreach(\App\Models\Enums\DeliveryType::all() as $delivery)
-                                        <div class="plan-selection">
-                                            <div class="plan-data">
-                                                <input v-model="selectedDelivery.type" id="box-{{ $delivery }}"  name="delivery" type="radio" class="with-font" value="{{ $delivery }}" />
-                                                <label for="box-{{ $delivery }}">{{ $delivery }}</label>
-                                                <p class="plan-text">Send online.</p>
-                                                <span class="plan-price secure-price">$100</span>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                    @if($errors->first('delivery'))
-                                        <span>{{ $errors->first('delivery') }}</span>
-                                    @endif
-                                </div>
                                 <div class="container-contact100-form-btn">
                                     <div class="wrap-contact100-form-btn">
                                         <div class="contact100-form-bgbtn"></div>
@@ -226,7 +216,7 @@
         </form>
     </div>
 </div>
-
+    </div>
 
 
 <div id="dropDownSelect1"></div>

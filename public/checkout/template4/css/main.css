@@ -145,6 +145,13 @@ iframe {
 /*//////////////////////////////////////////////////////////////////
 [ Contact ]*/
 
+.contact100 {
+
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
 .container-contact100 {
   width: 100%;
   min-height: 100vh;
@@ -157,11 +164,11 @@ iframe {
   justify-content: center;
   align-items: center;
   padding: 15px;
-  background: #a64bf4;
-  background: -webkit-linear-gradient(45deg, #00dbde, #fc00ff);
-  background: -o-linear-gradient(45deg, #00dbde, #fc00ff);
-  background: -moz-linear-gradient(45deg, #00dbde, #fc00ff);
-  background: linear-gradient(45deg, #00dbde, #fc00ff);
+  background: rgba(166,75,244,0.8);
+  background: -webkit-linear-gradient(45deg, rgba(0,219,222,0.8), rgba(252,0,255,0.8));
+  background: -o-linear-gradient(45deg, rgba(0,219,222,0.8), rgba(252,0,255,0.8));
+  background: -moz-linear-gradient(45deg, rgba(0,219,222,0.8), rgba(252,0,255,0.8));
+  background: linear-gradient(45deg, rgba(0,219,222,0.8), rgba(252,0,255,0.8));
 
 }
 
