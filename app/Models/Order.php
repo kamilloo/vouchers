@@ -6,9 +6,14 @@ use App\Contractors\IOrder;
 
 class Order extends Model implements IOrder
 {
-    public function Merchant()
+    public function merchant()
     {
         return $this->belongsTo(Merchant::class);
+    }
+
+    public function voucher()
+    {
+        return $this->belongsTo(Voucher::class);
     }
 
 

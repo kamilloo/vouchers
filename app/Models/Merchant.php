@@ -9,7 +9,8 @@ class Merchant extends Model
     protected $with = [
         'template',
         'shopStyles',
-        'shopImages'
+        'shopImages',
+        'user'
     ];
 
     public function template()

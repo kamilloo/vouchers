@@ -166,12 +166,14 @@ namespace App\Models{
  * @property float|null $review
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string|null $file_name
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Model mine()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Template newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Template newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Template query()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Template whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Template whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Template whereFileName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Template whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Template wherePrice($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Template whereReview($value)

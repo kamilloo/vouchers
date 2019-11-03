@@ -27,9 +27,9 @@ class PaymentController extends Controller
 
         if ($verify)
         {
-            $order = $payment->order;
+//            $order = $payment->order;
             return redirect()->route('payment.recap', [
-                'order' => $order,
+                'payment' => $payment,
             ])->with(['success' => 'Congratulation!, you bought voucher successful.']);
         }
         return view('payment.return');
