@@ -61,12 +61,12 @@ class VoucherOrderControllerTest extends TestCase
             ->with('pdf.voucher', m::any())
             ->once()
             ->andReturnSelf();
-        $response = Response::create();
         $this->pdf_service->shouldReceive('output')
             ->once();
 
         $response = $this->get(route('voucher.send', $this->order));
-        $response->assertStatus(204);
+        $response->assertStatus(302);
+        $response->assertSessionHas('success', 'Mail was send successful!');
     }
 
 

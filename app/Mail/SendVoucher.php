@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\Order;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
@@ -10,15 +11,19 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 class SendVoucher extends Mailable
 {
     use Queueable, SerializesModels;
+    /**
+     * @var Order
+     */
+    protected $order;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Order $order)
     {
-        //
+        $this->order = $order;
     }
 
     /**
@@ -28,6 +33,8 @@ class SendVoucher extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        return $this->markdown('mails.send-voucher', [
+            'order' => $this->order,
+        ]);
     }
 }

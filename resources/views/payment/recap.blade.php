@@ -17,7 +17,7 @@
                 <p>{{ __('Delivery your Voucher') }} </p>
                     <a href="{{ route('voucher.download', $order) }}" class="btn btn-primary btn-lg">{{ __('Download voucher') }}</a>
                     <a href="{{ route('voucher.send', $order) }}"  class="btn btn-primary btn-lg">{{ __('Send voucher') }}</a>
-                    <a href="{{ route('voucher.push', $order) }}" class="btn btn-primary btn-lg">{{ __('Push voucher') }}</a>
+                    <a href="{{ route('voucher.push', $order) }}" class="btn btn-primary btn-lg">{{ __('Send SMS') }}</a>
             </div>
         </div>
     </div>

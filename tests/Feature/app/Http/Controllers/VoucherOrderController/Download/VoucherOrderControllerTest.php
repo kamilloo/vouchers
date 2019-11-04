@@ -21,8 +21,6 @@ class VoucherOrderControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-
-
     /**
      * @var Voucher
      */

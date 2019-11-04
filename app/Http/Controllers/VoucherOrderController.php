@@ -41,7 +41,8 @@ class VoucherOrderController extends Controller
         $order = $order->load('merchant', 'voucher');
         $user_profile = $order->merchant->user->profile;
         $pdf = $generator->loadView('pdf.voucher', compact('order','user_profile'));
-        $mailable = new \App\Mail\SendVoucher();
+
+        $mailable = new \App\Mail\SendVoucher($order);
         $mailable->attachData($pdf->output(), 'voucher.pdf');
         Mail::to($order->email)
             ->send($mailable);
