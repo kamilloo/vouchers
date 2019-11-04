@@ -13,7 +13,24 @@ class PaymentGateway implements IPaymentGateway
 
     public function pay(IOrder $order, Merchant $merchant): IPayment
     {
-        return new Payment();
+        $payment = new Payment();
+        $registration_request = app()->make(\Devpark\Transfers24\Requests\Transfers24::class);
+
+        $register_payment = $registration_request
+            ->setUrlReturn(route('payment.return', $payment))
+            ->setUrlStatus(route('payment.status', $payment))
+            ->setEmail('test@example.com')
+            ->setAmount(100)->setArticle('Article Name')->init();
+
+        if($register_payment->isSuccess())
+        {
+            // save registration parameters in payment object
+
+            return $registration_request->execute($register_payment->getToken(), true);
+        }
+
+
+        return;
     }
 
     public function confirm(IPayment $payment): bool

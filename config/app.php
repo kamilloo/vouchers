@@ -175,6 +175,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        Devpark\Transfers24\Providers\Transfers24ServiceProvider::class,
+
     ],
 
     /*
