@@ -7,16 +7,28 @@ use App\Contractors\IPayment;
 use App\Contractors\IPaymentGateway;
 use App\Models\Merchant;
 use App\Models\Payment;
+use Devpark\Transfers24\Requests\Transfers24;
 
 class PaymentGateway implements IPaymentGateway
 {
+    /**
+     * @var Transfers24
+     */
+    protected $gateway;
+
+    public function __construct(Transfers24 $gateway)
+    {
+        $this->gateway = $gateway;
+    }
 
     public function pay(IOrder $order, Merchant $merchant): IPayment
     {
-        $payment = new Payment();
-        $registration_request = app()->make(\Devpark\Transfers24\Requests\Transfers24::class);
+        $payment = factory(Payment::class)->create([
+            'order_id' => $order->id,
+            'merchant_id' => $merchant->id
+        ]);
 
-        $register_payment = $registration_request
+        $register_payment = $this->gateway
             ->setUrlReturn(route('payment.return', $payment))
             ->setUrlStatus(route('payment.status', $payment))
             ->setEmail('test@example.com')
@@ -24,13 +36,14 @@ class PaymentGateway implements IPaymentGateway
 
         if($register_payment->isSuccess())
         {
-            // save registration parameters in payment object
 
-            return $registration_request->execute($register_payment->getToken(), true);
+            $token = $register_payment->getToken();
+            $payment->payment_link = $this->gateway->execute($token);;
+            $payment->save();
+            // save registration parameters in payment object
         }
 
-
-        return;
+        return $payment;
     }
 
     public function confirm(IPayment $payment): bool
@@ -50,11 +63,10 @@ class PaymentGateway implements IPaymentGateway
 
     public function confirmation(IPayment $payment): bool
     {
-        // TODO: Implement confirmation() method.
     }
 
     public function verify(IPayment $payment): bool
     {
-        // TODO: Implement verify() method.
+        return true;
     }
 }

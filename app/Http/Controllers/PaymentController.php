@@ -36,13 +36,15 @@ class PaymentController extends Controller
 
     }
 
-    public function callbackStatus(PaymentCallbackStatus $request)
+    public function callbackStatus(PaymentCallbackStatus $request, Payment $payment)
     {
+
         $payment_verify = app()->make(\Devpark\Transfers24\Requests\Transfers24::class);
         $payment_response = $payment_verify->receive($request);
 
         if ($payment_response->isSuccess()) {
-            $payment = Payment::where('session_id',$payment_response->getSessionId())->firstOrFail();
+            $payment->payment_link = $payment_response->getSessionId();
+            $payment->save();
             // process order here after making sure it was real payment
         }
         echo "OK";
