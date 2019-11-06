@@ -5,13 +5,9 @@
     <div class="row justify-content-center pb-md-5  pb-1">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Dashboard</div>
+                <div class="card-header">{{ __('Share your checkout shop') }}</div>
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+                    <shop-input shop-link="{{ route('checkout.start', auth()->user()->merchant) }}"></shop-input>
                 </div>
             </div>
         </div>
@@ -91,4 +87,11 @@
         </div>
     </div>
 </div>
+
 @endsection
+<script>
+    import ShopInput from "../js/components/ShopInput";
+    export default {
+        components: {ShopInput}
+    }
+</script>
