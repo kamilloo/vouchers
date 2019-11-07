@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Contractors\IOrder;
+use App\Http\Presenters\OrderPresenter;
 
 class Order extends Model implements IOrder
 {
@@ -23,4 +24,14 @@ class Order extends Model implements IOrder
             return $query->where('id', auth()->id());
         });
     }
+
+    /**
+     * @return OrderPresenter
+     */
+    public function getPresenterAttribute(): OrderPresenter
+    {
+        return new OrderPresenter($this);
+    }
+
+
 }
