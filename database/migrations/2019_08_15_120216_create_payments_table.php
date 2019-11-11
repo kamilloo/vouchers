@@ -18,6 +18,8 @@ class CreatePaymentsTable extends Migration
             $table->unsignedBigInteger('merchant_id');
             $table->unsignedBigInteger('order_id');
             $table->string('payment_link')->nullable()->default(null);
+            $table->dateTime('paid_at')->nullable()->default(null);
+            $table->decimal('amount');
             $table->timestamps();
 
             $table->foreign('merchant_id')->references('id')->on('merchants');

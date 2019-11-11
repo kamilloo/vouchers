@@ -23,6 +23,7 @@ class WizardController extends Controller
      */
     public function index()
     {
+        $orders = Order::toMe()->latest()->limit(5)->get();
         return view('home');
     }
 }

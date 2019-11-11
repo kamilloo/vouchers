@@ -15,16 +15,15 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(\App\Models\Payment::class, function (Faker $faker) {
+$factory->define(\App\Models\Review::class, function (Faker $faker) {
     return [
         'merchant_id' => function(){
             return factory(\App\Models\Merchant::class)->create()->id;
         },
-        'order_id' => function(){
-            return factory(\App\Models\Order::class)->create()->id;
-        },
-        'payment_link' => $faker->url,
-        'paid_at' => $faker->dateTime,
-        'amount' => $faker->randomFloat(2,1,1000),
+        'rating' => $faker->randomFloat(2,1,5),
+        'author' => $faker->firstName,
+        'body' => $faker->text,
+        'published_at' => $faker->dateTime,
+
     ];
 });

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Contractors\IPayment;
+use App\Http\Presenters\PaymentPresenter;
 
 class Payment extends Model implements IPayment
 {
@@ -23,5 +24,13 @@ class Payment extends Model implements IPayment
     public function order()
     {
         return $this->belongsTo(Order::class);
+    }
+
+    /**
+     * @return PaymentPresenter
+     */
+    public function getPresenterAttribute(): PaymentPresenter
+    {
+        return new PaymentPresenter($this);
     }
 }

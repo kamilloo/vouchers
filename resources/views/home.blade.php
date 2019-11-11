@@ -15,74 +15,65 @@
     <div class="row pb-md-5 pb-xl-5">
     <div class="col-md-4 pb-1">
             <div class="card">
-                <div class="card-header">Sales</div>
-
-                <div class="card" >
-                    <img class="card-img-top" src=".../100x180/">
+                <div class="card-header">{{ __('Payments') }}</div>
+                    <img class="card-img-top" src="{{ asset('images/payments.png') }}">
                     <div class="card-body">
-                        <h5 class="card-title">title</h5>
-                        <p class="card-text">text</p>
-                        <a href="#" class="btn btn-primary">text</a>
+                        <h5 class="card-title">{{ __('Your Payment') }}</h5>
+                        <table class="table table-hover">
+                            <tbody>
+                            @foreach($payments as $payment)
+                                <tr>
+                                    <td class="align-middle">{{ $payment->presenter->paid_at() }}</td>
+                                    <td class="align-middle">{{ $payment->presenter->paid_at() }}</td>
+                                    <td class="align-middle">{{ $payment->presenter->paid_at() }}</td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+
+                        </table>
                     </div>
-                </div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    You are logged in!
-                </div>
             </div>
         </div>
     <div class="col-md-4 pb-1">
             <div class="card">
-                <div class="card-header">Review</div>
-
-                <div class="card" >
-                    <img class="card-img-top" src=".../100x180/">
+                <div class="card-header">{{ __('Reviews') }}</div>
+                    <img class="card-img-top" src="{{ asset('images/reviews.png') }}">
                     <div class="card-body">
-                        <h5 class="card-title">title</h5>
-                        <p class="card-text">text</p>
-                        <a href="#" class="btn btn-primary">text</a>
+                        <h5 class="card-title">{{ __('Your Review') }}</h5>
+                        <table class="table table-hover">
+                            <tbody>
+                            @foreach($reviews as $review)
+                                <tr>
+                                    <td class="align-middle">{{ $review->presenter->author() }}</td>
+                                    <td class="align-middle">{!! $review->presenter->rating() !!}</td>
+                                    <td class="align-middle">{{ $review->presenter->body() }}</td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+
+                        </table>
                     </div>
-                </div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    You are logged in!
-                </div>
             </div>
         </div>
     <div class="col-md-4 pb-1">
             <div class="card">
-                <div class="card-header">Clients</div>
-
-                <div class="card" >
-                    <img class="card-img-top" src=".../100x180/">
+                <div class="card-header">{{ __('Sales') }}</div>
+                    <img class="card-img-top" src="{{ asset('images/clients.png') }}">
                     <div class="card-body">
-                        <h5 class="card-title">title</h5>
-                        <p class="card-text">text</p>
-                        <a href="#" class="btn btn-primary">text</a>
+                        <h5 class="card-title">{{ __('Your Sales') }}</h5>
+                        <table class="table table-hover">
+                            <tbody>
+                            @foreach($orders as $order)
+                                <tr>
+                                    <td class="align-middle">{{ $order->presenter->fullName() }}</td>
+                                    <td class="align-middle">{{ $order->presenter->price() }}</td>
+                                    <td class="align-middle">{{ $order->presenter->status() }}</td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+
+                        </table>
                     </div>
-                </div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    You are logged in!
-                </div>
             </div>
         </div>
     </div>
