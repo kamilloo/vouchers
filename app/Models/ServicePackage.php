@@ -15,4 +15,9 @@ class ServicePackage extends Model
     {
         return $this->belongsToMany(ServiceCategory::class, 'category_package', 'package_id', 'category_id');
     }
+
+    public function merchant()
+    {
+        return $this->belongsTo(Merchant::class);
+    }
 }

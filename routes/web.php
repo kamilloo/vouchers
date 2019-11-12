@@ -35,6 +35,9 @@ Route::middleware('auth')->group(function (){
     Route::resource('/vouchers', 'VoucherController');
     Route::resource('/orders', 'OrderController');
     Route::resource('/payments', 'TransactionController');
+    Route::resource('/service-categories', 'ServiceCategoryController');
+    Route::resource('/service-packages', 'ServicePackageController');
+    Route::resource('/services', 'ServiceController');
 
 });
 Route::get('/home', 'HomeController@index')->name('home');

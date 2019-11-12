@@ -17,12 +17,16 @@ class CreatePackagesTable extends Migration
     {
         Schema::create('service_packages', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('merchant_id');
             $table->string('title');
             $table->string('description')->default(null)->nullable();
             $table->decimal('price');
             $table->string('currency',3)->default(Currency::PLN);
             $table->boolean('active')->default(PackageStatus::INACTIVE);
             $table->timestamps();
+
+            $table->foreign('merchant_id')->references('id')->on('merchants')->onDelete('cascade');
+
         });
     }
 

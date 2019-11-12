@@ -16,10 +16,14 @@ class CreateCategoriesTable extends Migration
     {
         Schema::create('service_categories', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('merchant_id');
             $table->string('title');
             $table->string('description');
             $table->boolean('active')->default(CategoryStatus::INACTIVE);
             $table->timestamps();
+
+            $table->foreign('merchant_id')->references('id')->on('merchants')->onDelete('cascade');
+
         });
     }
 

@@ -16,4 +16,9 @@ class Service extends Model
         return $this->belongsToMany(ServicePackage::class, 'package_service', 'service_id', 'package_id');
     }
 
+    public function merchant()
+    {
+        return $this->belongsTo(Merchant::class);
+    }
+
 }
