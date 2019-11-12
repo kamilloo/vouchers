@@ -43,7 +43,7 @@ class ShopControllerTest extends TestCase
         $this->file_factory = UploadedFile::fake();
         $this->file = $this->file_factory->image('png');
         $this->createUserAndBe();
-        $this->merchant = $this->user->merchant()->save(factory(Merchant::class)->make());
+        $this->merchant = $this->user->merchant;
 
     }
 
@@ -116,7 +116,7 @@ class ShopControllerTest extends TestCase
             'logo' => $this->file
         ]);
 
-        $logo_file_name = $this->merchant->shopImages->logo;
+        $logo_file_name = $this->merchant->shopImages()->first()->logo;
         Storage::assertExists($logo_file_name);
 
     }
@@ -132,7 +132,7 @@ class ShopControllerTest extends TestCase
             'front' => $this->file
         ]);
 
-        $file_name = $this->merchant->shopImages->front;
+        $file_name = $this->merchant->shopImages()->first()->front;
         Storage::assertExists($file_name);
 
     }

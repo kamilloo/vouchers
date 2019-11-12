@@ -38,7 +38,7 @@ class ShopControllerTest extends TestCase
         $this->file_factory = UploadedFile::fake();
         $this->file = $this->file_factory->image('png');
         $this->createUserAndBe();
-        $this->user->merchant()->save(factory(Merchant::class)->make());
+        $this->user->merchant;
     }
 
     /**

@@ -5,6 +5,8 @@ namespace Tests\Feature\App\Http\Controllers\Checkout\Start;
 use App\Models\Enums\DeliveryType;
 use App\Models\Enums\VoucherType;
 use App\Models\Merchant;
+use App\Models\ShopImage;
+use App\Models\ShopStyle;
 use App\Models\Template;
 use App\Models\User;
 use App\Models\Voucher;
@@ -34,6 +36,9 @@ class CheckoutControllerTest extends TestCase
     {
         parent::setUp();
         $this->merchant = factory(Merchant::class)->create();
+        $this->merchant->shopImages()->save(factory(ShopImage::class)->make());
+        $this->merchant->shopStyles()->save(factory(ShopStyle::class)->make());
+
     }
 
     /**
@@ -41,8 +46,13 @@ class CheckoutControllerTest extends TestCase
      */
     public function start_gets_start_view()
     {
+        $template_file_name = 'template-1';
+        $this->merchant->template()->associate(factory(Template::class)->create([
+            'file_name' => $template_file_name
+        ]));
+        $this->merchant->save();
         $response = $this->get(route('checkout.start', $this->merchant))
-            ->assertViewIs('checkout.start');
+            ->assertViewIs('templates.'. $template_file_name);
 
         $response->assertStatus(200);
     }
@@ -52,6 +62,12 @@ class CheckoutControllerTest extends TestCase
      */
     public function start_gets_only_merchant_vouchers()
     {
+        $template_file_name = 'template-1';
+        $this->merchant->template()->associate(factory(Template::class)->create([
+            'file_name' => $template_file_name
+        ]));
+        $this->merchant->save();
+
         $vouchers = factory(Voucher::class,2)->create();
         $this->voucher = m::mock(Voucher::class);
         $this->voucher->shouldReceive('forMerchant')
@@ -72,6 +88,11 @@ class CheckoutControllerTest extends TestCase
      */
     public function start_has_merchant_template()
     {
+        $template_file_name = 'template-1';
+        $this->merchant->template()->associate(factory(Template::class)->create([
+            'file_name' => $template_file_name
+        ]));
+        $this->merchant->save();
         $template = factory(Template::class,2)->create();
         $template = m::mock(Template::class);
         $template->shouldReceive('forMerchant')

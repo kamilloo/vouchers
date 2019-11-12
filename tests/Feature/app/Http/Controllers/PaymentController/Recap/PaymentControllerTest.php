@@ -67,7 +67,7 @@ class PaymentControllerTest extends TestCase
         $response = $this->get(route('payment.recap', $this->payment));
         $response->assertStatus(200)
             ->assertViewIs('payment.recap')
-            ->assertViewHas('success');
+            ->assertViewHas('order');
     }
 
 }

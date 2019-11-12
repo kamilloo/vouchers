@@ -53,7 +53,7 @@ class ShopController extends Controller
         if ($user->isMerchant())
         {
             $merchant = $user->merchant;
-            $shop_style = $merchant->shopStyles;
+            $shop_style = $merchant->shopStyles()->first();
             $shop_styles = $request->only([
                 'background_color',
                 'welcoming',
@@ -78,7 +78,7 @@ class ShopController extends Controller
         if ($user->isMerchant())
         {
             $merchant = $user->merchant;
-            $shop_images = $merchant->shopImages;
+            $shop_images = $merchant->shopImages()->first();
             $incoming_images_meta_data = $request->only([
                 'logo_enabled',
                 'front_enabled',

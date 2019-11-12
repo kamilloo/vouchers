@@ -22,6 +22,7 @@ $factory->define(\App\Models\Template::class, function (Faker $faker) {
         'price' => $faker->randomFloat(2,1,6),
         'review' => $faker->randomFloat(2,1,5),
         'description' => $faker->text,
-        'thumbnail' => $faker->imageUrl()
+        'thumbnail' => $faker->imageUrl(),
+        'file_name' => $faker->word,
     ];
 });
