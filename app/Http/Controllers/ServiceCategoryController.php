@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdate;
+use App\Http\Requests\ServiceCategoryStoreRequest;
+use App\Http\Requests\ServiceCategoryUpdateRequest;
 use App\Http\Requests\VoucherStore;
 use App\Http\Requests\VoucherUpdate;
 use App\Models\ServiceCategory;
 use App\Models\UserProfile;
 use App\Models\Voucher;
+use Domain\Services\ServiceCategoryRepository;
 use Domain\Vouchers\VoucherRepository;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Filesystem\FilesystemManager;
@@ -24,43 +27,42 @@ class ServiceCategoryController extends Controller
 
     public function index(Guard $guard)
     {
-        $vouchers = Voucher::Mine()->get();
-        return view('vouchers.index', compact('vouchers'));
+        $service_categories = ServiceCategory::toMe()->get();
+        return view('service-categories.index', compact('service_categories'));
     }
 
     public function create()
     {
-        return view('vouchers.create');
+        return view('service-categories.create');
     }
 
-    public function store(VoucherStore $request, Guard $guard, VoucherRepository $repository)
+    public function store(ServiceCategoryStoreRequest $request, Guard $guard, ServiceCategoryRepository $repository)
     {
-        $voucher = $repository->create($request, $guard->user());
+        $service_category = $repository->create($request, $guard->user()->merchant()->first());
 
-        return redirect(route('vouchers.index'))->with('success', 'Your Voucher was updated!');
+        return redirect(route('service-categories.index'))->with('success', 'Your Category was stored!');
     }
 
-    public function edit(Voucher $voucher)
+    public function edit(ServiceCategory $service_category)
     {
-        return view('vouchers.edit', compact('voucher'));
+        return view('service-categories.edit', compact('service_category'));
     }
 
-    public function update(VoucherUpdate $request, Voucher $voucher, FilesystemManager $file_manager)
+    public function update(ServiceCategoryUpdateRequest $request, ServiceCategory $service_category)
     {
         $voucher_attributes = $request->only([
             'title',
-            'type',
-            'price',
-            'service'
+            'description',
+            'active',
         ]);
-        $voucher->update($voucher_attributes);
+        $service_category->update($voucher_attributes);
 
-        return redirect(route('vouchers.index'))->with('success', 'Your profile was updated!');
+        return redirect(route('service-categories.index'))->with('success', 'Your profile was updated!');
     }
 
-    public function destroy(Voucher $voucher)
+    public function destroy(ServiceCategory $service_category)
     {
-        $voucher->delete();
-        return redirect(route('vouchers.index'))->with('info', 'Your Voucher was deleted');
+        $service_category->delete();
+        return redirect(route('service-categories.index'))->with('info', 'Your Voucher was deleted');
     }
 }

@@ -34,6 +34,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
+                        <li class="nav-item"><a class="nav-link" href="{{ route('service-categories.index') }}">{{ __('Service Categories') }}</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('vouchers.index') }}">{{ __('My Vouchers') }}</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('shop.index') }}">{{ __('Shop') }}</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('payments.index') }}">{{ __('Payments') }}</a></li>

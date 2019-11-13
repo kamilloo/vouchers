@@ -20,4 +20,16 @@ class ServiceCategory extends Model
     {
         return $this->belongsTo(Merchant::class);
     }
+
+    public function scopeToMe($query)
+    {
+        return $query->whereHas('merchant.user', function ($query){
+            return $query->where('id', auth()->id());
+        });
+    }
+
+    public function isOwn(User $user): bool
+    {
+        return $user->merchant()->where('id', $this->merchant_id)->exists();
+    }
 }

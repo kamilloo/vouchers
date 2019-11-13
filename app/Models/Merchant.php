@@ -42,4 +42,9 @@ class Merchant extends Model
     {
         return $this->belongsToMany(Voucher::class);
     }
+
+    public function serviceCategories()
+    {
+        return $this->hasMany(ServiceCategory::class, 'merchant_id');
+    }
 }

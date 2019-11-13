@@ -2,7 +2,11 @@
 
 namespace Tests\Feature\App\Http\StarterTest;
 
+use App\Models\Enums\CategoryStatus;
 use App\Models\Enums\VoucherType;
+use App\Models\Merchant;
+use App\Models\Service;
+use App\Models\ServiceCategory;
 use App\Models\User;
 use App\Models\Voucher;
 use Illuminate\Http\UploadedFile;
@@ -18,14 +22,19 @@ class ServiceCategoryControllerTest extends TestCase
     use RefreshDatabase;
 
     /**
-     * @var Voucher
+     * @var ServiceCategory
      */
-    private $voucher;
+    private $service_category;
+    /**
+     * @var Merchant
+     */
+    private $merchant;
 
     protected function setUp(): void
     {
         parent::setUp();
         $this->createUserAndBe();
+        $this->merchant = $this->user->merchant()->first();
 
     }
 
@@ -35,7 +44,7 @@ class ServiceCategoryControllerTest extends TestCase
     public function index_get_categories_list()
     {
         $response = $this->get(route('service-categories.index'))
-            ->assertViewHas('serviceCategories');
+            ->assertViewHas('service_categories');
 
         $response->assertStatus(200);
     }
@@ -43,10 +52,10 @@ class ServiceCategoryControllerTest extends TestCase
     /**
      * @test
      */
-    public function index_get_vouchers_create()
+    public function create_show_view()
     {
-        $response = $this->get(route('vouchers.create'))
-            ->assertViewIs('vouchers.create');
+        $response = $this->get(route('service-categories.create'))
+            ->assertViewIs('service-categories.create');
 
         $response->assertStatus(200);
     }
@@ -56,85 +65,48 @@ class ServiceCategoryControllerTest extends TestCase
      */
     public function store_validation_exception()
     {
-        $redirect_url = route('vouchers.create');
-        $response = $this->call(Request::METHOD_POST, route('vouchers.store'), [
-            'type' => false
+        $redirect_url = route('service-categories.create');
+        $response = $this->call(Request::METHOD_POST, route('service-categories.store'), [
+            'title' => false,
+            'description' => false,
+            'active' => 'no boolean',
         ], [],[],['HTTP_REFERER' => $redirect_url]);
 
         $response->assertStatus(302)->assertRedirect($redirect_url);
+        $response->assertSessionHasErrors([
+            'title',
+            'description',
+            'active'
+        ]);
     }
 
     /**
      * @test
      */
-    public function store_add_voucher_do_db()
+    public function store_add_service_category_to_db()
     {
         $incoming_data = [
             'title' => 'title',
-            'type' => VoucherType::SERVICE,
-            'service' => 'service'
+            'description' => 'description',
+            'active' => CategoryStatus::ACTIVE
         ];
-        $response = $this->post(route('vouchers.store'), $incoming_data);
+        $response = $this->post(route('service-categories.store'), $incoming_data);
 
-        $response->assertStatus(302)->assertRedirect(route('vouchers.index'))
+        $response->assertStatus(302)->assertRedirect(route('service-categories.index'))
             ->assertSessionHas('success');
 
-        $this->assertDatabaseHas('vouchers', [
-                'user_id' => $this->user->id,
+        $this->assertDatabaseHas('service_categories', [
+                'merchant_id' => $this->merchant->id,
             ] + $incoming_data);
     }
-
-
-    /**
-     * @test
-     */
-    public function store_file_for_voucher_db()
-    {
-        $incoming_data = [
-            'file-name' => $this->file,
-            'title' => 'title',
-            'type' => VoucherType::SERVICE,
-            'service' => 'service'
-        ];
-        $response = $this->post(route('vouchers.store'), $incoming_data);
-
-        $response->assertStatus(302)->assertRedirect(route('vouchers.index'))
-            ->assertSessionHas('success');
-
-
-        $voucher = Voucher::latest()->first();
-
-        $this->assertContains('public/vouchers', $voucher->file);
-
-        Storage::assertExists($voucher->file);
-    }
-
-    /**
-     * @test
-     */
-    public function store_add_voucher_to_merchant()
-    {
-        $incoming_data = [
-            'title' => 'title',
-            'type' => VoucherType::SERVICE,
-            'service' => 'service'
-        ];
-        $response = $this->post(route('vouchers.store'), $incoming_data)->assertStatus(302);
-
-        $this->assertDatabaseHas('merchant_voucher', [
-                'merchant_id' => $this->user->merchant->id,
-                'voucher_id' => DB::table('vouchers')->latest()->first()->id
-            ]);
-    }
-
 
     /**
      * @test
      */
     public function update_got_403_authorization_denied()
     {
-        $this->voucher = factory(Voucher::class)->create();
-        $response = $this->put(route('vouchers.update', $this->voucher));
+        $this->service_category = factory(ServiceCategory::class)->create();
+        $response = $this->put(route('service-categories.update', $this->service_category));
         $response->assertStatus(403);
     }
 
@@ -143,28 +115,36 @@ class ServiceCategoryControllerTest extends TestCase
      */
     public function update_validation_exception()
     {
-        $this->voucher = factory(Voucher::class)->state('mine')->create();
-        $redirect_url = route('vouchers.edit', $this->voucher);
-        $response = $this->call(Request::METHOD_PUT, route('vouchers.update', $this->voucher), [
-            'type' => false
+        $this->createServiceCategory();
+        $redirect_url = route('service-categories.edit', $this->service_category);
+        $response = $this->call(Request::METHOD_PUT, route('service-categories.update', $this->service_category), [
+            'title' => false,
+            'description' => false,
+            'active' => 'no boolean',
         ], [],[],['HTTP_REFERER' => $redirect_url]);
 
         $response->assertStatus(302)->assertRedirect($redirect_url);
+        $response->assertSessionHasErrors([
+            'title',
+            'description',
+            'active'
+        ]);
     }
 
     /**
      * @test
      */
-    public function update_voucher_was_updated()
+    public function update_service_category_was_updated()
     {
-        $this->voucher = factory(Voucher::class)->state('mine')->create();
-        $response = $this->put(route('vouchers.update', $this->voucher), [
+        $this->createServiceCategory();
+
+        $response = $this->put(route('service-categories.update', $this->service_category), [
             'title' => 'title',
-            'type' => VoucherType::SERVICE,
-            'service' => 'service'
+            'description' => 'description',
+            'active' => CategoryStatus::ACTIVE
         ]);
 
-        $response->assertStatus(302)->assertRedirect(route('vouchers.index'))->assertSessionHas('success');
+        $response->assertStatus(302)->assertRedirect(route('service-categories.index'))->assertSessionHas('success');
     }
 
     /**
@@ -172,19 +152,19 @@ class ServiceCategoryControllerTest extends TestCase
      */
     public function update_database_was_updated()
     {
-        $this->voucher = factory(Voucher::class)->state('mine')->create();
+        $this->createServiceCategory();
         $incoming_data = [
-            'title' => 'title',
-            'type' => VoucherType::SERVICE,
-            'service' => 'service'
+            'title' => 'update title',
+            'description' => 'update description',
+            'active' => CategoryStatus::ACTIVE
         ];
-        $response = $this->put(route('vouchers.update', $this->voucher), $incoming_data);
+        $response = $this->put(route('service-categories.update', $this->service_category), $incoming_data);
 
-        $response->assertStatus(302)->assertRedirect(route('vouchers.index'))
+        $response->assertStatus(302)->assertRedirect(route('service-categories.index'))
             ->assertSessionHas('success');
 
-        $this->assertDatabaseHas('vouchers', [
-            'user_id' => $this->user->id,
+        $this->assertDatabaseHas('service_categories', [
+            'merchant_id' => $this->merchant->id,
         ] + $incoming_data);
     }
 
@@ -193,16 +173,23 @@ class ServiceCategoryControllerTest extends TestCase
      */
     public function delete_voucher_was_removed()
     {
-        $this->voucher = factory(Voucher::class)->state('mine')->create();
+        $this->createServiceCategory();
 
-        $response = $this->delete(route('vouchers.destroy', $this->voucher));
+        $response = $this->delete(route('service-categories.destroy', $this->service_category));
 
         $response->assertStatus(302)
-            ->assertRedirect(route('vouchers.index'))
+            ->assertRedirect(route('service-categories.index'))
             ->assertSessionHas('info');
 
-        $this->assertDatabaseMissing('vouchers', [
-                'id' => $this->voucher->id,
+        $this->assertDatabaseMissing('service_categories', [
+                'id' => $this->service_category->id,
             ]);
+    }
+
+    protected function createServiceCategory(): void
+    {
+        $this->service_category = factory(ServiceCategory::class)->create([
+            'merchant_id' => $this->merchant->id,
+        ]);
     }
 }
