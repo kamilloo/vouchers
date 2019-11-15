@@ -83,6 +83,41 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\ServicePackage
+ *
+ * @property int $id
+ * @property int $merchant_id
+ * @property string $title
+ * @property string|null $description
+ * @property float $price
+ * @property string $currency
+ * @property int $active
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ServiceCategory[] $categories
+ * @property-read int|null $categories_count
+ * @property-read \App\Models\Merchant $merchant
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Service[] $services
+ * @property-read int|null $services_count
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Model mine()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ServicePackage newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ServicePackage newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ServicePackage query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ServicePackage whereActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ServicePackage whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ServicePackage whereCurrency($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ServicePackage whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ServicePackage whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ServicePackage whereMerchantId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ServicePackage wherePrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ServicePackage whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ServicePackage whereUpdatedAt($value)
+ */
+	class ServicePackage extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\Voucher
  *
  * @property int $id
@@ -115,6 +150,38 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\ServiceCategory
+ *
+ * @property int $id
+ * @property int $merchant_id
+ * @property string $title
+ * @property string $description
+ * @property int $active
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Merchant $merchant
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ServicePackage[] $packages
+ * @property-read int|null $packages_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Service[] $services
+ * @property-read int|null $services_count
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Model mine()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ServiceCategory newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ServiceCategory newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ServiceCategory query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ServiceCategory toMe()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ServiceCategory whereActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ServiceCategory whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ServiceCategory whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ServiceCategory whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ServiceCategory whereMerchantId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ServiceCategory whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ServiceCategory whereUpdatedAt($value)
+ */
+	class ServiceCategory extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\Order
  *
  * @property int $id
@@ -130,7 +197,9 @@ namespace App\Models{
  * @property int $paid
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\Merchant $Merchant
+ * @property-read \OrderPresenter $presenter
+ * @property-read \App\Models\Merchant $merchant
+ * @property-read \App\Models\Voucher $voucher
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Model mine()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Order newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Order newQuery()
@@ -220,20 +289,61 @@ namespace App\Models{
  * @property string|null $payment_link
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string|null $paid_at
+ * @property float|null $amount
+ * @property-read \PaymentPresenter $presenter
  * @property-read \App\Models\Order $order
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Model mine()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Payment newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Payment newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Payment query()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Payment toMe()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Payment whereAmount($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Payment whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Payment whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Payment whereMerchantId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Payment whereOrderId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Payment wherePaidAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Payment wherePaymentLink($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Payment whereUpdatedAt($value)
  */
 	class Payment extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Service
+ *
+ * @property int $id
+ * @property int $merchant_id
+ * @property string $title
+ * @property string|null $description
+ * @property float $price
+ * @property string $currency
+ * @property int $active
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ServiceCategory[] $categories
+ * @property-read int|null $categories_count
+ * @property-read \App\Models\Merchant $merchant
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ServicePackage[] $packages
+ * @property-read int|null $packages_count
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Model mine()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Service newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Service newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Service query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Service toMe()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Service whereActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Service whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Service whereCurrency($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Service whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Service whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Service whereMerchantId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Service wherePrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Service whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Service whereUpdatedAt($value)
+ */
+	class Service extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -276,6 +386,8 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Order[] $orders
  * @property-read int|null $orders_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ServiceCategory[] $serviceCategories
+ * @property-read int|null $service_categories_count
  * @property-read \App\Models\ShopImage $shopImages
  * @property-read \App\Models\ShopStyle $shopStyles
  * @property-read \App\Models\Template|null $template
@@ -293,5 +405,36 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Merchant whereUserId($value)
  */
 	class Merchant extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Review
+ *
+ * @property int $id
+ * @property int $merchant_id
+ * @property float $rating
+ * @property string $author
+ * @property string|null $body
+ * @property string|null $published_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \ReviewPresenter $presenter
+ * @property-read \App\Models\Merchant $merchant
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Model mine()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Review newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Review newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Review query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Review toMe()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Review whereAuthor($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Review whereBody($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Review whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Review whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Review whereMerchantId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Review wherePublishedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Review whereRating($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Review whereUpdatedAt($value)
+ */
+	class Review extends \Eloquent {}
 }
 

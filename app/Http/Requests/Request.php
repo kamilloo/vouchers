@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Str;
 
 abstract class Request extends FormRequest
 {
@@ -25,11 +26,10 @@ abstract class Request extends FormRequest
 
     public function __call($method, $parameters)
     {
-        $method = mb_strtolower($method);
-
-        if (preg_match('/^get.*param$/', $method))
+        $method = Str::snake($method);
+        if (preg_match('/^get_.*_param$/', $method))
         {
-            $input = substr($method, 3, -5);
+            $input = substr($method, 4, -6);
             return $this->input($input);
         }
         return null;

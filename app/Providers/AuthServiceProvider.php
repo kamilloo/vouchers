@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\Service;
 use App\Models\ServiceCategory;
 use App\Models\Voucher;
+use App\Policies\Policy;
 use App\Policies\ServiceCategoryPolicy;
 use App\Policies\VoucherPolicy;
 use Illuminate\Support\Facades\Gate;
@@ -17,8 +19,10 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        Voucher::class => VoucherPolicy::class,
-        ServiceCategory::class => ServiceCategoryPolicy::class,
+        Voucher::class => Policy::class,
+        ServiceCategory::class => Policy::class,
+        Service::class => Policy::class,
+
     ];
 
     /**
