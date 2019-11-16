@@ -6,6 +6,7 @@ use App\Http\Requests\ProfileUpdate;
 use App\Http\Requests\ServiceCategoryStoreRequest;
 use App\Http\Requests\ServiceCategoryUpdateRequest;
 use App\Http\Requests\ServiceStoreRequest;
+use App\Http\Requests\ServiceUpdateRequest;
 use App\Http\Requests\VoucherStore;
 use App\Http\Requests\VoucherUpdate;
 use App\Models\Service;
@@ -46,26 +47,27 @@ class ServiceController extends Controller
         return redirect(route('services.index'))->with('success', 'Your Service was stored!');
     }
 
-    public function edit(ServiceCategory $service_category)
+    public function edit(Service $service)
     {
-        return view('service-categories.edit', compact('service_category'));
+        return view('service-categories.edit', compact('service'));
     }
 
-    public function update(ServiceCategoryUpdateRequest $request, ServiceCategory $service_category)
+    public function update(ServiceUpdateRequest $request, Service $service)
     {
-        $voucher_attributes = $request->only([
+        $attributes = $request->only([
             'title',
             'description',
             'active',
+            'price',
         ]);
-        $service_category->update($voucher_attributes);
+        $service->update($attributes);
 
-        return redirect(route('service-categories.index'))->with('success', 'Your profile was updated!');
+        return redirect(route('services.index'))->with('success', 'Your service was updated!');
     }
 
-    public function destroy(ServiceCategory $service_category)
+    public function destroy(Service $service)
     {
-        $service_category->delete();
-        return redirect(route('service-categories.index'))->with('info', 'Your Voucher was deleted');
+        $service->delete();
+        return redirect(route('services.index'))->with('info', 'Your Service was deleted');
     }
 }

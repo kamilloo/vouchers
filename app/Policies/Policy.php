@@ -19,6 +19,8 @@ class Policy
 
     public function edit(User $user, Model $model)
     {
+        dd($model);
+
         return $model->isOwn($user);
     }
 

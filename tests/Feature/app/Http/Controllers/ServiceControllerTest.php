@@ -74,7 +74,7 @@ class ServiceControllerTest extends TestCase
             'active' => 'no boolean',
             'price' => 'no valud price',
             'category_id' => $category->id,
-            'category_name' => false,
+            'category_title' => false,
         ], [],[],['HTTP_REFERER' => $redirect_url]);
 
         $response->assertStatus(302)->assertRedirect($redirect_url);
@@ -84,7 +84,7 @@ class ServiceControllerTest extends TestCase
             'active',
             'price',
             'category_id',
-            'category_name',
+            'category_title',
         ]);
     }
 
@@ -174,18 +174,25 @@ class ServiceControllerTest extends TestCase
     public function update_validation_exception()
     {
         $this->createService();
+        $service_category = factory(ServiceCategory::class)->create();
         $redirect_url = route('services.edit', $this->service);
         $response = $this->call(Request::METHOD_PUT, route('services.update', $this->service), [
             'title' => false,
             'description' => false,
             'active' => 'no boolean',
+            'price' => 'no valud price',
+            'category_id' => $service_category->id,
+            'category_title' => false,
         ], [],[],['HTTP_REFERER' => $redirect_url]);
 
         $response->assertStatus(302)->assertRedirect($redirect_url);
         $response->assertSessionHasErrors([
             'title',
             'description',
-            'active'
+            'active',
+            'price',
+            'category_id',
+            'category_title',
         ]);
     }
 
@@ -199,7 +206,8 @@ class ServiceControllerTest extends TestCase
         $response = $this->put(route('services.update', $this->service), [
             'title' => 'title',
             'description' => 'description',
-            'active' => CategoryStatus::ACTIVE
+            'active' => CategoryStatus::ACTIVE,
+            'price' => 100.20
         ]);
 
         $response->assertStatus(302)->assertRedirect(route('services.index'))->assertSessionHas('success');
@@ -214,7 +222,8 @@ class ServiceControllerTest extends TestCase
         $incoming_data = [
             'title' => 'update title',
             'description' => 'update description',
-            'active' => CategoryStatus::ACTIVE
+            'active' => CategoryStatus::ACTIVE,
+            'price' => 100.20
         ];
         $response = $this->put(route('services.update', $this->service), $incoming_data);
 
@@ -247,6 +256,13 @@ class ServiceControllerTest extends TestCase
     protected function createService(): void
     {
         $this->service = factory(Service::class)->create([
+            'merchant_id' => $this->merchant->id,
+        ]);
+    }
+
+    protected function createServiceCategory(): ServiceCategory
+    {
+        return factory(ServiceCategory::class)->create([
             'merchant_id' => $this->merchant->id,
         ]);
     }
