@@ -7,32 +7,6 @@ use App\Models\ServiceCategory;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-/**
- * Class VoucherStore
- * @package App\Http\Requests
- * @method getTitleParam
- * @method getDescriptionParam
- * @method getActiveParam
- * @method getPriceParam
- * @method getCategoryIdParam
- * @method getCategoryTitleParam
- */
-class ServiceUpdateRequest extends Request
+class ServiceUpdateRequest extends ServiceStoreRequest
 {
-    /*
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
-    public function rules()
-    {
-        return [
-            'title' => ['required', 'string', 'max:256'],
-            'description' => ['nullable', 'string', 'max:256'],
-            'price' => ['required', 'numeric', 'min:1', 'max:1000'],
-            'active' => ['required', 'boolean'],
-            'category_id' => ['nullable', Rule::in(ServiceCategory::toMe()->pluck('id')), ],
-            'category_title' => ['nullable', 'string', ],
-        ];
-    }
 }

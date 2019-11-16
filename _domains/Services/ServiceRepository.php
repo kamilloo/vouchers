@@ -5,6 +5,7 @@ namespace Domain\Services;
 use App\Contractors\IVoucherRepository;
 use App\Http\Requests\ServiceCategoryStoreRequest;
 use App\Http\Requests\ServiceStoreRequest;
+use App\Http\Requests\ServiceUpdateRequest;
 use App\Http\Requests\VoucherStore;
 use App\Models\Merchant;
 use App\Models\Service;
@@ -70,26 +71,35 @@ class ServiceRepository
 
     }
 
-    protected function replaceLogo(UploadedFile $file)
+    public function update(ServiceUpdateRequest $request, Service $service)
     {
-        return $file->storePublicly('public/vouchers');
+        $attributes = $request->only([
+            'title',
+            'description',
+            'active',
+            'price',
+        ]);
+        $service->update($attributes);
+
+        $this->assignCategory($service, $request);
+
     }
 
-    private function assignCategory(Service $service, ServiceStoreRequest $request, Merchant $merchant)
+    private function assignCategory(Service $service, ServiceStoreRequest $request)
     {
         $service_category = $this->service_category_repository
             ->findMineById($request->getCategoryIdParam());
 
         if ($service_category)
         {
-            $service->categories()->attach($service_category);
+            $service->categories()->sync($service_category);
             return;
         }
 
         if ($new_category_title = $request->getCategoryTitleParam())
         {
-            $service_category = $this->service_category_repository->createFromTitle($new_category_title, $merchant);
-            $service->categories()->attach($service_category);
+            $service_category = $this->service_category_repository->createFromTitle($new_category_title, $service->merchant()->first());
+            $service->categories()->sync($service_category);
         }
         return;
     }

@@ -16,6 +16,9 @@ class Service extends Model
         return $this->belongsToMany(ServicePackage::class, 'package_service', 'service_id', 'package_id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo|Merchant
+     */
     public function merchant()
     {
         return $this->belongsTo(Merchant::class);

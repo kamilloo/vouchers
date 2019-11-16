@@ -52,16 +52,9 @@ class ServiceController extends Controller
         return view('service-categories.edit', compact('service'));
     }
 
-    public function update(ServiceUpdateRequest $request, Service $service)
+    public function update(ServiceUpdateRequest $request, Service $service, ServiceRepository $repository)
     {
-        $attributes = $request->only([
-            'title',
-            'description',
-            'active',
-            'price',
-        ]);
-        $service->update($attributes);
-
+        $repository->update($request, $service);
         return redirect(route('services.index'))->with('success', 'Your service was updated!');
     }
 

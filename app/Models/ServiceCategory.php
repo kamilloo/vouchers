@@ -30,7 +30,6 @@ class ServiceCategory extends Model
 
     public function isOwn(User $user): bool
     {
-        dd($user->merchant()->where('id', $this->merchant_id)->exists());
         return $user->merchant()->where('id', $this->merchant_id)->exists();
     }
 }

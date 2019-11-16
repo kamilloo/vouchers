@@ -222,7 +222,7 @@ class ServiceControllerTest extends TestCase
         $incoming_data = [
             'title' => 'update title',
             'description' => 'update description',
-            'active' => CategoryStatus::ACTIVE,
+            'active' => ServiceStatus::ACTIVE,
             'price' => 100.20
         ];
         $response = $this->put(route('services.update', $this->service), $incoming_data);
@@ -234,6 +234,100 @@ class ServiceControllerTest extends TestCase
             'merchant_id' => $this->merchant->id,
         ] + $incoming_data);
     }
+
+    /**
+     * @test
+     */
+    public function update_category_was_changed()
+    {
+        $this->createService();
+        $old_category = $this->createServiceCategory();
+        $this->service->categories()->attach($old_category);
+        $category = $this->createServiceCategory();
+        $this->assertDatabaseHas('category_service', [
+            'category_id' => $old_category->id,
+            'service_id' => $this->service->id,
+        ]);
+        $incoming_data = [
+            'title' => 'update title',
+            'description' => 'update description',
+            'active' => CategoryStatus::ACTIVE,
+            'price' => 100.20,
+            'category_id' => $category->id,
+        ];
+        $response = $this->put(route('services.update', $this->service), $incoming_data);
+
+        $response->assertStatus(302)->assertRedirect(route('services.index'))
+            ->assertSessionHas('success');
+
+        $this->assertDatabaseHas('category_service', [
+                'category_id' => $category->id,
+                'service_id' => $this->service->id,
+            ]);
+        $this->assertDatabaseMissing('category_service', [
+            'category_id' => $old_category->id,
+            'service_id' => $this->service->id,
+        ]);
+    }
+
+    /**
+     * @test
+     */
+    public function update_category_was_attach()
+    {
+        $this->createService();
+        $category = $this->createServiceCategory();
+        $incoming_data = [
+            'title' => 'update title',
+            'description' => 'update description',
+            'active' => CategoryStatus::ACTIVE,
+            'price' => 100.20,
+            'category_id' => $category->id,
+        ];
+        $response = $this->put(route('services.update', $this->service), $incoming_data);
+
+        $response->assertStatus(302)->assertRedirect(route('services.index'))
+            ->assertSessionHas('success');
+
+        $this->assertDatabaseHas('category_service', [
+            'category_id' => $category->id,
+            'service_id' => $this->service->id,
+        ]);
+    }
+
+
+    /**
+     * @test
+     */
+    public function update_category_was_created()
+    {
+        $this->createService();
+        $incoming_data = [
+            'title' => 'update title',
+            'description' => 'update description',
+            'active' => CategoryStatus::ACTIVE,
+            'price' => 100.20,
+            'category_title' => 'new_category',
+        ];
+        $response = $this->put(route('services.update', $this->service), $incoming_data);
+
+        $response->assertStatus(302)->assertRedirect(route('services.index'))
+            ->assertSessionHas('success');
+
+        $this->assertDatabaseHas('service_categories', [
+            'title' => 'new_category',
+            'description' => null,
+            'active' => CategoryStatus::ACTIVE,
+        ]);
+
+        $service_category = ServiceCategory::toMe()->latest()->first();
+
+        $this->assertDatabaseHas('category_service', [
+            'category_id' => $service_category->id,
+            'service_id' => $this->service->id,
+        ]);
+    }
+
 
     /**
      * @test
