@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Service;
 use App\Models\ServiceCategory;
+use App\Models\ServicePackage;
 use App\Models\Voucher;
 use App\Policies\Policy;
 use App\Policies\ServiceCategoryPolicy;
@@ -22,6 +23,7 @@ class AuthServiceProvider extends ServiceProvider
         Voucher::class => Policy::class,
         ServiceCategory::class => Policy::class,
         Service::class => Policy::class,
+        ServicePackage::class => Policy::class,
 
     ];
 

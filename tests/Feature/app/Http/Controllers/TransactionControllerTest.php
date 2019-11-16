@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\App\Http\StarterTest;
+namespace Tests\Feature\App\Http;
 
 use App\Models\Enums\VoucherType;
 use App\Models\User;
