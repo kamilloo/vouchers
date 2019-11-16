@@ -47,4 +47,9 @@ class Merchant extends Model
     {
         return $this->hasMany(ServiceCategory::class, 'merchant_id');
     }
+
+    public function services()
+    {
+        return $this->hasMany(Service::class, 'merchant_id');
+    }
 }

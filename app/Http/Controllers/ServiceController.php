@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProfileUpdate;
 use App\Http\Requests\ServiceCategoryStoreRequest;
 use App\Http\Requests\ServiceCategoryUpdateRequest;
+use App\Http\Requests\ServiceStoreRequest;
 use App\Http\Requests\VoucherStore;
 use App\Http\Requests\VoucherUpdate;
 use App\Models\Service;
@@ -12,6 +13,7 @@ use App\Models\ServiceCategory;
 use App\Models\UserProfile;
 use App\Models\Voucher;
 use Domain\Services\ServiceCategoryRepository;
+use Domain\Services\ServiceRepository;
 use Domain\Vouchers\VoucherRepository;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Filesystem\FilesystemManager;
@@ -37,11 +39,11 @@ class ServiceController extends Controller
         return view('services.create');
     }
 
-    public function store(ServiceCategoryStoreRequest $request, Guard $guard, ServiceCategoryRepository $repository)
+    public function store(ServiceStoreRequest $request, Guard $guard, ServiceRepository $repository)
     {
         $service = $repository->create($request, $guard->user()->merchant()->first());
 
-        return redirect(route('service-categories.index'))->with('success', 'Your Category was stored!');
+        return redirect(route('services.index'))->with('success', 'Your Service was stored!');
     }
 
     public function edit(ServiceCategory $service_category)

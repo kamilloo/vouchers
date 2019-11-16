@@ -15,7 +15,7 @@ use Illuminate\Validation\Rule;
  * @method getActiveParam
  * @method getPriceParam
  * @method getCategoryIdParam
- * @method getCategoryNameParam
+ * @method getCategoryTitleParam
  */
 class ServiceStoreRequest extends Request
 {
@@ -32,7 +32,7 @@ class ServiceStoreRequest extends Request
             'price' => ['required', 'numeric', 'min:1', 'max:1000'],
             'active' => ['required', 'boolean'],
             'category_id' => ['nullable', Rule::in(ServiceCategory::toMe()->pluck('id')), ],
-            'category_name' => ['nullable', 'string', ],
+            'category_title' => ['nullable', 'string', ],
         ];
     }
 }

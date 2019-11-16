@@ -2,9 +2,12 @@
 
 namespace Tests\Feature\App\Http\StarterTest;
 
+use App\Models\Enums\CategoryStatus;
+use App\Models\Enums\ServiceStatus;
 use App\Models\Enums\VoucherType;
 use App\Models\Merchant;
 use App\Models\Service;
+use App\Models\ServiceCategory;
 use App\Models\User;
 use App\Models\Voucher;
 use Illuminate\Http\UploadedFile;
@@ -63,18 +66,25 @@ class ServiceControllerTest extends TestCase
      */
     public function store_validation_exception()
     {
+        $category = factory(ServiceCategory::class)->create();
         $redirect_url = route('services.create');
         $response = $this->call(Request::METHOD_POST, route('services.store'), [
             'title' => false,
             'description' => false,
             'active' => 'no boolean',
+            'price' => 'no valud price',
+            'category_id' => $category->id,
+            'category_name' => false,
         ], [],[],['HTTP_REFERER' => $redirect_url]);
 
         $response->assertStatus(302)->assertRedirect($redirect_url);
         $response->assertSessionHasErrors([
             'title',
             'description',
-            'active'
+            'active',
+            'price',
+            'category_id',
+            'category_name',
         ]);
     }
 
@@ -83,11 +93,7 @@ class ServiceControllerTest extends TestCase
      */
     public function store_add_service_to_db()
     {
-        $incoming_data = [
-            'title' => 'title',
-            'description' => 'description',
-            'active' => CategoryStatus::ACTIVE
-        ];
+        $incoming_data = $this->getIncomingParameters();
         $response = $this->post(route('services.store'), $incoming_data);
 
         $response->assertStatus(302)->assertRedirect(route('services.index'))
@@ -96,6 +102,60 @@ class ServiceControllerTest extends TestCase
         $this->assertDatabaseHas('services', [
                 'merchant_id' => $this->merchant->id,
             ] + $incoming_data);
+    }
+
+    /**
+     * @test
+     */
+    public function store_service_was_add_to_existing_category()
+    {
+        $service_category = factory(ServiceCategory::class)->make();
+        $this->merchant->services()->save($service_category);
+        $incoming_data = $this->getIncomingParameters();
+
+        $incoming_data['category_id'] = $service_category->id;
+
+        $response = $this->post(route('services.store'), $incoming_data);
+
+        $response->assertStatus(302)->assertRedirect(route('services.index'))
+            ->assertSessionHas('success');
+
+        $service = Service::toMe()->latest()->first();
+
+        $this->assertDatabaseHas('category_service', [
+                'category_id' => $service_category->id,
+                'service_id' => $service->id,
+            ]);
+    }
+
+    /**
+     * @test
+     */
+    public function store_service_was_add_to_new_category()
+    {
+        $incoming_data = $this->getIncomingParameters();
+
+        $incoming_data['category_title'] = 'new_category';
+
+        $response = $this->post(route('services.store'), $incoming_data);
+
+        $response->assertStatus(302)->assertRedirect(route('services.index'))
+            ->assertSessionHas('success');
+
+        $service = Service::toMe()->latest()->first();
+
+        $service_category = ServiceCategory::toMe()->latest()->first();
+
+        $this->assertDatabaseHas('service_categories', [
+            'title' => 'new_category',
+            'description' => null,
+            'active' => CategoryStatus::ACTIVE,
+        ]);
+
+        $this->assertDatabaseHas('category_service', [
+            'category_id' => $service_category->id,
+            'service_id' => $service->id,
+        ]);
     }
 
     /**
@@ -189,5 +249,20 @@ class ServiceControllerTest extends TestCase
         $this->service = factory(Service::class)->create([
             'merchant_id' => $this->merchant->id,
         ]);
+    }
+
+    /**
+     * @return array
+     */
+    protected function getIncomingParameters(): array
+    {
+        $incoming_data = [
+            'title' => 'title',
+            'description' => 'description',
+            'active' => ServiceStatus::ACTIVE,
+            'price' => 100.20,
+        ];
+
+        return $incoming_data;
     }
 }

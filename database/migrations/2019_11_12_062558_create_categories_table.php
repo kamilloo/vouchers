@@ -18,7 +18,7 @@ class CreateCategoriesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('merchant_id');
             $table->string('title');
-            $table->string('description');
+            $table->string('description')->nullable()->default(null);
             $table->boolean('active')->default(CategoryStatus::INACTIVE);
             $table->timestamps();
 
