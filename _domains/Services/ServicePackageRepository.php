@@ -58,6 +58,7 @@ class ServicePackageRepository
                 $service_package = $merchant->servicePackages()->create($attributes);
 
                 $this->assignCategory($service_package, $request);
+                $this->assignServices($service_package, $request);
 
                 return $service_package;
             });
@@ -84,7 +85,7 @@ class ServicePackageRepository
         $service_package->update($attributes);
 
         $this->assignCategory($service_package, $request);
-
+        $this->assignServices($service_package, $request);
     }
 
     private function assignCategory(ServicePackage $service_package, ServicePackageStoreRequest $request)
@@ -104,6 +105,11 @@ class ServicePackageRepository
             $service_package->categories()->sync($service_category);
         }
         return;
+    }
+
+    private function assignServices(ServicePackage $service_package, ServicePackageStoreRequest $request): void
+    {
+        $service_package->services()->sync($request->getServicesParam());
     }
 }
 

@@ -24,6 +24,10 @@ class ServicePackageControllerTest extends TestCase
     use RefreshDatabase;
 
     /**
+     * @var Service
+     */
+    protected $service;
+    /**
      * @var ServicePackage
      */
     private $service_package;
@@ -136,6 +140,27 @@ class ServicePackageControllerTest extends TestCase
     /**
      * @test
      */
+    public function store_service_was_attach_to_new_package()
+    {
+        $service_category = factory(ServiceCategory::class)->make();
+        $this->merchant->services()->save($service_category);
+        $incoming_data = $this->getIncomingParameters();
+
+        $response = $this->post(route('service-packages.store'), $incoming_data);
+
+        $response->assertStatus(302)->assertRedirect(route('service-packages.index'))->assertSessionHas('success');
+
+        $service_package = ServicePackage::toMe()->latest()->first();
+
+        $this->assertDatabaseHas('package_service', [
+            'service_id' => $incoming_data['services'][0],
+            'package_id' => $service_package->id,
+        ]);
+    }
+
+    /**
+     * @test
+     */
     public function store_service_was_add_to_new_category()
     {
         $incoming_data = $this->getIncomingParameters();
@@ -180,8 +205,9 @@ class ServicePackageControllerTest extends TestCase
     {
         $this->createService();
         $service_category = factory(ServiceCategory::class)->create();
-        $redirect_url = route('services.edit', $this->service_package);
-        $response = $this->call(Request::METHOD_PUT, route('services.update', $this->service_package), [
+        $this->createServicePackage();
+        $redirect_url = route('service-packages.edit', $this->service_package);
+        $response = $this->call(Request::METHOD_PUT, route('service-packages.update', $this->service_package), [
             'title' => false,
             'description' => false,
             'active' => 'no boolean',
@@ -198,6 +224,7 @@ class ServicePackageControllerTest extends TestCase
             'price',
             'category_id',
             'category_title',
+            'services'
         ]);
     }
 
@@ -206,16 +233,13 @@ class ServicePackageControllerTest extends TestCase
      */
     public function update_service_was_updated()
     {
-        $this->createService();
+        $this->createServicePackage();
 
-        $response = $this->put(route('services.update', $this->service_package), [
-            'title' => 'title',
-            'description' => 'description',
-            'active' => CategoryStatus::ACTIVE,
-            'price' => 100.20
-        ]);
+        $incoming_parameters = $this->getIncomingParameters();
 
-        $response->assertStatus(302)->assertRedirect(route('services.index'))->assertSessionHas('success');
+        $response = $this->put(route('service-packages.update', $this->service_package), $incoming_parameters);
+
+        $response->assertStatus(302)->assertRedirect(route('service-packages.index'))->assertSessionHas('success');
     }
 
     /**
@@ -223,19 +247,15 @@ class ServicePackageControllerTest extends TestCase
      */
     public function update_database_was_updated()
     {
-        $this->createService();
-        $incoming_data = [
-            'title' => 'update title',
-            'description' => 'update description',
-            'active' => ServiceStatus::ACTIVE,
-            'price' => 100.20
-        ];
-        $response = $this->put(route('services.update', $this->service_package), $incoming_data);
+        $this->createServicePackage();
+        $incoming_data = $this->getIncomingParameters();
 
-        $response->assertStatus(302)->assertRedirect(route('services.index'))
+        $response = $this->put(route('service-packages.update', $this->service_package), $incoming_data);
+
+        $response->assertStatus(302)->assertRedirect(route('service-packages.index'))
             ->assertSessionHas('success');
-
-        $this->assertDatabaseHas('services', [
+        unset($incoming_data['services']);
+        $this->assertDatabaseHas('service_packages', [
             'merchant_id' => $this->merchant->id,
         ] + $incoming_data);
     }
@@ -245,33 +265,28 @@ class ServicePackageControllerTest extends TestCase
      */
     public function update_category_was_changed()
     {
-        $this->createService();
+        $this->createServicePackage();
         $old_category = $this->createServiceCategory();
         $this->service_package->categories()->attach($old_category);
         $category = $this->createServiceCategory();
-        $this->assertDatabaseHas('category_service', [
+        $this->assertDatabaseHas('category_package', [
             'category_id' => $old_category->id,
-            'service_id' => $this->service_package->id,
+            'package_id' => $this->service_package->id,
         ]);
-        $incoming_data = [
-            'title' => 'update title',
-            'description' => 'update description',
-            'active' => CategoryStatus::ACTIVE,
-            'price' => 100.20,
-            'category_id' => $category->id,
-        ];
-        $response = $this->put(route('services.update', $this->service_package), $incoming_data);
+        $incoming_data = $this->getIncomingParameters();
+        $incoming_data['category_id'] = $category->id;
+        $response = $this->put(route('service-packages.update', $this->service_package), $incoming_data);
 
-        $response->assertStatus(302)->assertRedirect(route('services.index'))
+        $response->assertStatus(302)->assertRedirect(route('service-packages.index'))
             ->assertSessionHas('success');
 
-        $this->assertDatabaseHas('category_service', [
+        $this->assertDatabaseHas('category_package', [
                 'category_id' => $category->id,
-                'service_id' => $this->service_package->id,
+                'package_id' => $this->service_package->id,
             ]);
-        $this->assertDatabaseMissing('category_service', [
+        $this->assertDatabaseMissing('category_package', [
             'category_id' => $old_category->id,
-            'service_id' => $this->service_package->id,
+            'package_id' => $this->service_package->id,
         ]);
     }
 
@@ -280,23 +295,18 @@ class ServicePackageControllerTest extends TestCase
      */
     public function update_category_was_attach()
     {
-        $this->createService();
+        $this->createServicePackage();
         $category = $this->createServiceCategory();
-        $incoming_data = [
-            'title' => 'update title',
-            'description' => 'update description',
-            'active' => CategoryStatus::ACTIVE,
-            'price' => 100.20,
-            'category_id' => $category->id,
-        ];
-        $response = $this->put(route('services.update', $this->service_package), $incoming_data);
+        $incoming_data = $this->getIncomingParameters();
+        $incoming_data['category_id'] = $category->id;
+        $response = $this->put(route('service-packages.update', $this->service_package), $incoming_data);
 
-        $response->assertStatus(302)->assertRedirect(route('services.index'))
+        $response->assertStatus(302)->assertRedirect(route('service-packages.index'))
             ->assertSessionHas('success');
 
-        $this->assertDatabaseHas('category_service', [
+        $this->assertDatabaseHas('category_package', [
             'category_id' => $category->id,
-            'service_id' => $this->service_package->id,
+            'package_id' => $this->service_package->id,
         ]);
     }
 
@@ -306,17 +316,13 @@ class ServicePackageControllerTest extends TestCase
      */
     public function update_category_was_created()
     {
-        $this->createService();
-        $incoming_data = [
-            'title' => 'update title',
-            'description' => 'update description',
-            'active' => CategoryStatus::ACTIVE,
-            'price' => 100.20,
-            'category_title' => 'new_category',
-        ];
-        $response = $this->put(route('services.update', $this->service_package), $incoming_data);
+        $this->createServicePackage();
 
-        $response->assertStatus(302)->assertRedirect(route('services.index'))
+        $incoming_data = $this->getIncomingParameters();
+        $incoming_data['category_title'] = 'new_category';
+        $response = $this->put(route('service-packages.update', $this->service_package), $incoming_data);
+
+        $response->assertStatus(302)->assertRedirect(route('service-packages.index'))
             ->assertSessionHas('success');
 
         $this->assertDatabaseHas('service_categories', [
@@ -327,9 +333,26 @@ class ServicePackageControllerTest extends TestCase
 
         $service_category = ServiceCategory::toMe()->latest()->first();
 
-        $this->assertDatabaseHas('category_service', [
+        $this->assertDatabaseHas('category_package', [
             'category_id' => $service_category->id,
-            'service_id' => $this->service_package->id,
+            'package_id' => $this->service_package->id,
+        ]);
+    }
+
+    /**
+     * @test
+     */
+    public function update_services_was_attach()
+    {
+        $this->createServicePackage();
+        $incoming_data = $this->getIncomingParameters();
+        $response = $this->put(route('service-packages.update', $this->service_package), $incoming_data);
+
+        $response->assertStatus(302)->assertRedirect(route('service-packages.index'))->assertSessionHas('success');
+
+        $this->assertDatabaseHas('package_service', [
+            'service_id' => $incoming_data['services'][0],
+            'package_id' => $this->service_package->id,
         ]);
     }
 
@@ -339,22 +362,37 @@ class ServicePackageControllerTest extends TestCase
      */
     public function delete_voucher_was_removed()
     {
+        $this->createServicePackage();
         $this->createService();
 
-        $response = $this->delete(route('services.destroy', $this->service_package));
-
+        $response = $this->delete(route('service-packages.destroy', $this->service_package));
+        
+        $service_id = $this->service->id;
+        $deleted_service_id = $this->service_package->id;
         $response->assertStatus(302)
-            ->assertRedirect(route('services.index'))
+            ->assertRedirect(route('service-packages.index'))
             ->assertSessionHas('info');
 
-        $this->assertDatabaseMissing('services', [
-                'id' => $this->service_package->id,
+
+        $this->assertDatabaseMissing('package_service', [
+            'service_id' => $service_id,
+            'package_id' => $deleted_service_id,
+        ]);
+        $this->assertDatabaseMissing('service_packages', [
+                'id' => $deleted_service_id,
             ]);
     }
 
     protected function createService(): void
     {
-        $this->service_package = factory(Service::class)->create([
+        $this->service = factory(Service::class)->create([
+            'merchant_id' => $this->merchant->id,
+        ]);
+    }
+
+    protected function createServicePackage(): void
+    {
+        $this->service_package = factory(ServicePackage::class)->create([
             'merchant_id' => $this->merchant->id,
         ]);
     }
@@ -377,7 +415,7 @@ class ServicePackageControllerTest extends TestCase
             'description' => 'description',
             'active' => ServiceStatus::ACTIVE,
             'price' => 100.20,
-            'services' => [$this->service_package->id]
+            'services' => [$this->service->id]
         ];
 
         return $incoming_data;

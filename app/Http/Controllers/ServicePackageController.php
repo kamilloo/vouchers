@@ -58,12 +58,12 @@ class ServicePackageController extends Controller
     public function update(ServicePackageStoreRequest $request, ServicePackage $service_package, ServicePackageRepository $repository)
     {
         $repository->update($request, $service_package);
-        return redirect(route('services.index'))->with('success', 'Your service was updated!');
+        return redirect(route('service-packages.index'))->with('success', 'Your service was updated!');
     }
 
-    public function destroy(Service $service)
+    public function destroy(ServicePackage $service_package)
     {
-        $service->delete();
-        return redirect(route('services.index'))->with('info', 'Your Service was deleted');
+        $service_package->delete();
+        return redirect(route('service-packages.index'))->with('info', 'Your Service was deleted');
     }
 }

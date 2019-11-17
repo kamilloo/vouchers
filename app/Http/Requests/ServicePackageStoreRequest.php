@@ -17,6 +17,7 @@ use Illuminate\Validation\Rule;
  * @method getPriceParam
  * @method getCategoryIdParam
  * @method getCategoryTitleParam
+ * @method getServicesParam
  */
 class ServicePackageStoreRequest extends Request
 {
