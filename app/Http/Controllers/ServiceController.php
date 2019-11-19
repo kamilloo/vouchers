@@ -37,7 +37,8 @@ class ServiceController extends Controller
 
     public function create()
     {
-        return view('services.create');
+        $service_categories = ServiceCategory::toMe()->get();
+        return view('services.create', compact('service_categories'));
     }
 
     public function store(ServiceStoreRequest $request, Guard $guard, ServiceRepository $repository)
@@ -49,7 +50,8 @@ class ServiceController extends Controller
 
     public function edit(Service $service)
     {
-        return view('services.edit', compact('service'));
+        $service_categories = ServiceCategory::toMe()->get();
+        return view('services.edit', compact('service', 'service_categories'));
     }
 
     public function update(ServiceUpdateRequest $request, Service $service, ServiceRepository $repository)

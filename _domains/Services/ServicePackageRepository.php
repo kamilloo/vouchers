@@ -90,12 +90,9 @@ class ServicePackageRepository
 
     private function assignCategory(ServicePackage $service_package, ServicePackageStoreRequest $request)
     {
-        $service_category = $this->service_category_repository
-            ->findMineById($request->getCategoryIdParam());
-
-        if ($service_category)
+        if (!empty($request->getCategoriesParam()))
         {
-            $service_package->categories()->sync($service_category);
+            $service_package->categories()->sync($request->getCategoriesParam());
             return;
         }
 

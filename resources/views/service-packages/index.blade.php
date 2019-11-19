@@ -3,8 +3,8 @@
 
 @section('list')
     <div class="row mb-4">
-        <div class="btn-group" role="group" aria-label="Add Service Category">
-            <a href="{{ route('service-packages.create') }}" type="button" class="btn btn-outline-info">Add Service Category</a>
+        <div class="btn-group" role="group" aria-label="Add Package">
+            <a href="{{ route('service-packages.create') }}" type="button" class="btn btn-outline-info">Add Package</a>
         </div>
     </div>
     <div class="row ">
@@ -14,6 +14,7 @@
                 <th scope="col">#</th>
                 <th scope="col">Title</th>
                 <th scope="col">Price</th>
+                <th scope="col">Categories</th>
                 <th scope="col">Services</th>
                 <th scope="col">Active</th>
                 <th scope="col">Action</th>
@@ -25,7 +26,22 @@
                     <th class="align-middle" scope="row">{{ $service_package->id }}</th>
                     <td class="align-middle">{{ $service_package->title }}</td>
                     <td class="align-middle">{{ $service_package->price }} zł</td>
-                    <td class="align-middle">{{ $service_package->services->pluck('title') }}</td>
+                    <td class="align-middle">
+                        @if(! $service_package->categories->count())
+                            <span class="badge badge-warning"></span>
+                        @endif
+                        @foreach($service_package->categories as $category)
+                            <span class="badge badge-info">{{ $category->title }}</span><br>
+                        @endforeach
+                    </td>
+                    <td class="align-middle">
+                        @if(! $service_package->services->count())
+                            <span class="badge badge-warning"></span>
+                        @endif
+                        @foreach($service_package->services as $service)
+                            <span class="badge badge-info">{{ $service->title }}</span><br>
+                        @endforeach
+                    </td>
                     <td class="align-middle">
                         @if($service_package->active)
                             <span class="badge-success px-2 py-1 rounded-circle"><span class="oi oi-check"></span></span>

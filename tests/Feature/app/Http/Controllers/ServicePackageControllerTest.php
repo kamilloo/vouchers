@@ -79,7 +79,7 @@ class ServicePackageControllerTest extends TestCase
             'description' => false,
             'active' => 'no boolean',
             'price' => 'no valud price',
-            'category_id' => $category->id,
+            'categories' => [$category->id],
             'category_title' => false,
             'services' => [$service->id],
         ], [],[],['HTTP_REFERER' => $redirect_url]);
@@ -90,7 +90,7 @@ class ServicePackageControllerTest extends TestCase
             'description',
             'active',
             'price',
-            'category_id',
+            'categories.0',
             'category_title',
             'services.0',
         ]);
@@ -122,7 +122,7 @@ class ServicePackageControllerTest extends TestCase
         $this->merchant->services()->save($service_category);
         $incoming_data = $this->getIncomingParameters();
 
-        $incoming_data['category_id'] = $service_category->id;
+        $incoming_data['categories'] = [$service_category->id];
 
         $response = $this->post(route('service-packages.store'), $incoming_data);
 
@@ -212,7 +212,7 @@ class ServicePackageControllerTest extends TestCase
             'description' => false,
             'active' => 'no boolean',
             'price' => 'no valud price',
-            'category_id' => $service_category->id,
+            'categories' => [$service_category->id],
             'category_title' => false,
         ], [],[],['HTTP_REFERER' => $redirect_url]);
 
@@ -222,7 +222,7 @@ class ServicePackageControllerTest extends TestCase
             'description',
             'active',
             'price',
-            'category_id',
+            'categories.0',
             'category_title',
             'services'
         ]);
@@ -274,7 +274,7 @@ class ServicePackageControllerTest extends TestCase
             'package_id' => $this->service_package->id,
         ]);
         $incoming_data = $this->getIncomingParameters();
-        $incoming_data['category_id'] = $category->id;
+        $incoming_data['categories'] = [$category->id];
         $response = $this->put(route('service-packages.update', $this->service_package), $incoming_data);
 
         $response->assertStatus(302)->assertRedirect(route('service-packages.index'))
@@ -298,7 +298,7 @@ class ServicePackageControllerTest extends TestCase
         $this->createServicePackage();
         $category = $this->createServiceCategory();
         $incoming_data = $this->getIncomingParameters();
-        $incoming_data['category_id'] = $category->id;
+        $incoming_data['categories'] = [$category->id];
         $response = $this->put(route('service-packages.update', $this->service_package), $incoming_data);
 
         $response->assertStatus(302)->assertRedirect(route('service-packages.index'))

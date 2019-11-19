@@ -45,11 +45,20 @@
                 <div class="form-group">
                     @foreach($services as $service)
                         <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="customCheck1" name="services[]" value="{{ $service->id }}">
-                            <label class="custom-control-label" for="customCheck1">Check this custom checkbox</label>
+                            <input type="checkbox" class="custom-control-input" id="service-{{ $service->id }}" name="services[]" value="{{ $service->id }}">
+                            <label class="custom-control-label" for="service-{{ $service->id }}">{{ $service->title }}</label>
                         </div>
                     @endforeach
 
+                </div>
+
+                <div class="form-group">
+                    @foreach($service_categories as $service_category)
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="category-{{ $service_category->id }}" name="categories[]" value="{{ $service_category->id }}" >
+                            <label class="custom-control-label" for="category-{{ $service_category->id }}">{{ $service_category->title }}</label>
+                        </div>
+                    @endforeach
                 </div>
 
                 <button type="submit" class="btn btn-primary">Submit</button>

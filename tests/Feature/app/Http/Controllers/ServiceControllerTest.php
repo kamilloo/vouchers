@@ -73,7 +73,7 @@ class ServiceControllerTest extends TestCase
             'description' => false,
             'active' => 'no boolean',
             'price' => 'no valud price',
-            'category_id' => $category->id,
+            'categories' => [$category->id],
             'category_title' => false,
         ], [],[],['HTTP_REFERER' => $redirect_url]);
 
@@ -83,7 +83,7 @@ class ServiceControllerTest extends TestCase
             'description',
             'active',
             'price',
-            'category_id',
+            'categories.0',
             'category_title',
         ]);
     }
@@ -113,7 +113,7 @@ class ServiceControllerTest extends TestCase
         $this->merchant->services()->save($service_category);
         $incoming_data = $this->getIncomingParameters();
 
-        $incoming_data['category_id'] = $service_category->id;
+        $incoming_data['categories'] = [$service_category->id];
 
         $response = $this->post(route('services.store'), $incoming_data);
 
@@ -181,7 +181,7 @@ class ServiceControllerTest extends TestCase
             'description' => false,
             'active' => 'no boolean',
             'price' => 'no valud price',
-            'category_id' => $service_category->id,
+            'categories' => [$service_category->id],
             'category_title' => false,
         ], [],[],['HTTP_REFERER' => $redirect_url]);
 
@@ -191,7 +191,7 @@ class ServiceControllerTest extends TestCase
             'description',
             'active',
             'price',
-            'category_id',
+            'categories.0',
             'category_title',
         ]);
     }
@@ -253,7 +253,7 @@ class ServiceControllerTest extends TestCase
             'description' => 'update description',
             'active' => CategoryStatus::ACTIVE,
             'price' => 100.20,
-            'category_id' => $category->id,
+            'categories' => [$category->id],
         ];
         $response = $this->put(route('services.update', $this->service), $incoming_data);
 
@@ -282,7 +282,7 @@ class ServiceControllerTest extends TestCase
             'description' => 'update description',
             'active' => CategoryStatus::ACTIVE,
             'price' => 100.20,
-            'category_id' => $category->id,
+            'categories' => [$category->id],
         ];
         $response = $this->put(route('services.update', $this->service), $incoming_data);
 

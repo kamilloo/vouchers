@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 namespace Domain\Services;
 
 use App\Contractors\IVoucherRepository;
@@ -55,7 +55,7 @@ class ServiceRepository
 
                 $service = $merchant->services()->create($attributes);
 
-                $this->assignCategory($service, $request, $merchant);
+                $this->assignCategory($service, $request);
 
                 return $service;
             });
@@ -87,12 +87,10 @@ class ServiceRepository
 
     private function assignCategory(Service $service, ServiceStoreRequest $request)
     {
-        $service_category = $this->service_category_repository
-            ->findMineById($request->getCategoryIdParam());
-
-        if ($service_category)
+        $categories_list = $request->getCategoriesParam();
+        if (!empty($categories_list))
         {
-            $service->categories()->sync($service_category);
+            $service->categories()->sync($categories_list);
             return;
         }
 

@@ -41,6 +41,14 @@
             <input type="radio" id="in-active" name="active" class="custom-control-input" value="{{ \App\Models\Enums\ServiceStatus::INACTIVE }}" @if(!$service->active)checked @endif>
             <label class="custom-control-label" for="in-active">Inactive</label>
         </div>
+        <div class="form-group">
+            @foreach($service_categories as $service_category)
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="category-{{ $service_category->id }}" name="categories[]" value="{{ $service_category->id }}" @if(in_array($service_category->id, $service->categories->pluck('id')->all()))checked @endif>
+                    <label class="custom-control-label" for="category-{{ $service_category->id }}">{{ $service_category->title }}</label>
+                </div>
+            @endforeach
+        </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
         </div>

@@ -15,6 +15,7 @@
                 <th scope="col">Title</th>
                 <th scope="col">Price</th>
                 <th scope="col">Active</th>
+                <th scope="col">Categories</th>
                 <th scope="col">Action</th>
             </tr>
             </thead>
@@ -31,6 +32,14 @@
                         @else
                             <span class="badge-danger px-2 py-1 rounded-circle"><span class="oi oi-x"></span></span>
                         @endif
+                    </td>
+                    <td class="align-middle">
+                        @if(! $service->categories->count())
+                            <span class="badge badge-warning"></span>
+                        @endif
+                        @foreach($service->categories as $category)
+                            <span class="badge badge-info">{{ $category->title }}</span><br>
+                        @endforeach
                     </td>
                     <td class="align-middle">
                     <span class="btn-toolbar" role="toolbar" aria-label="Toolbar for manage category">

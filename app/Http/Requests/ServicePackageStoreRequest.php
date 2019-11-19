@@ -15,7 +15,7 @@ use Illuminate\Validation\Rule;
  * @method getDescriptionParam
  * @method getActiveParam
  * @method getPriceParam
- * @method getCategoryIdParam
+ * @method getCategoriesParam
  * @method getCategoryTitleParam
  * @method getServicesParam
  */
@@ -33,7 +33,8 @@ class ServicePackageStoreRequest extends Request
             'description' => ['nullable', 'string', 'max:256'],
             'price' => ['required', 'numeric', 'min:1', 'max:1000'],
             'active' => ['required', 'boolean'],
-            'category_id' => ['nullable', Rule::in(ServiceCategory::toMe()->pluck('id')), ],
+            'categories' => ['nullable', 'array'],
+            'categories.*' => ['nullable', Rule::in(ServiceCategory::toMe()->pluck('id'))],
             'category_title' => ['nullable', 'string', ],
             'services' => ['required', 'array', Rule::in(Service::toMe()->pluck('id'))],
             'services.*' => ['required', Rule::in(Service::toMe()->pluck('id'))],
