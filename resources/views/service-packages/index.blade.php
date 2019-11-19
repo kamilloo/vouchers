@@ -13,6 +13,8 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Title</th>
+                <th scope="col">Price</th>
+                <th scope="col">Services</th>
                 <th scope="col">Active</th>
                 <th scope="col">Action</th>
             </tr>
@@ -22,8 +24,10 @@
                 <tr>
                     <th class="align-middle" scope="row">{{ $service_package->id }}</th>
                     <td class="align-middle">{{ $service_package->title }}</td>
+                    <td class="align-middle">{{ $service_package->price }} zł</td>
+                    <td class="align-middle">{{ $service_package->services->pluck('title') }}</td>
                     <td class="align-middle">
-                        @if($service_package->status)
+                        @if($service_package->active)
                             <span class="badge-success px-2 py-1 rounded-circle"><span class="oi oi-check"></span></span>
 
                         @else

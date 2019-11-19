@@ -23,7 +23,7 @@
                     <th class="align-middle" scope="row">{{ $service_category->id }}</th>
                     <td class="align-middle">{{ $service_category->title }}</td>
                     <td class="align-middle">
-                        @if($service_category->status)
+                        @if($service_category->active)
                             <span class="badge-success px-2 py-1 rounded-circle"><span class="oi oi-check"></span></span>
 
                         @else

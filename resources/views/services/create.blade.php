@@ -24,12 +24,19 @@
                         <span>{{ $errors->first('description') }}</span>
                     @endif
                 </div>
+                <div class="form-group">
+                    <label for="price">Price</label>
+                    <input type="number" class="form-control" id="price" name="price" dusk="price" placeholder="Price" value="{{ old('price') }}">
+                    @if($errors->first('price'))
+                        <span>{{ $errors->first('price') }}</span>
+                    @endif
+                </div>
                 <div class="custom-control custom-radio">
-                    <input type="radio" id="active" name="active" class="custom-control-input" value="{{ \App\Models\Enums\CategoryStatus::ACTIVE }}">
+                    <input type="radio" id="active" name="active" class="custom-control-input" value="{{ \App\Models\Enums\ServiceStatus::ACTIVE }}">
                     <label class="custom-control-label" for="active">Active</label>
                 </div>
                 <div class="custom-control custom-radio mb-3">
-                    <input type="radio" id="in-active" name="active" class="custom-control-input" value="{{ \App\Models\Enums\CategoryStatus::INACTIVE }}">
+                    <input type="radio" id="in-active" name="active" class="custom-control-input" value="{{ \App\Models\Enums\ServiceStatus::INACTIVE }}">
                     <label class="custom-control-label" for="in-active">Inactive</label>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>

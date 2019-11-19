@@ -13,17 +13,19 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Title</th>
+                <th scope="col">Price</th>
                 <th scope="col">Active</th>
                 <th scope="col">Action</th>
             </tr>
             </thead>
             <tbody>
-            @foreach($services as $service_category)
+            @foreach($services as $service)
                 <tr>
-                    <th class="align-middle" scope="row">{{ $service_category->id }}</th>
-                    <td class="align-middle">{{ $service_category->title }}</td>
+                    <th class="align-middle" scope="row">{{ $service->id }}</th>
+                    <td class="align-middle">{{ $service->title }}</td>
+                    <td class="align-middle">{{ $service->price }} zł</td>
                     <td class="align-middle">
-                        @if($service_category->status)
+                        @if($service->active)
                             <span class="badge-success px-2 py-1 rounded-circle"><span class="oi oi-check"></span></span>
 
                         @else
@@ -33,10 +35,10 @@
                     <td class="align-middle">
                     <span class="btn-toolbar" role="toolbar" aria-label="Toolbar for manage category">
                         <span class="btn-group mr-2" role="group" aria-label="Update button">
-                            <a class="btn btn-outline-info" href="{{ route('services.edit', $service_category) }}">Edycja</a>
+                            <a class="btn btn-outline-info" href="{{ route('services.edit', $service) }}">Edycja</a>
                         </span>
                         <span class="btn-group" role="group" aria-label="Remove button">
-                        <form action="{{ route('services.destroy', $service_category) }}" method="post" >
+                        <form action="{{ route('services.destroy', $service) }}" method="post" >
                             @method('delete')
                             @csrf
                             <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#confirm-delete">Delete</button>

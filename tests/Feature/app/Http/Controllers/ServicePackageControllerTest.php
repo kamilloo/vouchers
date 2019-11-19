@@ -366,7 +366,7 @@ class ServicePackageControllerTest extends TestCase
         $this->createService();
 
         $response = $this->delete(route('service-packages.destroy', $this->service_package));
-        
+
         $service_id = $this->service->id;
         $deleted_service_id = $this->service_package->id;
         $response->assertStatus(302)

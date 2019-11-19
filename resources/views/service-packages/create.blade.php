@@ -3,7 +3,7 @@
 
 @section('form')
     <div class="px-3">
-        <h1 class="display-4">{{ __('Add Service Category') }}</h1>
+        <h1 class="display-4">{{ __('Add Package') }}</h1>
     </div>
     <div class="row py-3 px-3 border bg-white rounded-sm">
         <div class="col">
@@ -24,14 +24,34 @@
                         <span>{{ $errors->first('description') }}</span>
                     @endif
                 </div>
-                <div class="custom-control custom-radio">
-                    <input type="radio" id="active" name="active" class="custom-control-input" value="{{ \App\Models\Enums\CategoryStatus::ACTIVE }}">
-                    <label class="custom-control-label" for="active">Active</label>
+                <div class="form-group">
+                    <label for="price">Price</label>
+                    <input type="number" class="form-control" id="price" name="price" dusk="price" placeholder="Price" value="{{ old('price') }}">
+                    @if($errors->first('price'))
+                        <span>{{ $errors->first('price') }}</span>
+                    @endif
                 </div>
-                <div class="custom-control custom-radio mb-3">
-                    <input type="radio" id="in-active" name="active" class="custom-control-input" value="{{ \App\Models\Enums\CategoryStatus::INACTIVE }}">
-                    <label class="custom-control-label" for="in-active">Inactive</label>
+                <div class="form-group">
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="active" name="active" class="custom-control-input" value="{{ \App\Models\Enums\PackageStatus::ACTIVE }}">
+                        <label class="custom-control-label" for="active">Active</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="in-active" name="active" class="custom-control-input" value="{{ \App\Models\Enums\PackageStatus::INACTIVE }}">
+                        <label class="custom-control-label" for="in-active">Inactive</label>
+                    </div>
                 </div>
+
+                <div class="form-group">
+                    @foreach($services as $service)
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="customCheck1" name="services[]" value="{{ $service->id }}">
+                            <label class="custom-control-label" for="customCheck1">Check this custom checkbox</label>
+                        </div>
+                    @endforeach
+
+                </div>
+
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>

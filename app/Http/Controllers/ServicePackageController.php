@@ -40,7 +40,8 @@ class ServicePackageController extends Controller
 
     public function create()
     {
-        return view('service-packages.create');
+        $services = Service::toMe()->get();
+        return view('service-packages.create', compact('services'));
     }
 
     public function store(ServicePackageStoreRequest $request, Guard $guard, ServicePackageRepository $repository)
@@ -52,7 +53,8 @@ class ServicePackageController extends Controller
 
     public function edit(ServicePackage $service_package)
     {
-        return view('service-packages.edit', compact('service_package'));
+        $services = Service::toMe()->get();
+        return view('service-packages.edit', compact('service_package', 'services'));
     }
 
     public function update(ServicePackageStoreRequest $request, ServicePackage $service_package, ServicePackageRepository $repository)
