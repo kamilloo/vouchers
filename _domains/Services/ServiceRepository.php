@@ -88,7 +88,10 @@ class ServiceRepository
     private function assignCategory(Service $service, ServiceStoreRequest $request)
     {
         $categories_list = $request->getCategoriesParam();
-        if (!empty($categories_list))
+        if (empty($categories_list))
+        {
+            $service->categories()->detach();
+        }else
         {
             $service->categories()->sync($categories_list);
             return;

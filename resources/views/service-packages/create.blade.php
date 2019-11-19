@@ -60,6 +60,8 @@
                         </div>
                     @endforeach
                 </div>
+                @include('partials.new-category-input')
+
 
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>

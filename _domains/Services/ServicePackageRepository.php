@@ -90,7 +90,10 @@ class ServicePackageRepository
 
     private function assignCategory(ServicePackage $service_package, ServicePackageStoreRequest $request)
     {
-        if (!empty($request->getCategoriesParam()))
+        if(empty($request->getCategoriesParam()))
+        {
+            $service_package->categories()->detach();
+        }else
         {
             $service_package->categories()->sync($request->getCategoriesParam());
             return;

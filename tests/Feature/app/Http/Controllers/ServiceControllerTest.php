@@ -295,6 +295,36 @@ class ServiceControllerTest extends TestCase
         ]);
     }
 
+    /**
+     * @test
+     */
+    public function update_category_was_detach()
+    {
+        $this->createService();
+        $category = $this->createServiceCategory();
+        $this->service->categories()->attach($category->id);
+
+        $this->assertDatabaseHas('category_service', [
+            'category_id' => $category->id,
+            'service_id' => $this->service->id,
+        ]);
+        $incoming_data = [
+            'title' => 'update title',
+            'description' => 'update description',
+            'active' => CategoryStatus::ACTIVE,
+            'price' => 100.20,
+        ];
+        $response = $this->put(route('services.update', $this->service), $incoming_data);
+
+        $response->assertStatus(302)->assertRedirect(route('services.index'))
+            ->assertSessionHas('success');
+
+        $this->assertDatabaseMissing('category_service', [
+            'category_id' => $category->id,
+            'service_id' => $this->service->id,
+        ]);
+    }
+
 
     /**
      * @test
