@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Descriptors\MorphType;
+
 class Voucher extends Model
 {
     public function user()
@@ -14,9 +16,17 @@ class Voucher extends Model
         return $this->user_id === $user->id;
     }
 
-    public function merchants()
+    /**
+     * @return
+     */
+    public function merchant()
     {
-        return $this->belongsToMany(Merchant::class);
+        return $this->belongsTo(Merchant::class);
+    }
+
+    public function product()
+    {
+        return $this->morphTo(MorphType::PRODUCT);
     }
 
     public function scopeForMerchant($query, Merchant $merchant)

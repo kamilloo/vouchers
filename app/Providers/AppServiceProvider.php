@@ -3,9 +3,14 @@
 namespace App\Providers;
 
 use App\Contractors\IPaymentGateway;
+use App\Models\Descriptors\MorphType;
+use App\Models\Descriptors\ProductType;
+use App\Models\Service;
+use App\Models\ServicePackage;
 use Domain\Payments\PaymentGateway;
 use Domain\Payments\SandboxGateway;
 use Illuminate\Config\Repository;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 
@@ -36,6 +41,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Relation::morphMap([
+            ProductType::SERVICE => Service::class,
+            ProductType::SERVICE_PACKAGE => ServicePackage::class,
+        ]);
     }
 }

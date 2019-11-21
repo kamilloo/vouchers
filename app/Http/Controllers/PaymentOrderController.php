@@ -12,7 +12,7 @@ use App\Models\Voucher;
 use App\Models\Order;
 use Illuminate\Http\Request;
 
-class PaymentController extends Controller
+class PaymentOrderController extends Controller
 {
     public function create(Merchant $merchant, Order $order, IPaymentGateway $payment_gateway)
     {

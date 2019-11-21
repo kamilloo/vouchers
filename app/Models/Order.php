@@ -17,6 +17,11 @@ class Order extends Model implements IOrder
         return $this->belongsTo(Voucher::class);
     }
 
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
+
 
     public function scopeToMe($query)
     {

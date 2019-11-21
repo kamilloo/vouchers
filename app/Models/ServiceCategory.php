@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Descriptors\ProductType;
+
 class ServiceCategory extends Model
 {
     protected $table = 'service_categories';

@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Descriptors\ProductType;
+
 class ServicePackage extends Model
 {
     protected $table = 'service_packages';
@@ -22,6 +24,12 @@ class ServicePackage extends Model
     public function merchant()
     {
         return $this->belongsTo(Merchant::class);
+    }
+
+
+    public function vouchers()
+    {
+        return $this->morphMany(Voucher::class, ProductType::SERVICE_PACKAGE);
     }
 
     public function scopeToMe($query)

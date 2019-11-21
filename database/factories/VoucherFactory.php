@@ -20,10 +20,13 @@ $factory->define(\App\Models\Voucher::class, function (Faker $faker) {
         'user_id' => function(){
             return factory(User::class)->create()->id;
         },
+        'merchant_id' => function(){
+            return factory(\App\Models\Merchant::class)->create()->id;
+        },
         'type' => 'type',
         'title' => $faker->title,
         'price' => $faker->randomFloat(),
-        'service' => $faker->word
+//        'service' => $faker->word
     ];
 });
 

@@ -49,13 +49,13 @@ Route::post('checkout/{merchant}', 'CheckoutController@proceed')->name('checkout
 Route::get('checkout/{merchant}/confirmation/{order}', 'CheckoutController@confirmation')->name('checkout.confirmation');
 
 
-Route::get('payment/{merchant}/create/{order}', 'PaymentController@create')->name('payment.create');
-Route::get('payment/{payment}/callback-return', 'PaymentController@callbackReturn')->name('payment.return');
-Route::post('payment/{payment}/callback-status', 'PaymentController@callbackStatus')->name('payment.status');
-Route::get('payment/{payment}/sandbox-gateway', 'PaymentController@sandboxGateway')->name('payment.sandbox-gateway');
+Route::get('payment/{merchant}/create/{order}', 'PaymentOrderController@create')->name('payment.create');
+Route::get('payment/{payment}/callback-return', 'PaymentOrderController@callbackReturn')->name('payment.return');
+Route::post('payment/{payment}/callback-status', 'PaymentOrderController@callbackStatus')->name('payment.status');
+Route::get('payment/{payment}/sandbox-gateway', 'PaymentOrderController@sandboxGateway')->name('payment.sandbox-gateway');
 
 
-Route::get('payment/{payment}/recap', 'PaymentController@recap')->name('payment.recap');
+Route::get('payment/{payment}/recap', 'PaymentOrderController@recap')->name('payment.recap');
 
 Route::get('voucher/order/{order}/download', 'VoucherOrderController@download')->name('voucher.download');
 Route::get('voucher/order/{order}/send', 'VoucherOrderController@send')->name('voucher.send');

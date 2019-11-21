@@ -81,6 +81,8 @@ class VoucherControllerTest extends TestCase
                 'price',
                 'title',
                 'type',
+                'voucher',
+                'payment',
             ]
         ]);
     }

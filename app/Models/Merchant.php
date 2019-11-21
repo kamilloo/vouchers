@@ -40,7 +40,7 @@ class Merchant extends Model
 
     public function vouchers()
     {
-        return $this->belongsToMany(Voucher::class);
+        return $this->hasMany(Voucher::class);
     }
 
     public function serviceCategories()
