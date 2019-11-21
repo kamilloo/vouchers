@@ -25,6 +25,7 @@ class CreateOrdersTable extends Migration
             $table->string('email');
             $table->string('status')->default(\App\Models\Enums\StatusType::NEW);
             $table->boolean('paid')->default(\App\Models\Enums\PaymentStatus::WAITING_FOR_PAY);
+            $table->string('qr_code')->default(null)->nullable();
             $table->timestamps();
 
             $table->foreign('merchant_id')->references('id')->on('merchants');

@@ -3,6 +3,7 @@
 namespace Tests\Feature\App\Http\Controllers\Api;
 
 use App\Models\Enums\VoucherType;
+use App\Models\Order;
 use App\Models\User;
 use App\Models\Voucher;
 use Illuminate\Http\UploadedFile;
@@ -34,19 +35,32 @@ class VoucherControllerTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->file_factory = UploadedFile::fake();
-        $this->file = $this->file_factory->image('png');
-        $this->createUserAndBe();
+        $this->createUserAndBeFromApi();
 
     }
 
     /**
      * @test
      */
-    public function index_get_vouchers_list()
+    public function get_not_found_vourcher()
     {
-        $response = $this->get(route('vouchers.index'))
-            ->assertViewHas('vouchers');
+        $order = factory(Order::class)->create();
+
+        $response = $this->getJson(route('api-voucher-get', $order->qr_code));
+
+        $response->assertStatus(404);
+        $this->assertContains('No query results for model', $response->decodeResponseJson('message'));
+    }
+
+    /**
+     * @test
+     */
+    public function get_order_founded_be_me()
+    {
+        $order = factory(Order::class)->make();
+        $this->user->merchant->orders()->save($order);
+
+        $response = $this->getJson(route('api-voucher-get', $order->qr_code));
 
         $response->assertStatus(200);
     }
@@ -54,141 +68,23 @@ class VoucherControllerTest extends TestCase
     /**
      * @test
      */
-    public function index_get_vouchers_create()
+    public function get_response_with_order()
     {
-        $response = $this->get(route('vouchers.create'))
-            ->assertViewIs('vouchers.create');
+        $order = factory(Order::class)->make();
+        $this->user->merchant->orders()->save($order);
 
-        $response->assertStatus(200);
-    }
+        $response = $this->getJson(route('api-voucher-get', $order->qr_code));
 
-    /**
-     * @test
-     */
-    public function store_validation_exception()
-    {
-        $redirect_url = route('vouchers.create');
-        $response = $this->call(Request::METHOD_POST, route('vouchers.store'), [
-            'type' => false
-        ], [],[],['HTTP_REFERER' => $redirect_url]);
-
-        $response->assertStatus(302)->assertRedirect($redirect_url);
-    }
-
-    /**
-     * @test
-     */
-    public function store_add_voucher_do_db()
-    {
-        $incoming_data = [
-            'title' => 'title',
-            'type' => VoucherType::SERVICE,
-            'service' => 'service'
-        ];
-        $response = $this->post(route('vouchers.store'), $incoming_data);
-
-        $response->assertStatus(302)->assertRedirect(route('vouchers.index'))
-            ->assertSessionHas('success');
-
-        $this->assertDatabaseHas('vouchers', [
-                'user_id' => $this->user->id,
-            ] + $incoming_data);
-    }
-
-    /**
-     * @test
-     */
-    public function store_add_voucher_to_merchant()
-    {
-        $incoming_data = [
-            'title' => 'title',
-            'type' => VoucherType::SERVICE,
-            'service' => 'service'
-        ];
-        $response = $this->post(route('vouchers.store'), $incoming_data)->assertStatus(302);
-
-        $this->assertDatabaseHas('merchant_voucher', [
-                'merchant_id' => $this->user->merchant->id,
-                'voucher_id' => DB::table('vouchers')->latest()->first()->id
-            ]);
-    }
-
-
-    /**
-     * @test
-     */
-    public function update_got_403_authorization_denied()
-    {
-        $this->voucher = factory(Voucher::class)->create();
-        $response = $this->put(route('vouchers.update', $this->voucher));
-        $response->assertStatus(403);
-    }
-
-    /**
-     * @test
-     */
-    public function update_validation_exception()
-    {
-        $this->voucher = factory(Voucher::class)->state('mine')->create();
-        $redirect_url = route('vouchers.edit', $this->voucher);
-        $response = $this->call(Request::METHOD_PUT, route('vouchers.update', $this->voucher), [
-            'type' => false
-        ], [],[],['HTTP_REFERER' => $redirect_url]);
-
-        $response->assertStatus(302)->assertRedirect($redirect_url);
-    }
-
-    /**
-     * @test
-     */
-    public function update_voucher_was_updated()
-    {
-        $this->voucher = factory(Voucher::class)->state('mine')->create();
-        $response = $this->put(route('vouchers.update', $this->voucher), [
-            'title' => 'title',
-            'type' => VoucherType::SERVICE,
-            'service' => 'service'
+        $response->assertJsonStructure([
+            'data' => [
+                'id',
+                'price',
+                'title',
+                'type',
+            ]
         ]);
-
-        $response->assertStatus(302)->assertRedirect(route('vouchers.index'))->assertSessionHas('success');
     }
 
-    /**
-     * @test
-     */
-    public function update_database_was_updated()
-    {
-        $this->voucher = factory(Voucher::class)->state('mine')->create();
-        $incoming_data = [
-            'title' => 'title',
-            'type' => VoucherType::SERVICE,
-            'service' => 'service'
-        ];
-        $response = $this->put(route('vouchers.update', $this->voucher), $incoming_data);
 
-        $response->assertStatus(302)->assertRedirect(route('vouchers.index'))
-            ->assertSessionHas('success');
 
-        $this->assertDatabaseHas('vouchers', [
-            'user_id' => $this->user->id,
-        ] + $incoming_data);
-    }
-
-    /**
-     * @test
-     */
-    public function delete_voucher_was_removed()
-    {
-        $this->voucher = factory(Voucher::class)->state('mine')->create();
-
-        $response = $this->delete(route('vouchers.destroy', $this->voucher));
-
-        $response->assertStatus(302)
-            ->assertRedirect(route('vouchers.index'))
-            ->assertSessionHas('info');
-
-        $this->assertDatabaseMissing('vouchers', [
-                'id' => $this->voucher->id,
-            ]);
-    }
 }

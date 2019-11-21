@@ -23,4 +23,12 @@ abstract class TestCase extends BaseTestCase
         $this->user->profile()->save(factory(UserProfile::class)->make());
         $this->user->merchant()->save(factory(Merchant::class)->make());
     }
+
+    protected function createUserAndBeFromApi()
+    {
+        $this->user = factory(User::class)->create();
+        $this->be($this->user, 'api');
+        $this->user->profile()->save(factory(UserProfile::class)->make());
+        $this->user->merchant()->save(factory(Merchant::class)->make());
+    }
 }
