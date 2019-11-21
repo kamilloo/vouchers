@@ -14,11 +14,15 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:api')->group(function (){
+  Route::get('/user', function (Request $request) {
+      return $request->user();
+  });
+
+  Route::get('/vouchers/{qr_code}', 'Api\VoucherController@get')
+        ->name('api-voucher-get');
+
+  Route::post('/vouchers/{qr_code}/pay', 'Api\VoucherController@pay')
+        ->name('api-voucher-pay');
 });
 
-Route::get('/vouchers/{voucher}', function($voucher){
-    $voucher = factory(Voucher::class)->create();
-    return response()->json($voucher->toArray());
-});

@@ -29,6 +29,7 @@ $factory->define(\App\Models\Order::class, function (Faker $faker) {
         'last_name' => $faker->lastName,
         'phone' => $faker->phoneNumber,
         'email' => $faker->email,
+        'qr_code' => $faker->randomAscii,
         'status' => $faker->randomElement(\App\Models\Enums\StatusType::all()),
         'paid' => $faker->randomElement(\App\Models\Enums\PaymentStatus::all()),
     ];

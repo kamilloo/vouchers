@@ -25,6 +25,11 @@ class Order extends Model implements IOrder
         });
     }
 
+    public function scopeByQrCode($query, $qr_code)
+    {
+        $query->where('qr_code', $qr_code);
+    }
+
     /**
      * @return OrderPresenter
      */
