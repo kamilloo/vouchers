@@ -21,17 +21,19 @@ class OrderResource extends JsonResource
     {
         return [
             'id' => $this->id,
-string $'delivery'
-float $'price'
-string $'first_name'
-string $'last_name'
-string $'phone'
-string $'email'
-string $'status'
-int $'paid'
-\Illuminate\Support\Carbon|null $'created_at'
-\Illuminate\Support\Carbon|null $'updated_at'
-        ]
+            'delivery' => $this->delivery,
+            'price' => $this->price,
+            'first_name' => $this->first_name,
+            'last_name' => $this->last_name,
+            'phone' => $this->phone,
+            'email' => $this->email,
+            'status' => $this->status,
+            'paid' => $this->paid,
+            'created_at' => $this->created_at->toIso8601String(),
+            'updated_at' => $this->updated_at->toIso8601String(),
+            'voucher' => $this->voucher,
+            'payments' => $this->payments,
+        ];
 
     }
 }

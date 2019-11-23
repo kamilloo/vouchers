@@ -7,6 +7,7 @@ use App\Http\Requests\ProfileUpdate;
 use App\Http\Requests\ShopChangeImages;
 use App\Http\Requests\ShopChangeTemplate;
 use App\Http\Requests\ShopCustomTemplate;
+use App\Http\Resources\OrderResource;
 use App\Models\Merchant;
 use App\Models\Order;
 use App\Models\ShopImage;
@@ -25,7 +26,7 @@ class VoucherController extends Controller
 {
     public function get($qr_code, Guard $guard)
     {
-        $order = Order::toMe()->byQrCode($qr_code)->firstOrfail();
-        return new JsonResource([]);
+        $order = Order::toMe()->with(['voucher.product', 'payments', 'payments.transactions'])->byQrCode($qr_code)->firstOrfail();
+        return new OrderResource($order);
     }
 }

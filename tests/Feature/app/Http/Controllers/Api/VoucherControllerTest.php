@@ -4,6 +4,7 @@ namespace Tests\Feature\App\Http\Controllers\Api;
 
 use App\Models\Enums\VoucherType;
 use App\Models\Order;
+use App\Models\Service;
 use App\Models\User;
 use App\Models\Voucher;
 use Illuminate\Http\UploadedFile;
@@ -42,7 +43,7 @@ class VoucherControllerTest extends TestCase
     /**
      * @test
      */
-    public function get_not_found_vourcher()
+    public function get_not_found_voucher()
     {
         $order = factory(Order::class)->create();
 
@@ -74,19 +75,143 @@ class VoucherControllerTest extends TestCase
         $this->user->merchant->orders()->save($order);
 
         $response = $this->getJson(route('api-voucher-get', $order->qr_code));
-
         $response->assertJsonStructure([
             'data' => [
                 'id',
                 'price',
-                'title',
-                'type',
-                'voucher',
-                'payment',
+                'first_name',
+                'last_name',
+                'phone',
+                'delivery',
+                'email',
+                'status',
+                'paid',
+                'created_at',
+                'updated_at',
+                'voucher' => [
+                    'title',
+                    'price',
+                    'type',
+                    'product' => [
+                    ]
+                ],
+                'payments',
             ]
         ]);
     }
 
 
+    /**
+     * @test
+     */
+    public function get_response_with_product()
+    {
+        $order = $this->createOrderForProduct();
+
+        $response = $this->getJson(route('api-voucher-get', $order->qr_code));
+        $response->assertJsonStructure([
+            'data' => [
+                'voucher' => [
+                    'title',
+                    'price',
+                    'type',
+                    'product' => [
+                        'id',
+                        'title',
+                        'description',
+                        'price',
+                        'currency',
+                        'active'
+                    ]
+                ],
+                'payments',
+            ]
+        ]);
+    }
+
+    /**
+     * @test
+     */
+    public function get_response_with_payment()
+    {
+        //todo
+        $order = $this->createOrderForProduct();
+
+        $response = $this->getJson(route('api-voucher-get', $order->qr_code));
+        $response->assertJsonStructure([
+            'data' => [
+                'voucher' => [
+                    'title',
+                    'price',
+                    'type',
+                    'product' => [
+                        'id',
+                        'title',
+                        'description',
+                        'price',
+                        'currency',
+                        'active'
+                    ]
+                ],
+                'payments',
+            ]
+        ]);
+    }
+
+    /**
+     * @return Order
+     */
+    protected function createOrderForProduct(): Order
+    {
+        $service = $this->createService();
+        $voucher = $this->makeVoucher();
+        $voucher->product()->associate($service);
+        $voucher->save();
+        $order = $this->makeOrder();
+        $order->voucher()->associate($voucher);
+
+        $this->user->merchant->orders()->save($order);
+
+        return $order;
+    }
+
+
+    /**
+     * @return Order
+     */
+    protected function createOrderForPayment(): Order
+    {
+        $service = $this->createService();
+        $voucher = $this->makeVoucher();
+        $voucher->product()->associate($service);
+        $voucher->save();
+        $order = $this->makeOrder();
+        $order->voucher()->associate($voucher);
+
+        $this->user->merchant->orders()->save($order);
+
+        return $order;
+    }
+
+    /**
+     * @return mixed
+     */
+    protected function createService(array $attribute = []): Service
+    {
+        return factory(Service::class)->create($attribute);
+    }
+
+    /**
+     * @return Order
+     */
+    protected function makeOrder(array $attribute = []): Order
+    {
+        return factory(Order::class)->make($attribute);
+    }
+
+    private function makeVoucher(array $attribute = []): Voucher
+    {
+        return factory(Voucher::class)->make($attribute);
+    }
 
 }
