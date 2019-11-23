@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Descriptors\MorphType;
+use App\Models\Enums\VoucherType;
 
 class Voucher extends Model
 {
@@ -31,8 +32,14 @@ class Voucher extends Model
 
     public function scopeForMerchant($query, Merchant $merchant)
     {
-        return $query->whereHas('merchants', function ($query) use ($merchant){
+        return $query->whereHas('merchant', function ($query) use ($merchant){
             $query->where('id', $merchant->id);
         });
     }
+
+    public function isQuoteType():bool
+    {
+        return $this->type == VoucherType::QUOTE;
+    }
 }
+

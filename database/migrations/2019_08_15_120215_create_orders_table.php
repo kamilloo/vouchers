@@ -17,6 +17,7 @@ class CreateOrdersTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('merchant_id');
             $table->unsignedBigInteger('voucher_id');
+            $table->unsignedBigInteger('client_id')->nullable();
             $table->string('delivery')->default(\App\Models\Enums\DeliveryType::ONLINE);
             $table->float('price');
             $table->string('first_name');
@@ -29,6 +30,7 @@ class CreateOrdersTable extends Migration
             $table->timestamps();
 
             $table->foreign('merchant_id')->references('id')->on('merchants');
+            $table->foreign('client_id')->references('id')->on('clients')->onDelete('set null');
         });
     }
 

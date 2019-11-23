@@ -17,6 +17,9 @@ use Faker\Generator as Faker;
 
 $factory->define(\App\Models\Order::class, function (Faker $faker) {
     return [
+        'client_id' => function(){
+            return factory(\App\Models\Client::class)->create()->id;
+        },
         'merchant_id' => function(){
             return factory(\App\Models\Merchant::class)->create()->id;
         },

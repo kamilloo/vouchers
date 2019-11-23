@@ -42,7 +42,8 @@ class VoucherTest extends TestCase
     public function scopeForMerchant_filter_by_merchant()
     {
         $voucher = factory(Voucher::class)->create();
-        $voucher->merchants()->attach($this->merchant->id);
+        $voucher->merchant()->associate($this->merchant);
+        $voucher->save();
         $vouchers = $this->voucher->forMerchant($this->merchant)->get();
         $this->assertSame(1, $vouchers->count());
         $this->assertSame($voucher->id, $vouchers[0]->id);

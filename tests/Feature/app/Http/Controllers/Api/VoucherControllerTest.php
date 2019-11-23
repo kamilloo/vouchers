@@ -134,7 +134,7 @@ class VoucherControllerTest extends TestCase
      */
     public function get_response_with_payment()
     {
-        //todo
+
         $order = $this->createOrderForProduct();
 
         $response = $this->getJson(route('api-voucher-get', $order->qr_code));
@@ -181,9 +181,7 @@ class VoucherControllerTest extends TestCase
      */
     protected function createOrderForPayment(): Order
     {
-        $service = $this->createService();
         $voucher = $this->makeVoucher();
-        $voucher->product()->associate($service);
         $voucher->save();
         $order = $this->makeOrder();
         $order->voucher()->associate($voucher);
@@ -213,5 +211,7 @@ class VoucherControllerTest extends TestCase
     {
         return factory(Voucher::class)->make($attribute);
     }
+
+    private function makePayment
 
 }

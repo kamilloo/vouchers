@@ -24,19 +24,37 @@ class PaymentGateway implements IPaymentGateway
     public function pay(IOrder $order, Merchant $merchant): IPayment
     {
         $payment = factory(Payment::class)->create([
-            'order_id' => $order->id,
+            'order_id' => $order->getId(),
             'merchant_id' => $merchant->id
         ]);
 
-        $register_payment = $this->gateway
+        $this->gateway
             ->setUrlReturn(route('payment.return', $payment))
             ->setUrlStatus(route('payment.status', $payment))
-            ->setEmail('test@example.com')
-            ->setAmount(100)->setArticle('Article Name')->init();
+
+            ->setEmail($order->getClientEmail())
+            ->setClientName($order->getClientName())
+            ->setClientPhone($order->getClientPhone())
+            ->setAddress($order->getClientAddress())
+            ->setZipCode($order->getClientPostcode())
+            ->setCity($order->getClientCity())
+            ->setCountry($order->getClientCountry())
+
+            ->setAmount($order->getAmount())
+            ->setDescription($order->getDescription());
+        if (! $order->getVoucher()->isQuoteType())
+        {
+            $this->gateway
+                ->setArticle($order->getProductTitle())
+                ->setArticleDescription($order->getProductDescription());
+        }
+
+        $register_payment = $this->gateway->init();
 
         if($register_payment->isSuccess())
         {
 
+//            $register_payment->getRequestParameters()
             $token = $register_payment->getToken();
             $payment->payment_link = $this->gateway->execute($token);;
             $payment->save();
