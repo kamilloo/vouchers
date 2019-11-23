@@ -5,6 +5,7 @@ namespace Domain\Payments;
 use App\Contractors\IOrder;
 use App\Contractors\IPayment;
 use App\Contractors\IPaymentGateway;
+use App\Http\Requests\PaymentCallbackStatus;
 use App\Models\Merchant;
 use App\Models\Payment;
 
@@ -21,11 +22,6 @@ class SandboxGateway implements IPaymentGateway
         return $payment;
     }
 
-    public function confirm(IPayment $payment): bool
-    {
-        return true;
-    }
-
     public function cancel(IPayment $payment): bool
     {
         return true;
@@ -36,9 +32,9 @@ class SandboxGateway implements IPaymentGateway
         return true;
     }
 
-    public function confirmation(IPayment $payment): bool
+    public function confirmation(IPayment $payment, PaymentCallbackStatus $request): void
     {
-        return true;
+        //
     }
 
     public function verify(IPayment $payment): bool

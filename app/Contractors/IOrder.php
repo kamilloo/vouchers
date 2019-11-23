@@ -7,8 +7,6 @@ use App\Models\Voucher;
 
 interface IOrder
 {
-    public function getId(): int;
-
     public function getClientEmail():string;
     public function getClientName():string;
     public function getClientCity():string;
@@ -22,5 +20,10 @@ interface IOrder
     public function getProductTitle():string;
     public function getProductDescription():string;
     public function getVoucher():Voucher;
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function payments();
 
 }

@@ -13,11 +13,6 @@ use App\Models\Voucher;
  */
 trait OrderConcern
 {
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
     public function getClientEmail():string
     {
         return $this->client->email;

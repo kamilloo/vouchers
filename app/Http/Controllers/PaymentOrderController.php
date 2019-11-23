@@ -27,7 +27,6 @@ class PaymentOrderController extends Controller
 
         if ($verify)
         {
-//            $order = $payment->order;
             return redirect()->route('payment.recap', [
                 'payment' => $payment,
             ])->with(['success' => 'Congratulation!, you bought voucher successful.']);
@@ -36,17 +35,10 @@ class PaymentOrderController extends Controller
 
     }
 
-    public function callbackStatus(PaymentCallbackStatus $request, Payment $payment)
+    public function callbackStatus(PaymentCallbackStatus $request, Payment $payment, IPaymentGateway $payment_gateway)
     {
+        $payment_gateway->confirmation($payment, $request);
 
-        $payment_verify = app()->make(\Devpark\Transfers24\Requests\Transfers24::class);
-        $payment_response = $payment_verify->receive($request);
-
-        if ($payment_response->isSuccess()) {
-            $payment->payment_link = $payment_response->getSessionId();
-            $payment->save();
-            // process order here after making sure it was real payment
-        }
         echo "OK";
         return ;
     }

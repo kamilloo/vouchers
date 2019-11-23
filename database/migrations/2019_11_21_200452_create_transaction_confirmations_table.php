@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTransactionReflectionsTable extends Migration
+class CreateTransactionConfirmationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateTransactionReflectionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('transaction_reflections', function (Blueprint $table) {
+        Schema::create('transaction_confirmations', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
         });
@@ -26,6 +26,6 @@ class CreateTransactionReflectionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('transaction_reflections');
+        Schema::dropIfExists('transaction_confirmations');
     }
 }

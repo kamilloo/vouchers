@@ -1,6 +1,12 @@
 <?php
 
+use App\Models\Descriptors\MorphType;
+use App\Models\Descriptors\ProductType;
+use App\Models\Enums\VoucherType;
+use App\Models\Merchant;
+use App\Models\Service;
 use App\Models\User;
+use App\Models\Voucher;
 use Illuminate\Support\Str;
 use Faker\Generator as Faker;
 
@@ -15,23 +21,46 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(\App\Models\Voucher::class, function (Faker $faker) {
+$factory->define(Voucher::class, function (Faker $faker) {
+
+    $product = factory(Service::class)->create();
+
+    $product_type = MorphType::PRODUCT . '_type';
+
     return [
         'user_id' => function(){
             return factory(User::class)->create()->id;
         },
         'merchant_id' => function(){
-            return factory(\App\Models\Merchant::class)->create()->id;
+            return factory(Merchant::class)->create()->id;
         },
+        'product_id' => $product->id,
+        $product_type => ProductType::SERVICE,
         'type' => 'type',
         'title' => $faker->title,
         'price' => $faker->randomFloat(),
-//        'service' => $faker->word
     ];
 });
 
-$factory->state(\App\Models\Voucher::class, 'mine', function(){
+$factory->state(Voucher::class, 'mine', function(){
     return [
         'user_id' => auth()->id()
     ];
 });
+
+
+$factory->state(Voucher::class, VoucherType::QUOTE, function(){
+    return [
+        'type' => VoucherType::QUOTE
+    ];
+});
+
+
+$factory->state(Voucher::class, VoucherType::SERVICE, function(){
+    return [
+        'type' => VoucherType::SERVICE
+    ];
+});
+
+
+

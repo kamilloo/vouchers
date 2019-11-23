@@ -5,8 +5,10 @@ namespace Domain\Payments;
 use App\Contractors\IOrder;
 use App\Contractors\IPayment;
 use App\Contractors\IPaymentGateway;
+use App\Http\Requests\PaymentCallbackStatus;
 use App\Models\Merchant;
 use App\Models\Payment;
+use App\Models\Transaction;
 use Devpark\Transfers24\Requests\Transfers24;
 
 class PaymentGateway implements IPaymentGateway
@@ -23,50 +25,97 @@ class PaymentGateway implements IPaymentGateway
 
     public function pay(IOrder $order, Merchant $merchant): IPayment
     {
-        $payment = factory(Payment::class)->create([
-            'order_id' => $order->getId(),
-            'merchant_id' => $merchant->id
+        /**
+         * @var $payment Payment
+         */
+        $order_amount = $order->getAmount();
+        $payment = $order->payments()->make([
+            'amount' => $order_amount
         ]);
+        $payment->merchant()->associate($merchant);
+        $payment->save();
+
+        $url_return = route('payment.return', $payment);
+        $url_status = route('payment.status', $payment);
+        $client_email = $order->getClientEmail();
+        $client_name = $order->getClientName();
+        $client_phone = $order->getClientPhone();
+        $client_address = $order->getClientAddress();
+        $client_postcode = $order->getClientPostcode();
+        $client_city = $order->getClientCity();
+        $client_country = $order->getClientCountry();
+        $order_description = $order->getDescription();
+
+        $transaction_order_data = compact('order_amount',
+            'url_return',
+            'url_status',
+            'client_email',
+            'client_name',
+            'client_phone',
+            'client_address',
+            'client_postcode',
+            'client_city',
+            'client_country',
+            'order_description'
+        );
 
         $this->gateway
-            ->setUrlReturn(route('payment.return', $payment))
-            ->setUrlStatus(route('payment.status', $payment))
+            ->setUrlReturn($url_return)
+            ->setUrlStatus($url_status)
 
-            ->setEmail($order->getClientEmail())
-            ->setClientName($order->getClientName())
-            ->setClientPhone($order->getClientPhone())
-            ->setAddress($order->getClientAddress())
-            ->setZipCode($order->getClientPostcode())
-            ->setCity($order->getClientCity())
-            ->setCountry($order->getClientCountry())
+            ->setEmail($client_email)
+            ->setClientName($client_name)
+            ->setClientPhone($client_phone)
+            ->setAddress($client_address)
+            ->setZipCode($client_postcode)
+            ->setCity($client_city)
+            ->setCountry($client_country)
 
-            ->setAmount($order->getAmount())
-            ->setDescription($order->getDescription());
+            ->setAmount($order_amount)
+            ->setDescription($order_description);
         if (! $order->getVoucher()->isQuoteType())
         {
+            $product_title = $order->getProductTitle();
+            $product_description = $order->getProductDescription();
             $this->gateway
-                ->setArticle($order->getProductTitle())
-                ->setArticleDescription($order->getProductDescription());
+                ->setArticle($product_title)
+                ->setArticleDescription($product_description);
+
+            $transaction_order_data += compact(
+                'product_title',
+                'product_description'
+            );
         }
 
         $register_payment = $this->gateway->init();
 
-        if($register_payment->isSuccess())
-        {
 
-//            $register_payment->getRequestParameters()
+        $payment_registered = $register_payment->isSuccess();
+
+        $transaction = $payment->transactions()->make($transaction_order_data + [
+            'request_parameters' => $register_payment->getRequestParameters(),
+            'is_register' => $payment_registered,
+        ]);
+
+        if($payment_registered)
+        {
             $token = $register_payment->getToken();
-            $payment->payment_link = $this->gateway->execute($token);;
+
+            $transaction->session_id = $register_payment->getSessionId();
+            $transaction->token = $token;
+
+            $payment->payment_link = $this->gateway->execute($token);
             $payment->save();
-            // save registration parameters in payment object
+
+        }else{
+
+            $transaction->error_code = $register_payment->getErrorCode();
+            $transaction->error_description = $register_payment->getErrorDescription();
         }
 
-        return $payment;
-    }
+        $transaction->save();
 
-    public function confirm(IPayment $payment): bool
-    {
-        // TODO: Implement confirm() method.
+        return $payment;
     }
 
     public function cancel(IPayment $payment): bool
@@ -79,12 +128,19 @@ class PaymentGateway implements IPaymentGateway
         // TODO: Implement return() method.
     }
 
-    public function confirmation(IPayment $payment): bool
+    public function confirmation(IPayment $payment, PaymentCallbackStatus $request): void
     {
+        $payment_response = $this->gateway->receive($request);
+
+        if ($payment_response->isSuccess()) {
+//            $payment->payment_link = $payment_response->getSessionId();
+//            $payment->save();
+        }
+        return;
     }
 
     public function verify(IPayment $payment): bool
     {
-        return true;
+        return $payment->paid();
     }
 }

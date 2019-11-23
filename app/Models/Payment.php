@@ -27,6 +27,11 @@ class Payment extends Model implements IPayment
         return $this->belongsTo(Order::class);
     }
 
+    public function merchant()
+    {
+        return $this->belongsTo(Merchant::class);
+    }
+
     public function transactions()
     {
         return $this->hasMany(Transaction::class);
@@ -38,5 +43,10 @@ class Payment extends Model implements IPayment
     public function getPresenterAttribute(): PaymentPresenter
     {
         return new PaymentPresenter($this);
+    }
+
+    public function paid(): bool
+    {
+        return (bool)$this->paid_at;
     }
 }

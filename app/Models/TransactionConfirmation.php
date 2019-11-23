@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-class TransactionReflection extends Model
+class TransactionConfirmation extends Model
 {
     public function transaction()
     {
