@@ -9,6 +9,7 @@ use App\Http\Requests\PaymentCallbackStatus;
 use App\Models\Merchant;
 use App\Models\Payment;
 use App\Models\Transaction;
+use Carbon\Carbon;
 use Devpark\Transfers24\Requests\Transfers24;
 
 class PaymentGateway implements IPaymentGateway
@@ -132,9 +133,22 @@ class PaymentGateway implements IPaymentGateway
     {
         $payment_response = $this->gateway->receive($request);
 
-        if ($payment_response->isSuccess()) {
-//            $payment->payment_link = $payment_response->getSessionId();
-//            $payment->save();
+        $success = $payment_response->isSuccess();
+        $session_id = $payment_response->getSessionId();
+        $transaction = $payment->transactions()->where('session_id', $session_id)->firstOrFail();
+
+        $transaction->create([
+            'request_parameters' => $payment_response->getRequestParameters(),
+            'receive_parameters' => $payment_response->getReceiveParameters(),
+            'success' => $success,
+            'session_id' => $session_id,
+            'error_description' => $payment_response->getErrorDescription(),
+            'error_code' => $payment_response->getErrorCode(),
+            'order_id' => $payment_response->getOrderId()
+        ]);
+
+        if ($success) {
+            $payment->paidAt(Carbon::now());
         }
         return;
     }
