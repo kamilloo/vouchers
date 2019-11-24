@@ -29,4 +29,13 @@ class VoucherController extends Controller
         $order = Order::toMe()->with(['voucher.product', 'payments', 'payments.transactions'])->byQrCode($qr_code)->firstOrfail();
         return new OrderResource($order);
     }
+
+    public function pay($qr_code, Guard $guard)
+    {
+        $order = Order::toMe()->with(['voucher.product', 'payments', 'payments.transactions'])->byQrCode($qr_code)->firstOrfail();
+
+        return new OrderResource($order);
+    }
+
+
 }

@@ -4,6 +4,7 @@ namespace Tests\Feature\App\Http\Controllers\Api;
 
 use App\Models\Enums\VoucherType;
 use App\Models\Order;
+use App\Models\Payment;
 use App\Models\Service;
 use App\Models\User;
 use App\Models\Voucher;
@@ -135,25 +136,42 @@ class VoucherControllerTest extends TestCase
     public function get_response_with_payment()
     {
 
-        $order = $this->createOrderForProduct();
+        $order = $this->createOrderForPayment();
+        $payment = $this->createPayment($order);
 
         $response = $this->getJson(route('api-voucher-get', $order->qr_code));
         $response->assertJsonStructure([
             'data' => [
-                'voucher' => [
-                    'title',
-                    'price',
-                    'type',
-                    'product' => [
-                        'id',
-                        'title',
-                        'description',
-                        'price',
-                        'currency',
-                        'active'
+                'payments' => [
+                    '*' => [
+                       'id',
+                       'paid_at',
+                       'amount'
                     ]
                 ],
-                'payments',
+            ]
+        ]);
+    }
+
+    /**
+     * @test
+     */
+    public function pay_response_with_payment()
+    {
+
+        $order = $this->createOrderForPayment();
+        $payment = $this->createPayment($order);
+
+        $response = $this->getJson(route('api-voucher-pay', $order->qr_code));
+        $response->assertJsonStructure([
+            'data' => [
+                'payments' => [
+                    '*' => [
+                        'id',
+                        'paid_at',
+                        'amount'
+                    ]
+                ],
             ]
         ]);
     }
@@ -212,6 +230,17 @@ class VoucherControllerTest extends TestCase
         return factory(Voucher::class)->make($attribute);
     }
 
-    private function makePayment
+    private function makePayment(array $attribute = []): Payment
+    {
+        return factory(Payment::class)->make($attribute);
+    }
+
+    private function createPayment(Order $order, array $attribute = []): Payment
+    {
+        $payment = $this->makePayment($attribute);
+        $payment->order()->associate($order);
+        $payment->save();
+        return  $payment;
+    }
 
 }
