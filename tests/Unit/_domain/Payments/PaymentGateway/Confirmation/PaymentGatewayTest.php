@@ -10,13 +10,16 @@ use App\Models\Merchant;
 use App\Models\Order;
 use App\Models\Payment;
 use App\Models\Service;
+use App\Models\Transaction;
 use App\Models\User;
 use App\Models\Voucher;
+use Carbon\Carbon;
 use Devpark\Transfers24\Requests\Transfers24;
 use Devpark\Transfers24\Responses\Register;
 use Devpark\Transfers24\Responses\Register as RegisterResponse;
 use Domain\Payments\PaymentGateway;
 use Faker\Factory;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\UploadedFile;
 use Mockery as m;
 use Symfony\Component\HttpFoundation\Request;
@@ -62,24 +65,51 @@ class PaymentGatewayTest extends TestCase
 
     }
 
+
+    /**
+     * @test
+     */
+    public function confirmation_payment_not_found_per_session_id()
+    {
+        $this->expectException(ModelNotFoundException::class);
+
+        $payment = \factory(Payment::class)->create();
+        $request = PaymentCallbackStatus::createFromGlobals();
+
+        $register_response = $this->mockRegisterResponseWhenModelNotFoundExceptionOccur();
+
+        $this->mockTransfer($register_response, $request);
+
+        $this->gateway->confirmation($payment, $request);
+
+        $this->assertDatabaseHas('payments', [
+            'id' => $payment->id,
+            'paid_at' => null
+        ]);
+
+    }
+
     /**
      * @test
      */
     public function confirmation_create_transaction_confirmation()
     {
-//        $order = $this->createOrderWithQuoteVoucher();
         $payment = \factory(Payment::class)->create();
-        $request = PaymentCallbackStatus::createFromGlobals();
-        $register_response = $this->mockRegisterResponse($request);
 
-        $this->mockTransferForQuoteVoucher($register_response);
+        $session_id = 'session_id';
+        $this->createTransaction($payment, compact('session_id'));
+
+        $request = PaymentCallbackStatus::createFromGlobals();
+        $register_response = $this->mockRegisterResponse(compact('session_id'));
+
+        $this->mockTransfer($register_response, $request);
 
         $this->gateway->confirmation($payment, $request);
 
-//        $this->assertDatabaseHas('payments', [
-//            'order_id' => $order->id,
-//            'merchant_id' => $this->merchant->id,
-//        ]);
+        $this->assertDatabaseHas('payments', [
+            'id' => $payment->id,
+            'paid_at' => Carbon::now()
+        ]);
 
     }
 
@@ -88,143 +118,73 @@ class PaymentGatewayTest extends TestCase
      *
      * @return RegisterResponse|m\MockInterface
      */
-    protected function mockRegisterResponse(string $payment_link)
+    protected function mockRegisterResponse(array $attribute)
     {
         $register_response = m::mock(Register::class);
         $register_response->shouldReceive('isSuccess')
             ->once()
             ->andReturn(true);
-        $token = 'token';
-//        $register_response->shouldReceive('getToken')
-//            ->once()
-//            ->andReturn($token);
-//        $register_response->shouldReceive('getSessionId')
-//            ->once()
-//            ->andReturn('session_id');
-//        $register_response->shouldReceive('getRequestParameters')
-//            ->once()
-//            ->andReturn([]);
-//
-//        $this->transfer->shouldReceive('execute')
-//            ->once()
-//            ->with($token)
-//            ->andReturn($payment_link);
+        $register_response->shouldReceive('getSessionId')
+            ->once()
+            ->andReturn($attribute['session_id']);
+        $register_response->shouldReceive('getRequestParameters', 'getReceiveParameters')
+            ->once()
+            ->andReturn([]);
+        $register_response->shouldReceive('getErrorDescription')
+            ->once()
+            ->andReturn(null);
+        $register_response->shouldReceive('getErrorCode')
+            ->once()
+            ->andReturn(0);
+        $register_response->shouldReceive('getOrderId')
+            ->once()
+            ->andReturn('order_id');
 
         return $register_response;
-}
+    }
+
+    /**
+     * @param string $payment_link
+     *
+     * @return RegisterResponse|m\MockInterface
+     */
+    protected function mockRegisterResponseWhenModelNotFoundExceptionOccur()
+    {
+        $register_response = m::mock(Register::class);
+        $register_response->shouldReceive('isSuccess')
+            ->once()
+            ->andReturn(true);
+        $register_response->shouldReceive('getSessionId')
+            ->once()
+            ->andReturn('session_id');
+        $register_response->shouldNotReceive('getRequestParameters', 'getReceiveParameters', 'getErrorDescription', 'getErrorCode', 'getOrderId');
+
+        return $register_response;
+    }
 
     /**
      * @param $register_response
      */
-    protected function mockTransferForQuoteVoucher($register_response): void
+    protected function mockTransfer($register_response, $request): void
     {
-//        $this->transfer->shouldReceive(
-//            'setUrlReturn',
-//            'setUrlStatus',
-//            'setAmount',
-//            'setEmail',
-//            'setClientName',
-//            'setClientPhone',
-//            'setAddress',
-//            'setZipCode',
-//            'setCity',
-//            'setCountry',
-//            'setDescription'
-//            )
-//            ->once()
-//            ->andReturnSelf();
         $this->transfer->shouldReceive('receive')
             ->once()
+            ->with($request)
             ->andReturn($register_response);
     }
 
-
-    /**
-     * @param $register_response
-     */
-    protected function mockTransferForServiceVoucher($register_response): void
+    protected function makeTransaction(array $attribute): Transaction
     {
-        $this->transfer->shouldReceive('setUrlReturn', 'setUrlStatus',
-            'setAmount',
-            'setEmail',
-            'setClientName',
-            'setClientPhone',
-            'setAddress',
-            'setZipCode',
-            'setCity',
-            'setCountry',
-            'setDescription',
-            'setArticle',
-            'setArticleDescription'
-        )
-            ->once()
-            ->andReturnSelf();
-        $this->transfer->shouldReceive('init')
-            ->once()
-            ->andReturn($register_response);
-    }
-
-    protected function createOrderWithQuoteVoucher(array $attribute = []): Order
-    {
-        $voucher = $this->createQuoteVoucher();
-        $order = $this->makeOrder($attribute);
-        $order->voucher()->associate($voucher);
-        $order->save();
-        return $order;
-    }
-
-
-    protected function createOrderWithServiceVoucher(array $attribute = []): Order
-    {
-        $voucher = $this->createServiceVoucher();
-        $order = $this->makeOrder($attribute);
-        $order->voucher()->associate($voucher);
-        $order->save();
-        return $order;
+        return \factory(Transaction::class)->make($attribute);
     }
 
     /**
-     * @return mixed
+     * @param $payment
      */
-    protected function createQuoteVoucher(array $attribute = []): Voucher
+    protected function createTransaction($payment, array $attribute): void
     {
-        return \factory(Voucher::class)->state(VoucherType::QUOTE)->create($attribute);
-
+        $transaction = $this->makeTransaction($attribute);
+        $transaction->payment()->associate($payment);
+        $transaction->save();
     }
-
-    /**
-     * @return mixed
-     */
-    protected function createServiceVoucher(array $attribute = []): Voucher
-    {
-        $service = $this->createService();
-
-        $voucher = $this->makeServiceVoucher($attribute);
-
-        $voucher->product()->associate($service);
-        $voucher->save();
-        return $voucher;
-
-    }
-
-    protected function createService(array $attribute = []): Service
-    {
-        return \factory(Service::class)->create($attribute);
-    }
-
-    protected function makeOrder(array $attribute = []): Order
-    {
-        return \factory(Order::class)->make($attribute);
-    }
-
-    /**
-     * @param array $attribute
-     *
-     * @return mixed
-     */
-    protected function makeServiceVoucher(array $attribute): Voucher
-    {
-        return \factory(Voucher::class)->state(VoucherType::SERVICE)->create($attribute);
-    }
-
 }

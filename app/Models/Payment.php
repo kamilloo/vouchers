@@ -57,6 +57,6 @@ class Payment extends Model implements IPayment
     public function paidAt(Carbon $paid_at): bool
     {
         $this->paid_at = $paid_at;
-        $this->save();
+        return $this->save();
     }
 }

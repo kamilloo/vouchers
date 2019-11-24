@@ -135,9 +135,11 @@ class PaymentGateway implements IPaymentGateway
 
         $success = $payment_response->isSuccess();
         $session_id = $payment_response->getSessionId();
+
+        /** @var $transaction Transaction  */
         $transaction = $payment->transactions()->where('session_id', $session_id)->firstOrFail();
 
-        $transaction->create([
+        $transaction->confirmations()->create([
             'request_parameters' => $payment_response->getRequestParameters(),
             'receive_parameters' => $payment_response->getReceiveParameters(),
             'success' => $success,
