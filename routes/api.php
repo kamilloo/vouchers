@@ -20,9 +20,9 @@ Route::middleware('auth:api')->group(function (){
   });
 
   Route::get('/vouchers/{qr_code}', 'Api\VoucherController@get')
-        ->name('api-voucher-get');
+      ->name('api-voucher-get');
 
   Route::post('/vouchers/{qr_code}/pay', 'Api\VoucherController@pay')
-        ->name('api-voucher-pay');
+      ->name('api-voucher-pay');
 });
 

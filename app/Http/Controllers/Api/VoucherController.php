@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Exceptions\VoucherNotPaid;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProfileUpdate;
 use App\Http\Requests\ShopChangeImages;
@@ -33,6 +34,11 @@ class VoucherController extends Controller
     public function pay($qr_code, Guard $guard)
     {
         $order = Order::toMe()->with(['voucher.product', 'payments', 'payments.transactions'])->byQrCode($qr_code)->firstOrfail();
+
+        if (! $order->paid()){
+            throw new VoucherNotPaid;
+        }
+
 
         return new OrderResource($order);
     }

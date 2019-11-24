@@ -59,4 +59,9 @@ class Payment extends Model implements IPayment
         $this->paid_at = $paid_at;
         return $this->save();
     }
+
+    public function scopeByPaid($query)
+    {
+        $query->whereNotNull('paid_at');
+    }
 }

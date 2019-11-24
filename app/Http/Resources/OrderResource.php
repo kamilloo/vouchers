@@ -29,6 +29,7 @@ class OrderResource extends JsonResource
             'email' => $this->email,
             'status' => $this->status,
             'paid' => $this->paid,
+            'used' => $this->used,
             'created_at' => $this->created_at->toIso8601String(),
             'updated_at' => $this->updated_at->toIso8601String(),
             'voucher' => $this->voucher,

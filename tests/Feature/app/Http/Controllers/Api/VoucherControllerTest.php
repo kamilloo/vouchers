@@ -87,6 +87,7 @@ class VoucherControllerTest extends TestCase
                 'email',
                 'status',
                 'paid',
+                'used',
                 'created_at',
                 'updated_at',
                 'voucher' => [
@@ -162,18 +163,68 @@ class VoucherControllerTest extends TestCase
         $order = $this->createOrderForPayment();
         $payment = $this->createPayment($order);
 
-        $response = $this->getJson(route('api-voucher-pay', $order->qr_code));
+        $response = $this->postJson(route('api-voucher-pay', $order->qr_code))->assertOk();
         $response->assertJsonStructure([
             'data' => [
-                'payments' => [
-                    '*' => [
-                        'id',
-                        'paid_at',
-                        'amount'
+                'id',
+                'price',
+                'first_name',
+                'last_name',
+                'phone',
+                'delivery',
+                'email',
+                'status',
+                'paid',
+                'used',
+                'created_at',
+                'updated_at',
+                'voucher' => [
+                    'title',
+                    'price',
+                    'type',
+                    'product' => [
                     ]
                 ],
+                'payments',
             ]
         ]);
+    }
+
+    /**
+     * @test
+     */
+    public function pay_reject_because_not_approved_payment_found()
+    {
+        $order = $this->createOrderForPayment();
+        $payment = $this->createPayment($order, ['paid_at' => null]);
+
+        $response = $this->postJson(route('api-voucher-pay', $order->qr_code))->assertStatus(424);
+        $this->assertSame('Voucher not paid', $response->decodeResponseJson('message'));
+    }
+
+    /**
+     * @test
+     */
+    public function pay_reject_because_vaucher_expired()
+    {
+        $order = $this->createOrderForPayment();
+        $payment = $this->createPayment($order, ['paid_at' => null]);
+
+        $response = $this->postJson(route('api-voucher-pay', $order->qr_code))->assertStatus(424);
+        $this->assertSame('Voucher expired', $response->decodeResponseJson('message'));
+    }
+
+
+    /**
+     * @test
+     */
+    public function pay_reject_because_vaucher_used()
+    {
+        $order = $this->createOrderForPayment();
+        $payment = $this->createPayment($order, ['paid_at' => null]);
+
+        $response = $this->postJson(route('api-voucher-pay', $order->qr_code))->assertStatus(424);
+        $this->assertSame('Voucher used', $response->decodeResponseJson('message'));
     }
 
     /**

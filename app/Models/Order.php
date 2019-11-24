@@ -64,5 +64,10 @@ class Order extends Model implements IOrder
         return new OrderPresenter($this);
     }
 
+    public function paid():bool
+    {
+        return $this->payments()->byPaid()->exists();
+    }
+
 
 }
