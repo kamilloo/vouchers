@@ -5,14 +5,14 @@ namespace App\Exceptions;
 use Exception;
 use Symfony\Component\HttpFoundation\Response;
 
-class VoucherNotPaid extends HttpException
+class VoucherExpired extends HttpException
 {
     /**
      * @return string
      */
     protected function message():string
     {
-        return __('Voucher not paid');
+        return __('Voucher expired');
     }
 
     /**

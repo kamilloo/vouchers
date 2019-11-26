@@ -6,6 +6,7 @@ use App\Models\Client;
 use App\Contractors\IOrder;
 use App\Http\Presenters\OrderPresenter;
 use App\Models\Traits\OrderConcern;
+use Carbon\Carbon;
 
 class Order extends Model implements IOrder
 {
@@ -69,5 +70,20 @@ class Order extends Model implements IOrder
         return $this->payments()->byPaid()->exists();
     }
 
+    public function expired():bool
+    {
+        return !is_null($this->expired_at) && $this->expired_at < Carbon::now();
+    }
+
+    public function isUsed():bool
+    {
+        return !is_null($this->used_at);
+    }
+
+    public function pay():bool
+    {
+        $this->used_at = Carbon::now();
+        return $this->save();
+    }
 
 }

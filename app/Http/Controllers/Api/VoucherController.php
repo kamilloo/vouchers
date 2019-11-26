@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Exceptions\VoucherExpired;
 use App\Exceptions\VoucherNotPaid;
+use App\Exceptions\VoucherUsed;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProfileUpdate;
 use App\Http\Requests\ShopChangeImages;
@@ -39,6 +41,15 @@ class VoucherController extends Controller
             throw new VoucherNotPaid;
         }
 
+        if ($order->expired()){
+            throw new VoucherExpired;
+        }
+
+        if ($order->isUsed()){
+            throw new VoucherUsed;
+        }
+
+        $order->pay();
 
         return new OrderResource($order);
     }

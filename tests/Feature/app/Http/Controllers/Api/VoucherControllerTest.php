@@ -8,6 +8,7 @@ use App\Models\Payment;
 use App\Models\Service;
 use App\Models\User;
 use App\Models\Voucher;
+use Carbon\Carbon;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Request;
@@ -193,6 +194,28 @@ class VoucherControllerTest extends TestCase
     /**
      * @test
      */
+    public function pay_set_used_attribute()
+    {
+        $order = $this->createOrderForPayment();
+        $payment = $this->createPayment($order);
+
+        $now = Carbon::parse('2010-10-10');
+        Carbon::setTestNow($now);
+
+        $response = $this->postJson(route('api-voucher-pay', $order->qr_code))->assertOk();
+
+        $this->assertDatabaseHas('orders', [
+           'id' => $order->id,
+           'used_at' =>  $now
+        ]);
+
+        $this->assertSame($now->toIso8601String(), $response->decodeResponseJson('data')['used_at']);
+
+    }
+
+    /**
+     * @test
+     */
     public function pay_reject_because_not_approved_payment_found()
     {
         $order = $this->createOrderForPayment();
@@ -205,10 +228,12 @@ class VoucherControllerTest extends TestCase
     /**
      * @test
      */
-    public function pay_reject_because_vaucher_expired()
+    public function pay_reject_because_voucher_expired()
     {
-        $order = $this->createOrderForPayment();
-        $payment = $this->createPayment($order, ['paid_at' => null]);
+        $expired_at = Carbon::now()->subDays(1);
+        $used_at = null;
+        $order = $this->createOrderForPayment(compact('expired_at', 'used_at'));
+        $payment = $this->createPayment($order);
 
         $response = $this->postJson(route('api-voucher-pay', $order->qr_code))->assertStatus(424);
         $this->assertSame('Voucher expired', $response->decodeResponseJson('message'));
@@ -218,10 +243,12 @@ class VoucherControllerTest extends TestCase
     /**
      * @test
      */
-    public function pay_reject_because_vaucher_used()
+    public function pay_reject_because_voucher_used()
     {
-        $order = $this->createOrderForPayment();
-        $payment = $this->createPayment($order, ['paid_at' => null]);
+        $used_at = Carbon::now()->subDays(1);
+        $expired_at = null;
+        $order = $this->createOrderForPayment(compact('used_at','expired_at'));
+        $payment = $this->createPayment($order);
 
         $response = $this->postJson(route('api-voucher-pay', $order->qr_code))->assertStatus(424);
         $this->assertSame('Voucher used', $response->decodeResponseJson('message'));
@@ -248,11 +275,11 @@ class VoucherControllerTest extends TestCase
     /**
      * @return Order
      */
-    protected function createOrderForPayment(): Order
+    protected function createOrderForPayment(array $attribute = []): Order
     {
         $voucher = $this->makeVoucher();
         $voucher->save();
-        $order = $this->makeOrder();
+        $order = $this->makeOrder($attribute);
         $order->voucher()->associate($voucher);
 
         $this->user->merchant->orders()->save($order);
