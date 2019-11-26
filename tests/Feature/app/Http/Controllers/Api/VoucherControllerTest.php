@@ -88,7 +88,7 @@ class VoucherControllerTest extends TestCase
                 'email',
                 'status',
                 'paid',
-                'used',
+                'used_at',
                 'created_at',
                 'updated_at',
                 'voucher' => [
@@ -176,7 +176,7 @@ class VoucherControllerTest extends TestCase
                 'email',
                 'status',
                 'paid',
-                'used',
+                'used_at',
                 'created_at',
                 'updated_at',
                 'voucher' => [
