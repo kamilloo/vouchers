@@ -6,20 +6,6 @@ use App\Models\Enums\VoucherType;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class VoucherUpdate extends Request
+class VoucherUpdate extends VoucherStore
 {
-    /*
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
-    public function rules()
-    {
-        return [
-            'title' => ['required', 'string', 'max:256'],
-            'type' => ['required', Rule::in(VoucherType::all())],
-            'price' => [Rule::requiredIf($this->type === VoucherType::QUOTE), 'numeric'],
-            'service' => ['nullable', Rule::requiredIf(0), 'string'],
-        ];
-    }
 }

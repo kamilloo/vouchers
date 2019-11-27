@@ -3,7 +3,11 @@
 namespace Domain\Vouchers;
 
 use App\Contractors\IVoucherRepository;
+use App\Exceptions\VoucherUsed;
 use App\Http\Requests\VoucherStore;
+use App\Http\Requests\VoucherUpdate;
+use App\Models\Enums\VoucherType;
+use App\Models\Merchant;
 use App\Models\User;
 use App\Models\Voucher;
 use Illuminate\Database\Connection;
@@ -33,12 +37,8 @@ class VoucherRepository implements IVoucherRepository
     {
         try{
             return $this->db->transaction(function () use ($request, $user){
-                $voucher_attributes = [
-                    'title' => $request->getTitleParam(),
-                    'type' => $request->getTypeParam(),
-                    'price' => $request->getPriceParam(),
-                    'service' => $request->getServiceParam()
-                ];
+
+                $voucher_attributes = $this->getBaseVoucherParams($request);
 
                 $file = $request->file('file-name');
                 if (!empty($file))
@@ -46,9 +46,14 @@ class VoucherRepository implements IVoucherRepository
                     $logo = $this->replaceLogo($file);
                     Arr::set($voucher_attributes, 'file', $logo);
                 }
+                /**
+                 * @var $voucher Voucher
+                 */
+                $voucher = $user->vouchers()->make($voucher_attributes);
+                $voucher->merchant()->associate($user->merchant);
 
-                $voucher = $user->vouchers()->create($voucher_attributes);
-                $user->merchant->vouchers()->attach($voucher->getKey());
+                $this->associateProductToVoucher($voucher, $request);
+                $voucher->save();
                 return $voucher;
             });
         }catch (Throwable $exception){
@@ -59,13 +64,83 @@ class VoucherRepository implements IVoucherRepository
             ]);
             return new Voucher();
         }
+    }
 
 
+    public function update(VoucherUpdate $request, Voucher $voucher): bool
+    {
+        try{
+            return $this->db->transaction(function () use ($request, $voucher){
+
+                $voucher_attributes = $this->getBaseVoucherParams($request);
+
+                $file = $request->file('file-name');
+                if (!empty($file))
+                {
+                    $logo = $this->replaceLogo($file);
+                    Arr::set($voucher_attributes, 'file', $logo);
+                }
+
+                $voucher->update($voucher_attributes);
+
+                $this->associateProductToVoucher($voucher, $request);
+
+                return $voucher->save();
+
+            });
+        }catch (Throwable $exception){
+
+            $this->logger->error($exception->getMessage(), [
+                'code' => $exception->getCode(),
+                'trace' => $exception->getTraceAsString(),
+            ]);
+            return false;
+        }
     }
 
     protected function replaceLogo(UploadedFile $file)
     {
         return $file->storePublicly('public/vouchers');
+    }
+
+    /**
+     * @param Voucher $voucher
+     * @param $product
+     */
+    protected function associateProductToVoucher(Voucher $voucher, VoucherStore $request): void
+    {
+
+        $voucher_type = $request->getTypeParam();
+        if ($voucher_type == VoucherType::QUOTE || empty($product_id = $request->getProductIdParam()))
+        {
+            return;
+        }
+
+        if ($voucher_type == VoucherType::SERVICE)
+        {
+            $product = $voucher->merchant->services()->findOrFail($product_id);
+        }
+        if ($voucher_type == VoucherType::SERVICE_PACKAGE)
+        {
+            $product = $voucher->merchant->servicePackages()->findOrFail($product_id);
+        }
+
+        $voucher->product()->associate($product);
+        return;
+    }
+
+    /**
+     * @param VoucherStore $request
+     *
+     * @return array
+     */
+    function getBaseVoucherParams(VoucherStore $request): array
+    {
+        return [
+            'title' => $request->getTitleParam(),
+            'type' => $request->getTypeParam(),
+            'price' => $request->getPriceParam(),
+        ];
     }
 }
 

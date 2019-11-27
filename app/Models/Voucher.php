@@ -18,7 +18,7 @@ class Voucher extends Model
     }
 
     /**
-     * @return
+     * @return Merchant
      */
     public function merchant()
     {

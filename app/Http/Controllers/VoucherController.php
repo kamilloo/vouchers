@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProfileUpdate;
 use App\Http\Requests\VoucherStore;
 use App\Http\Requests\VoucherUpdate;
+use App\Models\Service;
+use App\Models\ServicePackage;
 use App\Models\UserProfile;
 use App\Models\Voucher;
 use Domain\Vouchers\VoucherRepository;
@@ -29,7 +31,10 @@ class VoucherController extends Controller
 
     public function create()
     {
-        return view('vouchers.create');
+        $services = Service::toMe()->get();
+        $service_packages = ServicePackage::toMe()->get();
+
+        return view('vouchers.create', compact('services', 'service_packages'));
     }
 
     public function store(VoucherStore $request, Guard $guard, VoucherRepository $repository)
@@ -41,18 +46,14 @@ class VoucherController extends Controller
 
     public function edit(Voucher $voucher)
     {
-        return view('vouchers.edit', compact('voucher'));
+        $services = Service::toMe()->get();
+        $service_packages = ServicePackage::toMe()->get();
+        return view('vouchers.edit', compact('voucher', 'services', 'service_packages'));
     }
 
-    public function update(VoucherUpdate $request, Voucher $voucher, FilesystemManager $file_manager)
+    public function update(VoucherUpdate $request, Voucher $voucher, VoucherRepository $repository)
     {
-        $voucher_attributes = $request->only([
-            'title',
-            'type',
-            'price',
-            'service'
-        ]);
-        $voucher->update($voucher_attributes);
+        $repository->update($request, $voucher);
 
         return redirect(route('vouchers.index'))->with('success', 'Your profile was updated!');
     }

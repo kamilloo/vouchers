@@ -12,7 +12,7 @@ use Illuminate\Validation\Rule;
  * @method getTitleParam
  * @method getTypeParam
  * @method getPriceParam
- * @method getServiceParam
+ * @method getProductIdParam
  */
 class VoucherStore extends Request
 {
@@ -26,9 +26,23 @@ class VoucherStore extends Request
         return [
             'title' => ['required', 'string', 'max:256'],
             'type' => ['required', Rule::in(VoucherType::all())],
-            'price' => [Rule::requiredIf($this->type === VoucherType::QUOTE), 'numeric'],
-            'service' => ['nullable', Rule::requiredIf(0), 'string'],
+            'price' => ['nullable', Rule::requiredIf($this->isQuoteVoucher()), 'numeric'],
+            'product_id' => ['nullable', Rule::requiredIf($this->isProductVoucher()), 'numeric'],
             'file-name' => ['nullable', 'file'],
         ];
     }
+
+    private function isProductVoucher():bool
+    {
+        return in_array($this->type, [
+            VoucherType::SERVICE,
+            VoucherType::SERVICE_PACKAGE,
+        ]);
+    }
+
+    private function isQuoteVoucher():bool
+    {
+        return  $this->type === VoucherType::QUOTE;
+    }
+
 }

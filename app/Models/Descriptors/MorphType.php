@@ -6,4 +6,6 @@ class MorphType
 {
     const PRODUCT = 'product';
 
+    const POSTFIX = '_type';
+
 }

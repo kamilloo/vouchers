@@ -8,6 +8,8 @@ class VoucherType
 
     const SERVICE = 'service';
 
+    const SERVICE_PACKAGE = 'service-package';
+
     public static function all(): array
     {
         $types = new \ReflectionClass(self::class);
