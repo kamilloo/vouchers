@@ -100,6 +100,7 @@ class VoucherRepository implements IVoucherRepository
         $voucher_type = $request->getTypeParam();
         if ($voucher_type == VoucherType::QUOTE || empty($product_id = $request->getProductIdParam()))
         {
+            $voucher->product()->dissociate();
             return;
         }
 
