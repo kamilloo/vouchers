@@ -40,12 +40,6 @@ class VoucherRepository implements IVoucherRepository
 
                 $voucher_attributes = $this->getBaseVoucherParams($request);
 
-                $file = $request->file('file-name');
-                if (!empty($file))
-                {
-                    $logo = $this->replaceLogo($file);
-                    Arr::set($voucher_attributes, 'file', $logo);
-                }
                 /**
                  * @var $voucher Voucher
                  */
@@ -73,13 +67,6 @@ class VoucherRepository implements IVoucherRepository
             return $this->db->transaction(function () use ($request, $voucher){
 
                 $voucher_attributes = $this->getBaseVoucherParams($request);
-
-                $file = $request->file('file-name');
-                if (!empty($file))
-                {
-                    $logo = $this->replaceLogo($file);
-                    Arr::set($voucher_attributes, 'file', $logo);
-                }
 
                 $voucher->update($voucher_attributes);
 
@@ -136,11 +123,18 @@ class VoucherRepository implements IVoucherRepository
      */
     function getBaseVoucherParams(VoucherStore $request): array
     {
-        return [
+        $voucher_attributes = [
             'title' => $request->getTitleParam(),
             'type' => $request->getTypeParam(),
             'price' => $request->getPriceParam(),
         ];
+        $file = $request->file('file-name');
+        if (!empty($file))
+        {
+            $logo = $this->replaceLogo($file);
+            Arr::set($voucher_attributes, 'file', $logo);
+        }
+        return $voucher_attributes;
     }
 }
 
