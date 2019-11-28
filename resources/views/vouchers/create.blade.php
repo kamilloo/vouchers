@@ -20,8 +20,9 @@
                 <div class="form-group">
                     <label for="type">Select Type</label>
                     <select class="form-control" id="type" name="type">
-                        <option value="quote">Quote</option>
-                        <option value="service">Service</option>
+                        @foreach(\App\Models\Enums\VoucherType::description() as $type => $description)
+                        <option value="{{ $type }}">{{ $description }}</option>
+                        @endforeach
                     </select>
                     @if($errors->first('type'))
                         <span>{{ $errors->first('type') }}</span>
@@ -36,7 +37,12 @@
                 </div>
                 <div class="form-group">
                     <label for="service">Service</label>
-                    <input type="text" class="form-control" id="service" name="service" dusk="service" placeholder="Service" value="{{ old('service') }}">
+                    <add-voucher-service-select
+
+                        value="{{ old('service') }}"
+                    >
+
+                    </add-voucher-service-select>
                     @if($errors->first('service'))
                         <span>{{ $errors->first('service') }}</span>
                     @endif

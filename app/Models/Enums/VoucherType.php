@@ -15,4 +15,13 @@ class VoucherType
         $types = new \ReflectionClass(self::class);
         return $types->getConstants();
     }
+
+    public static function description(): array
+    {
+        return [
+            self::QUOTE => 'quote',
+            self::SERVICE => 'service',
+            self::SERVICE_PACKAGE => 'service package',
+        ];
+    }
 }

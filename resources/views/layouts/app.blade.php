@@ -25,7 +25,7 @@
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    <img class="img-fluid" src="{{ asset('images/my-vouchers.png') }}" alt="{{ config('app.name', 'Laravel') }}" >
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -34,6 +34,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
+                        <li class="nav-item font-weight-bold"><a class="nav-link" href="{{ route('vouchers.index') }}">{!! __('My&nbsp;Vouchers') !!}</a></li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarServices" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 {{ __('Services') }}
@@ -44,11 +45,10 @@
                                 <a class="dropdown-item" href="{{ route('services.index') }}">{{ __('Service') }}</a>
                             </div>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="{{ route('vouchers.index') }}">{{ __('My Vouchers') }}</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('shop.index') }}">{{ __('Shop') }}</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('payments.index') }}">{{ __('Payments') }}</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('orders.index') }}">{{ __('Orders') }}</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ route('wizard') }}">{{ __('Wizard') }}</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('home') }}">{{ __('Home') }}</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -114,7 +114,7 @@
                         <li><a class="text-muted" href="{{ route('shop.index') }}">{{ __('Shop') }}</a></li>
                         <li><a class="text-muted" href="{{ route('payments.index') }}">{{ __('Payments') }}</a></li>
                         <li><a class="text-muted" href="{{ route('orders.index') }}">{{ __('Orders') }}</a></li>
-                        <li><a class="text-muted" href="{{ route('wizard') }}">{{ __('Wizard') }}</a></li>
+                        <li><a class="text-muted" href="{{ route('home') }}">{{ __('Home') }}</a></li>
                     </ul>
                 </div>
                 <div class="col-md">
