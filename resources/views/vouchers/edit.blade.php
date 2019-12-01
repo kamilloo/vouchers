@@ -7,45 +7,29 @@
     </div>
     <div class="row py-3 px-3 border bg-white rounded-sm">
         <div class="col">
-    <form method="post" enctype="multipart/form-data" action=" {{ route('vouchers.update', $voucher) }}">
-        {{ csrf_field() }}
-        @method('put')
-        <div class="form-group">
-            <label for="title">Title</label>
-            <input type="text" class="form-control" id="title" name="title" dusk="title" placeholder="Title" value="{{ old('title') ?? $voucher->title }}">
-            @if($errors->first('title'))
-                <span>{{ $errors->first('title') }}</span>
-            @endif
-        </div>
-        <div class="form-group">
-            <label for="type">Select Type</label>
-            <select class="form-control" id="type" name="type">
-                <option value="quote">Quote</option>
-                <option value="service">Service</option>
-            </select>
-            @if($errors->first('type'))
-            <span>{{ $errors->first('type') }}</span>
-            @endif
-        </div>
-        <div class="form-group">
-            <label for="price">Price</label>
-            <input type="number" class="form-control" id="price" name="price" dusk="price" placeholder="Price" value="{{ old('price') ?? $voucher->price }}">
-            @if($errors->first('price'))
-            <span>{{ $errors->first('price') }}</span>
-            @endif
-        </div>
-        <div class="form-group">
-            <label for="service">Service</label>
-            <input type="text" class="form-control" id="service" name="service" dusk="service" placeholder="Service" value="{{ old('service') ?? $voucher->service }}">
-            @if($errors->first('service'))
-            <span>{{ $errors->first('service') }}</span>
-            @endif
-        </div>
-        <div class="form-group">
-            <file-upload file-preview-width="400" file-name="file-name" file-src="/storage/logos/7wP5bh7oA2tAANeIztCMvhUtjJQwSPe9J3YAXQTl.jpeg"></file-upload>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+
+            <voucher-form action="{{ route('vouchers.update', $voucher) }}"
+                          :voucher-types="{{ \App\Models\Enums\VoucherType::view() }}"
+                          voucher-quote-type="{{ \App\Models\Enums\VoucherType::QUOTE }}"
+                          voucher-service-type="{{ \App\Models\Enums\VoucherType::SERVICE }}"
+                          voucher-service-package-type="{{ \App\Models\Enums\VoucherType::SERVICE_PACKAGE }}"
+                          flash-voucher-type="{{ old('type')  ?? $voucher->type}}"
+            >
+                <div slot="method">
+                    @method('put')
+                </div>
+                <div slot="csrf">
+                    @csrf
+                </div>
+                @include('vouchers.partials.title-group', ['title' => old('title') ?? $voucher->title ])
+                @include('vouchers.partials.type-group')
+                @include('vouchers.partials.price-group', ['price' => old('price') ?? $voucher->price])
+                @include('vouchers.partials.service-selection-group', ['product_id' => old('product_id') ?? $voucher->product_id])
+                @include('vouchers.partials.service-package-selection-group', ['product_id' => old('product_id') ?? $voucher->product_id])
+                @include('vouchers.partials.file-group', ['file_src' => "/storage/logos/7wP5bh7oA2tAANeIztCMvhUtjJQwSPe9J3YAXQTl.jpeg"])
+                @include('vouchers.partials.submit')
+            </voucher-form>
+
         </div>
     </div>
 @endsection
