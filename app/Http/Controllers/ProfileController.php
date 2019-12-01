@@ -25,20 +25,22 @@ class ProfileController extends Controller
     public function update(ProfileUpdate $request, Guard $guard, FilesystemManager $file_manager)
     {
         $profile_attributes = $request->only([
-            'address',
-            'company_name',
             'first_name',
             'last_name',
+            'company_name',
+            'address',
+            'city',
+            'postcode',
             'services',
+            'branch',
             'description',
-            'branch'
         ]);
 
-        $file = $request->file('logo');
+        $file = $request->file('avatar');
         if (!empty($file))
         {
             $logo = $this->replaceLogo($file);
-            Arr::set($profile_attributes, 'logo', $logo);
+            Arr::set($profile_attributes, 'avatar', $logo);
         }
 
         $profile = $guard->user()->profile()->first();

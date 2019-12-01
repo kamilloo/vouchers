@@ -20,12 +20,14 @@ $factory->define(\App\Models\UserProfile::class, function (Faker $faker) {
         'user_id' => function(){
             return factory(User::class)->create()->id;
         },
-        'address' => $faker->address,
         'first_name' => $faker->unique()->firstName,
         'last_name' => $faker->unique()->name,
-        'services' => $faker->word,
-        'logo' => $faker->url,
+        'company_name' => $faker->unique()->name,
+        'address' => $faker->address,
+        'city' => $faker->unique()->city,
+        'postcode' => $faker->unique()->postcode,
         'avatar' => $faker->url,
+        'services' => $faker->word,
         'branch' => $faker->word,
         'description' => $faker->text,
     ];

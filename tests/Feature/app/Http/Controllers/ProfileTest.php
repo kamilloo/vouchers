@@ -113,16 +113,16 @@ class ProfileTest extends TestCase
     /**
      * @test
      */
-    public function update_logo_was_stored()
+    public function update_avatar_was_stored()
     {
         $this->createUserAndBe();
         $incoming_data = [
-            'logo' => $this->file
+            'avatar' => $this->file
         ];
         $this->post(route('profile.update'), $incoming_data);
 
-        $logo_file_name = $this->user->profile->logo;
-        Storage::assertExists($logo_file_name);
+        $avatar_file_name = $this->user->profile->avatar;
+        Storage::assertExists($avatar_file_name);
 
     }
 }
