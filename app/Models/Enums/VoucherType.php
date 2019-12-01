@@ -19,9 +19,23 @@ class VoucherType
     public static function description(): array
     {
         return [
-            self::QUOTE => 'quote',
-            self::SERVICE => 'service',
-            self::SERVICE_PACKAGE => 'service package',
+            [
+                'value' => self::QUOTE,
+                'label' => 'Quote',
+            ],
+            [
+                'value' => self::SERVICE,
+                'label' => 'Service',
+            ],
+            [
+                'value' => self::SERVICE_PACKAGE,
+                'label' => 'Service Package',
+            ],
         ];
+    }
+
+    public static function view():string
+    {
+        return \GuzzleHttp\json_encode(self::description());
     }
 }

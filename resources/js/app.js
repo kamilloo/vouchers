@@ -27,7 +27,9 @@ Vue.component('stepper', require('./components/Stepper.vue').default);
 Vue.component('template-checkbox', require('./components/TemplateCheckbox.vue').default);
 Vue.component('my-template', require('./components/MyTemplate.vue').default);
 Vue.component('shop-input', require('./components/ShopInput.vue').default);
+Vue.component('voucher-type-select', require('./components/VoucherTypeSelect.vue').default);
 Vue.component('add-voucher-service-select', require('./components/AddVoucherServiceSelect.vue').default);
+Vue.component('voucher-form', require('./components/VoucherForm.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -53,6 +55,9 @@ const app = new Vue({
     methods :{
         changeValue(value) {
             this.checked = value;
+        },
+        colsoling(value){
+            console.log(value)
         }
     }
 });
