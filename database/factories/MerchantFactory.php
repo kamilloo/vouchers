@@ -19,6 +19,11 @@ $factory->define(\App\Models\Merchant::class, function (Faker $faker) {
     return [
         'user_id' => function(){
             return factory(\App\Models\User::class)->create()->id;
+
         },
+        'merchant_id' => $faker->numerify(),
+        'pos_id' => $faker->numerify(),
+        'crc' => $faker->randomAscii,
+        'sandbox' => $faker->boolean,
     ];
 });
