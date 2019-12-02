@@ -6,6 +6,7 @@ use App\Http\Requests\ProfileUpdate;
 use App\Http\Requests\ShopChangeImages;
 use App\Http\Requests\ShopChangeTemplate;
 use App\Http\Requests\ShopCustomTemplate;
+use App\Http\Requests\ShopGatewaySetting;
 use App\Models\Merchant;
 use App\Models\ShopImage;
 use App\Models\ShopStyle;
@@ -65,6 +66,26 @@ class ShopController extends Controller
             }else{
                 $shop_style->update($shop_styles);
             }
+            return redirect(route('shop.index'))
+                ->with('success', 'Well done!, you changed your shop design.');
+        }
+        return redirect(route('shop.index'))
+            ->with('warning', 'Ups!, Something went wrong.');
+    }
+
+
+    public function gatewaySettings(ShopGatewaySetting $request, Guard $guard)
+    {
+        $user = $guard->user();
+        if ($user->isMerchant())
+        {
+            $user->merchant->update([
+                'merchant_id' => $request->getMerchantIdParam(),
+                'pos_id' => $request->getPosIdParam(),
+                'crc' => $request->getCrcParam(),
+                'sandbox' => $request->getSandboxParam()
+            ]);
+
             return redirect(route('shop.index'))
                 ->with('success', 'Well done!, you changed your shop design.');
         }

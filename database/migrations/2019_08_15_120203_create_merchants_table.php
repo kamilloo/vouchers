@@ -18,7 +18,6 @@ class CreateMerchantsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('template_id')->nullable();
             $table->unsignedBigInteger('merchant_id')->nullable()->default(null);
-            $table->unsignedBigInteger('merchant_id')->nullable()->default(null);
             $table->unsignedBigInteger('pos_id')->nullable()->default(null);
             $table->string('crc')->nullable()->default(null);
             $table->boolean('sandbox')->default(\App\Models\Enums\GatewaySandbox::ENABLED);

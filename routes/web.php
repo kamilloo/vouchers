@@ -31,6 +31,7 @@ Route::middleware('auth')->group(function (){
     Route::post('/shop/change-template', 'ShopController@changeTemplate')->name('shop.change-template');
     Route::post('/shop/custom-template', 'ShopController@customTemplate')->name('shop.custom-template');
     Route::post('/shop/change-images', 'ShopController@changeImages')->name('shop.change-images');
+    Route::post('/shop/gateway-settings', 'ShopController@gatewaySettings')->name('shop.gateway-settings');
 
     Route::resource('/vouchers', 'VoucherController');
     Route::resource('/orders', 'OrderController');
