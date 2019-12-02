@@ -9,6 +9,7 @@
                 <a href="#designs" class="list-group-item list-group-item-action active" data-toggle="list"  role="tab">{{ __('Designs') }}</a>
                 <a href="#customs" class="list-group-item list-group-item-action" data-toggle="list"  role="tab">{{ __('Customs') }}</a>
                 <a href="#images" class="list-group-item list-group-item-action" data-toggle="list"  role="tab">{{ __('Images') }}</a>
+                <a href="#gateway" class="list-group-item list-group-item-action" data-toggle="list"  role="tab">{{ __('Payment Gateway') }}</a>
             </div>
             <br>
             @if(!empty($my_template))
@@ -80,6 +81,41 @@
                         <button type="submit" class="btn btn-primary">Submit</button>
 
                     </form>
+                </div>
+                <div class="tab-pane" id="gateway" role="tabpanel">
+                    <form method="post" action="{{ route('shop.gateway-settings') }}">
+                        @csrf
+                        <div class="form-group">
+                            <label for="welcoming">{{ __('Merchand Id') }}</label>
+                            <input type="number" class="form-control" id="merchant_id" aria-describedby="merchant-id-help" name="merchant_id" placeholder="{{ __('Merchant Id') }}" value="{{ old('merchant_id', $merchant->merchant_id) }}">
+                            <small id="merchant-id-help" class="form-text text-muted">{{ __('Set Merchant Id Gateway') }}.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="welcoming">{{ __('POS Id') }}</label>
+                            <input type="number" class="form-control" id="merchant_id" aria-describedby="pos-id-help" name="pos_id" placeholder="{{ __('POS Id') }}" value="{{ old('pos_id', $merchant->pos_id) }}">
+                            <small id="pos-id-help" class="form-text text-muted">{{ __('Set POS Id Gateway') }}.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="crc">{{ __('CRC') }}</label>
+                            <input type="text" class="form-control" id="crc" aria-describedby="crc-help" name="crc" placeholder="{{ __('CRC') }}" value="{{ old('crc', $merchant->crc) }}">
+                            <small id="crc-help" class="form-text text-muted">{{ __('Set CRC Gateway') }}.</small>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="sandbox" name="sandbox" class="custom-control-input" value="{{ \App\Models\Enums\GatewaySandbox::ENABLED }}" @if($merchant->sandbox == \App\Models\Enums\GatewaySandbox::ENABLED) checked @endif>
+                                <label class="custom-control-label" for="sandbox">Sanbox</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="live" name="sandbox" class="custom-control-input" value="{{ \App\Models\Enums\GatewaySandbox::DISABLED }}" @if($merchant->sandbox == \App\Models\Enums\GatewaySandbox::DISABLED) checked @endif>
+                                <label class="custom-control-label" for="live">Live</label>
+                            </div>
+                        </div>
+
+
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+
                 </div>
             </div>
         </div>

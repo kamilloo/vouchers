@@ -7,6 +7,7 @@ use App\Http\Requests\ShopChangeImages;
 use App\Http\Requests\ShopChangeTemplate;
 use App\Http\Requests\ShopCustomTemplate;
 use App\Http\Requests\ShopGatewaySetting;
+use App\Models\Enums\GatewaySandbox;
 use App\Models\Merchant;
 use App\Models\ShopImage;
 use App\Models\ShopStyle;
@@ -29,7 +30,7 @@ class ShopController extends Controller
         $shop_style = optional($merchant)->shopStyles ?? new ShopStyle;
         $shop_images = optional($merchant)->shopImages ?? new ShopImage();
 
-        return view('shop.index', compact('guard', 'templates', 'my_template', 'shop_style', 'shop_images'));
+        return view('shop.index', compact('guard', 'templates', 'my_template', 'shop_style', 'shop_images', 'merchant'));
     }
 
     public function changeTemplate(ShopChangeTemplate $request, Guard $guard)
@@ -83,7 +84,7 @@ class ShopController extends Controller
                 'merchant_id' => $request->getMerchantIdParam(),
                 'pos_id' => $request->getPosIdParam(),
                 'crc' => $request->getCrcParam(),
-                'sandbox' => $request->getSandboxParam()
+                'sandbox' => $request->getSandboxParam() ?? GatewaySandbox::ENABLED
             ]);
 
             return redirect(route('shop.index'))
