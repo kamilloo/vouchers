@@ -10,18 +10,17 @@ class UserProfile extends Model
 
     protected $table = 'user_profiles';
 
-    protected $fillable = [
-        'address',
-        'company_name',
-        'first_name',
-        'last_name',
-        'services',
-        'avatar',
-        'logo',
-        'description',
-        'branch',
-        'user_id'
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'social-media' => 'array',
     ];
+
+    protected $guarded = [];
 
     public function user()
     {

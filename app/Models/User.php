@@ -61,6 +61,22 @@ class User extends Authenticatable
         return $this->hasOne(Merchant::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany|Skill[]
+     */
+    public function skills()
+    {
+        return $this->belongsToMany(Skill::class);
+    }
+    
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany|Branch[]
+     */
+    public function branches()
+    {
+        return $this->belongsToMany(Branch::class);
+    }
+
     public function isMerchant()
     {
         return $this->merchant()->count() > 0;

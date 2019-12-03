@@ -22,10 +22,8 @@ class CreateUserProfilesTable extends Migration
             $table->string('city')->nullable()->default(null);
             $table->string('postcode')->nullable()->default(null);
             $table->string('avatar')->nullable()->default(null);
-            $table->string('services')->nullable()->default(null);
-            $table->string('branch')->nullable()->default(null);
             $table->string('description')->nullable()->default(null);
-            $table->string('social-media')->nullable()->default(null);
+            $table->json('social-media')->nullable()->default(null);
             $table->timestamps();
         });
     }
