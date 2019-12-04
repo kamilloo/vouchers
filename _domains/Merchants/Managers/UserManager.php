@@ -45,7 +45,9 @@ class UserManager
             'address',
             'city',
             'postcode',
+            'phone',
             'description',
+            'homepage',
         ]);
 
         $file = $request->file('avatar');

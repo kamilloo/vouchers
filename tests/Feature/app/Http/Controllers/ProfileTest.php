@@ -100,6 +100,10 @@ class ProfileTest extends TestCase
             'first_name' => 'some data',
             'last_name' => 'some data',
             'description' => 'some data',
+            'postcode' => 'some data',
+            'phone' => 'some data',
+            'city' => 'some data',
+            'homepage' => 'some data',
         ];
         $this->post(route('profile.update'), $incoming_data)
             ->assertRedirect(route('profile.index'))

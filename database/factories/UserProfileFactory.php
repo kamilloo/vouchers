@@ -24,6 +24,7 @@ $factory->define(\App\Models\UserProfile::class, function (Faker $faker) {
         'last_name' => $faker->unique()->name,
         'company_name' => $faker->unique()->name,
         'address' => $faker->address,
+        'phone' => $faker->phoneNumber,
         'city' => $faker->unique()->city,
         'postcode' => $faker->unique()->postcode,
         'avatar' => $faker->url,

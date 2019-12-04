@@ -19,11 +19,13 @@ class CreateUserProfilesTable extends Migration
             $table->string('last_name')->nullable()->default(null);
             $table->string('company_name')->nullable()->default(null);
             $table->string('address')->nullable()->default(null);
+            $table->string('phone')->nullable()->default(null);
             $table->string('city')->nullable()->default(null);
             $table->string('postcode')->nullable()->default(null);
             $table->string('avatar')->nullable()->default(null);
             $table->string('description')->nullable()->default(null);
-            $table->json('social-media')->nullable()->default(null);
+            $table->string('homepage')->nullable()->default(null);
+            $table->json('social_media')->nullable()->default(null);
             $table->timestamps();
         });
     }

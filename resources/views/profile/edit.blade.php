@@ -29,13 +29,72 @@
         </div>
         <div class="row input-group mb-3">
             <div class="col-md-4">
-                <label>Adres</label>
+                <label for="company_name">Company Name</label>
             </div>
             <div class="col-md-8">
-                <input type="text" class="form-control" placeholder="Adres" name="address" value=" {{ $guard->user()->profile->address }}">
+                <input type="text" class="form-control" placeholder="Company Name" id="company_name" name="company_name" value="{{ $guard->user()->profile->company_name }}">
+            </div>
+        </div>
+        <div class="row input-group mb-3">
+            <div class="col-md-4">
+                <label for="phone">Phone</label>
+            </div>
+            <div class="col-md-8">
+                <input type="text" class="form-control" placeholder="Phone" id="phone" name="phone" value="{{ $guard->user()->profile->phone }}">
+            </div>
+        </div>
+        <div class="row input-group mb-3">
+            <div class="col-md-4">
+                <label for="address">__('Address')</label>
+            </div>
+            <div class="col-md-8">
+                <input type="text" id="address" class="form-control" placeholder="__('Address')" name="address" value=" {{ $guard->user()->profile->address }}">
+            </div>
+        </div>
+        <div class="row input-group mb-3">
+            <div class="col-md-4">
+                <label for="postcode">__('Postcode')</label>
+            </div>
+            <div class="col-md-8">
+                <input type="text" id="postcode" class="form-control" placeholder="__('Postcode')" name="postcode" value=" {{ $guard->user()->profile->postcode }}">
+            </div>
+        </div>
+        <div class="row input-group mb-3">
+            <div class="col-md-4">
+                <label for="city">__('City')</label>
+            </div>
+            <div class="col-md-8">
+                <input type="text" id="city" class="form-control" placeholder="__('City')" name="city" value=" {{ $guard->user()->profile->city }}">
             </div>
         </div>
     </div>
+    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+        <div class="row input-group mb-3">
+            <div class="col-md-4">
+                <label for="description">__('Description')</label>
+            </div>
+            <div class="col-md-8">
+                <input type="text" id="description" class="form-control" placeholder="__('Description')" name="description" value=" {{ $guard->user()->profile->description }}">
+            </div>
+        </div>
+        <div class="row input-group mb-3">
+            <div class="col-md-4">
+                <label for="homepage">__('Home Page')</label>
+            </div>
+            <div class="col-md-8">
+                <input type="text" id="homepage" class="form-control" placeholder="__('Home Page')" name="homepage" value=" {{ $guard->user()->profile->homepage }}">
+            </div>
+        </div>
+        <div class="row input-group mb-3">
+            <div class="col-md-4">
+                <label for="social_media">__('Socia Media')</label>
+            </div>
+            <div class="col-md-8">
+                <input type="text" id="social_media" class="form-control" placeholder="__('Socia Media')" name="social_media" value=" {{ $guard->user()->profile->social_media }}">
+            </div>
+        </div>
+    </div>
+
 @endsection
 <script>
     import Avatar from "../../js/components/Avatar";

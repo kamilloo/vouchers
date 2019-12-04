@@ -95,10 +95,8 @@ namespace App\Models{
  * @property string|null $city
  * @property string|null $postcode
  * @property string|null $avatar
- * @property string|null $services
- * @property string|null $branch
  * @property string|null $description
- * @property array|null $social-media
+ * @property mixed|null $social_media
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\User $user
@@ -108,7 +106,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UserProfile query()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UserProfile whereAddress($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UserProfile whereAvatar($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UserProfile whereBranch($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UserProfile whereCity($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UserProfile whereCompanyName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UserProfile whereCreatedAt($value)
@@ -116,7 +113,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UserProfile whereFirstName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UserProfile whereLastName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UserProfile wherePostcode($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UserProfile whereServices($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UserProfile whereSocialMedia($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UserProfile whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UserProfile whereUserId($value)
@@ -161,12 +157,20 @@ namespace App\Models{
 /**
  * App\Models\Skill
  *
+ * @property int $id
+ * @property string $name
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User[] $users
  * @property-read int|null $users_count
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Model mine()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Skill newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Skill newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Skill query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Skill whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Skill whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Skill whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Skill whereUpdatedAt($value)
  */
 	class Skill extends \Eloquent {}
 }
@@ -394,12 +398,20 @@ namespace App\Models{
 /**
  * App\Models\Branch
  *
+ * @property int $id
+ * @property string $name
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User[] $users
  * @property-read int|null $users_count
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Model mine()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Branch newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Branch newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Branch query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Branch whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Branch whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Branch whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Branch whereUpdatedAt($value)
  */
 	class Branch extends \Eloquent {}
 }

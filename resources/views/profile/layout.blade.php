@@ -39,22 +39,6 @@
             <div class="col-md-8">
                 <div class="tab-content profile-tab" id="myTabContent">
                     @yield('about')
-                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Branża</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>{{ $guard->user()->profile->branch }}</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <label>Description</label><br/>
-                                <p>{{ $guard->user()->profile->description }}</p>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
