@@ -14,8 +14,8 @@ class CreateSkillUserPivotTable extends Migration
     public function up()
     {
         Schema::create('skill_user', function (Blueprint $table) {
-            $table->bigIncrements('skill_id');
-            $table->bigIncrements('user_id');
+            $table->unsignedBigInteger('skill_id');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
         });
     }

@@ -15,6 +15,8 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    protected $table = 'users';
+
     protected $with = ['profile'];
     /**
      * The attributes that are mass assignable.
@@ -48,17 +50,17 @@ class User extends Authenticatable
      */
     public function profile()
     {
-        return $this->hasOne(UserProfile::class);
+        return $this->hasOne(UserProfile::class, 'user_id');
     }
 
     public function vouchers()
     {
-        return $this->hasMany(Voucher::class);
+        return $this->hasMany(Voucher::class, 'user_id');
     }
 
     public function merchant()
     {
-        return $this->hasOne(Merchant::class);
+        return $this->hasOne(Merchant::class, 'user_id');
     }
 
     /**
@@ -66,15 +68,15 @@ class User extends Authenticatable
      */
     public function skills()
     {
-        return $this->belongsToMany(Skill::class);
+        return $this->belongsToMany(Skill::class, 'skill_user', 'user_id', 'skill_id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany|Branch[]
      */
     public function branches()
     {
-        return $this->belongsToMany(Branch::class);
+        return $this->belongsToMany(Branch::class, 'branch_user', 'user_id', 'branch_id');
     }
 
     public function isMerchant()

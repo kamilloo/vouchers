@@ -14,8 +14,8 @@ class CreateBranchUserPivotTable extends Migration
     public function up()
     {
         Schema::create('branch_user', function (Blueprint $table) {
-            $table->bigIncrements('branch_id');
-            $table->bigIncrements('user_id');
+            $table->unsignedBigInteger('branch_id');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
         });
     }

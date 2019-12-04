@@ -2,6 +2,8 @@
 
 namespace Tests\Feature\App\Http\StarterTest;
 
+use App\Models\Branch;
+use App\Models\Skill;
 use App\Models\User;
 use Illuminate\Http\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
@@ -97,9 +99,7 @@ class ProfileTest extends TestCase
             'company_name' => 'some data',
             'first_name' => 'some data',
             'last_name' => 'some data',
-            'services' => 'some data',
             'description' => 'some data',
-            'branch' => 'some data',
         ];
         $this->post(route('profile.update'), $incoming_data)
             ->assertRedirect(route('profile.index'))
@@ -109,6 +109,119 @@ class ProfileTest extends TestCase
             'user_id' => $this->user->id,
         ] + $incoming_data);
     }
+
+    /**
+     * @test
+     */
+    public function update_add_new_branch_and_attached_user()
+    {
+        $this->createUserAndBe();
+        $branch = 'some branch';
+        $incoming_data = [
+            'branches' => [ $branch ],
+        ];
+        $this->assertCount(0, Branch::all());
+        $this->post(route('profile.update'), $incoming_data)
+            ->assertRedirect(route('profile.index'))
+            ->assertSessionHas('success');
+
+        $this->assertCount(1, Branch::all());
+
+        $this->assertDatabaseHas('branches', [
+                'name' => $branch,
+            ]);
+        $new_branch = Branch::whereRaw('1=1')->latest()->first();
+        $this->assertDatabaseHas('branch_user', [
+                'user_id' => $this->user->id,
+                'branch_id' => $new_branch->id,
+            ]);
+    }
+
+
+    /**
+     * @test
+     */
+    public function update_use_existing_branch_and_attached_user()
+    {
+        $this->createUserAndBe();
+        $branch = 'Branch';
+        $incoming_data = [
+            'branches' => [ $branch ],
+        ];
+        $existing_branch = factory(Branch::class)->create([
+            'name' => 'branch'
+        ]);
+        $this->post(route('profile.update'), $incoming_data)
+            ->assertRedirect(route('profile.index'))
+            ->assertSessionHas('success');
+
+        $this->assertCount(1, Branch::all());
+
+        $this->assertDatabaseHas('branches', [
+            'name' => $branch,
+        ]);
+        $this->assertDatabaseHas('branch_user', [
+            'user_id' => $this->user->id,
+            'branch_id' => $existing_branch->id,
+        ]);
+    }
+
+    /**
+     * @test
+     */
+    public function update_add_new_skill_and_attached_user()
+    {
+        $this->createUserAndBe();
+        $skills = 'some skills';
+        $incoming_data = [
+            'skills' => [ $skills ],
+        ];
+        $this->assertCount(0, Skill::all());
+        $this->post(route('profile.update'), $incoming_data)
+            ->assertRedirect(route('profile.index'))
+            ->assertSessionHas('success');
+
+        $this->assertCount(1, Skill::all());
+
+        $this->assertDatabaseHas('skills', [
+            'name' => $skills,
+        ]);
+        $new_skill = Skill::whereRaw('1=1')->latest()->first();
+        $this->assertDatabaseHas('skill_user', [
+            'user_id' => $this->user->id,
+            'skill_id' => $new_skill->id,
+        ]);
+    }
+
+    /**
+     * @test
+     */
+    public function update_use_existing_skill_and_attached_user()
+    {
+        $this->createUserAndBe();
+        $skills = 'Skill';
+        $incoming_data = [
+            'skills' => [ $skills ],
+        ];
+        $existing_skill = factory(Skill::class)
+            ->create([
+                'name' => 'skill'
+            ]);
+        $this->post(route('profile.update'), $incoming_data)
+            ->assertRedirect(route('profile.index'))
+            ->assertSessionHas('success');
+
+        $this->assertCount(1, Skill::all());
+
+        $this->assertDatabaseHas('skills', [
+            'name' => $skills,
+        ]);
+        $this->assertDatabaseHas('skill_user', [
+            'user_id' => $this->user->id,
+            'skill_id' => $existing_skill->id,
+        ]);
+    }
+
 
     /**
      * @test

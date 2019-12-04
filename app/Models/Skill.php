@@ -9,10 +9,10 @@ class Skill extends Model
     protected $guarded = [];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany|UserProfile[]
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany|User[]
      */
-    public function profiles()
+    public function users()
     {
-        return $this->belongsToMany(UserProfile::class);
+        return $this->belongsToMany(User::class, 'skill_user', 'skill_id', 'user_id');
     }
 }

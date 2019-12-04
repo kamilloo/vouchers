@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdate;
 use App\Models\UserProfile;
+use Domain\Merchants\Managers\UserManager;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Filesystem\FilesystemManager;
 use Illuminate\Http\Request;
@@ -22,44 +23,13 @@ class ProfileController extends Controller
         return view('profile.edit', compact('guard'));
     }
 
-    public function update(ProfileUpdate $request, Guard $guard, FilesystemManager $file_manager)
+    public function update(ProfileUpdate $request, UserManager $user_manager)
     {
-        $profile_attributes = $request->only([
-            'first_name',
-            'last_name',
-            'company_name',
-            'address',
-            'city',
-            'postcode',
-            'services',
-            'branch',
-            'description',
-        ]);
+        $user_manager->update($request);
 
-        $file = $request->file('avatar');
-        if (!empty($file))
-        {
-            $logo = $this->replaceLogo($file);
-            Arr::set($profile_attributes, 'avatar', $logo);
-        }
 
-        $profile = $guard->user()->profile()->first();
-        if (empty($profile))
-        {
-            $guard->user()->profile()->save(new UserProfile($profile_attributes));
-        }else{
-            $profile->update($profile_attributes);
-        }
         return redirect(route('profile.index'))->with('success', 'Your profile was updated!');
     }
 
-    /**
-     * @param ProfileUpdate $request
-     *
-     * @return false|string
-     */
-    protected function replaceLogo(UploadedFile $file)
-    {
-        return $file->storePublicly('public/logos');
-    }
+
 }
