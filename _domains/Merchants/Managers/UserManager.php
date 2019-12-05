@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Domain\Merchants\Managers;
 
+use App\Http\ContentTypes\Tag;
 use App\Http\Requests\ProfileUpdate;
 use App\Models\User;
 use Domain\Merchants\Models\Branch;
@@ -71,18 +72,22 @@ class UserManager
 
     public function syncBranches(ProfileUpdate $request)
     {
-        $branches = Collection::make($request->getBranchesParam())->map(function (string $name){
-            $trimmed_name = mb_strtolower(trim($name));
-            return $this->branch->newModelQuery()->firstOrCreate(['name' => $trimmed_name]);
+        $branches = Collection::make($request->getBranches())->map(function (Tag $tag){
+            return $this->branch->newModelQuery()->firstOrCreate([
+                'slug' => $tag->getKey(),
+                'name' => $tag->getValue(),
+            ]);
         });
         $this->getAuthUser()->branches()->sync($branches->pluck('id'));
     }
 
     public function syncSkills(ProfileUpdate $request)
     {
-        $skills = Collection::make($request->getSkillsParam())->map(function (string $name){
-            $trimmed_name = mb_strtolower(trim($name));
-            return $this->skill->newModelQuery()->firstOrCreate(['name' => $trimmed_name]);
+        $skills = Collection::make($request->getSkills())->map(function (Tag $tag){
+            return $this->skill->newModelQuery()->firstOrCreate([
+                'slug' => $tag->getKey(),
+                'name' => $tag->getValue(),
+            ]);
         });
         $this->getAuthUser()->skills()->sync($skills->pluck('id'));
     }

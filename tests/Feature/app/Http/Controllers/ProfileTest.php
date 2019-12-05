@@ -120,7 +120,10 @@ class ProfileTest extends TestCase
     public function update_add_new_branch_and_attached_user()
     {
         $this->createUserAndBe();
-        $branch = 'some branch';
+        $branch =  [
+            'key' => 'some branch',
+            'value' => 'Some Branch',
+        ];
         $incoming_data = [
             'branches' => [ $branch ],
         ];
@@ -132,7 +135,8 @@ class ProfileTest extends TestCase
         $this->assertCount(1, Branch::all());
 
         $this->assertDatabaseHas('branches', [
-                'name' => $branch,
+                'name' => $branch['value'],
+                'slug' => $branch['key'],
             ]);
         $new_branch = Branch::whereRaw('1=1')->latest()->first();
         $this->assertDatabaseHas('branch_user', [
@@ -148,12 +152,16 @@ class ProfileTest extends TestCase
     public function update_use_existing_branch_and_attached_user()
     {
         $this->createUserAndBe();
-        $branch = 'Branch';
+        $branch =  [
+            'key' => 'Branch',
+            'value' => 'Branch',
+        ];
         $incoming_data = [
             'branches' => [ $branch ],
         ];
         $existing_branch = factory(Branch::class)->create([
-            'name' => 'branch'
+            'name' => 'Branch',
+            'slug' => 'branch',
         ]);
         $this->post(route('profile.update'), $incoming_data)
             ->assertRedirect(route('profile.index'))
@@ -162,7 +170,7 @@ class ProfileTest extends TestCase
         $this->assertCount(1, Branch::all());
 
         $this->assertDatabaseHas('branches', [
-            'name' => $branch,
+            'name' => $branch['value'],
         ]);
         $this->assertDatabaseHas('branch_user', [
             'user_id' => $this->user->id,
@@ -176,7 +184,11 @@ class ProfileTest extends TestCase
     public function update_add_new_skill_and_attached_user()
     {
         $this->createUserAndBe();
-        $skills = 'some skills';
+        $skills = [
+            'key' => 'some skills',
+            'value' => 'some skills',
+        ];
+
         $incoming_data = [
             'skills' => [ $skills ],
         ];
@@ -188,7 +200,7 @@ class ProfileTest extends TestCase
         $this->assertCount(1, Skill::all());
 
         $this->assertDatabaseHas('skills', [
-            'name' => $skills,
+            'name' => $skills['value'],
         ]);
         $new_skill = Skill::whereRaw('1=1')->latest()->first();
         $this->assertDatabaseHas('skill_user', [
@@ -203,13 +215,18 @@ class ProfileTest extends TestCase
     public function update_use_existing_skill_and_attached_user()
     {
         $this->createUserAndBe();
-        $skills = 'Skill';
+        $skills = [
+            'key' => 'Skills',
+            'value' => 'Skills',
+        ];
+
         $incoming_data = [
             'skills' => [ $skills ],
         ];
         $existing_skill = factory(Skill::class)
             ->create([
-                'name' => 'skill'
+                'slug' => 'skills',
+                'name' => 'skills',
             ]);
         $this->post(route('profile.update'), $incoming_data)
             ->assertRedirect(route('profile.index'))
@@ -218,7 +235,7 @@ class ProfileTest extends TestCase
         $this->assertCount(1, Skill::all());
 
         $this->assertDatabaseHas('skills', [
-            'name' => $skills,
+            'name' => $skills['value'],
         ]);
         $this->assertDatabaseHas('skill_user', [
             'user_id' => $this->user->id,

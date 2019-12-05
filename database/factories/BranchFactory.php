@@ -26,6 +26,7 @@ $factory->define(\App\Models\Branch::class, function (Faker $faker) {
 
     return [
         'name' => $faker->title,
+        'slug' => $faker->slug,
     ];
 });
 
