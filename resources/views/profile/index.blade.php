@@ -58,3 +58,7 @@
 
 
 @endsection
+
+@section('branches.and.skills')
+    @include('profile.partials.profile_work')
+@endsection

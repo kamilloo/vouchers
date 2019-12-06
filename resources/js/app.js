@@ -6,6 +6,7 @@
  */
 
 require('./bootstrap');
+require('@voerro/vue-tagsinput/dist/style.css');
 
 window.Vue = require('vue');
 
@@ -17,10 +18,12 @@ window.Vue = require('vue');
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
+Vue.component('tags-input', require('@voerro/vue-tagsinput/src/VoerroTagsInput').default);
+
 // const files = require.context('./', true, /\.vue$/i);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
-// Vue.component('avatar', require('./components/Avatar.vue').default);
+Vue.component('branch-input', require('./components/BranchInput.vue').default);
 Vue.component('file-upload', require('./components/FileUpload.vue').default);
 Vue.component('checkout-form', require('./components/CheckoutForm.vue').default);
 Vue.component('stepper', require('./components/Stepper.vue').default);

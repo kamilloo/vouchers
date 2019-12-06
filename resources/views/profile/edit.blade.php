@@ -96,6 +96,10 @@
     </div>
 
 @endsection
+
+@section('branches.and.skills')
+    @include('profile.partials.profile_work_edit')
+@endsection
 <script>
     import Avatar from "../../js/components/Avatar";
     export default {

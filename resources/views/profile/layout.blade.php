@@ -34,7 +34,7 @@
         </div>
         <div class="row">
             <div class="col-md-4">
-                @include('profile.partials.profile_work')
+                @yield('branches.and.skills')
             </div>
             <div class="col-md-8">
                 <div class="tab-content profile-tab" id="myTabContent">

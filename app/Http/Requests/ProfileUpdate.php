@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use App\Http\ContentTypes\Tag;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 
 /**
  * Class ProfileUpdate
@@ -77,7 +78,7 @@ class ProfileUpdate extends Request
     protected function byIncomplete(string $key, string $value): \Closure
     {
         return function ($branch) use ($key, $value) {
-            return is_array($branch) && isset($branch[$key], $branch[$value]);
+            return is_array($branch) && isset($branch[$value]);
         };
     }
 
@@ -90,7 +91,7 @@ class ProfileUpdate extends Request
     protected function toTags(string $key, string $value): \Closure
     {
         return function (array $branch) use ($key, $value) {
-            return new Tag($branch[$key], $branch[$value]);
+            return new Tag($branch[$key] ?? Str::slug($branch[$value]), $branch[$value]);
         };
     }
 

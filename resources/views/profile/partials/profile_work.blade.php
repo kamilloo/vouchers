@@ -1,7 +1,11 @@
 <div class="profile-work">
     <p>Branches</p>
-    <a href="">{{ $guard->user()->profile->homepage }}</a><br/>
-    <a href="">{{ $guard->user()->profile->facebook_fanpage }}</a><br/>
+    @foreach($own_branches as $branch)
+        <span class="badge badge-info">{{ $branch['value'] }}</span><br>
+    @endforeach
     <p>SKILLS</p>
-    <a href="">{{ $guard->user()->profile->skills }}</a><br/>
+
+    @foreach($own_skills as $skill)
+        <span class="badge badge-info">{{ $skill['value'] }}</span><br>
+    @endforeach
 </div>
