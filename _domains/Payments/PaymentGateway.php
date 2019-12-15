@@ -88,8 +88,12 @@ class PaymentGateway implements IPaymentGateway
             );
         }
 
-        $register_payment = $this->gateway->init();
-
+        $register_payment = $this->gateway
+            ->setPosId(98152)
+            ->setMerchantId(98152)
+            ->setCrc('9ce6c63b01df7132')
+            ->setTestMode(true)
+            ->init();
 
         $payment_registered = $register_payment->isSuccess();
 
@@ -105,7 +109,12 @@ class PaymentGateway implements IPaymentGateway
             $transaction->session_id = $register_payment->getSessionId();
             $transaction->token = $token;
 
-            $payment->payment_link = $this->gateway->execute($token);
+            $payment->payment_link = $this->gateway
+                ->setPosId(98152)
+                ->setMerchantId(98152)
+                ->setCrc('9ce6c63b01df7132')
+                ->setTestMode(true)
+                ->execute($token);
             $payment->save();
 
         }else{
@@ -131,7 +140,12 @@ class PaymentGateway implements IPaymentGateway
 
     public function confirmation(IPayment $payment, PaymentCallbackStatus $request): void
     {
-        $payment_response = $this->gateway->receive($request);
+        $payment_response = $this->gateway
+            ->setPosId(98152)
+            ->setMerchantId(98152)
+            ->setCrc('9ce6c63b01df7132')
+            ->setTestMode(true)
+            ->receive($request);
 
         $success = $payment_response->isSuccess();
         $session_id = $payment_response->getSessionId();

@@ -55,6 +55,7 @@
 				</span>
 
             @csrf
+            <input name="price" value="100">
             <div class="row">
                 <div class="col-xs-12">
                     <div class="bs-stepper">
