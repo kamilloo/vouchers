@@ -45,9 +45,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('get-started', 'Starter@getStarted')->name('get-started');
 
-Route::get('checkout/{merchant}', 'CheckoutController@start')->name('checkout.start');
-Route::post('checkout/{merchant}', 'CheckoutController@proceed')->name('checkout.proceed');
-Route::get('checkout/{merchant}/confirmation/{order}', 'CheckoutController@confirmation')->name('checkout.confirmation');
+Route::get(__('checkout').'/{merchant}', 'CheckoutController@start')->name('checkout.start');
+Route::post(__('checkout').'/{merchant}', 'CheckoutController@proceed')->name('checkout.proceed');
+Route::get(__('checkout').'/{merchant}/'.__('confirmation').'/{order}', 'CheckoutController@confirmation')->name('checkout.confirmation');
 
 
 Route::get('payment/{merchant}/create/{order}', 'PaymentOrderController@create')->name('payment.create');

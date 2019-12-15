@@ -24,7 +24,7 @@ class CreateMerchantsTable extends Migration
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('template_id')->references('id')->on('templates')->onDelete('set null');
+            $table->foreign('template_id')->references('id')->on('templates');
         });
     }
 

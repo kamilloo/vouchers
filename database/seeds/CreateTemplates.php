@@ -13,7 +13,6 @@ class CreateTemplates extends Seeder
     {
         for($i = 1; $i < 5; $i++)
         {
-            \DB::table('templates')->truncate();
             \App\Models\Template::create([
                 'title' => 'title'.$i,
                 'slug' => 'title'.$i,

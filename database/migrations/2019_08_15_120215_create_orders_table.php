@@ -32,7 +32,7 @@ class CreateOrdersTable extends Migration
             $table->timestamps();
 
             $table->foreign('merchant_id')->references('id')->on('merchants');
-            $table->foreign('client_id')->references('id')->on('clients')->onDelete('set null');
+            $table->foreign('client_id')->references('id')->on('clients');
         });
     }
 
