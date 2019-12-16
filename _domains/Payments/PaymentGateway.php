@@ -78,15 +78,20 @@ class PaymentGateway implements IPaymentGateway
         {
             $product_title = $order->getProductTitle();
             $product_description = $order->getProductDescription();
-            $this->gateway
-                ->setArticle($product_title)
-                ->setArticleDescription($product_description);
 
-            $transaction_order_data += compact(
-                'product_title',
-                'product_description'
-            );
+        }else{
+            $product_title = __('Client Voucher');
+            $product_description = __('Voucher for given amount');
         }
+
+        $this->gateway
+            ->setArticle($product_title)
+            ->setArticleDescription($product_description);
+
+        $transaction_order_data += compact(
+            'product_title',
+            'product_description'
+        );
 
         $register_payment = $this->gateway
             ->setPosId(98152)

@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Voucher;
 use Faker\Factory;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Arr;
 use Symfony\Component\HttpFoundation\Request;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -57,14 +58,17 @@ class CheckoutControllerTest extends TestCase
         $response->assertStatus(302)
             ->assertSessionHas('success');
 
+        $client = Arr::pull($incoming_data, 'client');
         $this->assertDatabaseHas('orders', $incoming_data);
+
+        $this->assertDatabaseHas('clients', $client);
     }
 
 
     /**
      * @test
      */
-    public function proceed_redirect_to_comfimation_page()
+    public function proceed_redirect_to_confirmation_page()
     {
         $this->voucher = $this->createVoucher();
         $faker = Factory::create();
@@ -104,6 +108,15 @@ class CheckoutControllerTest extends TestCase
             'last_name' => $faker->lastName,
             'phone' => $faker->phoneNumber,
             'email' => $faker->email,
+            'client' => [
+                'email' => $faker->email,
+                'name' => $faker->name,
+                'phone' => $faker->phoneNumber,
+                'city' => $faker->city,
+                'address' => $faker->address,
+                'postcode' => $faker->postcode,
+                'country' => $faker->country,
+            ]
         ];
     }
 }

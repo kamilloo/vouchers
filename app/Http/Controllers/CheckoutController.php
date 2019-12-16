@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Checkout;
+use App\Models\Client;
 use App\Models\Merchant;
 use App\Models\Voucher;
 use App\Models\Order;
@@ -36,8 +37,10 @@ class CheckoutController extends Controller
 
     public function proceed(Checkout $request, Merchant $merchant)
     {
-        $order_details = $request->only(array_keys($request->rules()));
-        $order = $merchant->orders()->create($order_details);
+        $client = Client::create($request->getClientParam());
+        $order = $this->makeOrder($request, $merchant);
+        $order->client()->associate($client);
+        $order->save();
         return redirect()->route('checkout.confirmation', compact('merchant', 'order'))->with('success', 'Your order was placed.');
     }
 
@@ -46,4 +49,23 @@ class CheckoutController extends Controller
 
         return view('checkout.confirmation', compact('merchant', 'order'));
     }
+
+    /**
+     * @param Checkout $request
+     * @param Merchant $merchant
+     *
+     * @return \Illuminate\Database\Eloquent\Model
+     */
+    protected function makeOrder(Checkout $request, Merchant $merchant): Order
+    {
+        return $merchant->orders()->make([
+            'voucher_id' => $request->getVoucherIdParam(),
+            'delivery' => $request->getDeliveryParam(),
+            'price' => $request->getPriceParam(),
+            'first_name' => $request->getFirstNameParam(),
+            'last_name' => $request->getLastNameParam(),
+            'phone' => $request->getPhoneParam(),
+            'email' => $request->getEmailParam(),
+        ]);
+}
 }

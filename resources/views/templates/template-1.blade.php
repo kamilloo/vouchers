@@ -28,34 +28,33 @@
             @include('layouts.flash-message')
         </div>
     </div>
-    <div class="container-contact1">
+        <form action="{{ route('checkout.proceed', $merchant) }}" method="post" class="validate-form" >
+            <div class="container-contact1">
 
-        <div class="contact1-pic js-tilt" data-tilt>
-            @if($custom_logo)
-                <img class="img-fluid" src="{{ asset($custom_logo) }}">
-            @else
-                <img class="img-fluid" src="template1/images/img-01.png" alt="logo">
-            @endif
+                <div class="contact1-pic js-tilt" data-tilt>
+                @if($custom_logo)
+                    <img class="img-fluid" src="{{ asset($custom_logo) }}">
+                @else
+                    <img class="img-fluid" src="template1/images/img-01.png" alt="logo">
+                @endif
 
 
-            <div class="col-xs-12 m-t-30">
+                <div class="col-xs-12 m-t-30">
 
-                <checkout-form
-                    :delivery-types="{{ json_encode(\App\Models\Enums\DeliveryType::all()) }}"
-                    :vouchers="{{ json_encode($vouchers) }}"
-                    :selected-voucher="selectedVoucher"
-                    :selected-delivery="selectedDelivery"
-                ></checkout-form>
+                    <checkout-form
+                        :delivery-types="{{ json_encode(\App\Models\Enums\DeliveryType::all()) }}"
+                        :vouchers="{{ json_encode($vouchers) }}"
+                        :selected-voucher="selectedVoucher"
+                        :selected-delivery="selectedDelivery"
+                    ></checkout-form>
+                </div>
             </div>
-        </div>
-
-        <form class="contact1-form validate-form" action="{{ route('checkout.proceed', $merchant) }}" method="post" >
-				<span class="contact1-form-title">
+                <div class="contact1-form">
+                <span class="contact1-form-title">
                     {{ $custom_welcoming ?? __('Podaruj prezent') }}
 				</span>
 
             @csrf
-            <input name="price" value="100">
             <div class="row">
                 <div class="col-xs-12">
                     <div class="bs-stepper">
@@ -201,9 +200,9 @@
                 </div>
             </div>
             <stepper></stepper>
-
+            </div>
+            </div>
         </form>
-    </div>
     </div>
 </div>
 
