@@ -77,7 +77,14 @@
                             <div class="step" data-target="#information-part">
                                 <button type="button" class="step-trigger" role="tab" aria-controls="information-part" id="information-part-trigger">
                                     <span class="bs-stepper-circle">3</span>
-                                    <span class="bs-stepper-label">Personal details</span>
+                                    <span class="bs-stepper-label">{{ __('Your Recipient')}}</span>
+                                </button>
+                            </div>
+                            <div class="line"></div>
+                            <div class="step" data-target="#client-part">
+                                <button type="button" class="step-trigger" role="tab" aria-controls="client-part" id="client-part-trigger">
+                                    <span class="bs-stepper-circle">4</span>
+                                    <span class="bs-stepper-label"> {{ __('Personal details') }}</span>
                                 </button>
                             </div>
                         </div>
@@ -138,7 +145,7 @@
                             </div>
                             <div id="information-part" class="content" role="tabpanel" aria-labelledby="information-part-trigger">
                                 <div class="box">
-                                    <h3 class="box-title">Your details</h3>
+                                    <h3 class="box-title">Your Recipient</h3>
 
 
                                     <div class="wrap-input1 validate-input" data-validate="Name is required">
@@ -155,6 +162,71 @@
                                             <span>{{ $errors->first('last_name') }}</span>
                                         @endif
                                     </div>
+
+                                    <div class="wrap-input1 validate-input" data-validate = "Wybót usługi jest wymagany">
+                                        <input type="email" id="email" class="input1" aria-describedby="email-helper" name="email" value="{{ old('email') }}" placeholder="Email">
+                                        <span class="shadow-input1"></span>
+                                        @if($errors->first('email'))
+                                            <span>{{ $errors->first('email') }}</span>
+                                        @endif
+                                    </div>
+
+                                    <div class="wrap-input1 validate-input" data-validate = "Wybót usługi jest wymagany">
+                                        <input type="text" id="phone" class="input1" aria-describedby="phone-helper" name="phone" value="{{ old('phone') }}" placeholder="Phone">
+                                        <span class="shadow-input1"></span>
+                                        @if($errors->first('phone'))
+                                            <span>{{ $errors->first('phone') }}</span>
+                                        @endif
+                                    </div>
+                                    <div class="container-contact1-form-btn">
+                                            <button type="button" class="contact1-form-btn" onclick="stepper_previous()">
+                                                <span>
+                                                    <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
+                                                    Back to Plan
+                                                </span>
+                                            </button>
+                                    </div>
+                                    <br>
+                                    <div class="container-contact1-form-btn">
+                                        <button type="submit" class="contact1-form-btn" onclick="stepper_next()">
+                                            <span>
+                                                Confirm Order
+                                                    <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                                            </span>
+                                        </button>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <div id="client-part" class="content" role="tabpanel" aria-labelledby="client-part-trigger">
+                                <div class="box">
+                                    <h3 class="box-title">Your details</h3>
+
+
+                                   @include('templates.common.fields.text-input', [
+                                            'data_validate' => 'Name is required',
+                                            'wrapper_class' => 'wrap-input1 validate-input',
+                                            'input_class' => 'input1',
+                                            'id' => 'client-name',
+                                            'name' => "client[]"
+                                        ])
+                                    @include('templates.common.fields.text-input', [
+                                            'data_validate' => 'Name is required',
+                                            'wrapper_class' => 'wrap-input1 validate-input',
+                                            'input_class' => 'input1',
+                                            'id' => 'client-address',
+                                            'name' => "client[]"
+                                        ])
+                                    @include('templates.common.fields.text-input', [
+                                          'data_validate' => 'Wybór usługi jest wymagany',
+                                          'wrapper_class' => 'wrap-input1 validate-input',
+                                          'input_class' => 'input1',
+                                          'id' => 'last-name',
+                                          'name' => 'last_name'
+                                      ])
+
 
                                     <div class="wrap-input1 validate-input" data-validate = "Wybót usługi jest wymagany">
                                         <input type="email" id="email" class="input1" aria-describedby="email-helper" name="email" value="{{ old('email') }}" placeholder="Email">
