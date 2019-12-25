@@ -112,90 +112,47 @@
                                         <span>{{ $errors->first('voucher_id') }}</span>
                                     @endif
                                 </div>
-                                <div class="container-contact1-form-btn">
-                                    <button type="button" class="contact1-form-btn" onclick="stepper_next()">
-                                                <span>
-                                                    Continue With Plans
-                                                    <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
-                                                </span>
-                                    </button>
-                                </div>
+                                @include('templates.common.fields.button-next')
                             </div>
                             <div id="delivery-part" class="content" role="tabpanel" aria-labelledby="delivery-part-trigger">
                                 @include('templates.common.delivery-choose')
 
-                                <div class="container-contact1-form-btn">
-                                    <button type="button" class="contact1-form-btn" onclick="stepper_previous()">
-                                                <span>
-                                                    <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
-                                                    Back to Plan
-                                                </span>
-                                    </button>
-                                </div>
+                                @include('templates.common.fields.button-previous')
                                 <br>
-                                <div class="container-contact1-form-btn">
-                                    <button type="button" class="contact1-form-btn" onclick="stepper_next()">
-                                                <span>
-                                                    Continue With Plans
-                                                    <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
-                                                </span>
-                                    </button>
-                                </div>
+                                @include('templates.common.fields.button-next')
 
                             </div>
                             <div id="information-part" class="content" role="tabpanel" aria-labelledby="information-part-trigger">
                                 <div class="box">
                                     <h3 class="box-title">Your Recipient</h3>
+                                @include('templates.common.fields.text-input', [
+                                    'data_validate' => 'Name is required',
+                                    'wrapper_class' => 'wrap-input1 validate-input',
+                                    'input_class' => 'input1',
+                                    'name' => "first_name"
+                                ])
+                                    @include('templates.common.fields.text-input', [
+                                        'data_validate' => 'Last Name is required',
+                                        'wrapper_class' => 'wrap-input1 validate-input',
+                                        'input_class' => 'input1',
+                                        'name' => "last_name"
+                                    ])
+                                    @include('templates.common.fields.text-input', [
+                                        'data_validate' => 'Email is required',
+                                        'wrapper_class' => 'wrap-input1 validate-input',
+                                        'input_class' => 'input1',
+                                        'name' => "email"
+                                    ])
+                                    @include('templates.common.fields.text-input', [
+                                        'data_validate' => 'Phone is required',
+                                        'wrapper_class' => 'wrap-input1 validate-input',
+                                        'input_class' => 'input1',
+                                        'name' => "phone"
+                                    ])
 
-
-                                    <div class="wrap-input1 validate-input" data-validate="Name is required">
-                                        <input type="text" id="first-name" class="input1" aria-describedby="first-name-helper" name="first_name" value="{{ old('first_name') }}" placeholder="First Name">
-                                        <span class="shadow-input1"></span>
-                                        @if($errors->first('first_name'))
-                                            <span>{{ $errors->first('first_name') }}</span>
-                                        @endif
-                                    </div>
-                                    <div class="wrap-input1 validate-input" data-validate = "Wybót usługi jest wymagany">
-                                        <input type="text" id="last-name" class="input1" aria-describedby="last-name-helper" name="last_name" value="{{ old('last_name') }}" placeholder="Last Name">
-                                        <span class="shadow-input1"></span>
-                                        @if($errors->first('last_name'))
-                                            <span>{{ $errors->first('last_name') }}</span>
-                                        @endif
-                                    </div>
-
-                                    <div class="wrap-input1 validate-input" data-validate = "Wybót usługi jest wymagany">
-                                        <input type="email" id="email" class="input1" aria-describedby="email-helper" name="email" value="{{ old('email') }}" placeholder="Email">
-                                        <span class="shadow-input1"></span>
-                                        @if($errors->first('email'))
-                                            <span>{{ $errors->first('email') }}</span>
-                                        @endif
-                                    </div>
-
-                                    <div class="wrap-input1 validate-input" data-validate = "Wybót usługi jest wymagany">
-                                        <input type="text" id="phone" class="input1" aria-describedby="phone-helper" name="phone" value="{{ old('phone') }}" placeholder="Phone">
-                                        <span class="shadow-input1"></span>
-                                        @if($errors->first('phone'))
-                                            <span>{{ $errors->first('phone') }}</span>
-                                        @endif
-                                    </div>
-                                    <div class="container-contact1-form-btn">
-                                            <button type="button" class="contact1-form-btn" onclick="stepper_previous()">
-                                                <span>
-                                                    <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
-                                                    Back to Plan
-                                                </span>
-                                            </button>
-                                    </div>
+                                    @include('templates.common.fields.button-previous')
                                     <br>
-                                    <div class="container-contact1-form-btn">
-                                        <button type="submit" class="contact1-form-btn" onclick="stepper_next()">
-                                            <span>
-                                                Confirm Order
-                                                    <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
-                                            </span>
-                                        </button>
-
-                                    </div>
+                                    @include('templates.common.fields.button-next')
 
                                 </div>
 
@@ -204,64 +161,16 @@
                                 <div class="box">
                                     <h3 class="box-title">Your details</h3>
 
-
-                                   @include('templates.common.fields.text-input', [
-                                            'data_validate' => 'Name is required',
-                                            'wrapper_class' => 'wrap-input1 validate-input',
-                                            'input_class' => 'input1',
-                                            'id' => 'client-name',
-                                            'name' => "client[]"
-                                        ])
-                                    @include('templates.common.fields.text-input', [
-                                            'data_validate' => 'Name is required',
-                                            'wrapper_class' => 'wrap-input1 validate-input',
-                                            'input_class' => 'input1',
-                                            'id' => 'client-address',
-                                            'name' => "client[]"
-                                        ])
-                                    @include('templates.common.fields.text-input', [
-                                          'data_validate' => 'Wybór usługi jest wymagany',
-                                          'wrapper_class' => 'wrap-input1 validate-input',
-                                          'input_class' => 'input1',
-                                          'id' => 'last-name',
-                                          'name' => 'last_name'
-                                      ])
-
-
-                                    <div class="wrap-input1 validate-input" data-validate = "Wybót usługi jest wymagany">
-                                        <input type="email" id="email" class="input1" aria-describedby="email-helper" name="email" value="{{ old('email') }}" placeholder="Email">
-                                        <span class="shadow-input1"></span>
-                                        @if($errors->first('email'))
-                                            <span>{{ $errors->first('email') }}</span>
-                                        @endif
-                                    </div>
-
-                                    <div class="wrap-input1 validate-input" data-validate = "Wybót usługi jest wymagany">
-                                        <input type="text" id="phone" class="input1" aria-describedby="phone-helper" name="phone" value="{{ old('phone') }}" placeholder="Phone">
-                                        <span class="shadow-input1"></span>
-                                        @if($errors->first('phone'))
-                                            <span>{{ $errors->first('phone') }}</span>
-                                        @endif
-                                    </div>
-                                    <div class="container-contact1-form-btn">
-                                            <button type="button" class="contact1-form-btn" onclick="stepper_previous()">
-                                                <span>
-                                                    <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
-                                                    Back to Plan
-                                                </span>
-                                            </button>
-                                    </div>
+                                    @include('templates.common.fields.text-input-table', [
+                                        'data_validate' => 'Country is required',
+                                        'wrapper_class' => 'wrap-input1 validate-input',
+                                        'input_class' => 'input1',
+                                        'name' => "client",
+                                        'fields' => ['name', 'email', 'phone', 'city', 'address', 'postcode', 'country']
+                                    ])
+                                    @include('templates.common.fields.button-previous')
                                     <br>
-                                    <div class="container-contact1-form-btn">
-                                        <button type="submit" class="contact1-form-btn" onclick="stepper_next()">
-                                            <span>
-                                                Confirm Order
-                                                    <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
-                                            </span>
-                                        </button>
-
-                                    </div>
-
+                                    @include('templates.common.fields.button-confirm')
                                 </div>
 
                             </div>
