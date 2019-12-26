@@ -60,33 +60,29 @@
                     <div class="bs-stepper">
                         <div class="bs-stepper-header" role="tablist">
                             <!-- your steps here -->
-                            <div class="step" data-target="#vouchers-part">
-                                <button type="button" class="step-trigger" role="tab" aria-controls="vouchers-part" id="vouchers-part-trigger">
-                                    <span class="bs-stepper-circle">1</span>
-                                    <span class="bs-stepper-label">Logins</span>
-                                </button>
-                            </div>
+                            @include('templates.common.steppers.step', [
+                                'target' => 'vouchers-part',
+                                'counter' => 1,
+                                'label' => __('Choose Voucher')
+                            ])
                             <div class="line"></div>
-                            <div class="step" data-target="#delivery-part">
-                                <button type="button" class="step-trigger" role="tab" aria-controls="delivery-part" id="delivery-part-trigger">
-                                    <span class="bs-stepper-circle">2</span>
-                                    <span class="bs-stepper-label">Delivery</span>
-                                </button>
-                            </div>
+                            @include('templates.common.steppers.step', [
+                                'target' => 'delivery-part',
+                                'counter' => 2,
+                                'label' => __('Delivery')
+                            ])
                             <div class="line"></div>
-                            <div class="step" data-target="#information-part">
-                                <button type="button" class="step-trigger" role="tab" aria-controls="information-part" id="information-part-trigger">
-                                    <span class="bs-stepper-circle">3</span>
-                                    <span class="bs-stepper-label">{{ __('Your Recipient')}}</span>
-                                </button>
-                            </div>
+                            @include('templates.common.steppers.step', [
+                                'target' => 'information-part',
+                                'counter' => 3,
+                                'label' => __('Your Recipient')
+                            ])
                             <div class="line"></div>
-                            <div class="step" data-target="#client-part">
-                                <button type="button" class="step-trigger" role="tab" aria-controls="client-part" id="client-part-trigger">
-                                    <span class="bs-stepper-circle">4</span>
-                                    <span class="bs-stepper-label"> {{ __('Personal details') }}</span>
-                                </button>
-                            </div>
+                            @include('templates.common.steppers.step', [
+                                'target' => 'client-part',
+                                'counter' => 4,
+                                'label' => __('Personal Details')
+                            ])
                         </div>
                         <div class="bs-stepper-content">
                             <!-- your steps content here -->
