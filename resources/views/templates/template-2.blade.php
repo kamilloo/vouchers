@@ -44,13 +44,8 @@
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-5 col-xs-12">
 
-                                <checkout-form
-                                    :delivery-types="{{ json_encode(\App\Models\Enums\DeliveryType::all()) }}"
-                                    :vouchers="{{ json_encode($vouchers) }}"
-                                    :selected-voucher="selectedVoucher"
-                                    :selected-delivery="selectedDelivery"
-                                ></checkout-form>
-                                @if($custom_logo)
+                                @include('templates.common.checkout-form')
+                            @if($custom_logo)
                                 <img class="img-fluid" src="{{ asset($custom_logo) }}">
                                 @else
                                 <img class="img-fluid" src="">
