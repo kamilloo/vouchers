@@ -10,6 +10,10 @@
 
 @import '~bs-stepper/dist/css/bs-stepper.min.css';
 
+.bs-stepper .step-trigger{
+    font-size: 1rem;
+}
+
 .navbar-laravel {
     background-color: $body-bg;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);

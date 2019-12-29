@@ -8,8 +8,6 @@
         @include('templates.common.delivery-choose')
 
         @include('templates.template-1.buttons.button-previous')
-        <br>
-        @include('templates.template-1.buttons.button-next')
 
     </div>
     <div id="information-part" class="content" role="tabpanel" aria-labelledby="information-part-trigger">
@@ -31,12 +29,10 @@
                 'data_validate' => 'Phone is required',
                 'name' => "phone"
             ])
+        </div>
 
             @include('templates.template-1.buttons.button-previous')
-            <br>
-            @include('templates.template-1.buttons.button-next')
 
-        </div>
 
     </div>
     <div id="client-part" class="content" role="tabpanel" aria-labelledby="client-part-trigger">
@@ -48,10 +44,9 @@
                 'name' => "client",
                 'fields' => ['name', 'email', 'phone', 'city', 'address', 'postcode', 'country']
             ])
-            @include('templates.template-1.buttons.button-previous')
-            <br>
-            @include('templates.template-1.buttons.button-confirm')
         </div>
+
+        @include('templates.template-1.buttons.button-confirm')
 
     </div>
 </div>

@@ -3,7 +3,7 @@
     @include('templates.common.steppers.step', [
         'target' => 'vouchers-part',
         'counter' => 1,
-        'label' => __('Choose Voucher')
+        'label' => __('Choose')
     ])
     <div class="line"></div>
     @include('templates.common.steppers.step', [
@@ -15,12 +15,12 @@
     @include('templates.common.steppers.step', [
         'target' => 'information-part',
         'counter' => 3,
-        'label' => __('Your Recipient')
+        'label' => __('Recipient')
     ])
     <div class="line"></div>
     @include('templates.common.steppers.step', [
         'target' => 'client-part',
         'counter' => 4,
-        'label' => __('Personal Details')
+        'label' => __('Details')
     ])
 </div>

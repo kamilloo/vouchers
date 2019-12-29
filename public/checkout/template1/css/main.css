@@ -177,18 +177,18 @@ iframe {
 /*------------------------------------------------------------------
 [  ]*/
 .contact1-pic {
-  width: 296px;
+  width: 30%;
 }
 
 .contact1-pic img {
-  max-width: 100%;
+  width: 100%;
 }
 
 
 /*------------------------------------------------------------------
 [  ]*/
 .contact1-form {
-  width: 390px;
+  width: 60%;
 }
 
 .contact1-form-title {
@@ -277,11 +277,11 @@ textarea.input1 + .shadow-input1 {
   display: -ms-flexbox;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 .contact1-form-btn {
-  min-width: 193px;
+  min-width: 150px;
   height: 50px;
   border-radius: 25px;
   background: #57b846;
@@ -297,7 +297,7 @@ textarea.input1 + .shadow-input1 {
   justify-content: center;
   align-items: center;
   padding: 0 25px;
-
+    flex-wrap: wrap;
   -webkit-transition: all 0.4s;
   -o-transition: all 0.4s;
   -moz-transition: all 0.4s;
@@ -332,27 +332,26 @@ textarea.input1 + .shadow-input1 {
 [ Responsive ]*/
 
 @media (max-width: 1200px) {
-  .contact1-pic {
-    width: 33.5%;
-  }
+    .container-contact1 {
+        width: 100%;
+        padding: 90px 130px 88px 90px;
+    }
 
-  .contact1-form {
-    width: 44%;
-  }
+    .contact1-pic {
+        width: 35%;
+    }
+
+
 }
+
 
 @media (max-width: 992px) {
   .container-contact1 {
     padding: 90px 80px 88px 90px;
   }
-
-  .contact1-pic {
-    width: 35%;
-  }
-
-  .contact1-form {
-    width: 55%;
-  }
+    .contact1-form-btn{
+        width: 150px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -361,7 +360,7 @@ textarea.input1 + .shadow-input1 {
   }
 
   .contact1-pic {
-    display: none;
+    width: 100%;
   }
 
   .contact1-form {
