@@ -10,8 +10,23 @@
 
 @import '~bs-stepper/dist/css/bs-stepper.min.css';
 
-.bs-stepper .step-trigger{
-    font-size: 1rem;
+@import "~@fortawesome/fontawesome-free/css/fontawesome.css";
+
+@import "~animate.css/animate.css";
+
+@import "~hamburgers/dist/hamburgers.css";
+
+@import "~select2/dist/css/select2.css";
+
+@import "../css/fonts.scss";
+
+.template-1 {
+    @import "../css/util.scss";
+    @import "../css/main.scss";
+    @import "../css/bs-stepper";
+    .bs-stepper .step-trigger{
+        font-size: 1rem;
+    }
 }
 
 .navbar-laravel {

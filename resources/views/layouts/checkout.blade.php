@@ -23,7 +23,7 @@
 
 </head>
 <body>
-    <div id="app">
+    <div id="app" class="template-1">
         @yield('content')
     </div>
 </body>

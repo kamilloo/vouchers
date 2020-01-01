@@ -14,13 +14,12 @@
 {{--    <!--===============================================================================================-->--}}
 {{--    <link rel="stylesheet" type="text/css" href="template1/vendor/select2/select2.min.css">--}}
 {{--    <!--===============================================================================================-->--}}
-    <link rel="stylesheet" type="text/css" href="template1/css/util.css">
-    <link rel="stylesheet" type="text/css" href="template1/css/main.css">
+{{--    <link rel="stylesheet" type="text/css" href="template1/css/util.css">--}}
+{{--    <link rel="stylesheet" type="text/css" href="template1/css/main.css">--}}
 {{--    <!--===============================================================================================-->--}}
 @endsection
 
 @section('content')
-
     <div class="contact1"
          @if($custom_background_image)style="background-image:url({{  asset($custom_background_image) }});"
          @else style="background-image: url('template2/images/bg-01.jpg');" @endif>

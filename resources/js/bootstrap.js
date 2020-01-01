@@ -11,7 +11,6 @@ try {
     window.Popper = require('popper.js').default;
     window.$ = window.jQuery = require('jquery');
 
-
     require('bootstrap');
 } catch (e) {}
 
@@ -55,3 +54,7 @@ if (token) {
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     encrypted: true
 // });
+
+window.Select2 = require('select2');
+window.Tilt = require('tilt.js');
+require('./template-1/main.js');
