@@ -59446,6 +59446,12 @@ window.Tilt = __webpack_require__(/*! tilt.js */ "./node_modules/tilt.js/src/til
 
 __webpack_require__(/*! ./template-1/main.js */ "./resources/js/template-1/main.js");
 
+__webpack_require__(/*! ./template-2/main.js */ "./resources/js/template-2/main.js");
+
+__webpack_require__(/*! ./template-3/main.js */ "./resources/js/template-3/main.js");
+
+__webpack_require__(/*! ./template-4/main.js */ "./resources/js/template-4/main.js");
+
 /***/ }),
 
 /***/ "./resources/js/components/AddVoucherServiceSelect.vue":
@@ -60252,6 +60258,231 @@ __webpack_require__.r(__webpack_exports__);
     return check;
   });
   $('.validate-form .input1').each(function () {
+    $(this).focus(function () {
+      hideValidate(this);
+    });
+  });
+
+  function showValidate(input) {
+    var thisAlert = $(input).parent();
+    $(thisAlert).addClass('alert-validate');
+  }
+
+  function hideValidate(input) {
+    var thisAlert = $(input).parent();
+    $(thisAlert).removeClass('alert-validate');
+  }
+
+  $('.js-tilt').tilt({
+    scale: 1.5
+  });
+})(jQuery);
+
+/***/ }),
+
+/***/ "./resources/js/template-2/main.js":
+/*!*****************************************!*\
+  !*** ./resources/js/template-2/main.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function ($) {
+  "use strict";
+  /*==================================================================
+  [ Focus Contact2 ]*/
+
+  $('.input2').each(function () {
+    $(this).on('blur', function () {
+      if ($(this).val().trim() != "") {
+        $(this).addClass('has-val');
+      } else {
+        $(this).removeClass('has-val');
+      }
+    });
+  });
+  /*==================================================================
+  [ Validate ]*/
+
+  var name = $('.validate-input input[name="name"]');
+  var email = $('.validate-input input[name="email"]');
+  var message = $('.validate-input textarea[name="message"]');
+  $('.validate-form').on('submit', function () {
+    var check = true;
+
+    if ($(name).val().trim() == '') {
+      showValidate(name);
+      check = false;
+    }
+
+    if ($(email).val().trim().match(/^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{1,5}|[0-9]{1,3})(\]?)$/) == null) {
+      showValidate(email);
+      check = false;
+    }
+
+    if ($(message).val().trim() == '') {
+      showValidate(message);
+      check = false;
+    }
+
+    return check;
+  });
+  $('.validate-form .input2').each(function () {
+    $(this).focus(function () {
+      hideValidate(this);
+    });
+  });
+
+  function showValidate(input) {
+    var thisAlert = $(input).parent();
+    $(thisAlert).addClass('alert-validate');
+  }
+
+  function hideValidate(input) {
+    var thisAlert = $(input).parent();
+    $(thisAlert).removeClass('alert-validate');
+  }
+})(jQuery);
+
+/***/ }),
+
+/***/ "./resources/js/template-3/main.js":
+/*!*****************************************!*\
+  !*** ./resources/js/template-3/main.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function ($) {
+  "use strict";
+
+  $(".selection-2").select2({
+    minimumResultsForSearch: 20,
+    dropdownParent: $('#dropDownSelect1')
+  });
+  /*==================================================================
+  [ Focus Contact2 ]*/
+
+  $('.input3').each(function () {
+    $(this).on('blur', function () {
+      if ($(this).val().trim() != "") {
+        $(this).addClass('has-val');
+      } else {
+        $(this).removeClass('has-val');
+      }
+    });
+  });
+  /*==================================================================
+  [ Chose Radio ]*/
+
+  $("#radio1").on('change', function () {
+    if ($(this).is(":checked")) {
+      $('.input3-select').slideUp(300);
+    }
+  });
+  $("#radio2").on('change', function () {
+    if ($(this).is(":checked")) {
+      $('.input3-select').slideDown(300);
+    }
+  });
+  /*==================================================================
+  [ Validate ]*/
+
+  var name = $('.validate-input input[name="name"]');
+  var email = $('.validate-input input[name="email"]');
+  var message = $('.validate-input textarea[name="message"]');
+  $('.validate-form').on('submit', function () {
+    var check = true;
+
+    if ($(name).val().trim() == '') {
+      showValidate(name);
+      check = false;
+    }
+
+    if ($(email).val().trim().match(/^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{1,5}|[0-9]{1,3})(\]?)$/) == null) {
+      showValidate(email);
+      check = false;
+    }
+
+    if ($(message).val().trim() == '') {
+      showValidate(message);
+      check = false;
+    }
+
+    return check;
+  });
+  $('.validate-form .input3').each(function () {
+    $(this).focus(function () {
+      hideValidate(this);
+    });
+  });
+
+  function showValidate(input) {
+    var thisAlert = $(input).parent();
+    $(thisAlert).addClass('alert-validate');
+  }
+
+  function hideValidate(input) {
+    var thisAlert = $(input).parent();
+    $(thisAlert).removeClass('alert-validate');
+  }
+})(jQuery);
+
+/***/ }),
+
+/***/ "./resources/js/template-4/main.js":
+/*!*****************************************!*\
+  !*** ./resources/js/template-4/main.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function ($) {
+  "use strict";
+
+  $(".selection-2").select2({
+    minimumResultsForSearch: 20,
+    dropdownParent: $('#dropDownSelect1')
+  });
+  /*==================================================================
+  [ Focus Contact2 ]*/
+
+  $('.input100').each(function () {
+    $(this).on('blur', function () {
+      if ($(this).val().trim() != "") {
+        $(this).addClass('has-val');
+      } else {
+        $(this).removeClass('has-val');
+      }
+    });
+  });
+  /*==================================================================
+  [ Validate ]*/
+
+  var name = $('.validate-input input[name="name"]');
+  var email = $('.validate-input input[name="email"]');
+  var message = $('.validate-input textarea[name="message"]');
+  $('.validate-form').on('submit', function () {
+    var check = true;
+
+    if ($(name).val().trim() == '') {
+      showValidate(name);
+      check = false;
+    }
+
+    if ($(email).val().trim().match(/^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{1,5}|[0-9]{1,3})(\]?)$/) == null) {
+      showValidate(email);
+      check = false;
+    }
+
+    if ($(message).val().trim() == '') {
+      showValidate(message);
+      check = false;
+    }
+
+    return check;
+  });
+  $('.validate-form .input100').each(function () {
     $(this).focus(function () {
       hideValidate(this);
     });

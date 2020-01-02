@@ -2,7 +2,7 @@
 (function ($) {
     "use strict";
 
-    
+
     /*==================================================================
     [ Validate ]*/
     var name = $('.validate-input input[name="name"]');
@@ -56,7 +56,8 @@
 
         $(thisAlert).removeClass('alert-validate');
     }
-    
-    
+    $('.js-tilt').tilt({
+        scale: 1.5
+    })
 
 })(jQuery);

@@ -2,10 +2,14 @@
 (function ($) {
     "use strict";
 
+    $(".selection-2").select2({
+        minimumResultsForSearch: 20,
+        dropdownParent: $('#dropDownSelect1')
+    });
 
     /*==================================================================
     [ Focus Contact2 ]*/
-    $('.input2').each(function(){
+    $('.input100').each(function(){
         $(this).on('blur', function(){
             if($(this).val().trim() != "") {
                 $(this).addClass('has-val');
@@ -15,7 +19,6 @@
             }
         })
     })
-
 
 
     /*==================================================================
@@ -48,7 +51,7 @@
     });
 
 
-    $('.validate-form .input2').each(function(){
+    $('.validate-form .input100').each(function(){
         $(this).focus(function(){
            hideValidate(this);
        });

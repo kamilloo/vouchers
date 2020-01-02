@@ -1,4 +1,3 @@
-
 (function ($) {
     "use strict";
 
@@ -50,8 +49,8 @@
 
     $('.validate-form .input2').each(function(){
         $(this).focus(function(){
-           hideValidate(this);
-       });
+            hideValidate(this);
+        });
     });
 
     function showValidate(input) {

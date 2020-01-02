@@ -22,7 +22,31 @@
 
 .template-1 {
     @import "../css/util.scss";
-    @import "../css/main.scss";
+    @import "../css/template-1/main.scss";
+    @import "../css/bs-stepper";
+    .bs-stepper .step-trigger{
+        font-size: 1rem;
+    }
+}
+.template-2 {
+    @import "../css/util.scss";
+    @import "../css/template-2/main.scss";
+    @import "../css/bs-stepper";
+    .bs-stepper .step-trigger{
+        font-size: 1rem;
+    }
+}
+.template-3 {
+    @import "../css/util.scss";
+    @import "../css/template-3/main.scss";
+    @import "../css/bs-stepper";
+    .bs-stepper .step-trigger{
+        font-size: 1rem;
+    }
+}
+.template-4 {
+    @import "../css/util.scss";
+    @import "../css/template-4/main.scss";
     @import "../css/bs-stepper";
     .bs-stepper .step-trigger{
         font-size: 1rem;

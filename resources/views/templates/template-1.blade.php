@@ -1,24 +1,5 @@
 @extends('layouts.checkout')
 
-@section('head')
-
-{{--    <!--===============================================================================================-->--}}
-{{--    <link rel="stylesheet" type="text/css" href="template1/vendor/bootstrap/css/bootstrap.min.css">--}}
-{{--    <!--===============================================================================================-->--}}
-{{--    <link rel="stylesheet" type="text/css" href="template1/fonts/font-awesome-4.7.0/css/font-awesome.min.css">--}}
-{{--    <!--===============================================================================================-->--}}
-{{--    <link rel="stylesheet" type="text/css" href="template1/vendor/animate/animate.css">--}}
-{{--    <!--===============================================================================================-->--}}
-{{--    <link rel="stylesheet" type="text/css"--}}
-{{--          href="template1/vendor/css-hamburgers/hamburgers.min.css">--}}
-{{--    <!--===============================================================================================-->--}}
-{{--    <link rel="stylesheet" type="text/css" href="template1/vendor/select2/select2.min.css">--}}
-{{--    <!--===============================================================================================-->--}}
-{{--    <link rel="stylesheet" type="text/css" href="template1/css/util.css">--}}
-{{--    <link rel="stylesheet" type="text/css" href="template1/css/main.css">--}}
-{{--    <!--===============================================================================================-->--}}
-@endsection
-
 @section('content')
     <div class="contact1"
          @if($custom_background_image)style="background-image:url({{  asset($custom_background_image) }});"
@@ -34,7 +15,7 @@
                   class="validate-form">
                 <div class="container-contact1">
 
-                    <div class="contact1-pic" data-tilt>
+                    <div class="contact1-pic js-tilt" >
                         @if($custom_logo)
                             <img class="img-fluid" src="{{ asset($custom_logo) }}">
                         @else
@@ -61,20 +42,4 @@
             </form>
         </div>
     </div>
-
-
-
-
-{{--    <!--===============================================================================================-->--}}
-{{--    <script src="template1/vendor/jquery/jquery-3.2.1.min.js"></script>--}}
-{{--    <!--===============================================================================================-->--}}
-{{--    <script src="template1/vendor/bootstrap/js/popper.js"></script>--}}
-{{--    <script src="template1/vendor/bootstrap/js/bootstrap.min.js"></script>--}}
-{{--    <!--===============================================================================================-->--}}
-{{--    <script src="template1/vendor/select2/select2.min.js"></script>--}}
-{{--    <!--===============================================================================================-->--}}
-{{--    <script src="template1/vendor/tilt/tilt.jquery.min.js"></script>--}}
-
-{{--    <!--===============================================================================================-->--}}
-{{--    <script src="template1/js/main.js"></script>--}}
 @endsection

@@ -2,10 +2,13 @@
 (function ($) {
     "use strict";
 
-
+    $(".selection-2").select2({
+        minimumResultsForSearch: 20,
+        dropdownParent: $('#dropDownSelect1')
+    });
     /*==================================================================
     [ Focus Contact2 ]*/
-    $('.input2').each(function(){
+    $('.input3').each(function(){
         $(this).on('blur', function(){
             if($(this).val().trim() != "") {
                 $(this).addClass('has-val');
@@ -15,6 +18,21 @@
             }
         })
     })
+
+
+    /*==================================================================
+    [ Chose Radio ]*/
+    $("#radio1").on('change', function(){
+        if ($(this).is(":checked")) {
+            $('.input3-select').slideUp(300);
+        }
+    });
+
+    $("#radio2").on('change', function(){
+        if ($(this).is(":checked")) {
+            $('.input3-select').slideDown(300);
+        }
+    });
 
 
 
@@ -48,7 +66,7 @@
     });
 
 
-    $('.validate-form .input2').each(function(){
+    $('.validate-form .input3').each(function(){
         $(this).focus(function(){
            hideValidate(this);
        });

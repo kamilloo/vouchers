@@ -58,3 +58,6 @@ if (token) {
 window.Select2 = require('select2');
 window.Tilt = require('tilt.js');
 require('./template-1/main.js');
+require('./template-2/main.js');
+require('./template-3/main.js');
+require('./template-4/main.js');

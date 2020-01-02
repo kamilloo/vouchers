@@ -19,11 +19,10 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
-    @yield('head')
-
 </head>
 <body>
-    <div id="app" class="template-1">
+
+    <div id="app" class="{{ $merchant->template->file_name }}">
         @yield('content')
     </div>
 </body>
