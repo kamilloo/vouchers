@@ -2,14 +2,16 @@
     <!-- your steps content here -->
     <div id="vouchers-part" class="content" role="tabpanel" aria-labelledby="vouchers-part-trigger">
         @include('templates.common.voucher-selection')
+        <div class="container-contact2-form-btn">
         @include('templates.template-2.buttons.button-next')
+        </div>
     </div>
     <div id="delivery-part" class="content" role="tabpanel" aria-labelledby="delivery-part-trigger">
         @include('templates.common.delivery-choose')
-
+        <div class="container-contact2-form-btn">
         @include('templates.template-2.buttons.button-previous')
-        <br>
         @include('templates.template-2.buttons.button-next')
+        </div>
 
     </div>
     <div id="information-part" class="content" role="tabpanel" aria-labelledby="information-part-trigger">
@@ -31,13 +33,11 @@
                 'data_validate' => 'Phone is required',
                 'name' => "phone"
             ])
-
-            @include('templates.template-2.buttons.button-previous')
-            <br>
-            @include('templates.template-2.buttons.button-next')
-
         </div>
-
+        <div class="container-contact2-form-btn">
+            @include('templates.template-2.buttons.button-previous')
+            @include('templates.template-2.buttons.button-next')
+        </div>
     </div>
     <div id="client-part" class="content" role="tabpanel" aria-labelledby="client-part-trigger">
         <div class="box">
@@ -48,8 +48,9 @@
                 'name' => "client",
                 'fields' => ['name', 'email', 'phone', 'city', 'address', 'postcode', 'country']
             ])
+        </div>
+        <div class="container-contact2-form-btn">
             @include('templates.template-2.buttons.button-previous')
-            <br>
             @include('templates.template-2.buttons.button-confirm')
         </div>
 

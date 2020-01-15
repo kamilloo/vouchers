@@ -35447,7 +35447,7 @@ h3 {
   color: #333333;
   line-height: 1.2;
   text-align: center;
-  padding-bottom: 90px;
+  padding-bottom: 10px;
 }
 .template-2 .wrap-input2 {
   width: 100%;
@@ -35564,7 +35564,7 @@ h3 {
   -webkit-box-align: center;
           align-items: center;
   padding: 0 20px;
-  min-width: 244px;
+  min-width: 200px;
   height: 50px;
   font-family: Poppins-Medium;
   font-size: 16px;
@@ -35574,8 +35574,33 @@ h3 {
 .template-2 .wrap-contact2-form-btn:hover .contact2-form-bgbtn {
   left: 0;
 }
+.template-2 .content {
+  padding-top: 10px;
+}
+@media (max-width: 992px) {
+  .template-2 .container-contact2 {
+    padding: 90px 80px 88px 90px;
+  }
+  .template-2 .contact2-form-btn {
+    width: 150px;
+  }
+}
+@media (max-width: 768px) {
+  .template-2 .container-contact2 {
+    padding: 90px 80px 88px 80px;
+  }
+  .template-2 .contact2-form {
+    width: 100%;
+  }
+  .template-2 .wrap-contact2 {
+    padding: 72px 15px 90px 15px;
+  }
+}
 @media (max-width: 576px) {
   .template-2 .wrap-contact2 {
+    padding: 0;
+  }
+  .template-2 .container-contact2 {
     padding: 72px 15px 90px 15px;
   }
 }
@@ -43367,6 +43392,12 @@ h3 {
 }
 .template-3 .container-contact3-form-btn {
   padding-top: 23px;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+          align-items: center;
 }
 .template-3 .contact3-form-btn {
   font-family: Poppins-Medium;
@@ -51387,12 +51418,12 @@ h3 {
   display: -webkit-box;
   display: flex;
   flex-wrap: wrap;
-  -webkit-box-pack: center;
-          justify-content: center;
+  -webkit-box-pack: justify;
+          justify-content: space-between;
   padding-top: 13px;
 }
 .template-4 .wrap-contact100-form-btn {
-  width: 100%;
+  min-width: 200px;
   display: block;
   position: relative;
   z-index: 1;

@@ -232,6 +232,14 @@ textarea.input3 {
 [  ]*/
 .container-contact3-form-btn {
   padding-top: 23px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
 }
 
 .contact3-form-btn {

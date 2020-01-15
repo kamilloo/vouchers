@@ -159,7 +159,7 @@ iframe {
   color: #333333;
   line-height: 1.2;
   text-align: center;
-  padding-bottom: 90px;
+  padding-bottom: 10px;
 }
 
 
@@ -322,7 +322,7 @@ textarea.input2 + .focus-input2::after {
   justify-content: center;
   align-items: center;
   padding: 0 20px;
-  min-width: 244px;
+  min-width: 200px;
   height: 50px;
 
 
@@ -339,13 +339,43 @@ textarea.input2 + .focus-input2::after {
   left: 0;
 }
 
+.content {
+    padding-top: 10px;
+}
+
 /*------------------------------------------------------------------
 [ Responsive ]*/
 
+@media (max-width: 992px) {
+    .container-contact2 {
+        padding: 90px 80px 88px 90px;
+    }
+    .contact2-form-btn{
+        width: 150px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container-contact2 {
+        padding: 90px 80px 88px 80px;
+    }
+
+    .contact2-form {
+        width: 100%;
+    }
+
+    .wrap-contact2 {
+        padding: 72px 15px 90px 15px;
+    }
+}
+
 @media (max-width: 576px) {
-  .wrap-contact2 {
-    padding: 72px 15px 90px 15px;
-  }
+    .wrap-contact2 {
+        padding: 0;
+    }
+    .container-contact2 {
+        padding: 72px 15px 90px 15px;
+    }
 }
 
 

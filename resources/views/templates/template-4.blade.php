@@ -17,7 +17,7 @@
 				</span>
             @csrf
             <div class="row">
-                <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12">
+                <div class="col-lg-8 col-md-12">
                     <div class="bs-stepper">
                         @include('templates.common.steppers.stepper-header')
                         @include('templates.template-4.steppers.stepper-content')
@@ -25,7 +25,7 @@
 
 
                 </div>
-                <div class="col-lg-4 col-md-4 col-sm-5 col-xs-12">
+                <div class="col-lg-4 col-md-12">
                     @include('templates.common.checkout-form')
                 </div>
             </div>

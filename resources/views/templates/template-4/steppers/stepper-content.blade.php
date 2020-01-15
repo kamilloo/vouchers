@@ -2,14 +2,16 @@
     <!-- your steps content here -->
     <div id="vouchers-part" class="content" role="tabpanel" aria-labelledby="vouchers-part-trigger">
         @include('templates.common.voucher-selection')
+        <div class="container-contact100-form-btn">
         @include('templates.template-4.buttons.button-next')
+        </div>
     </div>
     <div id="delivery-part" class="content" role="tabpanel" aria-labelledby="delivery-part-trigger">
         @include('templates.common.delivery-choose')
-
+        <div class="container-contact100-form-btn">
         @include('templates.template-4.buttons.button-previous')
-        <br>
         @include('templates.template-4.buttons.button-next')
+        </div>
 
     </div>
     <div id="information-part" class="content" role="tabpanel" aria-labelledby="information-part-trigger">
@@ -32,10 +34,11 @@
                 'name' => "phone"
             ])
 
-            @include('templates.template-4.buttons.button-previous')
-            <br>
-            @include('templates.template-4.buttons.button-next')
 
+        </div>
+        <div class="container-contact100-form-btn">
+            @include('templates.template-4.buttons.button-previous')
+            @include('templates.template-4.buttons.button-next')
         </div>
 
     </div>
@@ -48,8 +51,9 @@
                 'name' => "client",
                 'fields' => ['name', 'email', 'phone', 'city', 'address', 'postcode', 'country']
             ])
+        </div>
+        <div class="container-contact100-form-btn">
             @include('templates.template-4.buttons.button-previous')
-            <br>
             @include('templates.template-4.buttons.button-confirm')
         </div>
 
