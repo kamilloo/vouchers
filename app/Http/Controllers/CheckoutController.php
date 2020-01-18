@@ -46,8 +46,26 @@ class CheckoutController extends Controller
 
     public function confirmation(Merchant $merchant, Order $order)
     {
+        if ($merchant->shopImages()->exists())
+        {
+            $custom_logo = $merchant->shopImages->logo_enabled ? $merchant->shopImages->logo : null;
+            $custom_background_image = $merchant->shopImages->front_enabled ? $merchant->shopImages->front : null;
+        }
+        if ($merchant->shopStyles()->exists())
+        {
+            $custom_welcoming = $merchant->shopStyles->welcoming;
+            $custom_background = $merchant->shopStyles->background_color;
+        }
 
-        return view('checkout.confirmation', compact('merchant', 'order'));
+        return view('checkout.confirmation.'. $merchant->template->file_name, compact(
+            'vouchers',
+            'merchant',
+            'custom_logo',
+            'custom_background_image',
+            'custom_welcoming',
+            'custom_background',
+            'order'
+        ));
     }
 
     /**

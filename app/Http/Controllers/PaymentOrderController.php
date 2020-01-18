@@ -31,7 +31,9 @@ class PaymentOrderController extends Controller
                 'payment' => $payment,
             ])->with(['success' => 'Congratulation!, you bought voucher successful.']);
         }
-        return view('payment.return');
+        return view('payment.return', [
+            'payment' => $payment,
+        ])->with(['success' => 'Congratulation!, you bought voucher successful.']);
 
     }
 
@@ -46,7 +48,27 @@ class PaymentOrderController extends Controller
     public function recap(Payment $payment)
     {
         $order = $payment->order;
-        return view('payment.recap', compact('order'));
+        $merchant = $payment->merchant->fresh();
+        if ($merchant->shopImages()->exists())
+        {
+            $custom_logo = $merchant->shopImages->logo_enabled ? $merchant->shopImages->logo : null;
+            $custom_background_image = $merchant->shopImages->front_enabled ? $merchant->shopImages->front : null;
+        }
+        if ($merchant->shopStyles()->exists())
+        {
+            $custom_welcoming = $merchant->shopStyles->welcoming;
+            $custom_background = $merchant->shopStyles->background_color;
+        }
+
+        return view('payment.recap.'. $merchant->template->file_name, compact(
+            'vouchers',
+            'merchant',
+            'custom_logo',
+            'custom_background_image',
+            'custom_welcoming',
+            'custom_background',
+            'order'
+        ));
     }
 
     public function sandboxGateway(Payment $payment)
