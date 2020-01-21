@@ -68,7 +68,7 @@
     <tr><td class="left">email: {{ $user_profile->user->email }}</td><td class="right">adres: {{$user_profile->address }}</td></tr>
 </table>
 <div >
-    <img class="qr-code" src="{{ asset('images/qrcode-sample.png') }}" alt="QR Code">
+    <img class="qr-code" src="{{ asset('qrcode.png') }}" alt="QR Code">
 </div>
 
 <p class="small">Termin realizacji bonu upływa: 20.10.2010r.</p>

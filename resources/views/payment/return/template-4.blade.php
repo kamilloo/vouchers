@@ -13,10 +13,18 @@
                     </div>
                 </div>
                 <section class="col">
-                    @include('payment.recap.template-4.box')
+                    @include('payment.recap.template-4.box', [
+                        'lead' => __('You can send Voucher to Kamil'),
+                        'help' => __('Waiting for payment confirmation.')
+                    ])
                 </section>
-                @include('payment.recap.template-4.buttons')
+                @include('payment.recap.template-4.button-homepage')
             </div>
         </div>
     </div>
+    <script>
+        setInterval(function(){
+            window.location.reload()
+        }, 4000)
+    </script>
 @endsection

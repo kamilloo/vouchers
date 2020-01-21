@@ -27,14 +27,36 @@ class PaymentOrderController extends Controller
 
         if ($verify)
         {
+            $payment->order->qr_code = uniqid();
+            $payment->order->save();
+
             return redirect()->route('payment.recap', [
                 'payment' => $payment,
             ])->with(['success' => 'Congratulation!, you bought voucher successful.']);
         }
-        return view('payment.return', [
-            'payment' => $payment,
-        ])->with(['success' => 'Congratulation!, you bought voucher successful.']);
 
+        $order = $payment->order;
+        $merchant = $payment->merchant->fresh();
+        if ($merchant->shopImages()->exists())
+        {
+            $custom_logo = $merchant->shopImages->logo_enabled ? $merchant->shopImages->logo : null;
+            $custom_background_image = $merchant->shopImages->front_enabled ? $merchant->shopImages->front : null;
+        }
+        if ($merchant->shopStyles()->exists())
+        {
+            $custom_welcoming = $merchant->shopStyles->welcoming;
+            $custom_background = $merchant->shopStyles->background_color;
+        }
+
+        return view('payment.return.'. $merchant->template->file_name, compact(
+            'vouchers',
+            'merchant',
+            'custom_logo',
+            'custom_background_image',
+            'custom_welcoming',
+            'custom_background',
+            'order'
+        ))->with(['success' => 'Congratulation!, you bought voucher successful.']);
     }
 
     public function callbackStatus(PaymentCallbackStatus $request, Payment $payment, IPaymentGateway $payment_gateway)

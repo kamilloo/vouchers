@@ -39,7 +39,7 @@ class VoucherOrderController extends Controller
     {
         $pdf = $this->createPdf($order);
 
-        return $pdf->download();
+        return $pdf->stream();
     }
 
     public function send(Order $order)
@@ -67,10 +67,10 @@ class VoucherOrderController extends Controller
      */
     protected function createPdf(Order $order): PDF
     {
+        \QrCode::format('png')->size(400)->generate($order->qr_code ?? 'my code', public_path('qrcode.png'));
         $order = $order->load('merchant', 'voucher');
         $user_profile = $order->merchant->user->profile;
         $pdf = $this->generator->loadView('pdf.voucher', compact('order', 'user_profile'));
-
         return $pdf;
     }
 }

@@ -41,11 +41,6 @@
 
                         </div>
 
-
-                        <div class="jumbotron">
-
-                        </div>
-
             </div>
         </div>
     </div>
