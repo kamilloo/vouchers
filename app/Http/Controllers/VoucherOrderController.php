@@ -70,7 +70,8 @@ class VoucherOrderController extends Controller
         \QrCode::format('png')->size(400)->generate($order->qr_code ?? 'my code', public_path('qrcode.png'));
         $order = $order->load('merchant', 'voucher');
         $user_profile = $order->merchant->user->profile;
-        $pdf = $this->generator->loadView('pdf.voucher', compact('order', 'user_profile'));
+        $pdf = $this->generator
+            ->loadView('pdf.voucher', compact('order', 'user_profile'));
         return $pdf;
     }
 }
