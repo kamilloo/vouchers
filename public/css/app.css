@@ -52100,10 +52100,10 @@ input[type=checkbox].with-font:checked ~ label:before {
   right: 0px;
   color: #094bde;
   font-size: 20px;
-  font-weight: 700;
+  font-weight: 100;
   letter-spacing: -1px;
   line-height: 1.5;
-  bottom: 43px;
+  bottom: -10px;
 }
 
 .term-price {
@@ -52111,7 +52111,7 @@ input[type=checkbox].with-font:checked ~ label:before {
 }
 
 .secure-price {
-  bottom: 68px;
+  bottom: -10px;
 }
 
 .summary-block {

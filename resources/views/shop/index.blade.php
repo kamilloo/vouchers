@@ -9,6 +9,7 @@
                 <a href="#designs" class="list-group-item list-group-item-action active" data-toggle="list"  role="tab">{{ __('Designs') }}</a>
                 <a href="#customs" class="list-group-item list-group-item-action" data-toggle="list"  role="tab">{{ __('Customs') }}</a>
                 <a href="#images" class="list-group-item list-group-item-action" data-toggle="list"  role="tab">{{ __('Images') }}</a>
+                <a href="#settings" class="list-group-item list-group-item-action" data-toggle="list"  role="tab">{{ __('Settings') }}</a>
                 <a href="#gateway" class="list-group-item list-group-item-action" data-toggle="list"  role="tab">{{ __('Payment Gateway') }}</a>
             </div>
             <br>
@@ -80,6 +81,25 @@
 
                         <button type="submit" class="btn btn-primary">Submit</button>
 
+                    </form>
+                </div>
+                <div class="tab-pane" id="settings" role="tabpanel">
+                    <form method="post" action="{{ route('shop.shop-settings') }}">
+                        @csrf
+
+                        <div class="form-group">
+                            <label for="expiry_after">{{ __('Expiry After') }}</label>
+                            <input type="number" step="1" class="form-control" id="expiry_after" aria-describedby="expiry_after-help" name="expiry_after" placeholder="{{ __('Expiry After') }}" value="{{ old('expiry_after', $shop_settings->expiry_after) }}">
+                            <small id="expiry_after-help" class="form-text text-muted">{{ __('Set Expiry After') }}.</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="delivery_cost">{{ __('Delivery Cost') }}</label>
+                            <input type="number" step="0.01" class="form-control" id="delivery_cost" aria-describedby="delivery_cost-help" name="delivery_cost" placeholder="{{ __('Delivery Cost') }}" value="{{ old('delivery_cost', $shop_settings->delivery_cost) }}">
+                            <small id="delivery_cost-help" class="form-text text-muted">{{ __('Set Delivery Cost') }}.</small>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
                 </div>
                 <div class="tab-pane" id="gateway" role="tabpanel">

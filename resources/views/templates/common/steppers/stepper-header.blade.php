@@ -3,7 +3,7 @@
     @include('templates.common.steppers.step', [
         'target' => 'vouchers-part',
         'counter' => 1,
-        'label' => __('Choose')
+        'label' => __('Vouchers')
     ])
     <div class="line"></div>
     @include('templates.common.steppers.step', [

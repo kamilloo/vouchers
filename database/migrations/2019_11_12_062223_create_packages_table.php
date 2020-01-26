@@ -20,7 +20,7 @@ class CreatePackagesTable extends Migration
             $table->unsignedBigInteger('merchant_id');
             $table->string('title');
             $table->string('description')->default(null)->nullable();
-            $table->decimal('price');
+            $table->float('price');
             $table->string('currency',3)->default(Currency::PLN);
             $table->boolean('active')->default(PackageStatus::INACTIVE);
             $table->timestamps();

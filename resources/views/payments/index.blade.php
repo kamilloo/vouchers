@@ -40,5 +40,6 @@
         </tbody>
 
     </table>
+        {{ $payments->render() }}
     </div>
 @endsection

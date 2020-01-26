@@ -8,9 +8,12 @@ class DeliveryType
 
     const POST = 'post';
 
+    const ONLINE_DELIVERY_COST = 0;
+
     public static function all(): array
     {
         $types = new \ReflectionClass(self::class);
+
         return $types->getConstants();
     }
 
@@ -22,11 +25,11 @@ class DeliveryType
         ];
     }
 
-    static public function prices(): array
+    static public function titles(): array
     {
         return [
-            self::ONLINE => 0,
-            self::POST => 100,
+            self::ONLINE => __('Online'),
+            self::POST => __('Post'),
         ];
     }
 }

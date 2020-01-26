@@ -92,10 +92,12 @@ namespace App\Models{
  * @property string|null $last_name
  * @property string|null $company_name
  * @property string|null $address
+ * @property string|null $phone
  * @property string|null $city
  * @property string|null $postcode
  * @property string|null $avatar
  * @property string|null $description
+ * @property string|null $homepage
  * @property mixed|null $social_media
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -111,7 +113,9 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UserProfile whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UserProfile whereDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UserProfile whereFirstName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UserProfile whereHomepage($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UserProfile whereLastName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UserProfile wherePhone($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UserProfile wherePostcode($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UserProfile whereSocialMedia($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UserProfile whereUpdatedAt($value)
@@ -159,6 +163,7 @@ namespace App\Models{
  *
  * @property int $id
  * @property string $name
+ * @property string $slug
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User[] $users
@@ -170,9 +175,35 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Skill whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Skill whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Skill whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Skill whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Skill whereUpdatedAt($value)
  */
 	class Skill extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\ShopSettings
+ *
+ * @property int $id
+ * @property int $merchant_id
+ * @property int|null $expiry_after
+ * @property float $delivery_cost
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Merchant $merchant
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Model mine()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ShopSettings newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ShopSettings newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ShopSettings query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ShopSettings whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ShopSettings whereDeliveryCost($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ShopSettings whereExpiryAfter($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ShopSettings whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ShopSettings whereMerchantId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ShopSettings whereUpdatedAt($value)
+ */
+	class ShopSettings extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -222,12 +253,13 @@ namespace App\Models{
  * @property int $merchant_id
  * @property string $type
  * @property string $title
- * @property string|null $price
+ * @property float|null $price
  * @property string|null $product_type
  * @property int|null $product_id
  * @property string|null $file
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \VoucherPresenter $presenter
  * @property-read \App\Models\Merchant $merchant
  * @property-read \Illuminate\Database\Eloquent\Model|\Eloquent $product
  * @property-read \App\Models\User $user
@@ -400,6 +432,7 @@ namespace App\Models{
  *
  * @property int $id
  * @property string $name
+ * @property string $slug
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User[] $users
@@ -411,6 +444,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Branch whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Branch whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Branch whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Branch whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Branch whereUpdatedAt($value)
  */
 	class Branch extends \Eloquent {}
@@ -526,6 +560,7 @@ namespace App\Models{
  * @property int|null $merchant_id
  * @property int|null $pos_id
  * @property string|null $crc
+ * @property string|null $homepage
  * @property int $sandbox
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -538,6 +573,7 @@ namespace App\Models{
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Service[] $services
  * @property-read int|null $services_count
  * @property-read \App\Models\ShopImage $shopImages
+ * @property-read \App\Models\ShopSettings $shopSettings
  * @property-read \App\Models\ShopStyle $shopStyles
  * @property-read \App\Models\Template|null $template
  * @property-read \App\Models\User $user
@@ -549,6 +585,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Merchant query()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Merchant whereCrc($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Merchant whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Merchant whereHomepage($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Merchant whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Merchant whereMerchantId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Merchant wherePosId($value)

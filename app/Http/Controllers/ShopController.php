@@ -7,12 +7,15 @@ use App\Http\Requests\ShopChangeImages;
 use App\Http\Requests\ShopChangeTemplate;
 use App\Http\Requests\ShopCustomTemplate;
 use App\Http\Requests\ShopGatewaySetting;
+use App\Http\Requests\ShopSettings;
 use App\Models\Enums\GatewaySandbox;
 use App\Models\Merchant;
 use App\Models\ShopImage;
 use App\Models\ShopStyle;
 use App\Models\Template;
+use App\Models\User;
 use App\Models\UserProfile;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Filesystem\FilesystemManager;
 use Illuminate\Http\Request;
@@ -29,8 +32,9 @@ class ShopController extends Controller
         $my_template = optional($merchant)->template ?? Template::first();
         $shop_style = optional($merchant)->shopStyles ?? new ShopStyle;
         $shop_images = optional($merchant)->shopImages ?? new ShopImage();
+        $shop_settings = optional($merchant)->shopSettings ?? new ShopSettings();
 
-        return view('shop.index', compact('guard', 'templates', 'my_template', 'shop_style', 'shop_images', 'merchant'));
+        return view('shop.index', compact('guard', 'templates', 'my_template', 'shop_style', 'shop_images', 'merchant', 'shop_settings'));
     }
 
     public function changeTemplate(ShopChangeTemplate $request, Guard $guard)
@@ -51,10 +55,9 @@ class ShopController extends Controller
 
     public function customTemplate(ShopCustomTemplate $request, Guard $guard)
     {
-        $user = $guard->user();
-        if ($user->isMerchant())
+        if ($this->getUser($guard)->isMerchant())
         {
-            $merchant = $user->merchant;
+            $merchant = $this->getMerchant($guard);
             $shop_style = $merchant->shopStyles()->first();
             $shop_styles = $request->only([
                 'background_color',
@@ -78,7 +81,7 @@ class ShopController extends Controller
     public function gatewaySettings(ShopGatewaySetting $request, Guard $guard)
     {
         $user = $guard->user();
-        if ($user->isMerchant())
+        if ($this->getUser($guard)->isMerchant())
         {
             $user->merchant->update([
                 'merchant_id' => $request->getMerchantIdParam(),
@@ -89,6 +92,30 @@ class ShopController extends Controller
 
             return redirect(route('shop.index'))
                 ->with('success', 'Well done!, you changed your shop design.');
+        }
+        return redirect(route('shop.index'))
+            ->with('warning', 'Ups!, Something went wrong.');
+    }
+
+    public function shopSettings(ShopSettings $request, Guard $guard)
+    {
+        if ($this->getUser($guard)->isMerchant())
+        {
+            $merchant = $this->getMerchant($guard);
+            $voucher_style = $merchant->shopSettings()->first();
+            $voucher_settings = [
+                'expiry_after' => $request->getExpiryAfterParam(),
+                'delivery_cost' => $request->getDeliveryCostParam(),
+            ];
+
+            if (empty($voucher_style))
+            {
+                $merchant->shopSettings()->save(new \App\Models\ShopSettings($voucher_settings));
+            }else{
+                $voucher_style->update($voucher_settings);
+            }
+            return redirect(route('shop.index'))
+                ->with('success', 'Well done!, you changed your shop settings.');
         }
         return redirect(route('shop.index'))
             ->with('warning', 'Ups!, Something went wrong.');
@@ -141,4 +168,22 @@ class ShopController extends Controller
     {
         return $file->storePublicly('storage/merchant');
     }
+
+    /**
+     * @return Merchant
+     */
+    private function getMerchant(Guard $guard):Merchant
+    {
+        return $this->getUser($guard)->merchant;
+}
+
+    /**
+     * @param Guard $guard
+     *
+     * @return Authenticatable|User
+     */
+    private function getUser(Guard $guard):User
+    {
+        return $guard->user();
+}
 }

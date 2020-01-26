@@ -23,7 +23,7 @@ class TransactionController extends Controller
 
     public function index(Guard $guard)
     {
-        $payments = Payment::toMe()->get();
+        $payments = Payment::toMe()->paginate();
         return view('payments.index', compact('payments'));
     }
 }

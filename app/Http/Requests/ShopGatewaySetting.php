@@ -25,10 +25,10 @@ class ShopGatewaySetting extends Request
     public function rules()
     {
         return [
-            'merchant_id' => ['nullable', 'numeric',],
-            'pos_id' => ['nullable', 'numeric',],
-            'crc' => ['nullable', 'string',],
-            'sandbox' => ['nullable', 'boolean',],
+            'merchant_id' => ['required', 'numeric',],
+            'pos_id' => ['required', 'numeric',],
+            'crc' => ['required', 'string',],
+            'sandbox' => ['required', 'boolean',],
         ];
     }
 }

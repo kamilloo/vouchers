@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Presenters\VoucherPresenter;
 use App\Models\Descriptors\MorphType;
 use App\Models\Enums\VoucherType;
 
@@ -40,6 +41,14 @@ class Voucher extends Model
     public function isQuoteType():bool
     {
         return $this->type == VoucherType::QUOTE;
+    }
+
+    /**
+     * @return VoucherPresenter
+     */
+    public function getPresenterAttribute(): VoucherPresenter
+    {
+        return new VoucherPresenter($this);
     }
 }
 

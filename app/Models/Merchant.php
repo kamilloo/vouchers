@@ -10,9 +10,13 @@ class Merchant extends Model
         'template',
         'shopStyles',
         'shopImages',
+        'shopSettings',
         'user'
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo|Template
+     */
     public function template()
     {
         return $this->belongsTo(Template::class);
@@ -23,16 +27,33 @@ class Merchant extends Model
         return $this->hasMany(Order::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne|ShopStyle
+     */
     public function shopStyles()
     {
         return $this->hasOne(ShopStyle::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne|ShopImage
+     */
     public function shopImages()
     {
         return $this->hasOne(ShopImage::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne|ShopSettings
+     */
+    public function shopSettings()
+    {
+        return $this->hasOne(ShopSettings::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo|User
+     */
     public function user()
     {
         return $this->belongsTo(User::class);

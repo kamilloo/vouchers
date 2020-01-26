@@ -32,6 +32,7 @@ Route::middleware('auth')->group(function (){
     Route::post('/shop/custom-template', 'ShopController@customTemplate')->name('shop.custom-template');
     Route::post('/shop/change-images', 'ShopController@changeImages')->name('shop.change-images');
     Route::post('/shop/gateway-settings', 'ShopController@gatewaySettings')->name('shop.gateway-settings');
+    Route::post('/shop/shop-settings', 'ShopController@shopSettings')->name('shop.shop-settings');
 
     Route::resource('/vouchers', 'VoucherController');
     Route::resource('/orders', 'OrderController');
@@ -41,6 +42,8 @@ Route::middleware('auth')->group(function (){
     Route::resource('/services', 'ServiceController');
 
 });
+
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('get-started', 'Starter@getStarted')->name('get-started');

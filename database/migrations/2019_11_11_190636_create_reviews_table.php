@@ -16,7 +16,7 @@ class CreateReviewsTable extends Migration
         Schema::create('reviews', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('merchant_id');
-            $table->decimal('rating');
+            $table->float('rating');
             $table->string('author');
             $table->text('body')->default(null)->nullable();
             $table->dateTime('published_at')->nullable();

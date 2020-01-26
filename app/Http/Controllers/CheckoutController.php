@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Checkout;
+use App\Managers\DeliveryManager;
 use App\Models\Client;
 use App\Models\Merchant;
 use App\Models\Voucher;
@@ -11,9 +12,20 @@ use Illuminate\Http\Request;
 
 class CheckoutController extends Controller
 {
+    /**
+     * @var DeliveryManager
+     */
+    protected $delivery_manager;
+
+    public function __construct(DeliveryManager $delivery_manager)
+    {
+        $this->delivery_manager = $delivery_manager;
+    }
+
     public function start(Merchant $merchant, Voucher $voucher)
     {
         $vouchers = $voucher->forMerchant($merchant)->get();
+        $delivery_options = $this->delivery_manager->getForMerchant($merchant);
         if ($merchant->shopImages()->exists())
         {
             $custom_logo = $merchant->shopImages->logo_enabled ? $merchant->shopImages->logo : null;
@@ -31,7 +43,8 @@ class CheckoutController extends Controller
             'custom_logo',
             'custom_background_image',
             'custom_welcoming',
-            'custom_background'
+            'custom_background',
+            'delivery_options'
         ));
     }
 

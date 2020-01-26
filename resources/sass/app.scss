@@ -195,9 +195,9 @@ input[type=radio].with-font:focus~label:before, input[type=checkbox].with-font:f
 .plan-data { position: relative; }
 .plan-data label { font-size: 20px; margin-bottom: 15px; font-weight: 400; }
 .plan-text { padding-left: 35px; }
-.plan-price { position: absolute; right: 0px; color: #094bde; font-size: 20px; font-weight: 700; letter-spacing: -1px; line-height: 1.5; bottom: 43px; }
+.plan-price { position: absolute; right: 0px; color: #094bde; font-size: 20px; font-weight: 100; letter-spacing: -1px; line-height: 1.5; bottom: -10px; }
 .term-price { bottom: 18px; }
-.secure-price { bottom: 68px; }
+.secure-price { bottom: -10px; }
 .summary-block { border-bottom: 2px solid #d7d9de; }
 .summary-block:last-child { border-bottom: 0px; }
 .summary-content { padding: 28px 0px; }

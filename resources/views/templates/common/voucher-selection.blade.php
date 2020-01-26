@@ -5,13 +5,21 @@
         <div class="plan-data">
             <input v-model="selectedVoucher.id" id="voucher-{{ $voucher->id }}" name="voucher_id" type="radio" class="with-font" value="{{ $voucher->id }}" />
             <label for="voucher-{{ $voucher->id }}">{{ $voucher->title }}</label>
+
             <p class="plan-text">
-                @if($voucher->type == \App\Models\Enums\VoucherType::QUOTE )
-                {{ __('You can used full quote whatever.') }}
-                @else
-                Your service: {{ $voucher->service }}</p>
+{{--                {{ __('You can used full quote whatever.') }}--}}
+
+
+            @if(!$voucher->isQuoteType())
+                {{ __('Service') }}: {{ $voucher->product->title }}
+                @if(!empty($voucher->product->description))
+                    <br>
+                {{ __('Description') }}: {{ $voucher->product->description }}
+                @endif
             @endif
-            <span class="plan-price">{{ $voucher->price }} $</span>
+                <span class="plan-price">{{ $voucher->presenter->price() }} zł</span>
+            </p>
+
         </div>
     </div>
     @endforeach

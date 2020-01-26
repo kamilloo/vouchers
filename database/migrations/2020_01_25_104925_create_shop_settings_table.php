@@ -1,11 +1,10 @@
 <?php
 
-use App\Models\Descriptors\MorphType;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateVouchersTable extends Migration
+class CreateShopSettingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,19 +13,17 @@ class CreateVouchersTable extends Migration
      */
     public function up()
     {
-        Schema::create('vouchers', function (Blueprint $table) {
+        Schema::create('shop_settings', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('merchant_id');
-            $table->string('type');
-            $table->string('title');
-            $table->float('price')->nullable()->default(null);
-            $table->nullableMorphs(MorphType::PRODUCT);
-            $table->string('file')->nullable()->default(null);
+
+            $table->integer('expiry_after')->nullable()->default(null);
+            $table->float('delivery_cost')->default(0);
+
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('merchant_id')->references('id')->on('merchants');
+
         });
     }
 
@@ -37,6 +34,6 @@ class CreateVouchersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vouchers');
+        Schema::dropIfExists('shop_settings');
     }
 }
