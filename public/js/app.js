@@ -1940,12 +1940,7 @@ __webpack_require__.r(__webpack_exports__);
     this.computePrice();
   },
   updated: function updated() {
-    if (this.selectedDelivery.type == this.deliveryTypes.POST) {
-      this.selectedDelivery.price = 100;
-    } else {
-      this.selectedDelivery.price = 0;
-    }
-
+    var selectedDelivery = this.deliveryTypes.find(this.getSelectedDelivery);
     var selectedVoucher = this.vouchers.find(this.getSelectedVoucher);
 
     if (typeof selectedVoucher !== 'undefined') {
@@ -1955,14 +1950,25 @@ __webpack_require__.r(__webpack_exports__);
       this.resetSelectedVoucher();
     }
 
+    if (typeof selectedDelivery !== 'undefined') {
+      this.selectedDelivery.title = selectedDelivery.title;
+      this.selectedDelivery.cost = selectedDelivery.cost;
+      this.selectedDelivery.type = selectedDelivery.type;
+    } else {
+      this.resetSelectedDelivery();
+    }
+
     this.computePrice();
   },
   methods: {
     computePrice: function computePrice() {
-      this.total = parseFloat(this.selectedDelivery.price) + parseFloat(this.selectedVoucher.price);
+      this.total = parseFloat(this.selectedDelivery.cost) + parseFloat(this.selectedVoucher.price);
     },
     getSelectedVoucher: function getSelectedVoucher(voucher) {
       return voucher.id == this.selectedVoucher.id;
+    },
+    getSelectedDelivery: function getSelectedDelivery(delivery) {
+      return delivery.type == this.selectedDelivery.type;
     },
     resetSelectedVoucher: function resetSelectedVoucher() {
       this.selectedVoucher.name = '-';
@@ -1970,7 +1976,8 @@ __webpack_require__.r(__webpack_exports__);
     },
     resetSelectedDelivery: function resetSelectedDelivery() {
       this.selectedDelivery.type = '-';
-      this.selectedDelivery.price = 0;
+      this.selectedDelivery.title = '-';
+      this.selectedDelivery.cost = 0;
     }
   }
 });
@@ -46604,7 +46611,7 @@ var render = function() {
         _vm._v(" "),
         _c("div", { staticClass: "summary-price" }, [
           _c("p", { staticClass: "summary-text" }, [
-            _vm._v("$" + _vm._s(_vm.selectedVoucher.price))
+            _vm._v(_vm._s(_vm.selectedVoucher.price) + " zł")
           ])
         ])
       ])
@@ -46613,14 +46620,19 @@ var render = function() {
     _c("div", { staticClass: "summary-block" }, [
       _c("div", { staticClass: "summary-content" }, [
         _c("div", { staticClass: "summary-head" }, [
-          _c("h5", { staticClass: "summary-title" }, [
-            _vm._v(_vm._s(_vm.selectedDelivery.type))
-          ])
+          _c(
+            "h5",
+            {
+              staticClass: "summary-title",
+              attrs: { "data-delivery-type": _vm.selectedDelivery.type }
+            },
+            [_vm._v(_vm._s(_vm.selectedDelivery.title))]
+          )
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "summary-price" }, [
           _c("p", { staticClass: "summary-text" }, [
-            _vm._v("$" + _vm._s(_vm.selectedDelivery.price))
+            _vm._v(_vm._s(_vm.selectedDelivery.cost) + " zł")
           ])
         ])
       ])
@@ -46632,7 +46644,7 @@ var render = function() {
         _vm._v(" "),
         _c("div", { staticClass: "summary-price" }, [
           _c("p", { staticClass: "summary-text" }, [
-            _vm._v("$" + _vm._s(_vm.total))
+            _vm._v(_vm._s(_vm.total) + " zł")
           ]),
           _vm._v(" "),
           _c("input", {
@@ -59352,7 +59364,8 @@ var app = new Vue({
     },
     selectedDelivery: {
       type: '',
-      price: ''
+      cost: '',
+      title: ''
     },
     checked: 5,
     translate: {}

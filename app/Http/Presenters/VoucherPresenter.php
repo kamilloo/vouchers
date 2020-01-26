@@ -8,7 +8,12 @@ use App\Models\Order;
 use App\Models\Voucher;
 use phpDocumentor\Reflection\DocBlock\Tags\Property;
 
-class VoucherPresenter extends ModelPresenter
+/**
+ * Class VoucherPresenter
+ *
+ * @mixin Voucher
+ */
+class VoucherPresenter extends ModelPresenter implements \JsonSerializable
 {
     /**
      * @var Voucher
@@ -34,5 +39,17 @@ class VoucherPresenter extends ModelPresenter
         $price = $this->model->product->price;
 
         return number_format($price, 2, ',', ' ');
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function jsonSerialize()
+    {
+        return [
+            'id' => $this->model->id,
+            'price' => $this->price(),
+            'title' => $this->model->title
+        ];
     }
 }

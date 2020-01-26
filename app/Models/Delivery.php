@@ -4,9 +4,10 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Models\Enums\DeliveryType;
+use Illuminate\Contracts\Support\Jsonable;
 use Illuminate\Support\Arr;
 
-class Delivery
+class Delivery implements \JsonSerializable
 {
     /**
      * @var string
@@ -57,4 +58,16 @@ class Delivery
         return Arr::get(DeliveryType::description(), $this->type);
     }
 
+    /**
+     * @inheritDoc
+     */
+    public function jsonSerialize()
+    {
+        return [
+            'type' => $this->type,
+            'cost' => $this->cost,
+            'description' => $this->getDescription(),
+            'title' => $this->getTitle(),
+        ];
+    }
 }

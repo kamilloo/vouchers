@@ -50,7 +50,8 @@ const app = new Vue({
         },
         selectedDelivery: {
             type: '',
-            price: '',
+            cost: '',
+            title: '',
         },
         checked: 5,
         translate: {}

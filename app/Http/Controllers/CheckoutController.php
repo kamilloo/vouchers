@@ -26,6 +26,7 @@ class CheckoutController extends Controller
     {
         $vouchers = $voucher->forMerchant($merchant)->get();
         $delivery_options = $this->delivery_manager->getForMerchant($merchant);
+        $voucher_presenters = $vouchers->map(function($voucher){return $voucher->presenter;});
         if ($merchant->shopImages()->exists())
         {
             $custom_logo = $merchant->shopImages->logo_enabled ? $merchant->shopImages->logo : null;
@@ -44,7 +45,8 @@ class CheckoutController extends Controller
             'custom_background_image',
             'custom_welcoming',
             'custom_background',
-            'delivery_options'
+            'delivery_options',
+            'voucher_presenters'
         ));
     }
 
