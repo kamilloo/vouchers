@@ -81,7 +81,7 @@
                             </div>
                             <div id="information-part" class="content" role="tabpanel" aria-labelledby="information-part-trigger">
                                 <div class="box">
-                                    <h3 class="box-title">Your details</h3>
+                                    <h3 class="box-title">{{ __('Your details') }}</h3>
                                     <div class="form-group">
                                         <label for="first-name">First Name</label>
                                         <input type="text" id="first-name" class="form-control" aria-describedby="first-name-helper" name="first_name" value="{{ old('first_name') }}">

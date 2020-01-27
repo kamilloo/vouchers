@@ -43,7 +43,7 @@ class Checkout extends Request
             'client.city' => ['required', 'string', 'max:256'],
             'client.address' => ['required', 'string', 'max:256'],
             'client.postcode' => ['required', 'string', 'max:256'],
-            'client.country' => ['required', 'string', 'max:256'],
+//            'client.country' => ['required', 'string', 'max:256'],
         ];
     }
 }

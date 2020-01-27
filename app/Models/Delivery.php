@@ -66,6 +66,7 @@ class Delivery implements \JsonSerializable
         return [
             'type' => $this->type,
             'cost' => $this->cost,
+            'costToCurrencyNotation' => number_format($this->cost, 2, ',', ' '),
             'description' => $this->getDescription(),
             'title' => $this->getTitle(),
         ];

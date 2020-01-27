@@ -54,7 +54,10 @@ const app = new Vue({
             title: '',
         },
         checked: 5,
-        translate: {}
+        translate: {
+            wishList: "Lista życzeń",
+            total: "Całość",
+        }
     },
     methods :{
         changeValue(value) {

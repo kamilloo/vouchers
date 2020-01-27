@@ -1,5 +1,5 @@
 <div class="box">
-    <h3 class="box-title">Select delivery option</h3>
+    <h3 class="box-title">{{ __('Select delivery option') }}</h3>
 
 @foreach($delivery_options as $delivery)
     <div class="plan-selection">

@@ -30,15 +30,14 @@ class VoucherPresenter extends ModelPresenter implements \JsonSerializable
         return mb_strtoupper($this->model->status);
     }
 
-    public function price(): string
+    public function price(): float
     {
         if ($this->model->isQuoteType())
         {
-            return number_format($this->model->price, 2, ',', ' ');
+            return $this->model->price;
         }
-        $price = $this->model->product->price;
+        return $this->model->product->price;
 
-        return number_format($price, 2, ',', ' ');
     }
 
     /**

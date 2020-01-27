@@ -1928,7 +1928,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['vouchers', 'selectedDelivery', 'selectedVoucher', 'deliveryTypes'],
+  props: ['vouchers', 'selectedDelivery', 'selectedVoucher', 'deliveryTypes', 'translate'],
   data: function data() {
     return {
       total: '0'
@@ -46594,7 +46594,9 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "widget" }, [
-    _c("h4", { staticClass: "widget-title" }, [_vm._v("Wish list")]),
+    _c("h4", { staticClass: "widget-title" }, [
+      _vm._v(_vm._s(_vm.translate.wishList))
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "summary-block" }, [
       _c("div", { staticClass: "summary-content" }, [
@@ -46640,7 +46642,11 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "summary-block" }, [
       _c("div", { staticClass: "summary-content" }, [
-        _vm._m(0),
+        _c("div", { staticClass: "summary-head" }, [
+          _c("h5", { staticClass: "summary-title" }, [
+            _vm._v(_vm._s(_vm.translate.total))
+          ])
+        ]),
         _vm._v(" "),
         _c("div", { staticClass: "summary-price" }, [
           _c("p", { staticClass: "summary-text" }, [
@@ -46672,16 +46678,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "summary-head" }, [
-      _c("h5", { staticClass: "summary-title" }, [_vm._v("Total")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -59368,7 +59365,10 @@ var app = new Vue({
       title: ''
     },
     checked: 5,
-    translate: {}
+    translate: {
+      wishList: "Lista życzeń",
+      total: "Całość"
+    }
   },
   methods: {
     changeValue: function changeValue(value) {

@@ -1,6 +1,6 @@
 <template>
     <div class="widget">
-        <h4 class="widget-title">Wish list</h4>
+        <h4 class="widget-title">{{ translate.wishList }}</h4>
         <div class="summary-block">
             <div class="summary-content">
                 <div class="summary-head"><h5 class="summary-title" :data-selected-voucher="selectedVoucher.id">{{ selectedVoucher.name }}</h5></div>
@@ -19,7 +19,7 @@
         </div>
         <div class="summary-block">
             <div class="summary-content">
-                <div class="summary-head"> <h5 class="summary-title">Total</h5></div>
+                <div class="summary-head"> <h5 class="summary-title">{{ translate.total }}</h5></div>
                 <div class="summary-price">
                     <p class="summary-text">{{ total }} zł</p>
                     <input type="hidden" name="price" v-model="total">
@@ -31,7 +31,7 @@
 </template>
 <script>
  export default {
-     props: ['vouchers', 'selectedDelivery', 'selectedVoucher', 'deliveryTypes'],
+     props: ['vouchers', 'selectedDelivery', 'selectedVoucher', 'deliveryTypes', 'translate'],
      data (){
          return {
              total : '0'

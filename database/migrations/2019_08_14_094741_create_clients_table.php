@@ -21,7 +21,7 @@ class CreateClientsTable extends Migration
             $table->string('city')->nullable()->default(null);
             $table->string('address')->nullable()->default(null);
             $table->string('postcode')->nullable()->default(null);
-            $table->string('country')->nullable()->default(null);
+            $table->string('country')->nullable()->default(\App\Models\Enums\Country::POLAND);
             $table->timestamps();
         });
     }

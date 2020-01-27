@@ -1,3 +1,14 @@
 {
-    "checkout": "checkout"
+    "checkout": "checkout",
+    "Select you voucher": "Wybierz bon",
+    "Wish List": "Lists życzeń",
+    "online": "online",
+    "Online": "Online",
+    "post": "poczta",
+    "Post": "Poczta",
+    "We send your Voucher online": "Bon wysyłamy online",
+    "We send your Voucher by Post": "Bon wysyłamy pocztą tradycyjną",
+    "Select delivery option": "Wybierz formę dostarczenia",
+    "Your Recipient": "Osoba obdarowana",
+    "Your details": "Twoje dane"
 }

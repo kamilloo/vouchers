@@ -12,7 +12,7 @@
     </div>
     <div id="information-part" class="content" role="tabpanel" aria-labelledby="information-part-trigger">
         <div class="box">
-            <h3 class="box-title">Your Recipient</h3>
+            <h3 class="box-title">{{ __('Your Recipient') }}</h3>
             @include('templates.template-1.fields.text-input', [
                 'data_validate' => 'Name is required',
                 'name' => "first_name"
@@ -37,12 +37,12 @@
     </div>
     <div id="client-part" class="content" role="tabpanel" aria-labelledby="client-part-trigger">
         <div class="box">
-            <h3 class="box-title">Your details</h3>
+            <h3 class="box-title">{{ __('Your details') }}</h3>
 
             @include('templates.template-1.fields.text-input-table', [
                 'data_validate' => 'Country is required',
                 'name' => "client",
-                'fields' => ['name', 'email', 'phone', 'city', 'address', 'postcode', 'country']
+                'fields' => ['name', 'email', 'phone', 'city', 'address', 'postcode']
             ])
         </div>
 

@@ -20,8 +20,8 @@ class DeliveryType
     static public function description(): array
     {
         return [
-            self::ONLINE => __('We send your Voucher online.'),
-            self::POST => __('We send your Voucher by Post.'),
+            self::ONLINE => __('We send your Voucher online'),
+            self::POST => __('We send your Voucher by Post'),
         ];
     }
 

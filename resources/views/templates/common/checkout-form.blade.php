@@ -3,4 +3,5 @@
     :vouchers="{{ json_encode($voucher_presenters) }}"
     :selected-voucher="selectedVoucher"
     :selected-delivery="selectedDelivery"
+    :translate="translate"
 ></checkout-form>
