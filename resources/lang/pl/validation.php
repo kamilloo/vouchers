@@ -146,5 +146,16 @@ return [
     */
 
     'attributes' => [
+        'voucher_id' => 'wyboru bonu',
+        'delivery' => 'wyboru dostawy',
+        'phone' => 'telefon',
+        'first_name' => 'imię',
+        'last_name' => 'nazwisko',
+        'client.name' => 'nazwa',
+        'client.email' => 'email',
+        'client.phone' => 'telefon',
+        'client.city' => 'miasto',
+        'client.address' => 'adres',
+        'client.postcode' => 'kod pocztowy',
     ],
 ];

@@ -24,7 +24,7 @@
     </div>
     @endforeach
     @if($errors->first('voucher_id'))
-    <span>{{ $errors->first('voucher_id') }}</span>
+    <span class="help">{{ $errors->first('voucher_id') }}</span>
     @endif
 </div>
 

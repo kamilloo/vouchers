@@ -44,14 +44,14 @@ const app = new Vue({
     el: '#app',
     data: {
         selectedVoucher : {
-            id: '',
-            price: '',
-            name: '',
+            id: null,
+            price: null,
+            name: null,
         },
         selectedDelivery: {
-            type: '',
-            cost: '',
-            title: '',
+            type: null,
+            cost: null,
+            title: null,
         },
         checked: 5,
         translate: {

@@ -31,17 +31,35 @@
 </template>
 <script>
  export default {
-     props: ['vouchers', 'selectedDelivery', 'selectedVoucher', 'deliveryTypes', 'translate'],
+     props: ['vouchers', 'selectedDelivery', 'selectedVoucher', 'deliveryTypes', 'translate', 'oldVoucherId', 'oldDelivery'],
      data (){
          return {
              total : '0'
          };
      },
      created () {
-
-         this.resetSelectedDelivery();
          this.resetSelectedVoucher();
+         this.resetSelectedDelivery();
 
+         let selectedDelivery = this.deliveryTypes.find(this.getSelectedDelivery)
+         let selectedVoucher = this.vouchers.find(this.getSelectedVoucher);
+
+         if (typeof selectedVoucher !== 'undefined')
+         {
+             this.selectedVoucher.name = selectedVoucher.title;
+             this.selectedVoucher.price = selectedVoucher.price;
+         }else{
+             this.resetSelectedVoucher();
+         }
+
+         if (typeof selectedDelivery !== 'undefined')
+         {
+             this.selectedDelivery.title = selectedDelivery.title;
+             this.selectedDelivery.cost = selectedDelivery.cost;
+             this.selectedDelivery.type = selectedDelivery.type;
+         }else{
+             this.resetSelectedDelivery();
+         }
          this.computePrice();
      },
      updated() {
@@ -77,11 +95,12 @@
              return delivery.type == this.selectedDelivery.type;
          },
          resetSelectedVoucher(){
+             this.selectedVoucher.id = this.oldVoucherId;
              this.selectedVoucher.name = '-';
              this.selectedVoucher.price = 0;
          },
          resetSelectedDelivery(){
-             this.selectedDelivery.type = '-';
+             this.selectedDelivery.type = this.oldDelivery;
              this.selectedDelivery.title = '-';
              this.selectedDelivery.cost = 0;
          }

@@ -1928,15 +1928,33 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['vouchers', 'selectedDelivery', 'selectedVoucher', 'deliveryTypes', 'translate'],
+  props: ['vouchers', 'selectedDelivery', 'selectedVoucher', 'deliveryTypes', 'translate', 'oldVoucherId', 'oldDelivery'],
   data: function data() {
     return {
       total: '0'
     };
   },
   created: function created() {
-    this.resetSelectedDelivery();
     this.resetSelectedVoucher();
+    this.resetSelectedDelivery();
+    var selectedDelivery = this.deliveryTypes.find(this.getSelectedDelivery);
+    var selectedVoucher = this.vouchers.find(this.getSelectedVoucher);
+
+    if (typeof selectedVoucher !== 'undefined') {
+      this.selectedVoucher.name = selectedVoucher.title;
+      this.selectedVoucher.price = selectedVoucher.price;
+    } else {
+      this.resetSelectedVoucher();
+    }
+
+    if (typeof selectedDelivery !== 'undefined') {
+      this.selectedDelivery.title = selectedDelivery.title;
+      this.selectedDelivery.cost = selectedDelivery.cost;
+      this.selectedDelivery.type = selectedDelivery.type;
+    } else {
+      this.resetSelectedDelivery();
+    }
+
     this.computePrice();
   },
   updated: function updated() {
@@ -1971,11 +1989,12 @@ __webpack_require__.r(__webpack_exports__);
       return delivery.type == this.selectedDelivery.type;
     },
     resetSelectedVoucher: function resetSelectedVoucher() {
+      this.selectedVoucher.id = this.oldVoucherId;
       this.selectedVoucher.name = '-';
       this.selectedVoucher.price = 0;
     },
     resetSelectedDelivery: function resetSelectedDelivery() {
-      this.selectedDelivery.type = '-';
+      this.selectedDelivery.type = this.oldDelivery;
       this.selectedDelivery.title = '-';
       this.selectedDelivery.cost = 0;
     }
@@ -59355,14 +59374,14 @@ var app = new Vue({
   el: '#app',
   data: {
     selectedVoucher: {
-      id: '',
-      price: '',
-      name: ''
+      id: null,
+      price: null,
+      name: null
     },
     selectedDelivery: {
-      type: '',
-      cost: '',
-      title: ''
+      type: null,
+      cost: null,
+      title: null
     },
     checked: 5,
     translate: {

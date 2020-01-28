@@ -4,4 +4,6 @@
     :selected-voucher="selectedVoucher"
     :selected-delivery="selectedDelivery"
     :translate="translate"
+    old-voucher-id="{{ old('voucher_id') }}"
+    old-delivery="{{ old('delivery') }}"
 ></checkout-form>

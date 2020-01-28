@@ -56,7 +56,7 @@
                                         <span>{{ $errors->first('voucher_id') }}</span>
                                     @endif
                                 </div>
-                                <button type="button" class="btn btn-primary btn-lg mb30" onclick="stepper_next()">Continue With Plans</button>
+                                <button type="button" class="btn btn-primary btn-lg mb30" onclick="stepper_next()">{{ __('Continue') }} With Plans</button>
                             </div>
                             <div id="delivery-part" class="content" role="tabpanel" aria-labelledby="delivery-part-trigger">
                                 <div class="box">
@@ -77,7 +77,7 @@
                                 </div>
                                 <button type="button" class="btn btn-primary btn-lg mb30" onclick="stepper_previous()">Back to Plans</button>
 
-                                <button type="button" class="btn btn-primary btn-lg mb30" onclick="stepper_next()">Continue With Plans</button>
+                                <button type="button" class="btn btn-primary btn-lg mb30" onclick="stepper_next()">{{ __('Continue') }} With Plans</button>
                             </div>
                             <div id="information-part" class="content" role="tabpanel" aria-labelledby="information-part-trigger">
                                 <div class="box">

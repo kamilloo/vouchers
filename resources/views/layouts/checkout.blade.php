@@ -35,10 +35,10 @@
             <div class="row text-center mx-5">
                 <div class="col-sm text-center mb-3">
                     <ul class="list-unstyled text-small">
-                        <li><a class="text-muted" href="#">Team</a></li>
-                        <li><a class="text-muted" href="#">Locations</a></li>
-                        <li><a class="text-muted" href="#">Privacy</a></li>
-                        <li><a class="text-muted" href="#">Terms</a></li>
+                        <li><a class="text-muted" href="#">{{ __("Team") }}</a></li>
+                        <li><a class="text-muted" href="#">{{ __("Locations") }}</a></li>
+                        <li><a class="text-muted" href="#">{{ __("Privacy") }}</a></li>
+                        <li><a class="text-muted" href="#">{{ __("Terms") }}</a></li>
                     </ul>
                 </div>
             </div>
