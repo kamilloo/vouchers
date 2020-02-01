@@ -22,6 +22,9 @@
     "Continue": "Dalej",
     "Back": "Cofnij",
     "Confirm": "Zatwierdź",
+    "Download": "Pobierz",
+    "Pay": "Przejdź do płatności",
+    "Send To :recipient": "Wyślij do :recipient",
     "Back to homepage": "Wróć na stronę domową",
     "name":  "nazwa",
     "email": "email",
@@ -33,5 +36,14 @@
     "last_name": "nazwisko",
     "Service": "Usługa",
     "Description": "Opis",
-    "Please check the form below for errors": "Proszę poprawić formularz"
+    "Please check the form below for errors": "Proszę poprawić formularz",
+    "Thanks for your order": "Dziękujemy za złożenie zamówienia",
+    "The Voucher will be wonderful Gift for Kamil":"Bon będzie wspaniałym prezentem dla :recipient",
+    "Please complete your payment and send Voucher to Kamil.": "Wykonaj płatność za bon i wyślij bon do :recipient.",
+    "Congratulation!":"Gratulacje",
+    "You can send Voucher to :recipient": "Teraz możesz wysłać bon do :recipient",
+    "You bought Voucher to :recipient": "Kupiłeś bon upominkowy dla: :recipient",
+    "Delivery your Voucher": "Dostarcz swój bon",
+    "Waiting for payment confirmation.": "Oczekujemy na potwierdzenie płatności."
+
 }

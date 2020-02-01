@@ -9,14 +9,11 @@
                         @include('layouts.flash-message')
                     </div>
                 </div>
-                @include('payment.recap.template-2.greeting')
+                @include('payment.return.common.greeting')
                 <section class="col">
-                    @include('payment.recap.template-2.box', [
-                     'lead' => __('You can send Voucher to Kamil'),
-                     'help' => __('Waiting for payment confirmation.')
-                    ])
+                    @include('payment.return.common.box')
                 </section>
-                @include('payment.recap.template-2.button-homepage')
+                @include('payment.recap.'.$template_path.'.button-homepage')
             </div>
         </div>
     </div>

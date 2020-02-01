@@ -13,10 +13,10 @@
                 </div>
             </div>
             <div class="container-contact1 justify-content-center">
-                @include('payment.recap.template-1.greeting')
+                @include('payment.return.common.greeting')
                 <div class="col-md-8 col-sm-12 p-b-160">
-                    @include('payment.recap.template-1.box')
-                    @include('payment.recap.template-1.buttons')
+                    @include('payment.recap.common.box')
+                    @include('payment.recap.common.buttons')
                 </div>
             </div>
 

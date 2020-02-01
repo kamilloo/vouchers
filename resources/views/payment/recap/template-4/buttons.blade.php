@@ -1,41 +1,18 @@
 <div class="container-contact100-form-btn">
-    <div class="wrap-contact100-form-btn">
-        <div class="contact100-form-bgbtn"></div>
-        <a type="button" class="contact100-form-btn" href="{{ route('voucher.download', $order) }}">
-            <span>
-                {{ __('Download') }}
-                <i class="fa fa-long-arrow-right m-l-7"
-                   aria-hidden="true"></i>
-            </span>
-        </a>
-    </div>
-    <div class="wrap-contact100-form-btn">
-        <div class="contact100-form-bgbtn"></div>
-        <a type="button" class="contact100-form-btn" href="{{ route('voucher.send', $order) }}">
-            <span>
-                {{ __('Send To Kamil') }}
-                <i class="fa fa-long-arrow-right m-l-7"
-                   aria-hidden="true"></i>
-            </span>
-        </a>
-    </div>
-    {{--                                <div class="wrap-contact100-form-btn">--}}
-    {{--                                    <div class="contact100-form-bgbtn"></div>--}}
-    {{--                                    <a type="button" class="contact100-form-btn" href="{{ route('voucher.push', $order) }}">--}}
-    {{--                                        <span>--}}
-    {{--                                            {{ __('Send SMS') }}--}}
-    {{--                                            <i class="fa fa-long-arrow-right m-l-7"--}}
-    {{--                                               aria-hidden="true"></i>--}}
-    {{--                                        </span>--}}
-    {{--                                    </a>--}}
-    {{--                                </div>--}}
-    <div class="wrap-contact100-form-btn">
-        <div class="contact100-form-bgbtn"></div>
-        <a type="button" class="contact100-form-btn" href="{{ route('welcome') }}">
-            <span>
-                {{ __('Back to homepage') }}
-                <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
-            </span>
-        </a>
-    </div>
+    @include('payment.recap.template-4.button', [
+    'href' => route('voucher.download', $order),
+    'label' => __('Download')
+    ])
+    @include('payment.recap.template-4.button', [
+    'href' => route('voucher.send', $order),
+    'label' => __('Send to :recipient', ['recipient' => $order->first_name])
+    ])
+{{--    @include('payment.recap.template-4.button', [--}}
+{{--        'href' => route('voucher.push', $order),--}}
+{{--        'label' => __('Send SMS to:recipient', ['recipient' => $order->first_name])--}}
+{{--    ])--}}
+    @include('payment.recap.template-4.button', [
+        'href' => route('welcome'),
+        'label' => __('Back to homepage')
+    ])
 </div>

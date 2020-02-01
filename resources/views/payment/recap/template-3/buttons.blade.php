@@ -1,5 +1,18 @@
 <div class="container-contact3-form-btn">
-    <a type="button" class="contact3-form-btn" href="{{ route('voucher.download', $order) }}">{{ __('Download') }}</a>
-    <a type="button" class="contact3-form-btn" href="{{ route('voucher.send', $order) }}">{{ __('Send to Kamil') }}</a>
-    <a type="button" class="contact3-form-btn" href="{{ route('welcome') }}">{{ __('Back to homepage') }}</a>
+    @include('payment.recap.template-3.button', [
+'href' => route('voucher.download', $order),
+'label' => __('Download')
+])
+    @include('payment.recap.template-3.button', [
+    'href' => route('voucher.send', $order),
+    'label' => __('Send to :recipient', ['recipient' => $order->first_name])
+    ])
+    {{--    @include('payment.recap.template-3.button', [--}}
+    {{--        'href' => route('voucher.push', $order),--}}
+    {{--        'label' => __('Send SMS to:recipient', ['recipient' => $order->first_name])--}}
+    {{--    ])--}}
+    @include('payment.recap.template-3.button', [
+        'href' => route('welcome'),
+        'label' => __('Back to homepage')
+    ])
 </div>

@@ -13,12 +13,10 @@
                     </div>
                 </div>
                 <section class="col">
-                    @include('payment.recap.template-4.box', [
-                        'lead' => __('You can send Voucher to Kamil'),
-                        'help' => __('Waiting for payment confirmation.')
-                    ])
+                    @include('payment.return.common.greeting')
+                    @include('payment.return.common.box')
                 </section>
-                @include('payment.recap.template-4.button-homepage')
+                @include('payment.recap.'.$template_path.'.button-homepage')
             </div>
         </div>
     </div>

@@ -94,9 +94,9 @@ class PaymentGateway implements IPaymentGateway
         );
 
         $register_payment = $this->gateway
-            ->setPosId(98152)
-            ->setMerchantId(98152)
-            ->setCrc('9ce6c63b01df7132')
+            ->setPosId(535)
+            ->setMerchantId($merchant->merchant_id)
+            ->setCrc($merchant->crc)
             ->setTestMode(true)
             ->init();
 

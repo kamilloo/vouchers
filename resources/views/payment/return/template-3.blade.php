@@ -9,14 +9,11 @@
                 </div>
             </div>
             <div class="wrap-contact3 col-md-8 col-sm-12">
-                @include('payment.recap.template-3.greeting')
+                @include('payment.return.common.greeting')
                 <section class="col">
-                    @include('payment.recap.template-3.box', [
-                     'lead' => __('You can send Voucher to Kamil'),
-                     'help' => __('Waiting for payment confirmation.')
-                 ])
+                    @include('payment.return.common.box')
                 </section>
-                @include('payment.recap.template-3.button-homepage')
+                @include('payment.recap.'.$template_path.'.button-homepage')
             </div>
         </div>
     </div>

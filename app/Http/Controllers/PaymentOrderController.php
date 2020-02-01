@@ -48,14 +48,17 @@ class PaymentOrderController extends Controller
             $custom_background = $merchant->shopStyles->background_color;
         }
 
-        return view('payment.return.'. $merchant->template->file_name, compact(
+        $template_path = $merchant->template->file_name;
+
+        return view('payment.return.'. $template_path, compact(
             'vouchers',
             'merchant',
             'custom_logo',
             'custom_background_image',
             'custom_welcoming',
             'custom_background',
-            'order'
+            'order',
+            'template_path'
         ))->with(['success' => 'Congratulation!, you bought voucher successful.']);
     }
 
@@ -82,14 +85,17 @@ class PaymentOrderController extends Controller
             $custom_background = $merchant->shopStyles->background_color;
         }
 
-        return view('payment.recap.'. $merchant->template->file_name, compact(
+        $template_path = $merchant->template->file_name;
+
+        return view('payment.recap.'. $template_path, compact(
             'vouchers',
             'merchant',
             'custom_logo',
             'custom_background_image',
             'custom_welcoming',
             'custom_background',
-            'order'
+            'order',
+            'template_path'
         ));
     }
 

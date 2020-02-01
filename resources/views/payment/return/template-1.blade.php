@@ -13,14 +13,10 @@
                 </div>
             </div>
             <div class="container-contact1 justify-content-center">
-                @include('payment.recap.template-1.greeting')
+                @include('payment.return.common.greeting')
                 <div class="col-md-8 col-sm-12 p-b-160">
-                    @include('payment.recap.template-1.box', [
-                    'lead' => __('You can send Voucher to Kamil'),
-                    'help' => __('Waiting for payment confirmation.')
-                   ])
-                    @include('payment.recap.template-1.button-homepage')
-
+                    @include('payment.return.common.box')
+                    @include('payment.recap.'.$template_path.'.button-homepage')
                 </div>
             </div>
 
