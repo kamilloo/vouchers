@@ -51,6 +51,8 @@ class VoucherOrderController extends Controller
 
         Mail::to($order->email)->send($mailable);
 
+        $order->moveStatusToDeliver();
+
         return back()->with(['success' => 'Mail was send successful!']);
     }
 

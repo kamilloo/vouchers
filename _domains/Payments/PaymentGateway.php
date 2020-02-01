@@ -94,7 +94,8 @@ class PaymentGateway implements IPaymentGateway
         );
 
         $register_payment = $this->gateway
-            ->setPosId(535)
+            ->setPosId(465)
+//            ->setPosId($merchant->pos_id)
             ->setMerchantId($merchant->merchant_id)
             ->setCrc($merchant->crc)
             ->setTestMode(true)
@@ -126,6 +127,7 @@ class PaymentGateway implements IPaymentGateway
 
             $transaction->error_code = $register_payment->getErrorCode();
             $transaction->error_description = $register_payment->getErrorDescription();
+            $payment->order->moveStatusToRejected();
         }
 
         $transaction->save();
@@ -170,6 +172,9 @@ class PaymentGateway implements IPaymentGateway
 
         if ($success) {
             $payment->paidAt(Carbon::now());
+        }
+        else{
+            $payment->order->moveStatusToRejected();
         }
         return;
     }

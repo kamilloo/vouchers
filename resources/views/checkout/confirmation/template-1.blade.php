@@ -17,8 +17,8 @@
                 <div class="col-md-8 col-sm-12 p-b-160">
                     @include('payment.recap.template-1.box', [
                         'title' => __('Thanks for your order'),
-                        'lead' => __('The Voucher will be wonderful Gift for Kamil'),
-                        'help' => __('Please complete your payment and send Voucher to Kamil.')
+                        'lead' => __('The Voucher will be wonderful Gift for :recipient', ['recipient' => $order->first_name]),
+                        'help' => __('Please complete your payment and send Voucher to :recipient', ['recipient' => $order->first_name])
                         ])
                     @include('payment.recap.template-1.button-pay')
                 </div>

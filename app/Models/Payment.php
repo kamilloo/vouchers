@@ -13,7 +13,7 @@ class Payment extends Model implements IPayment
 
     public function link(): string
     {
-        return $this->payment_link ?? 'payment_url';
+        return $this->payment_link;
     }
 
     public function scopeToMe($query)

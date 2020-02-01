@@ -5,12 +5,12 @@
     <title>Your Voucher</title>
     <style>
         h1{
-            font-size: 50px;
+            font-size: 36px;
             font-weight: 300;
             text-align: center;
             font-style: italic;
-            line-height: 100px;
-            height: 100px;
+            line-height: 48px;
+            height: 48px;
             text-transform: capitalize;
             margin: 10px;
             padding: 0px;
@@ -19,7 +19,7 @@
 
             padding: 0px;
             margin: 0px;
-            /*font-family: DejaVu Sans;*/
+            font-family: DejaVu Sans;
         }
         body {
             text-align: center;
@@ -46,13 +46,13 @@
             color: #f7c83b;
         }
         h2 {
-            font-size: 72px;
+            font-size: 32px;
             font-weight: 600;
             font-style: italic;
             margin: 0 0 10px 0;
             padding: 0;
-            line-height: 80px;
-            height: 160px;
+            line-height: 36px;
+            height: 72px;
 
         }
         .footer{
@@ -65,9 +65,9 @@
             line-height: 20px;
         }
         .title{
-            font-size: 32px;
-            line-height: 36px;
-            height: 72px;
+            font-size: 20px;
+            line-height: 25px;
+            height: 50px;
         }
         .left{
             text-align: left;
@@ -76,11 +76,11 @@
             text-align: right;
         }
         .table{
-            font-size: 20px;
-            line-height: 20px;
+            font-size: 16px;
+            line-height: 16px;
             font-style: italic;
             width: 100%;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
         }
         .table td{
             padding: 2px 50px;
@@ -110,16 +110,23 @@
 </head>
 <body>
 <div class="content">
+    <h1>{{ $order->voucher->title  }}</h1>
+    @if($order->merchant->shopImages->logo_enabled)
     <div>
-        <img height="150" src="{{ $order->merchant->shopImages->logo }}" alt="Company Logo">
+        <img height="100" src="{{ $order->merchant->shopImages->logo ?? asset('checkout/template1/images/img-01.png') }}" alt="Company Logo">
     </div>
+    @else
+        <div>
+            <img height="100" src="{{ asset('checkout/template1/images/img-01.png') }}" alt="Company Logo">
+        </div>
+    @endif
     <h1 class="gold">{{ $user_profile->company_name }}</h1>
 
     <p>serdecznie zaprasza</p>
 
     <h2><span class="small">Sz. P.</span> {{ $order->first_name }}&nbsp;{{ $order->last_name }}</h2>
 
-    <p class="title">na dowolny zestaw zabiegów <br>w kwocie {{ $order->voucher->price }} zł</p>
+    <p class="title">{!!  $order->voucher->presenter->title() !!}
 
     <table class="table">
         <tr>

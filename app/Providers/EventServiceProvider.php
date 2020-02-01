@@ -2,6 +2,13 @@
 
 namespace App\Providers;
 
+use App\Events\OrderWasPlaced;
+use App\Events\PaymentWasBegan;
+use App\Events\PaymentWasCompleted;
+use App\Events\PaymentWasConfirmed;
+use App\Events\VoucherWasReleased;
+use App\Events\VoucherWasSent;
+use App\Listeners\OrderWasPlacedNotify;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -17,6 +24,24 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
+        ],
+        OrderWasPlaced::class => [
+            OrderWasPlacedNotify::class
+        ],
+        PaymentWasBegan::class => [
+
+        ],
+        PaymentWasCompleted::class => [
+
+        ],
+        PaymentWasConfirmed::class => [
+
+        ],
+        VoucherWasSent::class => [
+
+        ],
+        VoucherWasReleased::class => [
+
         ],
     ];
 

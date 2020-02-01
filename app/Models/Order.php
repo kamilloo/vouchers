@@ -5,7 +5,10 @@ namespace App\Models;
 use App\Models\Client;
 use App\Contractors\IOrder;
 use App\Http\Presenters\OrderPresenter;
+use App\Models\Enums\DeliveryType;
+use App\Models\Enums\StatusType;
 use App\Models\Traits\OrderConcern;
+use Barryvdh\DomPDF\PDF;
 use Carbon\Carbon;
 
 class Order extends Model implements IOrder
@@ -84,6 +87,76 @@ class Order extends Model implements IOrder
     {
         $this->used_at = Carbon::now();
         return $this->save();
+    }
+
+    public function isOnline():bool
+    {
+        return $this->delivery == DeliveryType::ONLINE;
+    }
+
+    public function isNew():bool
+    {
+        return $this->status === StatusType::NEW;
+    }
+
+    public function isWaiting():bool
+    {
+        return $this->status === StatusType::WAITING;
+    }
+
+    public function isCompleted():bool
+    {
+        return !$this->isNew() || !$this->isWaiting();
+    }
+
+    public function isConfirmed():bool
+    {
+        return $this->status === StatusType::CONFIRM;
+    }
+
+    public function isRejected():bool
+    {
+        return $this->status === StatusType::REJECTED;
+    }
+
+    public function moveStatusToWaiting():bool
+    {
+        if ($this->isNew())
+        {
+            $this->status = StatusType::WAITING;
+            return $this->save();
+        }
+        return false;
+    }
+
+    public function moveStatusToRejected():bool
+    {
+        if ($this->isNew() || $this->isWaiting())
+        {
+            $this->status = StatusType::REJECTED;
+            return $this->save();
+        }
+        return false;
+    }
+
+    public function moveStatusToConfirmed():bool
+    {
+        if ($this->isNew() || $this->isWaiting())
+        {
+            $this->status = StatusType::CONFIRM;
+            return $this->save();
+        }
+        return false;
+    }
+
+    public function moveStatusToDeliver():bool
+    {
+        if ($this->isConfirmed())
+        {
+            $this->status = StatusType::DELIVERY;
+            return $this->save();
+        }
+        return false;
     }
 
 }

@@ -2,8 +2,14 @@
 
 namespace App\Contractors;
 
+use App\Models\Payment;
 use Carbon\Carbon;
 
+/**
+ * Interface IPayment
+ *
+ * @mixin Payment
+ */
 interface IPayment
 {
     public function link(): string ;

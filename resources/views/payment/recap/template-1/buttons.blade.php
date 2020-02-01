@@ -1,20 +1,20 @@
 <div class="container-contact1-form-btn">
-    <a type="button" class="contact1-form-btn" href="{{ route('voucher.download', $order) }}">
-        <span>
-             {{ __('Download') }}
-            <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
-         </span>
-    </a>
-    <a type="button" class="contact1-form-btn" href="{{ route('voucher.send', $order) }}">
-        <span>
-             {{ __('Send To Kamil') }}
-            <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
-         </span>
-    </a>
-    <a type="button" class="contact1-form-btn" href="{{ route('welcome') }}">
-        <span>
-             {{ __('Back to homepage') }}
-            <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
-         </span>
-    </a>
+    @include('payment.recap.template-1.button', [
+    'href' => route('voucher.download', $order),
+    'label' => __('Download')
+    ])
+    @if($order->isOnline())
+    @include('payment.recap.template-1.button', [
+    'href' => route('voucher.send', $order),
+    'label' => __('Send to :recipient', ['recipient' => $order->first_name])
+    ])
+    @endif
+    {{--    @include('payment.recap.template-1.button', [--}}
+    {{--        'href' => route('voucher.push', $order),--}}
+    {{--        'label' => __('Send SMS to:recipient', ['recipient' => $order->first_name])--}}
+    {{--    ])--}}
+    @include('payment.recap.template-1.button', [
+        'href' => route('welcome'),
+        'label' => __('Back to homepage')
+    ])
 </div>

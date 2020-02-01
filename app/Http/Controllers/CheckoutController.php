@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\OrderWasPlaced;
 use App\Http\Requests\Checkout;
 use App\Managers\DeliveryManager;
 use App\Models\Client;
 use App\Models\Merchant;
 use App\Models\Voucher;
 use App\Models\Order;
+use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Http\Request;
+use Symfony\Contracts\EventDispatcher\Event;
 
 class CheckoutController extends Controller
 {
@@ -50,17 +53,25 @@ class CheckoutController extends Controller
         ));
     }
 
-    public function proceed(Checkout $request, Merchant $merchant)
+    public function proceed(Checkout $request, Merchant $merchant, Dispatcher $event_dispatcher)
     {
         $client = Client::create($request->getClientParam());
         $order = $this->makeOrder($request, $merchant);
         $order->client()->associate($client);
         $order->save();
-        return redirect()->route('checkout.confirmation', compact('merchant', 'order'))->with('success', 'Your order was placed.');
+        $event_dispatcher->dispatch(new OrderWasPlaced($order));
+        return redirect()->route('checkout.confirmation', compact('merchant', 'order'))->with('success', __('Your order was placed.'));
     }
 
     public function confirmation(Merchant $merchant, Order $order)
     {
+        if ($order->isRejected())
+        {
+            return redirect()->route('payment.failed', [
+                'payment' => $order->payments()->first(),
+            ])->with(['error' => __('You bought voucher failed.')]);
+        }
+
         if ($merchant->shopImages()->exists())
         {
             $custom_logo = $merchant->shopImages->logo_enabled ? $merchant->shopImages->logo : null;

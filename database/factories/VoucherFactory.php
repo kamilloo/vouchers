@@ -38,7 +38,7 @@ $factory->define(Voucher::class, function (Faker $faker) {
         $product_type => ProductType::SERVICE,
         'type' => 'type',
         'title' => $faker->title,
-        'price' => $faker->randomFloat(),
+        'price' => $faker->randomFloat(2,1,1000),
     ];
 });
 

@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\App\Http\Controllers\Checkout\Proceed;
 
+use App\Events\OrderWasPlaced;
 use App\Models\Enums\DeliveryType;
 use App\Models\Enums\VoucherType;
 use App\Models\Merchant;
@@ -31,6 +32,7 @@ class CheckoutControllerTest extends TestCase
     {
         parent::setUp();
         $this->merchant = factory(Merchant::class)->create();
+        \Event::fake();
     }
 
     /**
@@ -62,6 +64,9 @@ class CheckoutControllerTest extends TestCase
         $this->assertDatabaseHas('orders', $incoming_data);
 
         $this->assertDatabaseHas('clients', $client);
+
+        \Event::assertDispatched(OrderWasPlaced::class);
+
     }
 
 

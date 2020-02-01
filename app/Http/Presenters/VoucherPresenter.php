@@ -37,7 +37,20 @@ class VoucherPresenter extends ModelPresenter implements \JsonSerializable
             return $this->model->price;
         }
         return $this->model->product->price;
+    }
 
+    public function title(): string
+    {
+        if ($this->model->isQuoteType())
+        {
+            return "Na dowolny zestaw zabiegów<br>w kwocie {$this->model->price} zł</p>";
+        }
+        if (empty($this->model->product->description))
+        {
+            return  __('On') .' '. "{$this->model->product->title}<br>";
+        }
+        return  __('On') .' '. "{$this->model->product->title}<br>".
+            "({$this->model->product->description})";
     }
 
     /**
