@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Contractors\IPayment;
 use App\Contractors\IPaymentGateway;
+use App\Events\PaymentWasBegan;
+use App\Events\PaymentWasCompleted;
+use App\Events\PaymentWasConfirmed;
 use App\Exceptions\PaymentLinkNotAvailable;
 use App\Http\Requests\Checkout;
 use App\Http\Requests\PaymentCallbackStatus;
@@ -13,16 +16,19 @@ use App\Models\Payment;
 use App\Models\Voucher;
 use App\Models\Order;
 use Carbon\Carbon;
+use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Http\Request;
 
 class PaymentOrderController extends Controller
 {
-    public function create(Merchant $merchant, Order $order, IPaymentGateway $payment_gateway)
+    public function create(Merchant $merchant, Order $order, IPaymentGateway $payment_gateway, Dispatcher $event_dispatcher)
     {
         try {
             $payment = $payment_gateway->pay($order, $merchant);
+            $payment_link = $payment->link();
+            $event_dispatcher->dispatch(new PaymentWasBegan($payment));
+            return redirect()->away($payment_link);
 
-            return redirect()->away($payment->link());
         }catch (PaymentLinkNotAvailable $exception)
         {
             return redirect()->away($merchant->getHomepage());
@@ -30,12 +36,12 @@ class PaymentOrderController extends Controller
 
     }
 
-    public function callbackReturn(Payment $payment, IPaymentGateway $payment_gateway)
+    public function callbackReturn(Payment $payment, IPaymentGateway $payment_gateway, Dispatcher $event_dispatcher)
     {
         $payment->order->moveStatusToWaiting();
         $verify = $payment_gateway->verify($payment);
         $merchant = $payment->merchant->fresh();
-
+        $event_dispatcher->dispatch(new PaymentWasCompleted($payment));
         if ($verify)
         {
             $payment->order->qr_code = uniqid();
@@ -80,9 +86,10 @@ class PaymentOrderController extends Controller
         ))->with(['success' => __('You bought voucher successful.')]);
     }
 
-    public function callbackStatus(PaymentCallbackStatus $request, Payment $payment, IPaymentGateway $payment_gateway)
+    public function callbackStatus(PaymentCallbackStatus $request, Payment $payment, IPaymentGateway $payment_gateway, Dispatcher $event_dispatcher)
     {
         $payment_gateway->confirmation($payment, $request);
+        $event_dispatcher->dispatch(new PaymentWasConfirmed($payment));
 
         echo "OK";
         return ;

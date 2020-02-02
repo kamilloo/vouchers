@@ -3,6 +3,8 @@
 namespace Tests\Feature\App\Http\Controllers\PaymentController\Create;
 
 use App\Contractors\IPaymentGateway;
+use App\Events\OrderWasPlaced;
+use App\Events\PaymentWasBegan;
 use App\Models\Enums\DeliveryType;
 use App\Models\Enums\StatusType;
 use App\Models\Enums\VoucherType;
@@ -75,6 +77,7 @@ class PaymentControllerTest extends TestCase
 
         $this->payment_gateway = \Mockery::mock(IPaymentGateway::class);
         $this->app->instance(IPaymentGateway::class, $this->payment_gateway);
+        \Event::fake();
 
     }
 
@@ -95,6 +98,8 @@ class PaymentControllerTest extends TestCase
             'order' => $this->order]));
         $response->assertStatus(302)
             ->assertRedirect($this->payment_url);
+
+        \Event::assertDispatched(PaymentWasBegan::class);
     }
 
     /**

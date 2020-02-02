@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\VoucherWasDelivered;
 use App\Http\Requests\ProfileUpdate;
 use App\Http\Requests\VoucherStore;
 use App\Http\Requests\VoucherUpdate;
@@ -12,6 +13,7 @@ use App\Notifications\SendVoucher;
 use Barryvdh\DomPDF\PDF;
 use Domain\Vouchers\VoucherRepository;
 use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Filesystem\FilesystemManager;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
@@ -42,7 +44,7 @@ class VoucherOrderController extends Controller
         return $pdf->stream();
     }
 
-    public function send(Order $order)
+    public function send(Order $order, Dispatcher $event_dispatcher)
     {
         $pdf = $this->createPdf($order);
 
@@ -52,6 +54,7 @@ class VoucherOrderController extends Controller
         Mail::to($order->email)->send($mailable);
 
         $order->moveStatusToDeliver();
+        $event_dispatcher->dispatch(new VoucherWasDelivered($order));
 
         return back()->with(['success' => 'Mail was send successful!']);
     }

@@ -6,6 +6,7 @@ use App\Events\OrderWasPlaced;
 use App\Events\PaymentWasBegan;
 use App\Events\PaymentWasCompleted;
 use App\Events\PaymentWasConfirmed;
+use App\Events\VoucherWasDelivered;
 use App\Events\VoucherWasReleased;
 use App\Events\VoucherWasSent;
 use App\Listeners\OrderWasPlacedNotify;
@@ -38,6 +39,9 @@ class EventServiceProvider extends ServiceProvider
 
         ],
         VoucherWasSent::class => [
+
+        ],
+        VoucherWasDelivered::class => [
 
         ],
         VoucherWasReleased::class => [

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\VoucherWasReleased;
 use App\Exceptions\VoucherExpired;
 use App\Exceptions\VoucherNotPaid;
 use App\Exceptions\VoucherUsed;
@@ -19,6 +20,7 @@ use App\Models\Template;
 use App\Models\UserProfile;
 use App\Models\Voucher;
 use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Filesystem\FilesystemManager;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -33,7 +35,7 @@ class VoucherController extends Controller
         return new OrderResource($order);
     }
 
-    public function pay($qr_code, Guard $guard)
+    public function pay($qr_code, Guard $guard, Dispatcher $event_dispatcher)
     {
         $order = Order::toMe()->with(['voucher.product', 'payments', 'payments.transactions'])->byQrCode($qr_code)->firstOrfail();
 
@@ -50,6 +52,8 @@ class VoucherController extends Controller
         }
 
         $order->pay();
+
+        $event_dispatcher->dispatch(new VoucherWasReleased($order));
 
         return new OrderResource($order);
     }

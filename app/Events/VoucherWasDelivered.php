@@ -2,7 +2,7 @@
 
 namespace App\Events;
 
-use App\Models\Payment;
+use App\Models\Order;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -11,6 +11,6 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class PaymentWasBegan extends PaymentEvent
+class VoucherWasDelivered  extends OrderEvent
 {
 }
