@@ -8,7 +8,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class OrderWasPlaceNotification extends OrderNotification implements ShouldQueue
+class PaymentWasConfirmedNotification extends OrderNotification implements ShouldQueue
 {
 
     /**
@@ -22,8 +22,8 @@ class OrderWasPlaceNotification extends OrderNotification implements ShouldQueue
         $client = $this->order->getClientEmail();
         $voucher = $this->order->voucher->title;
         return (new MailMessage)
-            ->line(__('Order was placed.'))
-            ->line(__("Client {$client} ordered your voucher: {$voucher}"))
+            ->line(__('Payment was began.'))
+            ->line(__("Client {$client} began payment your voucher: {$voucher}"))
             ->action(__('You can visit details'), route('orders.index'))
             ->line(__('Thank you for using our application!'));
     }

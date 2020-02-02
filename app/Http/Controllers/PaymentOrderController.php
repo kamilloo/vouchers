@@ -41,7 +41,7 @@ class PaymentOrderController extends Controller
         $payment->order->moveStatusToWaiting();
         $verify = $payment_gateway->verify($payment);
         $merchant = $payment->merchant->fresh();
-        $event_dispatcher->dispatch(new PaymentWasCompleted($payment));
+//        $event_dispatcher->dispatch(new PaymentWasCompleted($payment));
         if ($verify)
         {
             $payment->order->qr_code = uniqid();
