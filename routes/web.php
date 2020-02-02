@@ -51,20 +51,28 @@ Route::get('get-started', 'Starter@getStarted')->name('get-started');
 
 Route::get(__('checkout').'/{merchant}', 'CheckoutController@start')->name('checkout.start');
 Route::post(__('checkout').'/{merchant}', 'CheckoutController@proceed')->name('checkout.proceed');
-Route::get(__('checkout').'/{merchant}/'.__('confirmation').'/{order}', 'CheckoutController@confirmation')->name('checkout.confirmation')->middleware('canOrderProceeded');
 
+Route::group(['middleware' => 'canOrderProceeded'], function () {
+    Route::get(__('checkout').'/{merchant}/'.__('confirmation').'/{order}', 'CheckoutController@confirmation')->name('checkout.confirmation');
 
-Route::get('payment/{merchant}/create/{order}', 'PaymentOrderController@create')->name('payment.create')->middleware('canOrderProceeded');
-Route::get('payment/{payment}/callback-return', 'PaymentOrderController@callbackReturn')->name('payment.return');
-Route::post('payment/{payment}/callback-status', 'PaymentOrderController@callbackStatus')->name('payment.status');
-Route::get('payment/{payment}/sandbox-gateway', 'PaymentOrderController@sandboxGateway')->name('payment.sandbox-gateway');
+    Route::get('payment/{merchant}/create/{order}', 'PaymentOrderController@create')->name('payment.create');
+});
 
+Route::group(['middleware' => 'paymentOrderIsActive'], function () {
+    Route::get('payment/{payment}/callback-return', 'PaymentOrderController@callbackReturn')->name('payment.return');
+    Route::post('payment/{payment}/callback-status', 'PaymentOrderController@callbackStatus')->name('payment.status');
+    Route::get('payment/{payment}/sandbox-gateway', 'PaymentOrderController@sandboxGateway')->name('payment.sandbox-gateway');
 
-Route::get('payment/{payment}/recap', 'PaymentOrderController@recap')->name('payment.recap');
+    Route::get('payment/{payment}/recap', 'PaymentOrderController@recap')->name('payment.recap');
+});
 
 Route::get('voucher/order/{order}/failed', 'VoucherOrderController@failed')->name('voucher.failed');
 
 
-Route::get('voucher/order/{order}/download', 'VoucherOrderController@download')->name('voucher.download');
-Route::get('voucher/order/{order}/send', 'VoucherOrderController@send')->name('voucher.send');
-Route::get('voucher/order/{order}/push', 'VoucherOrderController@push')->name('voucher.push');
+Route::group(['middleware' => ['orderIsActive', 'voucherIsWaiting']], function (){
+
+    Route::get('voucher/order/{order}/download', 'VoucherOrderController@download')->name('voucher.download');
+    Route::get('voucher/order/{order}/send', 'VoucherOrderController@send')->name('voucher.send');
+    Route::get('voucher/order/{order}/push', 'VoucherOrderController@push')->name('voucher.push');
+
+});

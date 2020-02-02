@@ -3,6 +3,9 @@
 namespace App\Http;
 
 use App\Http\Middleware\CanOrderProceeded;
+use App\Http\Middleware\OrderIsActive;
+use App\Http\Middleware\PaymentOrderIsActive;
+use App\Http\Middleware\VoucherIsWaiting;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 use Spatie\Cors\Cors;
 
@@ -64,6 +67,9 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'canOrderProceeded' => CanOrderProceeded::class,
+        'orderIsActive' => OrderIsActive::class,
+        'paymentOrderIsActive' => PaymentOrderIsActive::class,
+        'voucherIsWaiting' => VoucherIsWaiting::class,
     ];
 
     /**

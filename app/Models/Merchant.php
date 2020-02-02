@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use App\Http\Presenters\MerchantPresenter;
+use App\Http\Presenters\OrderPresenter;
+
 class Merchant extends Model
 {
     protected $guarded = [];
@@ -85,5 +88,14 @@ class Merchant extends Model
     public function getHomepage():string
     {
         return $this->user->profile->homepage ?? config('app.url');
+    }
+
+
+    /**
+     * @return MerchantPresenter
+     */
+    public function getPresenterAttribute(): MerchantPresenter
+    {
+        return new MerchantPresenter($this);
     }
 }

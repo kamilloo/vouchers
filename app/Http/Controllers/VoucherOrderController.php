@@ -61,6 +61,34 @@ class VoucherOrderController extends Controller
         //push
     }
 
+    public function failed(Order $order)
+    {
+        $merchant = $order->merchant->fresh();
+        if ($merchant->shopImages()->exists())
+        {
+            $custom_logo = $merchant->shopImages->logo_enabled ? $merchant->shopImages->logo : null;
+            $custom_background_image = $merchant->shopImages->front_enabled ? $merchant->shopImages->front : null;
+        }
+        if ($merchant->shopStyles()->exists())
+        {
+            $custom_welcoming = $merchant->shopStyles->welcoming;
+            $custom_background = $merchant->shopStyles->background_color;
+        }
+
+        $template_path = $merchant->template->file_name;
+
+        return view('payment.failed.'. $template_path, compact(
+            'vouchers',
+            'merchant',
+            'custom_logo',
+            'custom_background_image',
+            'custom_welcoming',
+            'custom_background',
+            'order',
+            'template_path'
+        ));
+    }
+
     /**
      * @param Order $order
      * @param PDF $generator

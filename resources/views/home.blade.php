@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">{{ __('Share your checkout shop') }}</div>
                 <div class="card-body">
-                    <shop-input shop-link="{{ route('checkout.start', auth()->user()->merchant) }}"></shop-input>
+                    <shop-input shop-link="{{ auth()->user()->merchant->presenter->shopLink() }}"></shop-input>
                 </div>
             </div>
         </div>

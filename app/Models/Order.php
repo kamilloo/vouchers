@@ -114,7 +114,7 @@ class Order extends Model implements IOrder
 
     public function isCompleted():bool
     {
-        return !$this->isNew() || !$this->isWaiting();
+        return in_array($this->status, StatusType::completed());
     }
 
     public function isConfirmed():bool
@@ -135,6 +135,16 @@ class Order extends Model implements IOrder
     public function isRejected():bool
     {
         return $this->status === StatusType::REJECTED;
+    }
+
+    public function isActive():bool
+    {
+        return in_array($this->status, StatusType::active());
+    }
+
+    public function isInactive():bool
+    {
+        return in_array($this->status, StatusType::inactive());
     }
 
     public function moveStatusToWaiting():bool

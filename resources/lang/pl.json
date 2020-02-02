@@ -53,5 +53,6 @@
     "You bought voucher failed.": "Transakcja nieudana",
     "You can make order again": "Możesz złożyć nowe zamówienie",
     "Restart": "Rozpocznij od nowa",
-    "Transaction Failed!": "Transakcja nieudana"
+    "Transaction Failed!": "Transakcja nieudana",
+    "Action forbidden": "Nie można zrealizować akcji."
 }
