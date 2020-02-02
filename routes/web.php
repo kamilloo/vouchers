@@ -60,7 +60,9 @@ Route::get('payment/{payment}/sandbox-gateway', 'PaymentOrderController@sandboxG
 
 
 Route::get('payment/{payment}/recap', 'PaymentOrderController@recap')->name('payment.recap');
-Route::get('payment/{payment}/failed', 'PaymentOrderController@failed')->name('payment.failed');
+
+Route::get('voucher/order/{order}/failed', 'VoucherOrderController@failed')->name('voucher.failed');
+
 
 Route::get('voucher/order/{order}/download', 'VoucherOrderController@download')->name('voucher.download');
 Route::get('voucher/order/{order}/send', 'VoucherOrderController@send')->name('voucher.send');

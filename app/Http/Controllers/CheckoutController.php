@@ -67,8 +67,8 @@ class CheckoutController extends Controller
     {
         if ($order->isRejected())
         {
-            return redirect()->route('payment.failed', [
-                'payment' => $order->payments()->first(),
+            return redirect()->route('voucher.failed', [
+                'order' => $order->payment(),
             ])->with(['error' => __('You bought voucher failed.')]);
         }
 

@@ -47,6 +47,14 @@ class Order extends Model implements IOrder
         return $this->hasMany(Payment::class);
     }
 
+    /**
+     * @return Payment|\Illuminate\Database\Eloquent\Model|\Illuminate\Database\Eloquent\Relations\HasMany|object|null
+     */
+    public function payment()
+    {
+        return $this->payments()->latest()->first();
+    }
+
 
     public function scopeToMe($query)
     {
@@ -112,6 +120,16 @@ class Order extends Model implements IOrder
     public function isConfirmed():bool
     {
         return $this->status === StatusType::CONFIRM;
+    }
+
+    public function isSent():bool
+    {
+        return $this->status === StatusType::SENT;
+    }
+
+    public function isDelivery():bool
+    {
+        return $this->status === StatusType::DELIVERY;
     }
 
     public function isRejected():bool

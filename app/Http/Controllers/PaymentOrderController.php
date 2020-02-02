@@ -18,26 +18,27 @@ class PaymentOrderController extends Controller
 {
     public function create(Merchant $merchant, Order $order, IPaymentGateway $payment_gateway)
     {
-        $payment = $payment_gateway->pay($order, $merchant);
 
         if ($order->isNew())
         {
+            $payment = $payment_gateway->pay($order, $merchant);
+
             return redirect()->away($payment->link());
         }
         if ($order->isRejected())
         {
-            return redirect()->route('payment.failed', [
-                'payment' => $payment,
+            return redirect()->route('voucher.failed', [
+                'order' => $order,
             ])->with(['error' => __('You bought voucher failed.')]);
         }
-        if ($order->isWaiting() || $order->isNew() )
+        if ($order->isWaiting() || $order->isConfirmed() || $order->isSent() || $order->isDelivery() )
         {
             return redirect()->route('payment.recap', [
-                'payment' => $payment,
+                'payment' => $order->payment(),
             ])->with(['success' => __('You bought voucher successful.')]);
         }
 
-
+        return redirect()->away($merchant->user->profile->homepage);
     }
 
     public function callbackReturn(Payment $payment, IPaymentGateway $payment_gateway)
@@ -59,8 +60,8 @@ class PaymentOrderController extends Controller
         }
         if ($payment->order->isRejected())
         {
-            return redirect()->route('payment.failed', [
-                'payment' => $payment,
+            return redirect()->route('voucher.failed', [
+                'order' => $payment->order,
             ])->with(['error' => __('You bought voucher failed.')]);
         }
 
