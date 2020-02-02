@@ -65,46 +65,26 @@ class CheckoutController extends Controller
 
     public function confirmation(Merchant $merchant, Order $order)
     {
-        if ($order->isNew())
+        if ($merchant->shopImages()->exists())
         {
-            if ($merchant->shopImages()->exists())
-            {
-                $custom_logo = $merchant->shopImages->logo_enabled ? $merchant->shopImages->logo : null;
-                $custom_background_image = $merchant->shopImages->front_enabled ? $merchant->shopImages->front : null;
-            }
-            if ($merchant->shopStyles()->exists())
-            {
-                $custom_welcoming = $merchant->shopStyles->welcoming;
-                $custom_background = $merchant->shopStyles->background_color;
-            }
-
-            return view('checkout.confirmation.'. $merchant->template->file_name, compact(
-                'vouchers',
-                'merchant',
-                'custom_logo',
-                'custom_background_image',
-                'custom_welcoming',
-                'custom_background',
-                'order'
-            ));
+            $custom_logo = $merchant->shopImages->logo_enabled ? $merchant->shopImages->logo : null;
+            $custom_background_image = $merchant->shopImages->front_enabled ? $merchant->shopImages->front : null;
+        }
+        if ($merchant->shopStyles()->exists())
+        {
+            $custom_welcoming = $merchant->shopStyles->welcoming;
+            $custom_background = $merchant->shopStyles->background_color;
         }
 
-        if ($order->isRejected())
-        {
-            return redirect()->route('voucher.failed', [
-                'order' => $order->payment(),
-            ])->with(['error' => __('You bought voucher failed.')]);
-        }
-
-        if ($order->isWaiting() || $order->isConfirmed() || $order->isSent() || $order->isDelivery() )
-        {
-            return redirect()->route('payment.recap', [
-                'payment' => $order->payment(),
-            ])->with(['success' => __('You bought voucher successful.')]);
-        }
-
-        return redirect()->away($merchant->getHomepage());
-
+        return view('checkout.confirmation.'. $merchant->template->file_name, compact(
+            'vouchers',
+            'merchant',
+            'custom_logo',
+            'custom_background_image',
+            'custom_welcoming',
+            'custom_background',
+            'order'
+        ));
     }
 
     /**
