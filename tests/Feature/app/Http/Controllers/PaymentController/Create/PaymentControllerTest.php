@@ -84,7 +84,7 @@ class PaymentControllerTest extends TestCase
     public function create_redirect_to_payment_gateway()
     {
         $this->order = $this->createOrder(StatusType::NEW, []);
-        $this->payment_url = 'payment_url';
+        $this->payment_url = Factory::create()->url;
         $this->payment = $this->createPayment([
             'payment_link' => $this->payment_url
         ]);

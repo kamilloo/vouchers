@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Contractors\IPayment;
+use App\Exceptions\PaymentLinkNotAvailable;
 use App\Http\Presenters\PaymentPresenter;
 use App\Models\Transaction;
 use Carbon\Carbon;
@@ -11,9 +12,17 @@ class Payment extends Model implements IPayment
 {
     protected $link;
 
+    /**
+     * @return string
+     * @throws PaymentLinkNotAvailable
+     */
     public function link(): string
     {
-        return $this->payment_link;
+        if (filter_var($this->payment_link, FILTER_VALIDATE_URL))
+        {
+            return $this->payment_link;
+        }
+        throw new PaymentLinkNotAvailable();
     }
 
     public function scopeToMe($query)

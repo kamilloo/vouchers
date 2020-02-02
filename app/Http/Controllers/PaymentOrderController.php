@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Contractors\IPayment;
 use App\Contractors\IPaymentGateway;
+use App\Exceptions\PaymentLinkNotAvailable;
 use App\Http\Requests\Checkout;
 use App\Http\Requests\PaymentCallbackStatus;
 use App\Models\Enums\StatusType;
@@ -18,27 +19,15 @@ class PaymentOrderController extends Controller
 {
     public function create(Merchant $merchant, Order $order, IPaymentGateway $payment_gateway)
     {
-
-        if ($order->isNew())
-        {
+        try {
             $payment = $payment_gateway->pay($order, $merchant);
 
             return redirect()->away($payment->link());
-        }
-        if ($order->isRejected())
+        }catch (PaymentLinkNotAvailable $exception)
         {
-            return redirect()->route('voucher.failed', [
-                'order' => $order,
-            ])->with(['error' => __('You bought voucher failed.')]);
-        }
-        if ($order->isWaiting() || $order->isConfirmed() || $order->isSent() || $order->isDelivery() )
-        {
-            return redirect()->route('payment.recap', [
-                'payment' => $order->payment(),
-            ])->with(['success' => __('You bought voucher successful.')]);
+            return redirect()->away($merchant->getHomepage());
         }
 
-        return redirect()->away($merchant->user->profile->homepage);
     }
 
     public function callbackReturn(Payment $payment, IPaymentGateway $payment_gateway)

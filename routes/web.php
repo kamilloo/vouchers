@@ -48,12 +48,13 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('get-started', 'Starter@getStarted')->name('get-started');
 
+
 Route::get(__('checkout').'/{merchant}', 'CheckoutController@start')->name('checkout.start');
 Route::post(__('checkout').'/{merchant}', 'CheckoutController@proceed')->name('checkout.proceed');
-Route::get(__('checkout').'/{merchant}/'.__('confirmation').'/{order}', 'CheckoutController@confirmation')->name('checkout.confirmation');
+Route::get(__('checkout').'/{merchant}/'.__('confirmation').'/{order}', 'CheckoutController@confirmation')->name('checkout.confirmation')->middleware('canOrderProceeded');
 
 
-Route::get('payment/{merchant}/create/{order}', 'PaymentOrderController@create')->name('payment.create');
+Route::get('payment/{merchant}/create/{order}', 'PaymentOrderController@create')->name('payment.create')->middleware('canOrderProceeded');
 Route::get('payment/{payment}/callback-return', 'PaymentOrderController@callbackReturn')->name('payment.return');
 Route::post('payment/{payment}/callback-status', 'PaymentOrderController@callbackStatus')->name('payment.status');
 Route::get('payment/{payment}/sandbox-gateway', 'PaymentOrderController@sandboxGateway')->name('payment.sandbox-gateway');

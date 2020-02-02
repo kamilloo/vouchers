@@ -81,4 +81,9 @@ class Merchant extends Model
     {
         return $this->hasMany(Service::class, 'merchant_id');
     }
+
+    public function getHomepage():string
+    {
+        return $this->user->profile->homepage ?? config('app.url');
+    }
 }
