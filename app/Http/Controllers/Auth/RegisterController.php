@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\Template;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -70,9 +71,15 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
 
-        $user->merchant()->create();
+        $merchant = $user->merchant()->create();
+        $merchant->template()->associate($this->getFirstTemplate())->save();
         $user->profile()->create();
 
         return $user;
+    }
+
+    protected function getFirstTemplate():Template
+    {
+        return Template::first();
     }
 }

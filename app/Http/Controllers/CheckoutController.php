@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\OrderWasPlaced;
 use App\Http\Requests\Checkout;
+use App\Http\ViewModels\TemplateViewModel;
 use App\Managers\DeliveryManager;
 use App\Models\Client;
 use App\Models\Merchant;
@@ -27,30 +28,21 @@ class CheckoutController extends Controller
 
     public function start(Merchant $merchant, Voucher $voucher)
     {
-        $vouchers = $voucher->forMerchant($merchant)->get();
-        $delivery_options = $this->delivery_manager->getForMerchant($merchant);
-        $voucher_presenters = $vouchers->map(function($voucher){return $voucher->presenter;});
-        if ($merchant->shopImages()->exists())
-        {
-            $custom_logo = $merchant->shopImages->logo_enabled ? $merchant->shopImages->logo : null;
-            $custom_background_image = $merchant->shopImages->front_enabled ? $merchant->shopImages->front : null;
-        }
-        if ($merchant->shopStyles()->exists())
-        {
-            $custom_welcoming = $merchant->shopStyles->welcoming;
-            $custom_background = $merchant->shopStyles->background_color;
-        }
 
-        return view('templates.'. $merchant->template->file_name, compact(
-            'vouchers',
-            'merchant',
-            'custom_logo',
-            'custom_background_image',
-            'custom_welcoming',
-            'custom_background',
-            'delivery_options',
-            'voucher_presenters'
-        ));
+//        if ($merchant->shopImages()->exists())
+//        {
+//            $custom_logo = $merchant->shopImages->logo_enabled ? $merchant->shopImages->logo : null;
+//            $custom_background_image = $merchant->shopImages->front_enabled ? $merchant->shopImages->front : null;
+//        }
+//        if ($merchant->shopStyles()->exists())
+//        {
+//            $custom_welcoming = $merchant->shopStyles->welcoming;
+//            $custom_background = $merchant->shopStyles->background_color;
+//        }
+
+        $template_view_model = new TemplateViewModel($merchant, $voucher, $this->delivery_manager);
+
+        return view('templates.'. $merchant->template->file_name, $template_view_model);
     }
 
     public function proceed(Checkout $request, Merchant $merchant, Dispatcher $event_dispatcher)

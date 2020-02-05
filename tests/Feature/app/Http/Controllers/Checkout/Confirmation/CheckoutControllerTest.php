@@ -3,6 +3,7 @@
 namespace Tests\Feature\App\Http\Controllers\Checkout\Confirmation;
 
 use App\Models\Enums\DeliveryType;
+use App\Models\Enums\StatusType;
 use App\Models\Enums\VoucherType;
 use App\Models\Merchant;
 use App\Models\Order;
@@ -34,7 +35,8 @@ class CheckoutControllerTest extends TestCase
         parent::setUp();
         $this->merchant = factory(Merchant::class)->create();
         $this->order = factory(Order::class)->create([
-            'merchant_id' => $this->merchant->id
+            'merchant_id' => $this->merchant->id,
+            'status' => StatusType::NEW
         ]);
     }
 

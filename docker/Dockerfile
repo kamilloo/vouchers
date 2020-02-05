@@ -1,4 +1,4 @@
-FROM php:7.2-fpm-alpine
+FROM php:7.4-fpm-alpine
 
 ARG BUILD_DATE
 ARG VCS_REF
@@ -15,11 +15,11 @@ ENV PHP_XDEBUG_PROFILER_ENABLE ${PHP_XDEBUG_PROFILER_ENABLE:-0}
 ENV PHP_XDEBUG_PROFILER_OUTPUT_DIR ${PHP_XDEBUG_PROFILER_OUTPUT_DIR:-"/tmp"}
 
 LABEL Maintainer="Zaher Ghaibeh <z@zah.me>" \
-      Description="Lightweight php 7.2 container based on alpine with xDebug enabled & composer installed." \
-      org.label-schema.name="php-7.2-xdebug-alpine" \
-      org.label-schema.description="Lightweight php 7.2 container based on alpine with xDebug enabled & composer installed." \
+      Description="Lightweight php 7.4 container based on alpine with xDebug enabled & composer installed." \
+      org.label-schema.name="php-7.4-xdebug-alpine" \
+      org.label-schema.description="Lightweight php 7.4 container based on alpine with xDebug enabled & composer installed." \
       org.label-schema.build-date=$BUILD_DATE \
-      org.label-schema.vcs-url="https://github.com/linuxjuggler/php-7.2-xdebug-alpine.git" \
+      org.label-schema.vcs-url="https://github.com/linuxjuggler/php-7.4-xdebug-alpine.git" \
       org.label-schema.vcs-ref=$VCS_REF \
       org.label-schema.schema-version="1.0.0"
 
@@ -36,7 +36,7 @@ RUN set -ex \
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
     && cd  / && rm -fr /src \
     && apk del build-dependencies \
-    && rm -rf /tmp/* 
+    && rm -rf /tmp/*
 
 COPY xdebug.ini /usr/local/etc/php/conf.d/xdebug-dev.ini
 

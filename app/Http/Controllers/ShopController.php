@@ -123,11 +123,11 @@ class ShopController extends Controller
 
     public function changeImages(ShopChangeImages $request, Guard $guard)
     {
-        $user = $guard->user();
+        $user = $this->getUser($guard);
         if ($user->isMerchant())
         {
-            $merchant = $user->merchant;
-            $shop_images = $merchant->shopImages()->first();
+            $merchant = $user->getMerchant();
+            $shop_images = $merchant->getShopImages();
             $incoming_images_meta_data = $request->only([
                 'logo_enabled',
                 'front_enabled',
@@ -147,10 +147,14 @@ class ShopController extends Controller
 
             if (empty($shop_images))
             {
-                $merchant->shopImages()->save(new ShopImage($incoming_images_meta_data));
+                $shop_images = $merchant->shopImages()->save(new ShopImage($incoming_images_meta_data));
             }else{
                 $shop_images->update($incoming_images_meta_data);
             }
+
+            $shop_images->adjustBackgroundImageSwitcher();
+            $shop_images->adjustLogoSwitcher();
+
             return redirect(route('shop.index'))
                 ->with('success', 'Well done!, you changed your shop design.');
         }

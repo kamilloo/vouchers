@@ -12,6 +12,7 @@ use App\Models\User;
 use App\Models\Voucher;
 use Faker\Factory;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Collection;
 use Mockery as m;
 use Symfony\Component\HttpFoundation\Request;
 use Tests\TestCase;
@@ -71,10 +72,10 @@ class CheckoutControllerTest extends TestCase
         $vouchers = factory(Voucher::class,2)->create();
         $this->voucher = m::mock(Voucher::class);
         $this->voucher->shouldReceive('forMerchant')
-            ->once()
+            ->twice()
             ->andReturnSelf();
         $this->voucher->shouldReceive('get')
-            ->once()
+            ->twice()
             ->andReturn($vouchers);
         $this->app->instance(Voucher::class, $this->voucher);
         $response = $this->get(route('checkout.start', $this->merchant))
@@ -94,16 +95,16 @@ class CheckoutControllerTest extends TestCase
         ]));
         $this->merchant->save();
         $template = factory(Template::class,2)->create();
-        $template = m::mock(Template::class);
+        $template = m::mock(Voucher::class);
         $template->shouldReceive('forMerchant')
-            ->once()
+            ->twice()
             ->andReturnSelf();
         $template->shouldReceive('get')
-            ->once()
-            ->andReturn($template);
+            ->twice()
+            ->andReturn(Collection::make());
         $this->app->instance(Voucher::class, $template);
         $response = $this->get(route('checkout.start', $this->merchant))
-            ->assertViewHas('template');
+            ->assertViewHas('vouchers');
 
         $response->assertStatus(200);
     }

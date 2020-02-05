@@ -63,17 +63,29 @@
                 <div class="tab-pane" id="images" role="tabpanel">
                     <form method="post" action="{{ route('shop.change-images') }}" enctype="multipart/form-data">
                         @csrf
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="logo-enabled" name="logo_enabled" value="1" @if($shop_images->logo_enabled) checked @endif>
-                            <label class="form-check-label" for="logo-enabled">{{ __('Show my logo') }} checked</label>
+                        <div class="form-group">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="logo-enabled" name="logo_enabled" class="custom-control-input" value="1" @if($shop_images->logo_enabled) checked @endif>
+                                <label class="custom-control-label" for="logo-enabled">{{ __('Show my logo') }}</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="logo-disabled" name="logo_enabled" class="custom-control-input" value="0" @if(empty($shop_images->logo_enabled)) checked @endif>
+                                <label class="custom-control-label" for="logo-disabled">{{ __('Hide my logo') }}</label>
+                            </div>
                         </div>
                         <div class="form-group">
                             <file-upload id="logo-image" file-preview-width="400" file-name="logo" file-src="{{ $shop_images->logo }}" ></file-upload>
                         </div>
 
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="front-enabled" name="front_enabled" value="1" @if($shop_images->front_enabled) checked @endif>
-                            <label class="form-check-label" for="front-enabled">{{ __('Show my Main Picture') }}</label>
+                        <div class="form-group">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="front-enabled" name="front_enabled" class="custom-control-input" value="1" @if($shop_images->front_enabled) checked @endif>
+                                <label class="custom-control-label" for="front-enabled">{{ __('Show my Main Picture') }}</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="front-disabled" name="front_enabled" class="custom-control-input" value="0" @if(empty($shop_images->front_enabled)) checked @endif>
+                                <label class="custom-control-label" for="front-disabled">{{ __('Hide my Main Picture') }}</label>
+                            </div>
                         </div>
                         <div class="form-group">
                             <file-upload id="front-image" file-preview-width="400" file-name="front" file-src="{{ $shop_images->front }}"></file-upload>
@@ -86,7 +98,6 @@
                 <div class="tab-pane" id="settings" role="tabpanel">
                     <form method="post" action="{{ route('shop.shop-settings') }}">
                         @csrf
-
                         <div class="form-group">
                             <label for="expiry_after">{{ __('Expiry After') }}</label>
                             <input type="number" step="1" class="form-control" id="expiry_after" aria-describedby="expiry_after-help" name="expiry_after" placeholder="{{ __('Expiry After') }}" value="{{ old('expiry_after', $shop_settings->expiry_after) }}">

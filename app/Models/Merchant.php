@@ -98,4 +98,52 @@ class Merchant extends Model
     {
         return new MerchantPresenter($this);
     }
+
+    public function hasShopImages():bool
+    {
+        return $this->shopImages()->exists();
+    }
+
+    /**
+     * @return ShopImage|\Illuminate\Database\Eloquent\Model|\Illuminate\Database\Eloquent\Relations\HasOne|null
+     */
+    public function getShopImages():?ShopImage
+    {
+        return $this->shopImages()->first();
+    }
+
+    public function hasShopStyles():bool
+    {
+        return $this->shopStyles()->exists();
+    }
+
+    public function hasActiveLogo():bool
+    {
+        return $this->shopImages->logo_enabled;
+    }
+
+    public function hasActiveBackgroundImage():bool
+    {
+        return $this->shopImages->front_enabled;
+    }
+
+    public function getLogo():string
+    {
+        return $this->shopImages->logo;
+    }
+
+    public function getBackgroundImage():string
+    {
+        return $this->shopImages->front;
+    }
+
+    public function getBackground():string
+    {
+        return $this->shopStyles->background_color;
+    }
+
+    public function getWelcoming():string
+    {
+        return $this->shopStyles->welcoming;
+    }
 }

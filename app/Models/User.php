@@ -58,6 +58,9 @@ class User extends Authenticatable
         return $this->hasMany(Voucher::class, 'user_id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne|Merchant
+     */
     public function merchant()
     {
         return $this->hasOne(Merchant::class, 'user_id');
@@ -79,8 +82,15 @@ class User extends Authenticatable
         return $this->belongsToMany(Branch::class, 'branch_user', 'user_id', 'branch_id');
     }
 
-    public function isMerchant()
+    public function isMerchant():bool
     {
-        return $this->merchant()->count() > 0;
+        return $this->merchant()->exists();
     }
+
+    public function getMerchant():?Merchant
+    {
+        return $this->merchant()->first();
+    }
+
+
 }

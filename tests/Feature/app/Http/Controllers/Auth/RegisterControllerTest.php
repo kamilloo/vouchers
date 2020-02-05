@@ -3,6 +3,7 @@
 namespace Tests\Feature\App\Http\StarterTest;
 
 use App\Http\Controllers\Auth\RegisterController;
+use App\Models\Template;
 use App\Models\User;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
@@ -15,6 +16,12 @@ use Illuminate\Support\Facades\Storage;
 class RegisterControllerTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->seed(\CreateTemplates::class);
+    }
 
     /**
      * @test
@@ -38,6 +45,7 @@ class RegisterControllerTest extends TestCase
 
         $this->assertDatabaseHas('merchants', [
             'user_id' => $user->id,
+            'template_id' => Template::first()->id
         ]);
 
         $this->assertDatabaseHas('user_profiles', [

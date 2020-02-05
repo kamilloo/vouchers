@@ -80,8 +80,8 @@ class ShopControllerTest extends TestCase
 
         $this->assertDatabaseHas('shop_images', [
             'merchant_id' => $this->merchant->id,
-            'logo_enabled' => true,
-            'front_enabled' => true,
+            'logo_enabled' => false,
+            'front_enabled' => false,
             'logo' => null,
             'front' => null,
         ]);
