@@ -10,6 +10,7 @@ use App\Events\PaymentWasConfirmed;
 use App\Exceptions\PaymentLinkNotAvailable;
 use App\Http\Requests\Checkout;
 use App\Http\Requests\PaymentCallbackStatus;
+use App\Http\ViewModels\OrderViewModel;
 use App\Models\Enums\StatusType;
 use App\Models\Merchant;
 use App\Models\Payment;
@@ -61,29 +62,10 @@ class PaymentOrderController extends Controller
         }
 
         $order = $payment->order;
-        if ($merchant->shopImages()->exists())
-        {
-            $custom_logo = $merchant->shopImages->logo_enabled ? $merchant->shopImages->logo : null;
-            $custom_background_image = $merchant->shopImages->front_enabled ? $merchant->shopImages->front : null;
-        }
-        if ($merchant->shopStyles()->exists())
-        {
-            $custom_welcoming = $merchant->shopStyles->welcoming;
-            $custom_background = $merchant->shopStyles->background_color;
-        }
 
-        $template_path = $merchant->template->file_name;
+        $view_model = new OrderViewModel($merchant, $order);
 
-        return view('payment.return.'. $template_path, compact(
-            'vouchers',
-            'merchant',
-            'custom_logo',
-            'custom_background_image',
-            'custom_welcoming',
-            'custom_background',
-            'order',
-            'template_path'
-        ))->with(['success' => __('You bought voucher successful.')]);
+        return view('payment.return.'. $view_model->templatePath(), $view_model)->with(['success' => __('You bought voucher successful.')]);
     }
 
     public function callbackStatus(PaymentCallbackStatus $request, Payment $payment, IPaymentGateway $payment_gateway, Dispatcher $event_dispatcher)
@@ -99,29 +81,9 @@ class PaymentOrderController extends Controller
     {
         $order = $payment->order;
         $merchant = $payment->merchant->fresh();
-        if ($merchant->shopImages()->exists())
-        {
-            $custom_logo = $merchant->shopImages->logo_enabled ? $merchant->shopImages->logo : null;
-            $custom_background_image = $merchant->shopImages->front_enabled ? $merchant->shopImages->front : null;
-        }
-        if ($merchant->shopStyles()->exists())
-        {
-            $custom_welcoming = $merchant->shopStyles->welcoming;
-            $custom_background = $merchant->shopStyles->background_color;
-        }
+        $view_model = new OrderViewModel($merchant, $order);
 
-        $template_path = $merchant->template->file_name;
-
-        return view('payment.recap.'. $template_path, compact(
-            'vouchers',
-            'merchant',
-            'custom_logo',
-            'custom_background_image',
-            'custom_welcoming',
-            'custom_background',
-            'order',
-            'template_path'
-        ));
+        return view('payment.recap.'. $view_model->templatePath(), $view_model);
     }
 
     public function sandboxGateway(Payment $payment)

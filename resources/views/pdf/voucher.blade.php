@@ -136,7 +136,7 @@
         <tr><td class="left">email: {{ $user_profile->user->email }}</td><td class="right">{{$user_profile->city }}</td></tr>
     </table>
     <div>
-        <img class="qr-code" src="{{ asset('qrcode.png') }}" alt="QR Code">
+        <img class="qr-code" src="data:image/png;base64,{{ $qr_code }}" alt="QR Code">
     </div>
     <div class="code">
         <p>{{ $order->qr_code }}</p>

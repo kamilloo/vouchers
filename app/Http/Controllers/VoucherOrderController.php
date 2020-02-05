@@ -6,6 +6,7 @@ use App\Events\VoucherWasDelivered;
 use App\Http\Requests\ProfileUpdate;
 use App\Http\Requests\VoucherStore;
 use App\Http\Requests\VoucherUpdate;
+use App\Http\ViewModels\OrderViewModel;
 use App\Models\Order;
 use App\Models\UserProfile;
 use App\Models\Voucher;
@@ -67,29 +68,10 @@ class VoucherOrderController extends Controller
     public function failed(Order $order)
     {
         $merchant = $order->merchant->fresh();
-        if ($merchant->shopImages()->exists())
-        {
-            $custom_logo = $merchant->shopImages->logo_enabled ? $merchant->shopImages->logo : null;
-            $custom_background_image = $merchant->shopImages->front_enabled ? $merchant->shopImages->front : null;
-        }
-        if ($merchant->shopStyles()->exists())
-        {
-            $custom_welcoming = $merchant->shopStyles->welcoming;
-            $custom_background = $merchant->shopStyles->background_color;
-        }
 
-        $template_path = $merchant->template->file_name;
+        $view_model = new OrderViewModel($merchant, $order);
 
-        return view('payment.failed.'. $template_path, compact(
-            'vouchers',
-            'merchant',
-            'custom_logo',
-            'custom_background_image',
-            'custom_welcoming',
-            'custom_background',
-            'order',
-            'template_path'
-        ));
+        return view('payment.failed.'. $view_model->templatePath(), $view_model);
     }
 
     /**
@@ -100,11 +82,11 @@ class VoucherOrderController extends Controller
      */
     protected function createPdf(Order $order): PDF
     {
-        \QrCode::format('png')->size(400)->generate($order->qr_code ?? 'my code', public_path('qrcode.png'));
+        $qr_code = base64_encode(\QrCode::format('png')->size(400)->generate($order->qr_code));
         $order = $order->load('merchant', 'voucher');
         $user_profile = $order->merchant->user->profile;
         $pdf = $this->generator
-            ->loadView('pdf.voucher', compact('order', 'user_profile'));
+            ->loadView('pdf.voucher', compact('order', 'user_profile', 'qr_code'));
         return $pdf;
     }
 }

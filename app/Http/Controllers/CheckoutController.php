@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Events\OrderWasPlaced;
 use App\Http\Requests\Checkout;
-use App\Http\ViewModels\TemplateViewModel;
+use App\Http\ViewModels\OrderViewModel;
+use App\Http\ViewModels\CheckoutViewModel;
 use App\Managers\DeliveryManager;
 use App\Models\Client;
 use App\Models\Merchant;
@@ -29,20 +30,9 @@ class CheckoutController extends Controller
     public function start(Merchant $merchant, Voucher $voucher)
     {
 
-//        if ($merchant->shopImages()->exists())
-//        {
-//            $custom_logo = $merchant->shopImages->logo_enabled ? $merchant->shopImages->logo : null;
-//            $custom_background_image = $merchant->shopImages->front_enabled ? $merchant->shopImages->front : null;
-//        }
-//        if ($merchant->shopStyles()->exists())
-//        {
-//            $custom_welcoming = $merchant->shopStyles->welcoming;
-//            $custom_background = $merchant->shopStyles->background_color;
-//        }
+        $view_model = new CheckoutViewModel($merchant, $voucher, $this->delivery_manager);
 
-        $template_view_model = new TemplateViewModel($merchant, $voucher, $this->delivery_manager);
-
-        return view('templates.'. $merchant->template->file_name, $template_view_model);
+        return view('templates.'. $view_model->templatePath(), $view_model);
     }
 
     public function proceed(Checkout $request, Merchant $merchant, Dispatcher $event_dispatcher)
@@ -57,26 +47,9 @@ class CheckoutController extends Controller
 
     public function confirmation(Merchant $merchant, Order $order)
     {
-        if ($merchant->shopImages()->exists())
-        {
-            $custom_logo = $merchant->shopImages->logo_enabled ? $merchant->shopImages->logo : null;
-            $custom_background_image = $merchant->shopImages->front_enabled ? $merchant->shopImages->front : null;
-        }
-        if ($merchant->shopStyles()->exists())
-        {
-            $custom_welcoming = $merchant->shopStyles->welcoming;
-            $custom_background = $merchant->shopStyles->background_color;
-        }
+        $view_model = new OrderViewModel($merchant, $order);
 
-        return view('checkout.confirmation.'. $merchant->template->file_name, compact(
-            'vouchers',
-            'merchant',
-            'custom_logo',
-            'custom_background_image',
-            'custom_welcoming',
-            'custom_background',
-            'order'
-        ));
+        return view('checkout.confirmation.'. $view_model->templatePath(), $view_model);
     }
 
     /**
