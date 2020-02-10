@@ -7,6 +7,7 @@ use App\Http\Requests\ProfileUpdate;
 use App\Http\Requests\VoucherStore;
 use App\Http\Requests\VoucherUpdate;
 use App\Http\ViewModels\OrderViewModel;
+use App\Http\ViewModels\PdfViewModel;
 use App\Models\Order;
 use App\Models\UserProfile;
 use App\Models\Voucher;
@@ -82,11 +83,10 @@ class VoucherOrderController extends Controller
      */
     protected function createPdf(Order $order): PDF
     {
-        $qr_code = base64_encode(\QrCode::format('png')->size(400)->generate($order->qr_code));
         $order = $order->load('merchant', 'voucher');
-        $user_profile = $order->merchant->user->profile;
-        $pdf = $this->generator
-            ->loadView('pdf.voucher', compact('order', 'user_profile', 'qr_code'));
-        return $pdf;
+
+        $view_model = new PdfViewModel($order->merchant, $order);
+
+        return $this->generator->loadView('pdf.voucher', $view_model);
     }
 }
