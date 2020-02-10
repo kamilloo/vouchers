@@ -26,3 +26,6 @@ Route::middleware('auth:api')->group(function (){
       ->name('api-voucher-pay');
 });
 
+Route::group(['middleware' => 'paymentOrderIsActive'], function () {
+    Route::post('payment/{payment}/callback-status', 'PaymentOrderController@callbackStatus')->name('payment.status');
+});

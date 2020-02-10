@@ -60,7 +60,6 @@ Route::group(['middleware' => 'canOrderProceeded'], function () {
 
 Route::group(['middleware' => 'paymentOrderIsActive'], function () {
     Route::get('payment/{payment}/callback-return', 'PaymentOrderController@callbackReturn')->name('payment.return');
-    Route::post('payment/{payment}/callback-status', 'PaymentOrderController@callbackStatus')->name('payment.status');
     Route::get('payment/{payment}/sandbox-gateway', 'PaymentOrderController@sandboxGateway')->name('payment.sandbox-gateway');
 
     Route::get('payment/{payment}/recap', 'PaymentOrderController@recap')->name('payment.recap');
