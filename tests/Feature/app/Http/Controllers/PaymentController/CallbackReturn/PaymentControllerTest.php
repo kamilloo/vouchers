@@ -4,6 +4,7 @@ namespace Tests\Feature\App\Http\Controllers\PaymentController\CallbackReturn;
 
 use App\Contractors\IPaymentGateway;
 use App\Models\Enums\DeliveryType;
+use App\Models\Enums\StatusType;
 use App\Models\Enums\VoucherType;
 use App\Models\Merchant;
 use App\Models\Order;
@@ -52,9 +53,11 @@ class PaymentControllerTest extends TestCase
     {
         parent::setUp();
         $this->merchant = factory(Merchant::class)->create();
-        $this->order = factory(Order::class)->create();
+        $this->order = factory(Order::class)->create([
+            'status' => StatusType::NEW,
+        ]);
         $this->payment = factory(Payment::class)->create([
-            'payment_link' => $this->payment_url
+            'payment_link' => $this->payment_url,
         ]);
 
         $this->payment_url = route('payment.recap', [

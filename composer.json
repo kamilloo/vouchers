@@ -23,7 +23,8 @@
         "laravel/tinker": "^1.0",
         "laravelcollective/html": "^5.8",
         "spatie/laravel-cors": "^1.6",
-        "simplesoftwareio/simple-qrcode": "~2"
+        "simplesoftwareio/simple-qrcode": "~2",
+        "ext-openssl": "*"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.6",

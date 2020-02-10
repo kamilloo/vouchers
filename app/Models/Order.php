@@ -187,4 +187,11 @@ class Order extends Model implements IOrder
         return false;
     }
 
+    public function generateQrCode(Carbon $expired_at):bool
+    {
+        $this->qr_code = bin2hex(openssl_random_pseudo_bytes(8));
+        $this->expired_at = $expired_at->isFuture() ? $expired_at: null;
+        return $this->save();
+    }
+
 }

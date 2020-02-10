@@ -45,9 +45,8 @@ class PaymentOrderController extends Controller
 //        $event_dispatcher->dispatch(new PaymentWasCompleted($payment));
         if ($verify)
         {
-            $payment->order->qr_code = uniqid();
-            $payment->order->expired_at = Carbon::now()->addDays($merchant->shopSettings->expiry_after);
-            $payment->order->save();
+            $expired_at = $this->getVoucherExpiredDate($merchant);
+            $payment->order->generateQrCode($expired_at);
             $payment->order->moveStatusToConfirmed();
 
             return redirect()->route('payment.recap', [
@@ -89,5 +88,19 @@ class PaymentOrderController extends Controller
     public function sandboxGateway(Payment $payment)
     {
         return redirect()->route('payment.return', $payment);
+    }
+
+    /**
+     * @param Merchant $merchant
+     *
+     * @return Carbon
+     */
+    protected function getVoucherExpiredDate(Merchant $merchant): Carbon
+    {
+        if ($merchant->hasShopSettings() && !empty($merchant->getVoucherExpireAfterSetting())) {
+            $expiry_after = $merchant->getVoucherExpireAfterSetting();
+            return Carbon::now()->addDays($expiry_after);
+        }
+        return Carbon::now();
     }
 }

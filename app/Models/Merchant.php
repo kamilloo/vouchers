@@ -117,6 +117,21 @@ class Merchant extends Model
         return $this->shopStyles()->exists();
     }
 
+    public function hasShopSettings():bool
+    {
+        return $this->shopSettings()->exists();
+    }
+
+    public function getVoucherExpireAfterSetting():?int
+    {
+        return $this->shopSettings->expiry_after;
+    }
+
+    public function getDeliveryCostSetting():float
+    {
+        return $this->shopSettings->delivery_cost;
+    }
+
     public function hasActiveLogo():bool
     {
         return $this->shopImages->logo_enabled;
