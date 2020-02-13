@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Auth;
 use App\Models\Template;
 use App\Models\User;
 use App\Http\Controllers\Controller;
+use DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Throwable;
 
 class RegisterController extends Controller
 {
@@ -59,23 +61,30 @@ class RegisterController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param array $data
      *
-     * @return \App\Models\User
+     * @return User|null
      */
     protected function create(array $data)
     {
-        $user = User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        try {
+            return DB::transaction(function () use ($data){
+                $user = User::create([
+                    'name' => $data['name'],
+                    'email' => $data['email'],
+                    'password' => Hash::make($data['password']),
+                ]);
 
-        $merchant = $user->merchant()->create();
-        $merchant->template()->associate($this->getFirstTemplate())->save();
-        $user->profile()->create();
+                $merchant = $user->merchant()->create();
+                $merchant->template()->associate($this->getFirstTemplate())->save();
+                $user->profile()->create();
 
-        return $user;
+                return $user;
+            });
+        } catch (Throwable $e) {
+            return null;
+        }
+
     }
 
     protected function getFirstTemplate():Template
