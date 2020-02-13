@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Http\ViewModels;
 
+use App\Http\Presenters\OrderPresenter;
 use App\Managers\DeliveryManager;
 use App\Models\Merchant;
 use App\Models\Order;
@@ -30,16 +31,28 @@ class PdfViewModel extends TemplateViewModel
             'order' => $this->order,
             'user_profile' => $this->userProfile(),
             'qr_code' => $this->qrCode(),
+            'voucher' => $this->voucher(),
+            'full_name' => $this->fullname()
         ]);
     }
 
     protected function qrCode(): string
     {
-        return base64_encode(\QrCode::format('png')->size(400)->generate($order->qr_code));
+        return base64_encode(\QrCode::format('png')->size(400)->generate($this->order->qr_code));
     }
 
     protected function userProfile(): UserProfile
     {
         return $this->merchant->user->profile;
     }
+    private function voucher():Voucher
+    {
+        return $this->order->voucher;
+    }
+
+    private function fullname(): string
+    {
+        return $this->order->presenter->fullName();
+    }
+
 }

@@ -19,7 +19,7 @@
 
             padding: 0px;
             margin: 0px;
-            font-family: DejaVu Sans;
+            /*font-family: DejaVu Sans;*/
         }
         body {
             text-align: center;
@@ -110,21 +110,15 @@
 </head>
 <body>
 <div class="content">
-    <h1>{{ $order->voucher->title  }}</h1>
-    @if($order->merchant->shopImages->logo_enabled)
+    <h1>{{ $voucher->title  }}</h1>
     <div>
-        <img height="100" src="{{ $order->merchant->shopImages->logo ?? asset('checkout/template1/images/img-01.png') }}" alt="Company Logo">
+        <img height="100" src="{{ $custom_logo ?? asset('checkout/template1/images/img-01.png') }}" alt="Company Logo">
     </div>
-    @else
-        <div>
-            <img height="100" src="{{ asset('checkout/template1/images/img-01.png') }}" alt="Company Logo">
-        </div>
-    @endif
     <h1 class="gold">{{ $user_profile->company_name }}</h1>
 
     <p>serdecznie zaprasza</p>
 
-    <h2><span class="small">Sz. P.</span> {{ $order->first_name }}&nbsp;{{ $order->last_name }}</h2>
+    <h2><span class="small">Sz. P.</span> {{ $full_name }}</h2>
 
     <p class="title">{!!  $order->voucher->presenter->title() !!}
 

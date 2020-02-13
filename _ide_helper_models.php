@@ -337,7 +337,7 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Client|null $client
- * @property-read \OrderPresenter $presenter
+ * @property-read \App\Http\Presenters\OrderPresenter $presenter
  * @property-read \App\Models\Merchant $merchant
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Payment[] $payments
  * @property-read int|null $payments_count
