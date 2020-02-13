@@ -43,7 +43,7 @@ class PdfViewModel extends TemplateViewModel
 
     protected function userProfile(): UserProfile
     {
-        return $this->merchant->user->profile;
+        return $this->merchant->user()->fresh()->profile;
     }
     private function voucher():Voucher
     {
