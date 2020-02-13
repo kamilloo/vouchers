@@ -19,7 +19,7 @@
 
             padding: 0px;
             margin: 0px;
-            /*font-family: DejaVu Sans;*/
+            font-family: DejaVu Sans;
         }
         body {
             text-align: center;
