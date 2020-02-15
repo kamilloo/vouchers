@@ -29,3 +29,9 @@ Route::middleware('auth:api')->group(function (){
 Route::group(['middleware' => 'paymentOrderIsActive'], function () {
     Route::post('payment/{payment}/callback-status', 'PaymentOrderController@callbackStatus')->name('payment.status');
 });
+
+Route::post('/register', 'Auth\ApiController@register');
+
+Route::post('/login', 'Auth\ApiController@login');
+
+Route::post('/logout', 'Auth\ApiController@logout');

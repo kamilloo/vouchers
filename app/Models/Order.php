@@ -15,6 +15,11 @@ class Order extends Model implements IOrder
 {
     use OrderConcern;
 
+    protected $casts = [
+        'used_at' => 'datetime',
+
+    ];
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo|Merchant
      */

@@ -2,9 +2,10 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Contracts\Support\Responsable;
 use Symfony\Component\HttpFoundation\Response;
 
-class VoucherUsed extends HttpException
+class VoucherUsed extends HttpException  implements Responsable
 {
     /**
      * @return string
