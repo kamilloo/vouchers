@@ -6,6 +6,7 @@ use App\Models\Client;
 use App\Contractors\IOrder;
 use App\Http\Presenters\OrderPresenter;
 use App\Models\Enums\DeliveryType;
+use App\Models\Enums\PaymentStatus;
 use App\Models\Enums\StatusType;
 use App\Models\Traits\OrderConcern;
 use Barryvdh\DomPDF\PDF;
@@ -17,6 +18,7 @@ class Order extends Model implements IOrder
 
     protected $casts = [
         'used_at' => 'datetime',
+        'expired_at' => 'datetime',
 
     ];
 
@@ -83,7 +85,8 @@ class Order extends Model implements IOrder
 
     public function paid():bool
     {
-        return $this->payments()->byPaid()->exists();
+        return $this->paid === PaymentStatus::PAID
+        || $this->payments()->byPaid()->exists();
     }
 
     public function expired():bool
@@ -180,6 +183,12 @@ class Order extends Model implements IOrder
             return $this->save();
         }
         return false;
+    }
+
+    public function checkAsPaid():void
+    {
+        $this->paid = PaymentStatus::PAID;
+        $this->save();
     }
 
     public function moveStatusToDeliver():bool

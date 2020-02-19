@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Enums\DeliveryType;
 use App\Models\Order;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -20,20 +21,16 @@ class OrderResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
-            'delivery' => $this->delivery,
-            'price' => $this->price,
-            'first_name' => $this->first_name,
-            'last_name' => $this->last_name,
+            'delivery' => $this->presenter->delivery(),
+            'full_name' => $this->presenter->fullName(),
             'phone' => $this->phone,
             'email' => $this->email,
-            'status' => $this->status,
-            'paid' => $this->paid,
+            'qr_code' => $this->qr_code,
+            'expired_at' => optional($this->expired_at)->toIso8601String(),
+            'status' => $this->presenter->status(),
+            'paid' => $this->paid(),
             'used_at' => optional($this->used_at)->toIso8601String(),
-            'created_at' => $this->created_at->toIso8601String(),
-            'updated_at' => $this->updated_at->toIso8601String(),
-            'voucher' => $this->voucher,
-            'payments' => $this->payments,
+            'voucher' => new VoucherResource($this->voucher),
         ];
 
     }

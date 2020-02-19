@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Http\Presenters;
 
+use App\Models\Enums\DeliveryType;
 use App\Models\Model;
 use App\Models\Order;
 use phpDocumentor\Reflection\DocBlock\Tags\Property;
@@ -31,6 +32,6 @@ class OrderPresenter extends ModelPresenter
 
     public function delivery(): string
     {
-        return ucfirst($this->model->delivery);
+        return DeliveryType::titles()[$this->model->delivery];
     }
 }

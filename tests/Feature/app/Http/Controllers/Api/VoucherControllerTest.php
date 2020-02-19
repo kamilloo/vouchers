@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\App\Http\Controllers\Api;
 
+use App\Models\Enums\PaymentStatus;
 use App\Models\Enums\VoucherType;
 use App\Models\Order;
 use App\Models\Payment;
@@ -79,26 +80,20 @@ class VoucherControllerTest extends TestCase
         $response = $this->getJson(route('api-voucher-get', $order->qr_code));
         $response->assertJsonStructure([
             'data' => [
-                'id',
-                'price',
-                'first_name',
-                'last_name',
-                'phone',
                 'delivery',
+                'full_name',
+                'phone',
                 'email',
+                'qr_code',
+                'expired_at',
                 'status',
                 'paid',
                 'used_at',
-                'created_at',
-                'updated_at',
                 'voucher' => [
                     'title',
                     'price',
                     'type',
-                    'product' => [
-                    ]
                 ],
-                'payments',
             ]
         ]);
     }
@@ -118,38 +113,6 @@ class VoucherControllerTest extends TestCase
                     'title',
                     'price',
                     'type',
-                    'product' => [
-                        'id',
-                        'title',
-                        'description',
-                        'price',
-                        'currency',
-                        'active'
-                    ]
-                ],
-                'payments',
-            ]
-        ]);
-    }
-
-    /**
-     * @test
-     */
-    public function get_response_with_payment()
-    {
-
-        $order = $this->createOrderForPayment();
-        $payment = $this->createPayment($order);
-
-        $response = $this->getJson(route('api-voucher-get', $order->qr_code));
-        $response->assertJsonStructure([
-            'data' => [
-                'payments' => [
-                    '*' => [
-                       'id',
-                       'paid_at',
-                       'amount'
-                    ]
                 ],
             ]
         ]);
@@ -167,26 +130,20 @@ class VoucherControllerTest extends TestCase
         $response = $this->postJson(route('api-voucher-pay', $order->qr_code))->assertOk();
         $response->assertJsonStructure([
             'data' => [
-                'id',
-                'price',
-                'first_name',
-                'last_name',
-                'phone',
                 'delivery',
+                'full_name',
+                'phone',
                 'email',
+                'qr_code',
+                'expired_at',
                 'status',
                 'paid',
                 'used_at',
-                'created_at',
-                'updated_at',
                 'voucher' => [
                     'title',
                     'price',
                     'type',
-                    'product' => [
-                    ]
                 ],
-                'payments',
             ]
         ]);
     }
@@ -218,9 +175,9 @@ class VoucherControllerTest extends TestCase
      */
     public function pay_reject_because_not_approved_payment_found()
     {
-        $order = $this->createOrderForPayment();
-        $payment = $this->createPayment($order, ['paid_at' => null]);
-
+        $order = $this->createOrderForPayment([
+            'paid' => PaymentStatus::WAITING_FOR_PAY
+        ]);
         $response = $this->postJson(route('api-voucher-pay', $order->qr_code))->assertStatus(424);
         $this->assertSame('Voucher not paid', $response->decodeResponseJson('message'));
     }

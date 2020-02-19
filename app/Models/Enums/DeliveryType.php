@@ -12,9 +12,10 @@ class DeliveryType
 
     public static function all(): array
     {
-        $types = new \ReflectionClass(self::class);
-
-        return $types->getConstants();
+        return [
+            self::ONLINE,
+            self::POST,
+        ];
     }
 
     static public function description(): array

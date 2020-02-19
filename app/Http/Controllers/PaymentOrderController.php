@@ -48,6 +48,7 @@ class PaymentOrderController extends Controller
             $expired_at = $this->getVoucherExpiredDate($merchant);
             $payment->order->generateQrCode($expired_at);
             $payment->order->moveStatusToConfirmed();
+            $payment->order->checkAsPaid();
 
             return redirect()->route('payment.recap', [
                 'payment' => $payment,

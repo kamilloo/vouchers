@@ -259,7 +259,7 @@ namespace App\Models{
  * @property string|null $file
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \VoucherPresenter $presenter
+ * @property-read \App\Http\Presenters\VoucherPresenter $presenter
  * @property-read \App\Models\Merchant $merchant
  * @property-read \Illuminate\Database\Eloquent\Model|\Eloquent $product
  * @property-read \App\Models\User $user
@@ -331,8 +331,8 @@ namespace App\Models{
  * @property string $email
  * @property string $status
  * @property int $paid
- * @property string|null $used_at
- * @property string|null $expired_at
+ * @property \Illuminate\Support\Carbon|null $used_at
+ * @property \Illuminate\Support\Carbon|null $expired_at
  * @property string|null $qr_code
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -564,6 +564,7 @@ namespace App\Models{
  * @property int $sandbox
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \MerchantPresenter $presenter
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Order[] $orders
  * @property-read int|null $orders_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ServiceCategory[] $serviceCategories

@@ -6,6 +6,7 @@ namespace App\Http\Presenters;
 use App\Models\Model;
 use App\Models\Order;
 use App\Models\Voucher;
+use Illuminate\Contracts\Support\Arrayable;
 use phpDocumentor\Reflection\DocBlock\Tags\Property;
 
 /**
@@ -13,21 +14,16 @@ use phpDocumentor\Reflection\DocBlock\Tags\Property;
  *
  * @mixin Voucher
  */
-class VoucherPresenter extends ModelPresenter implements \JsonSerializable
+class VoucherPresenter extends ModelPresenter implements \JsonSerializable, Arrayable
 {
     /**
      * @var Voucher
      */
     protected $model;
 
-    public function fullName(): string
-    {
-        return implode(' ', array_map('ucfirst',[$this->model->first_name, $this->model->last_name]));
-    }
-
     public function type(): string
     {
-        return mb_strtoupper($this->model->status);
+        return mb_strtoupper($this->model->type);
     }
 
     public function price(): float
@@ -62,6 +58,18 @@ class VoucherPresenter extends ModelPresenter implements \JsonSerializable
             'id' => $this->model->id,
             'price' => $this->price(),
             'title' => $this->model->title
+        ];
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function toArray()
+    {
+        return [
+            'type' => $this->type(),
+            'title' => $this->title(),
+            'price' => $this->price(),
         ];
     }
 }

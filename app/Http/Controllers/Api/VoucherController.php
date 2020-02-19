@@ -32,7 +32,7 @@ class VoucherController extends Controller
     public function get($qr_code, Guard $guard)
     {
         $order = Order::toMe()
-            ->with(['voucher.product', 'payments', 'payments.transactions'])
+            ->with(['voucher', 'voucher.product', 'payments'])
             ->byQrCode($qr_code)
             ->firstOrfail();
         return new OrderResource($order);
@@ -41,7 +41,7 @@ class VoucherController extends Controller
     public function pay($qr_code, Guard $guard, Dispatcher $event_dispatcher)
     {
         $order = Order::toMe()
-            ->with(['voucher.product', 'payments', 'payments.transactions'])
+            ->with(['voucher', 'voucher.product', 'payments'])
             ->byQrCode($qr_code)
             ->firstOrfail();
 
