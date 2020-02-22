@@ -19,7 +19,10 @@ Route::middleware('auth:api')->group(function (){
       return $request->user();
   });
 
-  Route::get('/vouchers/{qr_code}', 'Api\VoucherController@get')
+    Route::post('/logout', 'Auth\ApiController@logout');
+
+
+    Route::get('/vouchers/{qr_code}', 'Api\VoucherController@get')
       ->name('api-voucher-get');
 
   Route::post('/vouchers/{qr_code}/pay', 'Api\VoucherController@pay')
@@ -34,4 +37,3 @@ Route::post('/register', 'Auth\ApiController@register');
 
 Route::post('/login', 'Auth\ApiController@login');
 
-Route::post('/logout', 'Auth\ApiController@logout');

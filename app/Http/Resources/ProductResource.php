@@ -4,14 +4,16 @@ namespace App\Http\Resources;
 
 use App\Models\Enums\DeliveryType;
 use App\Models\Order;
+use App\Models\Service;
+use App\Models\ServicePackage;
 use App\Models\Voucher;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
  *
- * @mixin  Voucher
+ * @mixin Service|ServicePackage
  */
-class VoucherResource extends JsonResource
+class ProductResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -22,10 +24,9 @@ class VoucherResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'type' => $this->presenter->type(),
             'title' => $this->title,
-            'price' => $this->presenter->price(),
-            'product' => new ProductResource($this->product),
+            'description' => $this->description,
         ];
+
     }
 }

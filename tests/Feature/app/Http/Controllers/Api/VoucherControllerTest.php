@@ -113,6 +113,10 @@ class VoucherControllerTest extends TestCase
                     'title',
                     'price',
                     'type',
+                    'product' => [
+                        'title',
+                        'description'
+                    ]
                 ],
             ]
         ]);

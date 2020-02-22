@@ -3,10 +3,12 @@ declare(strict_types=1);
 
 namespace App\Http\Presenters;
 
+use App\Models\Enums\VoucherType;
 use App\Models\Model;
 use App\Models\Order;
 use App\Models\Voucher;
 use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Support\Arr;
 use phpDocumentor\Reflection\DocBlock\Tags\Property;
 
 /**
@@ -23,7 +25,9 @@ class VoucherPresenter extends ModelPresenter implements \JsonSerializable, Arra
 
     public function type(): string
     {
-        return mb_strtoupper($this->model->type);
+        return Arr::get(collect(VoucherType::description())->first(function (array $type){
+            return $type['value'] === $this->model->type;
+        }), 'label');
     }
 
     public function price(): float
