@@ -15,9 +15,9 @@
     "Delivery": "Dostawa",
     "Recipient":  "Odbiorca",
     "Details": "Szczegóły",
-    "Team": "O nas",
+    "Team": "Zespół",
     "Locations":"Kontakt",
-    "Privacy": "Prywatność",
+    "Privacy": "Polityka prywatności",
     "Terms":"Regulamin",
     "Continue": "Dalej",
     "Back": "Cofnij",
@@ -54,5 +54,47 @@
     "You can make order again": "Możesz złożyć nowe zamówienie",
     "Restart": "Rozpocznij od nowa",
     "Transaction Failed!": "Transakcja nieudana",
-    "Action forbidden": "Nie można zrealizować akcji."
+    "Action forbidden": "Nie można zrealizować akcji.",
+    "About": "U nas",
+    "Services":  "Usługi",
+    "Service Categories": "Kategorie",
+    "Service Packages":  "Pakiety",
+    "Shop":  "Sklep",
+    "Payments": "Płatności",
+    "Orders":  "Zamówienia",
+    "Home": "Home",
+    "Login": "Zaloguj",
+    "Register": "Utwórz konto",
+    "Logout": "Wyloguj",
+    "Profile": "Moje konto",
+    "Cancel": "Anuluj",
+    "Delete": "Usuń",
+    "E-Mail Address": "Adres Email",
+    "Password": "Hasło",
+    "Remember Me": "Zapamiętaj mnie",
+    "Forgot Your Password?": "Nie pamiętam hasła",
+    "Name": "Nazwa",
+    "Confirm Password": "Potwierdź hasło",
+    "Verify Your Email Address": "Zweryfikuj swój adres email",
+    "A fresh verification link has been sent to your email address.": "Wiadomości zawierająca link weryfikacyjny został wysłany na podany adres email",
+    "Before proceeding, please check your email for a verification link.": "Sprawdź swoją skrzynkę pocztą i potwierdź adres email",
+    "If you did not receive the email": "Jeżeli nie otrzymałeś wiadomości",
+    "click here to request another": "wyślij ponownie",
+    "Reset Password": "Zresetuj swoje hasło",
+    "Send Password Reset Link":  "Wyślij link resetujący hasło"
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

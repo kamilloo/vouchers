@@ -25,16 +25,17 @@
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img class="img-fluid" src="{{ asset('images/my-vouchers.png') }}" alt="{{ config('app.name', 'Laravel') }}" >
+                    <img class="img-fluid" src="{{ asset('images/my-vouchers_logo.png') }}" alt="{{ config('app.name', 'Laravel') }}" >
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    @auth()
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item font-weight-bold"><a class="nav-link" href="{{ route('vouchers.index') }}">{!! __('My&nbsp;Vouchers') !!}</a></li>
+                        <li class="nav-item font-weight-bold"><a class="nav-link" href="{{ route('vouchers.index') }}">{!! __('My Vouchers') !!}</a></li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarServices" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 {{ __('Services') }}
@@ -50,7 +51,7 @@
                         <li class="nav-item"><a class="nav-link" href="{{ route('orders.index') }}">{{ __('Orders') }}</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('home') }}">{{ __('Home') }}</a></li>
                     </ul>
-
+                    @endauth
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
@@ -103,11 +104,12 @@
     <footer class="pt-2 border-top bg-light mt-n5">
         <div class="container-fluid">
             <div class="col-sm text-center mb-3">
-                <img class="img-fluid" src="{{ config('app.name', 'Voucher') }}" alt="Voucher" width="24" height="24">
+                <img src="{{ asset('images/my-vouchers_logo.png') }}" alt="{{ config('app.name', 'Voucher') }}" height="24">
                 <span class="text-muted">© {{ \Carbon\Carbon::today()->year }}</span>
             </div>
             <div class="row mx-5">
                 <div class="col-md">
+                    @auth()
                     <h5>{{ __('Features') }}</h5>
                     <ul class="list-unstyled text-small">
                         <li><a class="text-muted" href="{{ route('vouchers.index') }}">{{ __('My Vouchers') }}</a></li>
@@ -116,23 +118,24 @@
                         <li><a class="text-muted" href="{{ route('orders.index') }}">{{ __('Orders') }}</a></li>
                         <li><a class="text-muted" href="{{ route('home') }}">{{ __('Home') }}</a></li>
                     </ul>
+                    @endauth
                 </div>
                 <div class="col-md">
-                    <h5>{{ __('Profile') }}</h5>
-                    <ul class="list-unstyled text-small">
-                        <li><a class="text-muted" href="#">Resource</a></li>
-                        <li><a class="text-muted" href="#">Resource name</a></li>
-                        <li><a class="text-muted" href="#">Another resource</a></li>
-                        <li><a class="text-muted" href="#">Final resource</a></li>
-                    </ul>
+{{--                    <h5>{{ __('Profile') }}</h5>--}}
+{{--                    <ul class="list-unstyled text-small">--}}
+{{--                        <li><a class="text-muted" href="#">Resource</a></li>--}}
+{{--                        <li><a class="text-muted" href="#">Resource name</a></li>--}}
+{{--                        <li><a class="text-muted" href="#">Another resource</a></li>--}}
+{{--                        <li><a class="text-muted" href="#">Final resource</a></li>--}}
+{{--                    </ul>--}}
                 </div>
                 <div class="col-md">
                     <h5>{{ __('About') }}</h5>
                     <ul class="list-unstyled text-small">
-                        <li><a class="text-muted" href="#">Team</a></li>
-                        <li><a class="text-muted" href="#">Locations</a></li>
-                        <li><a class="text-muted" href="#">Privacy</a></li>
-                        <li><a class="text-muted" href="#">Terms</a></li>
+                        <li><a class="text-muted" href="#">{{ __('Team') }}</a></li>
+                        <li><a class="text-muted" href="#">{{ __('Locations') }}</a></li>
+                        <li><a class="text-muted" href="#">{{ __('Privacy') }}</a></li>
+                        <li><a class="text-muted" href="#">{{ __('Terms') }}</a></li>
                     </ul>
                 </div>
             </div>
@@ -148,8 +151,8 @@
                     ...
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-danger btn-ok">Delete</a>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{ __('Cancel') }}</button>
+                    <a class="btn btn-danger btn-ok">{{ __('Delete') }}</a>
                 </div>
             </div>
         </div>
