@@ -3,18 +3,18 @@
 
 @section('list')
     <div class="row mb-4">
-        <div class="btn-group" role="group" aria-label="Add Service Category">
-            <a href="{{ route('service-categories.create') }}" type="button" class="btn btn-outline-info">Add Service Category</a>
+        <div class="btn-group" role="group" aria-label="{{ __('Add Service Category') }}">
+            <a href="{{ route('service-categories.create') }}" type="button" class="btn btn-outline-info">{{ __('Add Service Category') }}</a>
         </div>
     </div>
-    <div class="row ">
+    @if($service_categories->count())
         <table class="table table-striped table-hover">
             <thead class="thead-light">
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Title</th>
-                <th scope="col">Active</th>
-                <th scope="col">Action</th>
+                <th scope="col">{{ __('Title') }}</th>
+                <th scope="col">{{ __('Active') }}</th>
+                <th scope="col">{{ __('Action') }}</th>
             </tr>
             </thead>
             <tbody>
@@ -33,13 +33,13 @@
                     <td class="align-middle">
                     <span class="btn-toolbar" role="toolbar" aria-label="Toolbar for manage category">
                         <span class="btn-group mr-2" role="group" aria-label="Update button">
-                            <a class="btn btn-outline-info" href="{{ route('service-categories.edit', $service_category) }}">Edycja</a>
+                            <a class="btn btn-outline-info" href="{{ route('service-categories.edit', $service_category) }}">{{ __('Edit') }}</a>
                         </span>
                         <span class="btn-group" role="group" aria-label="Remove button">
                         <form action="{{ route('service-categories.destroy', $service_category) }}" method="post" >
                             @method('delete')
                             @csrf
-                            <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#confirm-delete">Delete</button>
+                            <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#confirm-delete">{{ __('Delete') }}</button>
                         </form>
                         </span>
 
@@ -50,7 +50,12 @@
             @endforeach
             </tbody>
 
-        </table>
+    </table>
+    <div class="m-auto col-6">
+        {{ $orders->links() }}
     </div>
+    @else
+        <h4 class="p-3 mb-2 bg-warning text-dark rounded ">{{ __('There is not any :items yet.', ['items' => __('categories')]) }}</h4>
+    @endif
 
 @endsection

@@ -2,11 +2,11 @@
 
 
 @section('list')
-    <div class="row mb-4">
-        <div class="btn-group" role="group" aria-label="Add Order">
-            <a href="{{ route('orders.create') }}" type="button" class="btn btn-outline-info">Add Order</a>
-        </div>
-    </div>
+{{--    <div class="row mb-4">--}}
+{{--        <div class="btn-group" role="group" aria-label="Add Order">--}}
+{{--            <a href="{{ route('orders.create') }}" type="button" class="btn btn-outline-info">Add Order</a>--}}
+{{--        </div>--}}
+{{--    </div>--}}
     @if($orders->count())
     <table class="table table-striped table-hover">
         <thead>
@@ -64,7 +64,7 @@
         {{ $orders->links() }}
     </div>
     @else
-    <h4 class="p-3 mb-2 bg-warning text-dark rounded ">{{ __('There is not any order yet.') }}</h4>
+    <h4 class="p-3 mb-2 bg-warning text-dark rounded ">{{ __('There is not any :items yet.', ['items' => __('orders')]) }}</h4>
     @endif
 
 @endsection

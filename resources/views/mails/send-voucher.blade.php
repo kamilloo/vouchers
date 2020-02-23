@@ -1,12 +1,12 @@
 @component('mail::message')
-# Voucher shipped
+# {{ __('Voucher shipped') }}
 
-Your Voucher has been shipped!
+{{ __('Your Voucher has been shipped!') }}
 
 @component('mail::button', ['url' => route('voucher.download', $order)])
-    View Voucher
+    {{ __('View Voucher') }}
 @endcomponent
 
-Your Sincerely,<br>
+{{ __('Your Sincerely,') }}<br>
 {{ config('app.name') }}
 @endcomponent

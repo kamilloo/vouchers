@@ -2,7 +2,7 @@
 
 @section('form.button')
     <div class="profile-edit-btn" onmouseover="editButtonFocusIn(this)" onmouseout="editButtonFocusOut(this)">
-        <a href="{{ route('profile.edit') }}" >Edit Profile</a>
+        <a href="{{ route('profile.edit') }}" >{{ __('Edit Profile') }}</a>
     </div>
 @endsection
 
@@ -16,7 +16,7 @@
     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
         <div class="row">
             <div class="col-md-6">
-                <label>Address</label>
+                <label>{{ __('Address') }}</label>
             </div>
             <div class="col-md-6">
                 <p>{{ $guard->user()->profile->address }}</p>
@@ -24,7 +24,7 @@
         </div>
         <div class="row">
             <div class="col-md-6">
-                <label>Phone</label>
+                <label>{{ __('Phone') }}</label>
             </div>
             <div class="col-md-6">
                 <p>{{ $guard->user()->profile->phone }}</p>
@@ -32,7 +32,7 @@
         </div>
         <div class="row">
             <div class="col-md-6">
-                <label>Services</label>
+                <label>{{ __('Services') }}</label>
             </div>
             <div class="col-md-6">
                 <p>{{ $guard->user()->profile->services }}</p>
@@ -42,7 +42,7 @@
     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
         <div class="row">
             <div class="col-md-6">
-                <label>Branża</label>
+                <label>{{ __('Branża') }}</label>
             </div>
             <div class="col-md-6">
                 <p>{{ $guard->user()->profile->branch }}</p>
@@ -50,7 +50,7 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <label>Description</label><br/>
+                <label>{{ __('Description') }}</label><br/>
                 <p>{{ $guard->user()->profile->description }}</p>
             </div>
         </div>
