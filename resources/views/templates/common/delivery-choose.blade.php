@@ -12,6 +12,6 @@
     </div>
 @endforeach
 @if($errors->first('delivery'))
-    <span>{{ $errors->first('delivery') }}</span>
+    <span class="text-danger">{{ $errors->first('delivery') }}</span>
 @endif
 </div>

@@ -3,20 +3,21 @@
 
 @section('list')
     <div class="row mb-4">
-        <div class="btn-group" role="group" aria-label="Add Service">
-            <a href="{{ route('services.create') }}" type="button" class="btn btn-outline-info">Add Service</a>
+        <div class="btn-group" role="group" aria-label="{{ __('Add Service') }}">
+            <a href="{{ route('services.create') }}" type="button" class="btn btn-outline-info">{{ __('Add Service') }}</a>
         </div>
     </div>
-    <div class="row ">
-        <table class="table table-striped table-hover">
+    @if($services->count())
+        <table class="table table-bordered table-hover">
             <thead class="thead-light">
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Title</th>
-                <th scope="col">Price</th>
-                <th scope="col">Active</th>
-                <th scope="col">Categories</th>
-                <th scope="col">Action</th>
+                <th scope="col">{{ __('Title') }}</th>
+                <th scope="col">{{ __('Description') }}</th>
+                <th scope="col">{{ __('Price') }}&nbsp;w&nbsp;zł</th>
+                <th scope="col">{{ __('Status') }}</th>
+                <th scope="col">{{ __('Categories') }}</th>
+                <th scope="col">{{ __('Action') }}</th>
             </tr>
             </thead>
             <tbody>
@@ -24,6 +25,7 @@
                 <tr>
                     <th class="align-middle" scope="row">{{ $service->id }}</th>
                     <td class="align-middle">{{ $service->title }}</td>
+                    <td class="align-middle">{{ $service->description }}</td>
                     <td class="align-middle">{{ $service->price }} zł</td>
                     <td class="align-middle">
                         @if($service->active)
@@ -44,13 +46,13 @@
                     <td class="align-middle">
                     <span class="btn-toolbar" role="toolbar" aria-label="Toolbar for manage category">
                         <span class="btn-group mr-2" role="group" aria-label="Update button">
-                            <a class="btn btn-outline-info" href="{{ route('services.edit', $service) }}">Edycja</a>
+                            <a class="btn btn-outline-info" href="{{ route('services.edit', $service) }}">{{ __('Edit') }}</a>
                         </span>
                         <span class="btn-group" role="group" aria-label="Remove button">
                         <form action="{{ route('services.destroy', $service) }}" method="post" >
                             @method('delete')
                             @csrf
-                            <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#confirm-delete">Delete</button>
+                            <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#confirm-delete">{{ __('Delete') }}</button>
                         </form>
                         </span>
 
@@ -62,6 +64,11 @@
             </tbody>
 
         </table>
+    <div class="m-auto col-6">
+        {{ $services->links() }}
     </div>
+    @else
+        <h4 class="p-3 mb-2 bg-warning text-dark rounded ">{{ __('There is not any :items yet.', ['items' => __('services')]) }}</h4>
+    @endif
 
 @endsection

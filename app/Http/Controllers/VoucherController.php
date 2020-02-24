@@ -25,7 +25,7 @@ class VoucherController extends Controller
 
     public function index(Guard $guard)
     {
-        $vouchers = Voucher::Mine()->get();
+        $vouchers = Voucher::Mine()->paginate();
         return view('vouchers.index', compact('vouchers'));
     }
 

@@ -27,7 +27,8 @@
                 @include('vouchers.partials.service-selection-group', ['product_id' => old('product_id') ?? $voucher->product_id])
                 @include('vouchers.partials.service-package-selection-group', ['product_id' => old('product_id') ?? $voucher->product_id])
                 @include('vouchers.partials.file-group', ['file_src' => "/storage/logos/7wP5bh7oA2tAANeIztCMvhUtjJQwSPe9J3YAXQTl.jpeg"])
-                @include('vouchers.partials.submit')
+                @include('vouchers.partials.submit', ['label' => __('Save')])
+
             </voucher-form>
 
         </div>

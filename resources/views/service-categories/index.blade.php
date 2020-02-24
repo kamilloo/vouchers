@@ -8,11 +8,12 @@
         </div>
     </div>
     @if($service_categories->count())
-        <table class="table table-striped table-hover">
+        <table class="table table-bordered table-hover">
             <thead class="thead-light">
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">{{ __('Title') }}</th>
+                <th scope="col">{{ __('Description') }}</th>
                 <th scope="col">{{ __('Active') }}</th>
                 <th scope="col">{{ __('Action') }}</th>
             </tr>
@@ -22,6 +23,7 @@
                 <tr>
                     <th class="align-middle" scope="row">{{ $service_category->id }}</th>
                     <td class="align-middle">{{ $service_category->title }}</td>
+                    <td class="align-middle">{{ $service_category->description ?? '-' }}</td>
                     <td class="align-middle">
                         @if($service_category->active)
                             <span class="badge-success px-2 py-1 rounded-circle"><span class="oi oi-check"></span></span>
@@ -52,7 +54,7 @@
 
     </table>
     <div class="m-auto col-6">
-        {{ $orders->links() }}
+        {{ $service_categories->links() }}
     </div>
     @else
         <h4 class="p-3 mb-2 bg-warning text-dark rounded ">{{ __('There is not any :items yet.', ['items' => __('categories')]) }}</h4>

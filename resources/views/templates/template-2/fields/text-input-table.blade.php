@@ -4,7 +4,7 @@
 
         <span class="focus-input2" data-placeholder="{{ implode(' ', array_map('ucfirst',explode('_',__($field)))) }}"></span>
         @if($errors->first(implode('.',[$name, $field])))
-            <span>{{ $errors->first(implode('.',[$name, $field])) }}</span>
+            <span class="text-danger">{{ $errors->first(implode('.',[$name, $field])) }}</span>
         @endif
     </div>
 @endforeach

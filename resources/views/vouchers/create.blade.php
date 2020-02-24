@@ -3,7 +3,7 @@
 
 @section('form')
     <div class="px-3">
-        <h1 class="display-4">{{ __('Add new Voucher') }}</h1>
+        <h1 class="display-4">{{ __('Add Voucher') }}</h1>
     </div>
     <div class="row py-3 px-3 border bg-white rounded-sm">
         <div class="col">
@@ -26,7 +26,7 @@
                     @include('vouchers.partials.service-selection-group', ['product_id' => old('product_id')])
                     @include('vouchers.partials.service-package-selection-group', ['product_id' => old('product_id')])
                     @include('vouchers.partials.file-group', ['file_src' => ''])
-                    @include('vouchers.partials.submit')
+                    @include('vouchers.partials.submit', ['label' => __('Submit')])
             </voucher-form>
 
         </div>

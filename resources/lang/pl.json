@@ -127,7 +127,23 @@
     "Add Service Category": "Dodaj kategorie",
     "Title":"Tytuł",
     "Active": "Aktywna",
-    "Action":"Akcje"
+    "Action":"Akcje",
+    "Inactive": "Nieaktywna",
+    "Submit": "Dodaj",
+    "services": "usługi",
+    "Add Service": "Dodaj usługę",
+    "Choose Categories": "Wybierz kategorie",
+    "Choose Services": "Wybierz usługi",
+    "Add new Categories": "Dodaj nową kategorię",
+    "Or add new Categories": "Lub dodaj nową kategorię",
+    "Edit Service": "Edycja usługi",
+    "Add Package": "Dodaj pakiet usług",
+    "Edit Package": "Zmień pakiet usług",
+    "packages": "pakiety",
+    "Add Voucher": "Dodaj bon",
+    "Edit Voucher": "Zmień bon",
+    "vouchers": "bony",
+    "Select Type": "Wybierz typ"
 }
 
 

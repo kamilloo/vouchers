@@ -4,7 +4,7 @@
 
         <span class="focus-input100"></span>
         @if($errors->first(implode('.',[$name, $field])))
-            <span>{{ $errors->first(implode('.',[$name, $field])) }}</span>
+            <span class="text-danger">{{ $errors->first(implode('.',[$name, $field])) }}</span>
         @endif
     </div>
 @endforeach

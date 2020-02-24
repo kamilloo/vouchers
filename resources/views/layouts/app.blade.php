@@ -41,9 +41,9 @@
                                 {{ __('Services') }}
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('services.index') }}">{{ __('Services') }}</a>
                                 <a class="dropdown-item" href="{{ route('service-categories.index') }}">{{ __('Service Categories') }}</a>
                                 <a class="dropdown-item" href="{{ route('service-packages.index') }}">{{ __('Service Packages') }}</a>
-                                <a class="dropdown-item" href="{{ route('services.index') }}">{{ __('Service') }}</a>
                             </div>
                         </li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('shop.index') }}">{{ __('Shop') }}</a></li>

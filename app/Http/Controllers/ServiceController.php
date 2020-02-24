@@ -31,7 +31,7 @@ class ServiceController extends Controller
 
     public function index(Guard $guard)
     {
-        $services = Service::toMe()->get();
+        $services = Service::toMe()->paginate();
         return view('services.index', compact('services'));
     }
 

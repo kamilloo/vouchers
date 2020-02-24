@@ -27,7 +27,7 @@ class ServiceCategoryController extends Controller
 
     public function index(Guard $guard)
     {
-        $service_categories = ServiceCategory::toMe()->get();
+        $service_categories = ServiceCategory::toMe()->paginate();
         return view('service-categories.index', compact('service_categories'));
     }
 

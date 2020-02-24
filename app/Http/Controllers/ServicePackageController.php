@@ -34,7 +34,7 @@ class ServicePackageController extends Controller
 
     public function index(Guard $guard)
     {
-        $service_packages = ServicePackage::toMe()->get();
+        $service_packages = ServicePackage::toMe()->paginate();
         return view('service-packages.index', compact('service_packages'));
     }
 

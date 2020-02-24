@@ -157,5 +157,12 @@ return [
         'client.city' => 'miasto',
         'client.address' => 'adres',
         'client.postcode' => 'kod pocztowy',
+        'title' => 'tytuł',
+        'description' => 'opis',
+        'active' => "status",
+        'price' => "cena",
+        'category_id' => "kategoria",
+        'category' => "kategoria",
+        'services' => "usługi"
     ],
 ];
