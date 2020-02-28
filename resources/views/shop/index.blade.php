@@ -31,7 +31,7 @@
                                 </div>
                             @endforeach
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">{{ __('Save')}}</button>
 
                     </form>
 
@@ -56,7 +56,7 @@
                             <small id="welcoming-help" class="form-text text-muted">{{ __('Welcome Your Clients') }}.</small>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
                     </form>
 
                 </div>
@@ -91,7 +91,7 @@
                             <file-upload id="front-image" file-preview-width="400" file-name="front" file-src="{{ $shop_images->front }}"></file-upload>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">{{ __('Save')}}</button>
 
                     </form>
                 </div>
@@ -110,7 +110,7 @@
                             <small id="delivery_cost-help" class="form-text text-muted">{{ __('Set Delivery Cost') }}.</small>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">{{ __('Save')}}</button>
                     </form>
                 </div>
                 <div class="tab-pane" id="gateway" role="tabpanel">
@@ -135,16 +135,16 @@
                         <div class="form-group">
                             <div class="custom-control custom-radio">
                                 <input type="radio" id="sandbox" name="sandbox" class="custom-control-input" value="{{ \App\Models\Enums\GatewaySandbox::ENABLED }}" @if($merchant->sandbox == \App\Models\Enums\GatewaySandbox::ENABLED) checked @endif>
-                                <label class="custom-control-label" for="sandbox">Sanbox</label>
+                                <label class="custom-control-label" for="sandbox">{{ __('Sandbox')}}</label>
                             </div>
                             <div class="custom-control custom-radio">
                                 <input type="radio" id="live" name="sandbox" class="custom-control-input" value="{{ \App\Models\Enums\GatewaySandbox::DISABLED }}" @if($merchant->sandbox == \App\Models\Enums\GatewaySandbox::DISABLED) checked @endif>
-                                <label class="custom-control-label" for="live">Live</label>
+                                <label class="custom-control-label" for="live">{{ __('Live')}}</label>
                             </div>
                         </div>
 
 
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">{{ __('Save')}}</button>
                     </form>
 
                 </div>
