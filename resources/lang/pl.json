@@ -195,7 +195,14 @@
     "Your Voucher was stored!":  "Twój bon został zapisany",
     "Your Voucher was updated!": "Twój bon został zaktualizowany",
     "Your Voucher was deleted":  "Twój bon został usunięty",
-    "Mail was send successful!": "Email został wysłany"
+    "Mail was send successful!": "Email został wysłany",
+    "Share your checkout shop": "Dziel się linkiem do Twojego sklepu",
+    "Payments":"Płatności",
+    "Your Payment": "Ostatnie płatności",
+    "Reviews":"Opinie",
+    "Your Review": "Ostatnie opinie",
+    "Sales":"Sprzedaż",
+    "Your Sales": "Ostatnia Sprzedaż"
 }
 
 
