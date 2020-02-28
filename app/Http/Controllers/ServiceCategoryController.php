@@ -40,7 +40,7 @@ class ServiceCategoryController extends Controller
     {
         $service_category = $repository->create($request, $guard->user()->merchant()->first());
 
-        return redirect(route('service-categories.index'))->with('success', 'Your Category was stored!');
+        return redirect(route('service-categories.index'))->with('success', __('Your Category was stored!'));
     }
 
     public function edit(ServiceCategory $service_category)
@@ -57,12 +57,12 @@ class ServiceCategoryController extends Controller
         ]);
         $service_category->update($voucher_attributes);
 
-        return redirect(route('service-categories.index'))->with('success', 'Your profile was updated!');
+        return redirect(route('service-categories.index'))->with('success', __('Your Category was updated!'));
     }
 
     public function destroy(ServiceCategory $service_category)
     {
         $service_category->delete();
-        return redirect(route('service-categories.index'))->with('info', 'Your Voucher was deleted');
+        return redirect(route('service-categories.index'))->with('info', __('Your Category was deleted'));
     }
 }

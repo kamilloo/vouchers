@@ -178,7 +178,24 @@
     "CRC": "CRC",
     "Set CRC Gateway":"Ustaw CRC",
     "Sandbox": "Usługa testowa",
-    "Live":"Bramka włączona"
+    "Live":"Bramka włączona",
+    "Successfully logged out":  "Wylogowywanie zakończyło się sukcesem",
+    "Your profile was updated!":  "Twój profil został zaktualizowany",
+    "Your Category was stored!": "Twoja kategoria została zapisana",
+    "Your Category was updated!":  "Twoja kategoria została zaktualizowana",
+    "Your Category was deleted": "Twoja kategoria została usunięta",
+    "Your Service was stored!":  "Twoja usługa została zapisana",
+    "Your Service was updated!":  "Twoja usługa została zaktualizowana",
+    "Your Service was deleted":  "Twoja usługa została usunięta",
+    "Your Package was stored!": "Twój pakiet został zapisany",
+    "Your Package was updated!":  "Twój pakiet został zaktualizowany",
+    "Your Package was deleted": "Twój pakiet został usunięty",
+    "Well done!, you changed your shop design.":  "Zmiany w sklepie zostały zapisane",
+    "Ups!, Something went wrong.": "Zmiany nie zostały zapisane",
+    "Your Voucher was stored!":  "Twój bon został zapisany",
+    "Your Voucher was updated!": "Twój bon został zaktualizowany",
+    "Your Voucher was deleted":  "Twój bon został usunięty",
+    "Mail was send successful!": "Email został wysłany"
 }
 
 

@@ -58,7 +58,7 @@ class VoucherOrderController extends Controller
         $order->moveStatusToDeliver();
         $event_dispatcher->dispatch(new VoucherWasDelivered($order));
 
-        return back()->with(['success' => 'Mail was send successful!']);
+        return back()->with(['success' => __('Mail was send successful!')]);
     }
 
     public function push(Order $order)

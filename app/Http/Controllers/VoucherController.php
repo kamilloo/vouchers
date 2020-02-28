@@ -41,7 +41,7 @@ class VoucherController extends Controller
     {
         $voucher = $repository->create($request, $guard->user());
 
-        return redirect(route('vouchers.index'))->with('success', 'Your Voucher was updated!');
+        return redirect(route('vouchers.index'))->with('success', __('Your Voucher was stored!'));
     }
 
     public function edit(Voucher $voucher)
@@ -55,12 +55,12 @@ class VoucherController extends Controller
     {
         $repository->update($request, $voucher);
 
-        return redirect(route('vouchers.index'))->with('success', 'Your profile was updated!');
+        return redirect(route('vouchers.index'))->with('success', __('Your Voucher was updated!'));
     }
 
     public function destroy(Voucher $voucher)
     {
         $voucher->delete();
-        return redirect(route('vouchers.index'))->with('info', 'Your Voucher was deleted');
+        return redirect(route('vouchers.index'))->with('info', __('Your Voucher was deleted'));
     }
 }

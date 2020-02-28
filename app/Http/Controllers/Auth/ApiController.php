@@ -26,7 +26,7 @@ class ApiController extends Controller
         $credentials = request(['email', 'password']);
 
         if (! $token = auth('api')->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            return response()->json(['error' => __('Unauthorized')], 401);
         }
 
         return $this->respondWithToken($token);
@@ -36,7 +36,7 @@ class ApiController extends Controller
     {
         auth('api')->logout();
 
-        return response()->json(['message' => 'Successfully logged out']);
+        return response()->json(['message' => __('Successfully logged out')]);
     }
 
     protected function respondWithToken($token)

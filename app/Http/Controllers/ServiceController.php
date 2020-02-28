@@ -45,7 +45,7 @@ class ServiceController extends Controller
     {
         $service = $repository->create($request, $guard->user()->merchant()->first());
 
-        return redirect(route('services.index'))->with('success', 'Your Service was stored!');
+        return redirect(route('services.index'))->with('success', __('Your Service was stored!'));
     }
 
     public function edit(Service $service)
@@ -57,12 +57,12 @@ class ServiceController extends Controller
     public function update(ServiceUpdateRequest $request, Service $service, ServiceRepository $repository)
     {
         $repository->update($request, $service);
-        return redirect(route('services.index'))->with('success', 'Your service was updated!');
+        return redirect(route('services.index'))->with('success', __('Your Service was updated!'));
     }
 
     public function destroy(Service $service)
     {
         $service->delete();
-        return redirect(route('services.index'))->with('info', 'Your Service was deleted');
+        return redirect(route('services.index'))->with('info', __('Your Service was deleted'));
     }
 }

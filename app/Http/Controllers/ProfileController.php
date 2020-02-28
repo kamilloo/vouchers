@@ -36,7 +36,7 @@ class ProfileController extends Controller
         $user_manager->update($request);
 
 
-        return redirect(route('profile.index'))->with('success', 'Your profile was updated!');
+        return redirect(route('profile.index'))->with('success', __('Your profile was updated!'));
     }
 
     /**

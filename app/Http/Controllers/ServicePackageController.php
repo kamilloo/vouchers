@@ -49,7 +49,7 @@ class ServicePackageController extends Controller
     {
         $service = $repository->create($request, $guard->user()->merchant()->first());
 
-        return redirect(route('service-packages.index'))->with('success', 'Your Package was stored!');
+        return redirect(route('service-packages.index'))->with('success', __('Your Package was stored!'));
     }
 
     public function edit(ServicePackage $service_package)
@@ -62,12 +62,12 @@ class ServicePackageController extends Controller
     public function update(ServicePackageStoreRequest $request, ServicePackage $service_package, ServicePackageRepository $repository)
     {
         $repository->update($request, $service_package);
-        return redirect(route('service-packages.index'))->with('success', 'Your service was updated!');
+        return redirect(route('service-packages.index'))->with('success', __('Your Package was updated!'));
     }
 
     public function destroy(ServicePackage $service_package)
     {
         $service_package->delete();
-        return redirect(route('service-packages.index'))->with('info', 'Your Service was deleted');
+        return redirect(route('service-packages.index'))->with('info', __('Your Package was deleted'));
     }
 }

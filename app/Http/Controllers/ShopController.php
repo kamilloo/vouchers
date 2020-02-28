@@ -46,10 +46,10 @@ class ShopController extends Controller
                 'template_id' => $request->template_id
             ]);
             return redirect(route('shop.index'))
-                ->with('success', 'Well done!, you changed your shop design.');
+                ->with('success', __('Well done!, you changed your shop design.'));
         }
         return redirect(route('shop.index'))
-            ->with('warning', 'Ups!, Something went wrong.');
+            ->with('warning', __('Ups!, Something went wrong.'));
 
     }
 
@@ -71,10 +71,10 @@ class ShopController extends Controller
                 $shop_style->update($shop_styles);
             }
             return redirect(route('shop.index'))
-                ->with('success', 'Well done!, you changed your shop design.');
+                ->with('success', __('Well done!, you changed your shop design.'));
         }
         return redirect(route('shop.index'))
-            ->with('warning', 'Ups!, Something went wrong.');
+            ->with('warning', __('Ups!, Something went wrong.'));
     }
 
 
@@ -91,10 +91,10 @@ class ShopController extends Controller
             ]);
 
             return redirect(route('shop.index'))
-                ->with('success', 'Well done!, you changed your shop design.');
+                ->with('success', __('Well done!, you changed your shop design.'));
         }
         return redirect(route('shop.index'))
-            ->with('warning', 'Ups!, Something went wrong.');
+            ->with('warning', __('Ups!, Something went wrong.'));
     }
 
     public function shopSettings(ShopSettings $request, Guard $guard)
@@ -115,10 +115,10 @@ class ShopController extends Controller
                 $voucher_style->update($voucher_settings);
             }
             return redirect(route('shop.index'))
-                ->with('success', 'Well done!, you changed your shop settings.');
+                ->with('success', __('Well done!, you changed your shop design.'));
         }
         return redirect(route('shop.index'))
-            ->with('warning', 'Ups!, Something went wrong.');
+            ->with('warning', __('Ups!, Something went wrong.'));
     }
 
     public function changeImages(ShopChangeImages $request, Guard $guard)
@@ -156,10 +156,10 @@ class ShopController extends Controller
             $shop_images->adjustLogoSwitcher();
 
             return redirect(route('shop.index'))
-                ->with('success', 'Well done!, you changed your shop design.');
+                ->with('success', __('Well done!, you changed your shop design.'));
         }
         return redirect(route('shop.index'))
-            ->with('warning', 'Ups!, Something went wrong.');
+            ->with('warning', __('Ups!, Something went wrong.'));
     }
 
 
