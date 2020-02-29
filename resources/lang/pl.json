@@ -224,7 +224,7 @@
     "download": "pobierz",
     "voucher": "bon",
     "send": "wyslij",
-    "push": "wyslij",
+    "push": "sms",
     "Amount":"Kwota",
     "Paid At": "Zapłacone dnia",
     "Confirmed":"Potwierdzono",

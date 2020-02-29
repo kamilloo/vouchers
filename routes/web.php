@@ -101,7 +101,7 @@ Route::group(['middleware' => 'paymentOrderIsActive'], function () {
     Route::get(__('payment').'/{payment}/'.__('recap'), 'PaymentOrderController@recap')->name('payment.recap');
 });
 
-Route::get(__('voucher').'/order/{order}/'.__('failed'), 'VoucherOrderController@failed')->name('voucher.failed');
+Route::get(__('voucher').'/'.__('order').'/{order}/'.__('failed'), 'VoucherOrderController@failed')->name('voucher.failed');
 
 
 Route::group(['middleware' => ['orderIsActive', 'voucherIsWaiting']], function (){
