@@ -15,17 +15,24 @@
     <div class="row pb-md-5 pb-xl-5">
     <div class="col-md-6 pb-1">
             <div class="card">
-                <div class="card-header">{{ __('Payments') }}</div>
+                <div class="card-header">{{ __('Your Payment') }}</div>
                     <img class="card-img-top" src="{{ asset('images/payments.png') }}">
                     <div class="card-body">
-                        <h5 class="card-title">{{ __('Your Payment') }}</h5>
-                        <table class="table table-hover">
+                        <h5 class="card-title">{{ __('More Details') }}</h5>
+                        <table class="table  table-bordered table-hover">
+                            <thead class="thead-light">
+                            <tr>
+                                <th scope="col">{{ __('Client') }}</th>
+                                <th scope="col">{{ __('Amount')}}&nbsp;w&nbsp;zł</th>
+                                <th scope="col">{{ __('Paid At')}}</th>
+                            </tr>
+                            </thead>
                             <tbody>
                             @foreach($payments as $payment)
                                 <tr>
-                                    <td class="align-middle">{{ $payment->presenter->paid_at() }}</td>
-                                    <td class="align-middle">{{ $payment->presenter->paid_at() }}</td>
-                                    <td class="align-middle">{{ $payment->presenter->paid_at() }}</td>
+                                    <td class="align-middle">{{ $payment->order->presenter->fullName() }}</td>
+                                    <td>{{ $payment->presenter->amount() }}</td>
+                                    <td>{{ $payment->presenter->paid_at() }}</td>
                                 </tr>
                             @endforeach
                             </tbody>
@@ -57,11 +64,18 @@
 {{--        </div>--}}
     <div class="col-md-6 pb-1">
             <div class="card">
-                <div class="card-header">{{ __('Sales') }}</div>
+                <div class="card-header">{{ __('Your Sales') }}</div>
                     <img class="card-img-top" src="{{ asset('images/clients.png') }}">
                     <div class="card-body">
-                        <h5 class="card-title">{{ __('Your Sales') }}</h5>
-                        <table class="table table-hover">
+                        <h5 class="card-title">{{ __('More Details') }}</h5>
+                        <table class="table  table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <th scope="col">{{ __('Client') }}</th>
+                                <th scope="col">{{ __('Price')}}</th>
+                                <th scope="col">{{ __('Status')}}</th>
+                            </tr>
+                            </thead>
                             <tbody>
                             @foreach($orders as $order)
                                 <tr>

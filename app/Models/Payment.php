@@ -12,6 +12,10 @@ class Payment extends Model implements IPayment
 {
     protected $link;
 
+    protected $casts = [
+        'paid_at' => 'datetime'
+    ];
+
     /**
      * @return string
      * @throws PaymentLinkNotAvailable

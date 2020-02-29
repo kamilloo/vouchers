@@ -8,15 +8,15 @@
 {{--        </div>--}}
 {{--    </div>--}}
     @if($payments->count())
-        <table class="table table-striped table-hover">
+        <table class="table table-bordered table-hover">
         <thead class="thead-light">
         <tr>
             <th scope="col">#</th>
             <th scope="col">{{ __('Client') }}</th>
-            <th scope="col">{{ __('Order')}}</th>
-            <th scope="col">{{ __('Voucher')}}</th>
-            <th scope="col">{{ __('Price')}}</th>
-            <th scope="col">{{ __('Status')}}</th>
+            <th scope="col">{{ __('Amount')}}&nbsp;w&nbsp;zł</th>
+            <th scope="col">{{ __('Paid At')}}</th>
+            <th scope="col">{{ __('Confirmed')}}</th>
+            <th scope="col">{{ __('Order Status')}}</th>
 
 {{--            <th scope="col">Action</th>--}}
         </tr>
@@ -24,20 +24,33 @@
         <tbody>
         @foreach($payments as $payment)
             <tr>
-                <th scope="row">{{ $payment->id }}</th>
-                <td>{{ $payment->title }}</td>
-                <td>{{ $payment->type }}</td>
-                <td>{{ $payment->price }}</td>
+                <th scope="row">{{ $loop->iteration }}</th>
+                <td class="align-middle">{{ $payment->order->presenter->fullName() }}</td>
+                <td>{{ $payment->presenter->amount() }}</td>
+                <td>{{ $payment->presenter->paid_at() }}</td>
                 <td>
-                    <span class="btn-group">
-                        <a class="btn btn-outline-info mr-1" href="{{ route('payments.edit', $payment) }}">{{ __('Edit') }}</a>
+
+                @if($payment->confirmed)
+                    <span class="badge-success px-2 py-1 rounded-circle"><span class="oi oi-check"></span></span>
+
+                @else
+                    <span class="badge-danger px-2 py-1 rounded-circle"><span class="oi oi-x"></span></span>
+                @endif
+                </td>
+                <td class="align-middle">
+                    <span class="badge badge-info">{{ $payment->order->presenter->status() }}</span><br>
+                </td>
+
+{{--                <td>--}}
+{{--                    <span class="btn-group">--}}
+{{--                        <a class="btn btn-outline-info mr-1" href="{{ route('payments.edit', $payment) }}">{{ __('Edit') }}</a>--}}
 {{--                        <form action="{{ route('payments.destroy', $payment) }}" method="post" >--}}
 {{--                            @method('delete')--}}
 {{--                            @csrf--}}
 {{--                            <button type="button" class="btn btn-outline-danger mr-1" data-toggle="modal" data-target="#confirm-delete">Delete</button>--}}
 {{--                        </form>--}}
-                    </span>
-                </td>
+{{--                    </span>--}}
+{{--                </td>--}}
             </tr>
         @endforeach
         </tbody>

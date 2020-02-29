@@ -20,6 +20,7 @@ abstract class Model extends VendorModel
 
     public function getRouteKey()
     {
-        return \Hashids::encodeHex($this->getKey().config('hashids.start_primary_key'));
+        $pad_length = config('hashids.start_primary_key');
+        return \Hashids::encodeHex(str_pad($this->getKey(), $pad_length, '0', STR_PAD_LEFT));
     }
 }

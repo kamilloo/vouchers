@@ -64,6 +64,18 @@ class ServiceControllerTest extends TestCase
     /**
      * @test
      */
+    public function edit_show_view()
+    {
+        $this->createService();
+        $response = $this->get(route('services.edit', $this->service))
+            ->assertViewIs('services.edit');
+
+        $response->assertStatus(200);
+    }
+
+    /**
+     * @test
+     */
     public function store_validation_exception()
     {
         $category = factory(ServiceCategory::class)->create();

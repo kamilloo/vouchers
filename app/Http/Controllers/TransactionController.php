@@ -6,6 +6,7 @@ use App\Http\Requests\ProfileUpdate;
 use App\Http\Requests\VoucherStore;
 use App\Http\Requests\VoucherUpdate;
 use App\Models\Payment;
+use App\Models\Transaction;
 use App\Models\UserProfile;
 use App\Models\Voucher;
 use Illuminate\Contracts\Auth\Guard;
@@ -18,7 +19,7 @@ class TransactionController extends Controller
 {
     public function __construct()
     {
-        $this->authorizeResource(Voucher::class);
+        $this->authorizeResource(Payment::class);
     }
 
     public function index(Guard $guard)

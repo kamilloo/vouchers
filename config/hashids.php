@@ -50,6 +50,6 @@ return [
         ],
 
     ],
-    'start_primary_key' => env('HASHIDS_START_PRIMARY_KEY', 10000)
+    'start_primary_key' => env('HASHIDS_START_PRIMARY_KEY', 10)
 
 ];
