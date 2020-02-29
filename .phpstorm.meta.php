@@ -5,7 +5,7 @@ namespace PHPSTORM_META {
 
    /**
     * PhpStorm Meta file, to provide autocomplete information for PhpStorm
-    * Generated on 2020-02-19 19:50:21.
+    * Generated on 2020-02-29 08:13:51.
     *
     * @author Barry vd. Heuvel <barryvdh@gmail.com>
     * @see https://github.com/barryvdh/laravel-ide-helper
@@ -131,6 +131,9 @@ namespace PHPSTORM_META {
         'form' => \Collective\Html\FormBuilder::class,
         'hash' => \Illuminate\Hashing\HashManager::class,
         'hash.driver' => \Illuminate\Hashing\BcryptHasher::class,
+        'hashids' => \Vinkla\Hashids\HashidsManager::class,
+        'hashids.connection' => \Hashids\Hashids::class,
+        'hashids.factory' => \Vinkla\Hashids\HashidsFactory::class,
         'html' => \Collective\Html\HtmlBuilder::class,
         'log' => \Illuminate\Log\LogManager::class,
         'mailer' => \Illuminate\Mail\Mailer::class,
@@ -294,6 +297,9 @@ namespace PHPSTORM_META {
         'form' => \Collective\Html\FormBuilder::class,
         'hash' => \Illuminate\Hashing\HashManager::class,
         'hash.driver' => \Illuminate\Hashing\BcryptHasher::class,
+        'hashids' => \Vinkla\Hashids\HashidsManager::class,
+        'hashids.connection' => \Hashids\Hashids::class,
+        'hashids.factory' => \Vinkla\Hashids\HashidsFactory::class,
         'html' => \Collective\Html\HtmlBuilder::class,
         'log' => \Illuminate\Log\LogManager::class,
         'mailer' => \Illuminate\Mail\Mailer::class,
@@ -457,6 +463,9 @@ namespace PHPSTORM_META {
         'form' => \Collective\Html\FormBuilder::class,
         'hash' => \Illuminate\Hashing\HashManager::class,
         'hash.driver' => \Illuminate\Hashing\BcryptHasher::class,
+        'hashids' => \Vinkla\Hashids\HashidsManager::class,
+        'hashids.connection' => \Hashids\Hashids::class,
+        'hashids.factory' => \Vinkla\Hashids\HashidsFactory::class,
         'html' => \Collective\Html\HtmlBuilder::class,
         'log' => \Illuminate\Log\LogManager::class,
         'mailer' => \Illuminate\Mail\Mailer::class,
@@ -620,6 +629,9 @@ namespace PHPSTORM_META {
         'form' => \Collective\Html\FormBuilder::class,
         'hash' => \Illuminate\Hashing\HashManager::class,
         'hash.driver' => \Illuminate\Hashing\BcryptHasher::class,
+        'hashids' => \Vinkla\Hashids\HashidsManager::class,
+        'hashids.connection' => \Hashids\Hashids::class,
+        'hashids.factory' => \Vinkla\Hashids\HashidsFactory::class,
         'html' => \Collective\Html\HtmlBuilder::class,
         'log' => \Illuminate\Log\LogManager::class,
         'mailer' => \Illuminate\Mail\Mailer::class,
@@ -783,6 +795,9 @@ namespace PHPSTORM_META {
         'form' => \Collective\Html\FormBuilder::class,
         'hash' => \Illuminate\Hashing\HashManager::class,
         'hash.driver' => \Illuminate\Hashing\BcryptHasher::class,
+        'hashids' => \Vinkla\Hashids\HashidsManager::class,
+        'hashids.connection' => \Hashids\Hashids::class,
+        'hashids.factory' => \Vinkla\Hashids\HashidsFactory::class,
         'html' => \Collective\Html\HtmlBuilder::class,
         'log' => \Illuminate\Log\LogManager::class,
         'mailer' => \Illuminate\Mail\Mailer::class,
@@ -946,6 +961,9 @@ namespace PHPSTORM_META {
         'form' => \Collective\Html\FormBuilder::class,
         'hash' => \Illuminate\Hashing\HashManager::class,
         'hash.driver' => \Illuminate\Hashing\BcryptHasher::class,
+        'hashids' => \Vinkla\Hashids\HashidsManager::class,
+        'hashids.connection' => \Hashids\Hashids::class,
+        'hashids.factory' => \Vinkla\Hashids\HashidsFactory::class,
         'html' => \Collective\Html\HtmlBuilder::class,
         'log' => \Illuminate\Log\LogManager::class,
         'mailer' => \Illuminate\Mail\Mailer::class,
@@ -1109,6 +1127,9 @@ namespace PHPSTORM_META {
         'form' => \Collective\Html\FormBuilder::class,
         'hash' => \Illuminate\Hashing\HashManager::class,
         'hash.driver' => \Illuminate\Hashing\BcryptHasher::class,
+        'hashids' => \Vinkla\Hashids\HashidsManager::class,
+        'hashids.connection' => \Hashids\Hashids::class,
+        'hashids.factory' => \Vinkla\Hashids\HashidsFactory::class,
         'html' => \Collective\Html\HtmlBuilder::class,
         'log' => \Illuminate\Log\LogManager::class,
         'mailer' => \Illuminate\Mail\Mailer::class,
@@ -1272,6 +1293,9 @@ namespace PHPSTORM_META {
         'form' => \Collective\Html\FormBuilder::class,
         'hash' => \Illuminate\Hashing\HashManager::class,
         'hash.driver' => \Illuminate\Hashing\BcryptHasher::class,
+        'hashids' => \Vinkla\Hashids\HashidsManager::class,
+        'hashids.connection' => \Hashids\Hashids::class,
+        'hashids.factory' => \Vinkla\Hashids\HashidsFactory::class,
         'html' => \Collective\Html\HtmlBuilder::class,
         'log' => \Illuminate\Log\LogManager::class,
         'mailer' => \Illuminate\Mail\Mailer::class,

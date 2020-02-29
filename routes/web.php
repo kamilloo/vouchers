@@ -46,8 +46,6 @@ Route::middleware('auth')->group(function (){
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('get-started', 'Starter@getStarted')->name('get-started');
-
 
 Route::get(__('checkout').'/{merchant}', 'CheckoutController@start')->name('checkout.start');
 Route::post(__('checkout').'/{merchant}', 'CheckoutController@proceed')->name('checkout.proceed');
@@ -55,23 +53,43 @@ Route::post(__('checkout').'/{merchant}', 'CheckoutController@proceed')->name('c
 Route::group(['middleware' => 'canOrderProceeded'], function () {
     Route::get(__('checkout').'/{merchant}/'.__('confirmation').'/{order}', 'CheckoutController@confirmation')->name('checkout.confirmation');
 
-    Route::get('payment/{merchant}/create/{order}', 'PaymentOrderController@create')->name('payment.create');
+    Route::get(__('payment').'/{merchant}/'.__('create').'/{order}', 'PaymentOrderController@create')->name('payment.create');
 });
 
 Route::group(['middleware' => 'paymentOrderIsActive'], function () {
     Route::get('payment/{payment}/callback-return', 'PaymentOrderController@callbackReturn')->name('payment.return');
     Route::get('payment/{payment}/sandbox-gateway', 'PaymentOrderController@sandboxGateway')->name('payment.sandbox-gateway');
 
-    Route::get('payment/{payment}/recap', 'PaymentOrderController@recap')->name('payment.recap');
+    Route::get(__('payment').'/{payment}/'.__('recap'), 'PaymentOrderController@recap')->name('payment.recap');
 });
 
-Route::get('voucher/order/{order}/failed', 'VoucherOrderController@failed')->name('voucher.failed');
+Route::get(__('voucher').'/order/{order}/'.__('failed'), 'VoucherOrderController@failed')->name('voucher.failed');
 
 
 Route::group(['middleware' => ['orderIsActive', 'voucherIsWaiting']], function (){
 
-    Route::get('voucher/order/{order}/download', 'VoucherOrderController@download')->name('voucher.download');
-    Route::get('voucher/order/{order}/send', 'VoucherOrderController@send')->name('voucher.send');
-    Route::get('voucher/order/{order}/push', 'VoucherOrderController@push')->name('voucher.push');
+    Route::get(__('voucher').'/'.__('order').'/{order}/'.__('download'), 'VoucherOrderController@download')->name('voucher.download');
+    Route::get(__('voucher').'/'.__('order').'/{order}/'.__('send'), 'VoucherOrderController@send')->name('voucher.send');
+    Route::get(__('voucher').'/'.__('order').'/{order}/'.__('push'), 'VoucherOrderController@push')->name('voucher.push');
 
 });
+
+$hash_models = [
+    'merchant',
+    'order',
+    'payment',
+    'service',
+    'service_category',
+    'service_package',
+    'voucher',
+
+];
+
+foreach ($hash_models as $model)
+{
+    Route::bind($model, function($value, $route)
+    {
+        return trim(Hashids::decodeHex($value), config('hashids.start_primary_key'));
+    });
+}
+

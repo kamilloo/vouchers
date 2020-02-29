@@ -13,7 +13,7 @@
         </div>
     </div>
     <div class="row pb-md-5 pb-xl-5">
-    <div class="col-md-4 pb-1">
+    <div class="col-md-6 pb-1">
             <div class="card">
                 <div class="card-header">{{ __('Payments') }}</div>
                     <img class="card-img-top" src="{{ asset('images/payments.png') }}">
@@ -34,28 +34,28 @@
                     </div>
             </div>
         </div>
-    <div class="col-md-4 pb-1">
-            <div class="card">
-                <div class="card-header">{{ __('Reviews') }}</div>
-                    <img class="card-img-top" src="{{ asset('images/reviews.png') }}">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ __('Your Review') }}</h5>
-                        <table class="table table-hover">
-                            <tbody>
-                            @foreach($reviews as $review)
-                                <tr>
-                                    <td class="align-middle">{{ $review->presenter->author() }}</td>
-                                    <td class="align-middle">{!! $review->presenter->rating() !!}</td>
-                                    <td class="align-middle">{{ $review->presenter->body() }}</td>
-                                </tr>
-                            @endforeach
-                            </tbody>
+{{--    <div class="col-md-4 pb-1">--}}
+{{--            <div class="card">--}}
+{{--                <div class="card-header">{{ __('Reviews') }}</div>--}}
+{{--                    <img class="card-img-top" src="{{ asset('images/reviews.png') }}">--}}
+{{--                    <div class="card-body">--}}
+{{--                        <h5 class="card-title">{{ __('Your Review') }}</h5>--}}
+{{--                        <table class="table table-hover">--}}
+{{--                            <tbody>--}}
+{{--                            @foreach($reviews as $review)--}}
+{{--                                <tr>--}}
+{{--                                    <td class="align-middle">{{ $review->presenter->author() }}</td>--}}
+{{--                                    <td class="align-middle">{!! $review->presenter->rating() !!}</td>--}}
+{{--                                    <td class="align-middle">{{ $review->presenter->body() }}</td>--}}
+{{--                                </tr>--}}
+{{--                            @endforeach--}}
+{{--                            </tbody>--}}
 
-                        </table>
-                    </div>
-            </div>
-        </div>
-    <div class="col-md-4 pb-1">
+{{--                        </table>--}}
+{{--                    </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+    <div class="col-md-6 pb-1">
             <div class="card">
                 <div class="card-header">{{ __('Sales') }}</div>
                     <img class="card-img-top" src="{{ asset('images/clients.png') }}">

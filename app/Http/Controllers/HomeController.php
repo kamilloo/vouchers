@@ -28,7 +28,7 @@ class HomeController extends Controller
     {
         $orders = Order::toMe()->latest()->limit(5)->get();
         $payments = Payment::toMe()->latest()->limit(5)->get();
-        $reviews = Review::toMe()->latest()->limit(5)->get();
+//        $reviews = Review::toMe()->latest()->limit(5)->get();
         return view('home', compact('orders', 'payments', 'reviews'));
     }
 }

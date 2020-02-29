@@ -16,4 +16,10 @@ abstract class Model extends VendorModel
     {
         return $query->whereUserId(auth()->id());
     }
+
+
+    public function getRouteKey()
+    {
+        return \Hashids::encodeHex($this->getKey().config('hashids.start_primary_key'));
+    }
 }
