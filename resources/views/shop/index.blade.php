@@ -117,6 +117,20 @@
                     <form method="post" action="{{ route('shop.gateway-settings') }}">
                         @csrf
                         <div class="form-group">
+                            <label for="payment_gateway_enabled">{{ __('Payment Gateway') }}</label>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="payment_gateway_enabled" name="payment_gateway_enabled" class="custom-control-input" value="{{ \App\Models\Enums\GatewayStatus::ENABLED }}" @if($merchant->payment_gateway_enabled == \App\Models\Enums\GatewayStatus::ENABLED) checked @endif>
+                                <label class="custom-control-label" for="payment_gateway_enabled">{{ __('Enable')}}</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="live" name="payment_gateway_enabled" class="custom-control-input" value="{{ \App\Models\Enums\GatewayStatus::DISABLED }}" @if($merchant->payment_gateway_enabled == \App\Models\Enums\GatewayStatus::DISABLED) checked @endif>
+                                <label class="custom-control-label" for="live">{{ __('Disable')}}</label>
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group">
                             <label for="welcoming">{{ __('Merchand Id') }}</label>
                             <input type="number" class="form-control" id="merchant_id" aria-describedby="merchant-id-help" name="merchant_id" placeholder="{{ __('Merchant Id') }}" value="{{ old('merchant_id', $merchant->merchant_id) }}">
                             <small id="merchant-id-help" class="form-text text-muted">{{ __('Set Merchant Id Gateway') }}.</small>

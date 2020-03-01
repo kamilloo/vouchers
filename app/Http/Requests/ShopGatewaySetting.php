@@ -14,6 +14,7 @@ use Illuminate\Validation\Rule;
  * @method getPosIdParam
  * @method getCrcParam
  * @method getSandboxParam
+ * @method getPaymentGatewayEnabledParam
  */
 class ShopGatewaySetting extends Request
 {
@@ -25,10 +26,11 @@ class ShopGatewaySetting extends Request
     public function rules()
     {
         return [
-            'merchant_id' => ['required', 'numeric',],
-            'pos_id' => ['required', 'numeric',],
-            'crc' => ['required', 'string',],
-            'sandbox' => ['required', 'boolean',],
+            'payment_gateway_enabled' => ['required', 'boolean',],
+            'merchant_id' => ['required_if:payment_gateway_enabled,true', 'numeric',],
+            'pos_id' => ['required_if:payment_gateway_enabled,true', 'numeric',],
+            'crc' => ['required_if:payment_gateway_enabled,true', 'string',],
+            'sandbox' => ['required_if:payment_gateway_enabled,true', 'boolean',],
         ];
     }
 }

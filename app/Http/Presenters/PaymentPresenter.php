@@ -18,4 +18,9 @@ class PaymentPresenter extends ModelPresenter
      */
     protected $model;
 
+    public function paid():bool
+    {
+        return $this->model->paid();
+    }
+
 }

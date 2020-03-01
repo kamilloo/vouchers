@@ -228,7 +228,19 @@
     "Amount":"Kwota",
     "Paid At": "Zapłacone dnia",
     "Confirmed":"Potwierdzono",
-    "Order Status": "Status zamówienia"
+    "Order Status": "Status zamówienia",
+    "new": "nowe",
+    "waiting": "oczekujace",
+    "confirm":  "potwierdzone",
+    "sent": "wysłane",
+    "delivery":  "dostarczone",
+    "released": "zrealizowane",
+    "rejected":  "odrzucone",
+    "returned": "zwrócone",
+    "cancelled":  "anulowane",
+    "Enable": "Włącz",
+    "Disable": "Wyłącz",
+    "Payment Gateway": "Bramka płatności"
 }
 
 

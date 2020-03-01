@@ -30,6 +30,22 @@ class ShopControllerTest extends TestCase
      */
     protected $merchant;
 
+
+    public function entryGatewayProviderData():iterable
+    {
+        yield [[
+            'payment_gateway_enabled' => false,
+        ]];
+
+        yield [[
+            'payment_gateway_enabled' => true,
+            'merchant_id' => 123465,
+            'pos_id' => 123456,
+            'crc' => 'crc',
+            'sandbox' => true
+        ]];
+    }
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -43,6 +59,7 @@ class ShopControllerTest extends TestCase
     public function gatewaySetting_validation_exception()
     {
         $response = $this->postJson(route('shop.gateway-settings'),[
+            'payment_gateway_enabled' => 'fake_merchant_id',
             'merchant_id' => 'fake_merchant_id',
             'pos_id' => 'fake_pos_id',
             'crc' => false,
@@ -58,15 +75,11 @@ class ShopControllerTest extends TestCase
 
     /**
      * @test
+     * @dataProvider entryGatewayProviderData
      */
-    public function gatewaySetting_set_in_db()
+    public function gatewaySetting_set_in_db(array $incoming_parameters)
     {
-        $incoming_parameters = [
-            'merchant_id' => 123465,
-            'pos_id' => 123456,
-            'crc' => 'crc',
-            'sandbox' => true
-        ];
+
         $response = $this->postJson(route('shop.gateway-settings'), $incoming_parameters);
 
         $this->assertDatabaseHas('merchants', array_merge($incoming_parameters, [
@@ -76,15 +89,11 @@ class ShopControllerTest extends TestCase
 
     /**
      * @test
+     * @dataProvider entryGatewayProviderData
      */
-    public function gatewaySetting_redirect_to_shop_settings()
+    public function gatewaySetting_redirect_to_shop_settings(array $incoming_parameters)
     {
-        $incoming_parameters = [
-            'merchant_id' => 123465,
-            'pos_id' => 123456,
-            'crc' => 'crc',
-            'sandbox' => true
-        ];
+
         $response = $this->postJson(route('shop.gateway-settings'), $incoming_parameters)
             ->assertRedirect(route('shop.index'))
             ->assertSessionHas('success');

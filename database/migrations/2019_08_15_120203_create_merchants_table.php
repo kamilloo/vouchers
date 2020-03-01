@@ -17,6 +17,7 @@ class CreateMerchantsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('template_id')->nullable();
+            $table->boolean('payment_gateway_enabled')->default(false);
             $table->unsignedBigInteger('merchant_id')->nullable()->default(null);
             $table->unsignedBigInteger('pos_id')->nullable()->default(null);
             $table->string('crc')->nullable()->default(null);

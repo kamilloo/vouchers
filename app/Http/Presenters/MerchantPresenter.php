@@ -23,5 +23,9 @@ class MerchantPresenter extends ModelPresenter
     {
         return route('checkout.start', $this->model);
     }
+    public function hasEnabledPaymentGateway():bool
+    {
+        return (bool)$this->model->payment_gateway_enabled;
+    }
 
 }

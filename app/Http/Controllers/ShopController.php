@@ -84,6 +84,7 @@ class ShopController extends Controller
         if ($this->getUser($guard)->isMerchant())
         {
             $user->merchant->update([
+                'payment_gateway_enabled' => $request->getPaymentGatewayEnabledParam(),
                 'merchant_id' => $request->getMerchantIdParam(),
                 'pos_id' => $request->getPosIdParam(),
                 'crc' => $request->getCrcParam(),

@@ -22,7 +22,7 @@ class OrderPresenter extends ModelPresenter
 
     public function status(): string
     {
-        return mb_strtoupper($this->model->status);
+        return __($this->model->status);
     }
 
     public function price(): string
@@ -33,5 +33,9 @@ class OrderPresenter extends ModelPresenter
     public function delivery(): string
     {
         return DeliveryType::titles()[$this->model->delivery];
+    }
+
+    public function paid(): bool {
+        return $this->model->paid();
     }
 }

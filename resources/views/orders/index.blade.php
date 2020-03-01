@@ -16,7 +16,7 @@
             <th scope="col">{{ __('Delivery')}}</th>
             <th scope="col">{{ __('Contact')}}</th>
             <th scope="col">{{ __('Price')}}</th>
-            <th scope="col">{{ __('Status')}}</th>
+            <th scope="col">{{ __('Order Status')}}</th>
             <th scope="col">{{ __('Paid')}}</th>
 {{--            <th scope="col">Action</th>--}}
         </tr>

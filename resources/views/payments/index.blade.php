@@ -30,7 +30,7 @@
                 <td>{{ $payment->presenter->paid_at() }}</td>
                 <td>
 
-                @if($payment->confirmed)
+                @if($payment->presenter->paid())
                     <span class="badge-success px-2 py-1 rounded-circle"><span class="oi oi-check"></span></span>
 
                 @else
