@@ -28,7 +28,7 @@ class PaymentWasCompletedNotification extends OrderNotification implements Shoul
                 'client' => $client,
                 'voucher' => $voucher
             ]))
-            ->action(__('You can visit details'), route('transactions.index'))
+            ->action(__('You can visit details'), route('payments.index'))
             ->line(__('Thank you for using our application!'));
     }
 }

@@ -28,7 +28,7 @@ class PaymentWasBeganNotification extends OrderNotification implements ShouldQue
                 'client' => $client,
                 'voucher' => $voucher
             ]))
-            ->action(__('You can visit details'), route('transactions.index'))
+            ->action(__('You can visit details'), route('payments.index'))
             ->line(__('Thank you for using our application!'));
     }
 }
