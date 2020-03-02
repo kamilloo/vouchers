@@ -91,4 +91,8 @@ class RegisterController extends Controller
     {
         return Template::first();
     }
+    public function redirectPath()
+    {
+        return route('home');
+    }
 }

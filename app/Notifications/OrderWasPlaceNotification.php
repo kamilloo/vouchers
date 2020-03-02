@@ -22,8 +22,12 @@ class OrderWasPlaceNotification extends OrderNotification implements ShouldQueue
         $client = $this->order->getClientEmail();
         $voucher = $this->order->voucher->title;
         return (new MailMessage)
+            ->subject(__('Order was placed.'))
             ->line(__('Order was placed.'))
-            ->line(__("Client {$client} ordered your voucher: {$voucher}"))
+            ->line(__('Client :client ordered your voucher: :voucher', [
+                'client' => $client,
+                'voucher' => $voucher
+            ]))
             ->action(__('You can visit details'), route('orders.index'))
             ->line(__('Thank you for using our application!'));
     }

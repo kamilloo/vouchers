@@ -240,7 +240,24 @@
     "cancelled":  "anulowane",
     "Enable": "Włącz",
     "Disable": "Wyłącz",
-    "Payment Gateway": "Bramka płatności"
+    "Payment Gateway": "Bramka płatności",
+    "Order was placed.": "Zamówienie zostało złożone",
+    "Client :client ordered your voucher: :voucher":"Klient :client zamówił Twój bon: :voucher",
+    "You can visit details": "Przejdź do szczegółów",
+    "Thank you for using our application!":"Dziekujemy za używanie aplikacji",
+    "Payment was began.": "Płatność została rozpoczęta",
+    "Client :client began payment your voucher: :voucher":"Klient :client rozpoczął płatność za Twój bon: :voucher",
+    "Payment was completed.": "Płatność została zakończona",
+    "Client :client completed payment your voucher: :voucher":"Klient :client zakończył płatność za Twój bon: :voucher",
+    "Payment was confirmed.": "Płatność została potwierdzona",
+    "Client :client confiremed payment your voucher: :voucher":"Klient :client potwierdził płatność za Twój bon: :voucher",
+    "Voucher was delivered.": "Bon został dostarczony",
+    "Your voucher: :voucher was delived to client :client":"Twój bon :voucher został dostarczony do klienta :client",
+    "Voucher was released.": "Bon został zrealizowany",
+    "Your voucher: :voucher was released":"Twój bon :voucher został zrealizowany",
+    "Voucher was sent.": "Bon został wysłany",
+    "Your voucher: :voucher was sent to client :client":"Twój bon :voucher został wysłany do klienta :client",
+    "Contact with Merchant for complete order": "Skontaktuj się z nami w celi dokończenia zamówienia"
 }
 
 

@@ -17,7 +17,15 @@
                         'help' => __('Please complete your payment and send Voucher to :recipient', ['recipient' => $order->first_name])
 ])
                 </section>
+                @if($merchant->presenter->hasEnabledPaymentGateway())
+
                 @include('payment.recap.template-3.button-pay')
+                @else
+                    <h5>{{ __('Contact with Merchant for complete order') }}</h5>
+                    <p>{{ __('Email') }}: {{ $merchant->user->email }}</p>
+                    <p>{{ __('Phone') }}: {{ $merchant->user->profile->phone }}</p>
+                @endif
+
             </div>
         </div>
     </div>

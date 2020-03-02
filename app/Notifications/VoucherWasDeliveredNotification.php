@@ -22,8 +22,12 @@ class VoucherWasDeliveredNotification extends OrderNotification implements Shoul
         $client = $this->order->getClientEmail();
         $voucher = $this->order->voucher->title;
         return (new MailMessage)
-            ->line(__('Order was placed.'))
-            ->line(__("Client {$client} ordered your voucher: {$voucher}"))
+            ->subject(__('Voucher was delivered.'))
+            ->line(__('Voucher was delivered.'))
+            ->line(__('Your voucher: :voucher was delived to client :client', [
+                'client' => $client,
+                'voucher' => $voucher
+            ]))
             ->action(__('You can visit details'), route('orders.index'))
             ->line(__('Thank you for using our application!'));
     }

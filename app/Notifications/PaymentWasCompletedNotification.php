@@ -22,9 +22,13 @@ class PaymentWasCompletedNotification extends OrderNotification implements Shoul
         $client = $this->order->getClientEmail();
         $voucher = $this->order->voucher->title;
         return (new MailMessage)
-            ->line(__('Payment was began.'))
-            ->line(__("Client {$client} began payment your voucher: {$voucher}"))
-            ->action(__('You can visit details'), route('orders.index'))
+            ->subject(__('Payment was completed.'))
+            ->line(__('Payment was completed.'))
+            ->line(__('Client :client completed payment your voucher: :voucher', [
+                'client' => $client,
+                'voucher' => $voucher
+            ]))
+            ->action(__('You can visit details'), route('transactions.index'))
             ->line(__('Thank you for using our application!'));
     }
 }
