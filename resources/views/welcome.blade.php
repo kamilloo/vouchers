@@ -56,7 +56,7 @@
                     <div class="banner-content text-center">
                         <span class="text-white top text-uppercase">Jesteśmy dla Ciebie</span>
                         <h1 class="text-white text-uppercase">Sprzedajemy bony upominkowe</h1>
-                        <a href="#" class="primary-btn d-inline-flex align-items-center"><span class="mr-10">Get Started</span><span class="lnr lnr-arrow-right"></span></a>
+                        <a href="{{ route('home') }}" class="primary-btn d-inline-flex align-items-center"><span class="mr-10">Get Started</span><span class="lnr lnr-arrow-right"></span></a>
                     </div>
                 </div>
             </div>
@@ -284,7 +284,7 @@
                     <div class="story-box">
                         <h6 class="text-uppercase">Od samego początku...</h6>
                         <p>Internet łączy ludzi, którzy spotkają się w realnym świecie. Chcemy być częścią tego wspaniałego świata.</p>
-                        <a href="#" class="primary-btn hover d-inline-flex align-items-center"><span class="mr-10">Get Started</span><span class="lnr lnr-arrow-right"></span></a>
+                        <a href="{{ route('home') }}" class="primary-btn hover d-inline-flex align-items-center"><span class="mr-10">Get Started</span><span class="lnr lnr-arrow-right"></span></a>
                     </div>
                 </div>
             </div>
@@ -310,7 +310,7 @@
                             <div style="position: absolute; left: -5000px;">
                                 <input type="text" name="b_2e0c9d65f6bc223cc7951eab7_6cda572e7f" tabindex="-1" value="">
                             </div>
-                            <button class="primary-btn hover d-inline-flex align-items-center"><span class="mr-10">Get Started</span><span class="lnr lnr-arrow-right"></span></button>
+                            <button class="primary-btn hover d-inline-flex align-items-center"><span class="mr-10">Wyślij</span><span class="lnr lnr-arrow-right"></span></button>
                             <div class="info"></div>
                         </form>
                     </div>
