@@ -12,7 +12,7 @@ $(document).ready(function(){
 	$(".fullscreen").css("height", window_height)
 	$(".fitscreen").css("height", fitscreen);
 
-     
+
      // -------   Active Mobile Menu-----//
 
     $(".menu-bar").on('click', function(e){
@@ -21,7 +21,7 @@ $(document).ready(function(){
         $("span", this).toggleClass("lnr-menu lnr-cross");
         $(".main-menu").addClass('mobile-menu');
     });
-     
+
     $('select').niceSelect();
     $('.img-pop-up').magnificPopup({
         type: 'image',
@@ -56,14 +56,47 @@ $(document).ready(function(){
               $('html, body').animate({
                 scrollTop: $(hash).offset().top - (-10)
             }, 600, function(){
-             
+
                 window.location.hash = hash;
             });
-        } 
+        }
     });
 
     $(document).ready(function() {
-        $('#mc_embed_signup').find('form').ajaxChimp();
-    });      
+        let wrapper = $('#mc_embed_signup');
+        let form = wrapper.find('form');
+        $(form).submit((event) => {
+            event.preventDefault();
+            $.ajax(
+                $(form).attr('action'),
+                {
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    type: form.attr('method'),
+                    data: JSON.stringify({
+                        email: $(form).find('input[name=email]').val(),
+                    }),
+                    success: (response) => {
+                        let info = wrapper.find('.info');
+                        info.text(response.message);
+                        info.attr('style', 'color:green');
+                    },
+                    error: (data) => {
+                        let raw = data.responseText;
+                        let response = JSON.parse(raw);
+                        let info = wrapper.find('.info');
+                        if (data.status == 422)
+                        {
+                            info.text(response.errors.email[0]);
+                        }else {
+                            info.text(response.message);
+
+                        }
+                        info.attr('style', 'color:red');
+                    }
+                });
+        });
+
+    });
 
  });

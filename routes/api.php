@@ -37,3 +37,6 @@ Route::post('/register', 'Auth\ApiController@register');
 
 Route::post('/login', 'Auth\ApiController@login');
 
+Route::post('/subscribe', 'SubscriberController@add')->name('subscribe');
+
+

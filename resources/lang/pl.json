@@ -257,7 +257,9 @@
     "Your voucher: :voucher was released":"Twój bon :voucher został zrealizowany",
     "Voucher was sent.": "Bon został wysłany",
     "Your voucher: :voucher was sent to client :client":"Twój bon :voucher został wysłany do klienta :client",
-    "Contact with Merchant for complete order": "Skontaktuj się z nami w celi dokończenia zamówienia"
+    "Contact with Merchant for complete order": "Skontaktuj się z nami w celi dokończenia zamówienia",
+    "We have sent you a confirmation email": "Wysłaliśmy do Ciebie maila potwierdzającego",
+    "Your email is already subscribed to list": "Twój email istnieje już na liście subscrybentów"
 }
 
 
