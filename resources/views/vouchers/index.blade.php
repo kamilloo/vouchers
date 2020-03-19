@@ -26,7 +26,7 @@
                     <td class="align-middle">{{ $voucher->title }}</td>
                     <td class="align-middle">{{ $voucher->type }}</td>
                     <td class="align-middle">
-                        <img class="img-thumbnail" src="@if($voucher->file){{ asset($voucher->file) }}@else{{ asset('images/placeholder_512_x_512.png') }}@endif" width="80" height="80">
+                        <img class="img-thumbnail" src="@if($voucher->file){{ asset($voucher->file) }}@else{{ asset('images/placeholder_512_x_512.png') }}@endif">
 
                     </td>
                     <td class="align-middle">{{ $voucher->presenter->price() }}</td>

@@ -88,7 +88,7 @@ class VoucherRepository implements IVoucherRepository
 
     protected function replaceLogo(UploadedFile $file)
     {
-        return $file->storePublicly('public/vouchers');
+        return Str::replaceFirst('public', 'storage', $file->storePublicly('public/vouchers'));
     }
 
     /**
@@ -133,7 +133,7 @@ class VoucherRepository implements IVoucherRepository
         $file = $request->file('file-name');
         if (!empty($file))
         {
-            $logo = Str::replaceFirst('public', 'storage', $this->replaceLogo($file));
+            $logo = $this->replaceLogo($file);
             Arr::set($voucher_attributes, 'file', $logo);
         }
         return $voucher_attributes;

@@ -171,7 +171,7 @@ class ShopController extends Controller
      */
     protected function uploadImage(UploadedFile $file)
     {
-        return $file->storePublicly('storage/merchant');
+        return Str::replaceFirst('public', 'storage', $file->storePublicly('public/merchant'));
     }
 
     /**
