@@ -26,7 +26,7 @@
                 @include('vouchers.partials.price-group', ['price' => old('price') ?? $voucher->price])
                 @include('vouchers.partials.service-selection-group', ['product_id' => old('product_id') ?? $voucher->product_id])
                 @include('vouchers.partials.service-package-selection-group', ['product_id' => old('product_id') ?? $voucher->product_id])
-                @include('vouchers.partials.file-group', ['file_src' => $voucher->file])
+                @include('vouchers.partials.file-group', ['file_src' => $voucher->file ? asset($voucher->file) : ''])
                 @include('vouchers.partials.submit', ['label' => __('Save')])
 
             </voucher-form>

@@ -14,6 +14,7 @@ use Illuminate\Database\Connection;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Log\Logger;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Throwable;
 
 class VoucherRepository implements IVoucherRepository
@@ -132,7 +133,7 @@ class VoucherRepository implements IVoucherRepository
         $file = $request->file('file-name');
         if (!empty($file))
         {
-            $logo = $this->replaceLogo($file);
+            $logo = Str::replaceFirst('public', 'storage', $this->replaceLogo($file));
             Arr::set($voucher_attributes, 'file', $logo);
         }
         return $voucher_attributes;
