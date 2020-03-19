@@ -14,6 +14,7 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Arr;
 use App\Models\UserProfile;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 
 class UserManager
 {
@@ -99,7 +100,7 @@ class UserManager
      */
     protected function replaceLogo(UploadedFile $file)
     {
-        return $file->storePublicly('public/logos');
+        return Str::replaceFirst('public', 'storage', $file->storePublicly('public/logos'));
     }
 
     /**

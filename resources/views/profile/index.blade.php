@@ -8,7 +8,7 @@
 
 @section('logo')
     <div class="profile-img">
-        <img src="{{ \Storage::url($guard->user()->profile->logo) }}" alt=""/>
+        <img class="img-fluid" src="@if($guard->user()->profile->logo){{ asset($guard->user()->profile->logo) }}@else{{ asset('images/placeholder_512_x_512.png') }}@endif" alt=""/>
     </div>
 @endsection
 
