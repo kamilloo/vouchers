@@ -14,6 +14,7 @@
                 <th scope="col">#</th>
                 <th scope="col">{{__('Title')}}</th>
                 <th scope="col">{{__('Type')}}</th>
+                <th scope="col">{{__('Sample')}}</th>
                 <th scope="col">{{__('Price')}}&nbsp;w&nbsp;zł</th>
                 <th scope="col">{{__('Action')}}</th>
             </tr>
@@ -24,6 +25,10 @@
                     <th class="align-middle" scope="row">{{ $voucher->id }}</th>
                     <td class="align-middle">{{ $voucher->title }}</td>
                     <td class="align-middle">{{ $voucher->type }}</td>
+                    <td class="align-middle">
+                        <img src="@if($voucher->file){{ asset($voucher->file) }}@else{{ asset('images/placeholder_512_x_512.png') }}@endif" width="80" height="80">
+
+                    </td>
                     <td class="align-middle">{{ $voucher->presenter->price() }}</td>
                     <td class="align-middle">
                     <span class="btn-toolbar" role="toolbar" aria-label="Toolbar for manage voucher">
