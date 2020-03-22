@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Http\Presenters\MerchantPresenter;
 use App\Http\Presenters\OrderPresenter;
+use App\Models\Enums\BackgroundColorType;
 
 class Merchant extends Model
 {
@@ -154,7 +155,8 @@ class Merchant extends Model
 
     public function getBackground():string
     {
-        return $this->shopStyles->background_color;
+
+        return BackgroundColorType::toRgb($this->shopStyles->background_color);
     }
 
     public function getWelcoming():string
