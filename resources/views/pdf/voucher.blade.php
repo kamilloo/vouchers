@@ -110,7 +110,7 @@
 </head>
 <body>
 <div class="content">
-    <h1>{{ $voucher->title  }}</h1>
+{{--    <h1>{{ $voucher->title  }}</h1>--}}
     <div>
         <img height="100" src="{{ $custom_logo ?? asset('checkout/template1/images/img-01.png') }}" alt="Company Logo">
     </div>

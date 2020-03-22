@@ -43,7 +43,7 @@ class VoucherPresenter extends ModelPresenter implements \JsonSerializable, Arra
     {
         if ($this->model->isQuoteType())
         {
-            return "Na dowolny zestaw zabiegów<br>w kwocie {$this->model->price} zł</p>";
+            return "Bon o wartości {$this->model->price} zł</p>";
         }
         if (empty($this->model->product->description))
         {

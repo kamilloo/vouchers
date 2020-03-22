@@ -54,8 +54,9 @@
             <div class="row justify-content-center height align-items-center">
                 <div class="col-lg-8">
                     <div class="banner-content text-center">
-                        <span class="text-white top text-uppercase">Jesteśmy dla Ciebie</span>
                         <h1 class="text-white text-uppercase">Sprzedajemy bony upominkowe</h1>
+                        <h2><span class="text-white top text-uppercase">Jesteśmy dla Ciebie</span></h2>
+
                         <a href="{{ route('home') }}" class="primary-btn d-inline-flex align-items-center"><span class="mr-10">Get Started</span><span class="lnr lnr-arrow-right"></span></a>
                     </div>
                 </div>
@@ -74,7 +75,7 @@
                         </div>
                         <div class="desc">
                             <h6 class="title text-uppercase">Pełna personalizacja</h6>
-                            <p>Dopasuj platformę do swoich potrzeb, wybierz jedną z dostępny templatek lub stwórz swoją stronę.</p>
+                            <p>Dopasuj platformę do swoich potrzeb, wybierz jedną z dostępnych templatek lub stwórz swoją stronę.</p>
                         </div>
                     </div>
                 </div>
@@ -96,7 +97,7 @@
                         </div>
                         <div class="desc">
                             <h6 class="title text-uppercase">Szybka integracja</h6>
-                            <p>Zacznij sprzedawać bony w 5 minut! I ciekaj na pierwszych klientów. </p>
+                            <p>Zacznij sprzedawać bony w 5 minut! I czekaj na pierwszych klientów. </p>
                         </div>
                     </div>
                 </div>
@@ -231,7 +232,7 @@
         <div class="row justify-content-center">
             <div class="col-lg-8">
                 <div class="section-title text-center">
-                    <h3>Co wiebierają nasi klienci</h3>
+                    <h3>Co wybierają nasi klienci</h3>
                     <span class="text-uppercase">Jesteśmy dla Ciebie</span>
                 </div>
             </div>
@@ -255,7 +256,7 @@
                 <div class="thumb" style="background: url(welcome/img/templates/template-3.png);"></div>
                 <div class="caption text-center">
                     <h6 class="text-uppercase">Retro styl</h6>
-                    <p>Strona idealna dla usług stylowych.</p>
+                    <p>Strona idealna dla usług hipsterskich.</p>
                 </div>
             </div>
             <div class="item">
@@ -282,8 +283,8 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="story-box">
-                        <h6 class="text-uppercase">Od samego początku...</h6>
-                        <p>Internet łączy ludzi, którzy spotkają się w realnym świecie. Chcemy być częścią tego wspaniałego świata.</p>
+                        <h6 class="text-uppercase">Od początku...</h6>
+                        <p>Internet łączy ludzi. Chcemy być częścią tego wspaniałego świata.</p>
                         <a href="{{ route('home') }}" class="primary-btn hover d-inline-flex align-items-center"><span class="mr-10">Get Started</span><span class="lnr lnr-arrow-right"></span></a>
                     </div>
                 </div>
