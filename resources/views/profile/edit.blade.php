@@ -2,7 +2,7 @@
 
 
 @section('logo')
-    <file-upload  file-preview-width="200" file-name="avatar" file-src="{{ $guard->user()->profile->avatar }}"></file-upload>
+    <file-upload  file-preview-width="200" file-name="avatar" file-src="{{ asset($guard->user()->profile->avatar) }}"></file-upload>
 @endsection
 
 @section('form.button')
