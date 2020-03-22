@@ -116,10 +116,15 @@
     </div>
     <h1 class="gold">{{ $user_profile->company_name }}</h1>
 
-    <p class="title">{!!  $order->voucher->presenter->title() !!}
+    @if(!$order->voucher->isQuoteType())
     <p class="title">{!!  $order->voucher->title !!}
+    @endif
+
+    <p class="title">{!!  $order->voucher->presenter->title() !!}
 
     <h2>{{ $full_name }}</h2>
+
+
 
     <table class="table">
         <tr>
