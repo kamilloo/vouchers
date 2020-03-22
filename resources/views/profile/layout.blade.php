@@ -19,7 +19,7 @@
                     </h6>
                     <h5 class="proile-rating">{{ __('Homepage:') }}
                         @if(!empty($guard->user()->profile->homepage))
-                            &nbsp;<a href="{{ $guard->user()->profile->homepage }}"><span>{{ $guard->user()->profile->homepage }}</span></a>
+                            &nbsp;<a href="{{ $guard->user()->profile->homepage }}" target="_blank"><span>{{ $guard->user()->profile->homepage }}</span></a>
                         @else
                         &nbsp;<a href="#"><span><i class="fa fa-close"></i></span></a>
                         @endif
