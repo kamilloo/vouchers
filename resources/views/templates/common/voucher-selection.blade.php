@@ -4,7 +4,9 @@
     <div class="plan-selection">
         <div class="plan-data">
             <input v-model="selectedVoucher.id" id="voucher-{{ $voucher->id }}" name="voucher_id" type="radio" class="with-font" value="{{ $voucher->id }}" />
-            <label for="voucher-{{ $voucher->id }}">{{ $voucher->title }}</label>
+            <label for="voucher-{{ $voucher->id }}">
+                {{ $voucher->title }}
+            </label>
 
             <p class="plan-text">
 {{--                {{ __('You can used full quote whatever.') }}--}}
@@ -16,6 +18,9 @@
                     <br>
                 {{ __('Description') }}: {{ $voucher->product->description }}
                 @endif
+            @endif
+            @if($voucher->file)
+                <img class="img-thumbnail" src="{{ asset($voucher->file) }}" width="80">
             @endif
                 <span class="plan-price">{{ $voucher->presenter->price() }} zł</span>
             </p>
