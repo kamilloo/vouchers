@@ -20,6 +20,7 @@
                 @endif
             @endif
             @if($voucher->file)
+                <br>
                 <img class="img-thumbnail" src="{{ asset($voucher->file) }}" width="150">
             @endif
                 <span class="plan-price">{{ $voucher->presenter->price() }} zł</span>
