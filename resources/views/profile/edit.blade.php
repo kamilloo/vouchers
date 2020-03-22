@@ -96,7 +96,7 @@
                         <select class="form-control" id="social_media" name="social_media[{{$iterator}}][type]" >
                             <option value="">{{ __('Select channel') }}</option>
                             @foreach(config('social-media.list') as $social)
-                            <option @if($social == $guard->user()->profile->social_media[$iterator]['type']) selected @endif value="{{ $social }}">{{ $social }}</option>
+                            <option @if(!empty($guard->user()->profile->social_media) &&  \Illuminate\Support\Arr::has($guard->user()->profile->social_media, $iterator.'type') && $social == $guard->user()->profile->social_media[$iterator]['type']) selected @endif value="{{ $social }}">{{ $social }}</option>
                             @endforeach
                         </select>
                     </div>
