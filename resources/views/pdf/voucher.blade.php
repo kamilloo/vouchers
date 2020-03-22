@@ -116,11 +116,10 @@
     </div>
     <h1 class="gold">{{ $user_profile->company_name }}</h1>
 
-    <p>serdecznie zaprasza</p>
-
-    <h2><span class="small">Sz. P.</span> {{ $full_name }}</h2>
-
     <p class="title">{!!  $order->voucher->presenter->title() !!}
+    <p class="title">{!!  $order->voucher->title !!}
+
+    <h2>{{ $full_name }}</h2>
 
     <table class="table">
         <tr>
