@@ -2,7 +2,7 @@
 
 
 @section('logo')
-    <file-upload  file-preview-width="200" file-name="logo" file-src="/storage/logos/7wP5bh7oA2tAANeIztCMvhUtjJQwSPe9J3YAXQTl.jpeg"></file-upload>
+    <file-upload  file-preview-width="200" file-name="avatar" file-src="{{ $guard->user()->profile->avatar }}"></file-upload>
 @endsection
 
 @section('form.button')
@@ -74,7 +74,7 @@
                 <label for="description">{{ __('Description') }}</label>
             </div>
             <div class="col-md-8">
-                <input type="text" id="description" class="form-control" placeholder="{{ __('Description') }}" name="description" value=" {{ $guard->user()->profile->description }}">
+                <textarea type="text" id="description" class="form-control" placeholder="{{ __('Description') }}" name="description" rows="6">{{ $guard->user()->profile->description }}</textarea>
             </div>
         </div>
         <div class="row input-group mb-3">
@@ -90,7 +90,22 @@
                 <label for="social_media">{{ __('Social Media')}}</label>
             </div>
             <div class="col-md-8">
-                <input type="text" id="social_media" class="form-control" placeholder="{{ __('Social Media')}}" name="social_media" value=" {{ $guard->user()->profile->social_media }}">
+                @for($iterator = 0; $iterator < 2; $iterator++)
+                <div class="row">
+                    <div class="col-5">
+                        <select class="form-control" id="social_media" name="social_media[{{$iterator}}][type]" >
+                            <option value="">{{ __('Select channel') }}</option>
+                            @foreach(config('social-media.list') as $social)
+                            <option @if($social == $guard->user()->profile->social_media[$iterator]['type']) selected @endif value="{{ $social }}">{{ $social }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-7">
+                        <input type="text" id="social_media" class="form-control" placeholder="{{ __('Address')}}" name="social_media[{{ $iterator }}][page]" value="{{ $guard->user()->profile->social_media[$iterator]['page'] ?? old("social_media[{$iterator}][page]") }}">
+
+                    </div>
+                </div>
+                @endfor
             </div>
         </div>
     </div>

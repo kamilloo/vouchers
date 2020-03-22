@@ -52,6 +52,8 @@ class UserManager
             'homepage',
         ]);
 
+        Arr::set($profile_attributes, 'social_media', $request->getSocialMediaParam());
+
         $file = $request->file('avatar');
         if (!empty($file))
         {

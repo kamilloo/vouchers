@@ -12,6 +12,7 @@ use Illuminate\Support\Str;
  *
  * @method getBranchesParam
  * @method getSkillsParam
+ * @method getSocialMediaParam
  */
 class ProfileUpdate extends Request
 {
@@ -39,6 +40,9 @@ class ProfileUpdate extends Request
             'skills.*.value' => ['nullable', 'string', 'max:256'],
             'branches.*.key' => ['nullable', 'string', 'max:256'],
             'branches.*.value' => ['nullable', 'string', 'max:256'],
+            'social_media' => ['nullable', 'array',],
+            'social_media.*.type' => ['nullable', 'string', 'max:256'],
+            'social_media.*.page' => ['nullable', 'string', 'max:256'],
         ];
     }
 

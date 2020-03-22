@@ -17,7 +17,25 @@
                     <h6>
                         {{ $guard->user()->profile->company_name }}
                     </h6>
-                    <p class="proile-rating">{{ __('RANKINGS:') }}&nbsp;<span>{{ $guard->user()->profile->ranking }}/10</span></p>
+                    <h5 class="proile-rating">{{ __('Homepage:') }}
+                        @if(!empty($guard->user()->profile->homepage))
+                            &nbsp;<a href="{{ $guard->user()->profile->homepage }}"><span>{{ $guard->user()->profile->homepage }}</span></a>
+                        @else
+                        &nbsp;<a href="#"><span><i class="fa fa-close"></i></span></a>
+                        @endif
+                    </h5>
+                    <h5 class="proile-rating">{{ __('Social Media:') }}
+                    <div class="footer-social d-inline">
+                        @if(!empty($guard->user()->profile->social_media) && count($guard->user()->profile->social_media))
+                        @foreach($guard->user()->profile->social_media as $social_media)
+                            <a href="{{ $social_media['page'] }}"><i class="fa fa-{{ $social_media['type'] }}"></i></a>
+                        @endforeach
+                    @else
+                        <a href="#"><i class="fa fa-close"></i></a>
+                    @endif
+                    </div>
+                    </h5>
+
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">{{ __('About Me') }}</a>

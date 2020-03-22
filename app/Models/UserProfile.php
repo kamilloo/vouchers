@@ -2,8 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\EntitySchemas\SocialMedia;
 use App\Models\User;
 
+/**
+ * @property SocialMedia[] $social_media
+ *
+ */
 class UserProfile extends Model
 {
     protected $primaryKey = 'user_id';
@@ -17,7 +22,7 @@ class UserProfile extends Model
      * @var array
      */
     protected $casts = [
-        'social-media' => 'array',
+        'social_media' => 'array',
     ];
 
     protected $guarded = [];

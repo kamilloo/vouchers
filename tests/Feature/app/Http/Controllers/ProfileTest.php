@@ -247,6 +247,31 @@ class ProfileTest extends TestCase
     /**
      * @test
      */
+    public function update_store_social_media()
+    {
+        $this->createUserAndBe();
+        $social_media = [
+            [
+                'page' => 'http://facebook.com',
+                'type' => 'facebook',
+            ],
+        ];
+
+        $incoming_data = [
+            'social_media' => $social_media,
+        ];
+
+        $this->post(route('profile.update'), $incoming_data)
+            ->assertRedirect(route('profile.index'))
+            ->assertSessionHas('success');
+
+        $profile = $this->user->profile->fresh();
+        $this->assertSame($social_media, $profile->social_media);
+    }
+
+    /**
+     * @test
+     */
     public function update_avatar_was_stored()
     {
         $this->createUserAndBe();
