@@ -3,7 +3,7 @@
 @section('content')
     <div class="contact1"
          @if($custom_background_image)style="background-image:url({{  asset($custom_background_image) }});"
-         @else style="background-image: url('template2/images/bg-01.jpg');" @endif>
+         @else style="background-image: url('/checkout/template2/images/bg-01.jpg');" @endif>
         <div class="outline-contact1"
              @if($custom_background) style="background: {{ $custom_background }};" @endif>
             <div class="justify-content-center" style="width: 100%;">
@@ -19,7 +19,7 @@
                         @if($custom_logo)
                             <img class="img-fluid" src="{{ asset($custom_logo) }}">
                         @else
-                            <img class="img-fluid" src="template1/images/img-01.png" alt="logo">
+                            <img class="img-fluid" src="/checkout/template1/images/img-01.png" alt="logo">
                         @endif
 
 

@@ -5,7 +5,7 @@
 
     <div class="contact100"
          @if($custom_background_image)style="background-image:url({{  asset($custom_background_image) }});"
-         @else style="background-image: url('template2/images/bg-01.jpg');" @endif>
+         @else style="background-image: url('/checkout/template2/images/bg-01.jpg');" @endif>
         <div class="container-contact100"
              @if($custom_background) style="background: {{ $custom_background }};" @endif>
             <div class="wrap-contact100">

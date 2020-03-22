@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="bg-contact3" @if($custom_background_image)style="background-image:url({{  asset($custom_background_image) }});" @else style="background-image: url('template3/images/bg-01.jpg');" @endif>
+<div class="bg-contact3" @if($custom_background_image)style="background-image:url({{  asset($custom_background_image) }});" @else style="background-image: url('/checkout/template3/images/bg-01.jpg');" @endif>
     <div class="container-contact3" @if($custom_background) style="background: {{ $custom_background }};" @endif>
         <div class="row justify-content-center" style="width: 100%">
             <div class="col-md-6">
