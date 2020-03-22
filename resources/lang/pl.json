@@ -263,7 +263,11 @@
     "Picture": "Zdjęcie",
     "Image": "Obrazek",
     "Sample": "Przykład",
-    "Select channel": "Kanał"
+    "Select channel": "Kanał",
+    "Type": "Typ",
+    "Quote": "kwotowy",
+    "Service": "usługowy",
+    "Service Package":  "pakietowy"
 }
 
 

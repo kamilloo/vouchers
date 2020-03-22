@@ -24,7 +24,7 @@
                 <tr>
                     <th class="align-middle" scope="row">{{ $voucher->id }}</th>
                     <td class="align-middle">{{ $voucher->title }}</td>
-                    <td class="align-middle">{{ $voucher->type }}</td>
+                    <td class="align-middle">{{ $voucher->presenter->type() }}</td>
                     <td class="align-middle">
                         <img class="img-thumbnail" width="80" src="@if($voucher->file){{ asset($voucher->file) }}@else{{ asset('images/placeholder_512_x_512.png') }}@endif">
 

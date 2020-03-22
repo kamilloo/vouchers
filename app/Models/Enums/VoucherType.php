@@ -21,15 +21,15 @@ class VoucherType
         return [
             [
                 'value' => self::QUOTE,
-                'label' => 'Quote',
+                'label' => __('Quote'),
             ],
             [
                 'value' => self::SERVICE,
-                'label' => 'Service',
+                'label' => __('Service'),
             ],
             [
                 'value' => self::SERVICE_PACKAGE,
-                'label' => 'Service Package',
+                'label' => __('Service Package'),
             ],
         ];
     }
