@@ -161,4 +161,14 @@ class Merchant extends Model
     {
         return $this->shopStyles->welcoming;
     }
+
+    public function hasActiveBackground():bool
+    {
+        return !empty($this->shopStyles->background_color);
+    }
+
+    public function hasActiveWelcoming():bool
+    {
+        return !empty($this->shopStyles->welcoming);
+    }
 }

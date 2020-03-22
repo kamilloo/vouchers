@@ -42,7 +42,7 @@ class TemplateViewModel implements Arrayable
 
     protected function welcoming(): ?string
     {
-        if ($this->merchant->hasShopStyles())
+        if ($this->merchant->hasShopStyles() && $this->merchant->hasActiveWelcoming())
         {
             return $this->merchant->getWelcoming();
         }
@@ -52,7 +52,7 @@ class TemplateViewModel implements Arrayable
 
     protected function background(): ?string
     {
-        if ($this->merchant->hasShopStyles())
+        if ($this->merchant->hasShopStyles() && $this->merchant->hasActiveBackground())
         {
             return $this->merchant->getBackground();
         }
