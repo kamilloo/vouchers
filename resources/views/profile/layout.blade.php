@@ -28,7 +28,7 @@
                     <div class="footer-social d-inline">
                         @if(!empty($guard->user()->profile->social_media) && count($guard->user()->profile->social_media))
                         @foreach($guard->user()->profile->social_media as $social_media)
-                            <a href="{{ $social_media['page'] }}"><i class="fa fa-{{ $social_media['type'] }}"></i></a>
+                            <a href="{{ $social_media['page'] }}" target="_blank"><i class="fa fa-{{ $social_media['type'] }}"></i></a>
                         @endforeach
                     @else
                         <a href="#"><i class="fa fa-close"></i></a>
