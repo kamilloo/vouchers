@@ -9,7 +9,7 @@
                         <h4 class="card-title">
                             <a href="#">{{ myTemplate.title }}</a>
                         </h4>
-                        <h5>${{ myTemplate.price }}</h5>
+                        <h5>{{ myTemplate.price }} zł</h5>
                         <p class="card-text">{{ myTemplate.description }}</p>
                     </div>
                     <div class="card-footer">

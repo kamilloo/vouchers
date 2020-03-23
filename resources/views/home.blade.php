@@ -16,28 +16,33 @@
     <div class="col-md-6 pb-1">
             <div class="card">
                 <div class="card-header">{{ __('Your Payment') }}</div>
+                    @if(!$payments->count())
                     <img class="card-img-top" src="{{ asset('images/payments.png') }}">
+                    @endif
                     <div class="card-body">
-                        <h5 class="card-title">{{ __('More Details') }}</h5>
-                        <table class="table  table-bordered table-hover">
-                            <thead class="thead-light">
-                            <tr>
-                                <th scope="col">{{ __('Client') }}</th>
-                                <th scope="col">{{ __('Amount')}}&nbsp;w&nbsp;zł</th>
-                                <th scope="col">{{ __('Paid At')}}</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($payments as $payment)
+                        @if($payments->count())
+                            <table class="table  table-bordered table-hover">
+                                <thead class="thead-light">
                                 <tr>
-                                    <td class="align-middle">{{ $payment->order->presenter->fullName() }}</td>
-                                    <td>{{ $payment->presenter->amount() }}</td>
-                                    <td>{{ $payment->presenter->paid_at() }}</td>
+                                    <th scope="col">{{ __('Client') }}</th>
+                                    <th scope="col">{{ __('Amount')}}&nbsp;w&nbsp;zł</th>
+                                    <th scope="col">{{ __('Paid At')}}</th>
                                 </tr>
-                            @endforeach
-                            </tbody>
+                                </thead>
+                                <tbody>
+                                @foreach($payments as $payment)
+                                    <tr>
+                                        <td class="align-middle">{{ $payment->order->presenter->fullName() }}</td>
+                                        <td>{{ $payment->presenter->amount() }}</td>
+                                        <td>{{ $payment->presenter->paid_at() }}</td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
 
-                        </table>
+                            </table>
+                        @else
+                            <h5 class="card-title">{{ __('No Payments') }}</h5>
+                        @endif
                     </div>
             </div>
         </div>
@@ -65,28 +70,33 @@
     <div class="col-md-6 pb-1">
             <div class="card">
                 <div class="card-header">{{ __('Your Sales') }}</div>
+                @if(!$orders->count())
                     <img class="card-img-top" src="{{ asset('images/clients.png') }}">
+                @endif
                     <div class="card-body">
-                        <h5 class="card-title">{{ __('More Details') }}</h5>
-                        <table class="table  table-bordered table-hover">
-                            <thead>
-                            <tr>
-                                <th scope="col">{{ __('Client') }}</th>
-                                <th scope="col">{{ __('Price')}}</th>
-                                <th scope="col">{{ __('Status')}}</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($orders as $order)
+                        @if($orders->count())
+                            <table class="table  table-bordered table-hover">
+                                <thead>
                                 <tr>
-                                    <td class="align-middle">{{ $order->presenter->fullName() }}</td>
-                                    <td class="align-middle">{{ $order->presenter->price() }}</td>
-                                    <td class="align-middle">{{ $order->presenter->status() }}</td>
+                                    <th scope="col">{{ __('Client') }}</th>
+                                    <th scope="col">{{ __('Price')}}</th>
+                                    <th scope="col">{{ __('Status')}}</th>
                                 </tr>
-                            @endforeach
-                            </tbody>
+                                </thead>
+                                <tbody>
+                                @foreach($orders as $order)
+                                    <tr>
+                                        <td class="align-middle">{{ $order->presenter->fullName() }}</td>
+                                        <td class="align-middle">{{ $order->presenter->price() }}</td>
+                                        <td class="align-middle">{{ $order->presenter->status() }}</td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
 
-                        </table>
+                            </table>
+                        @else
+                            <h5 class="card-title">{{ __('No Orders') }}</h5>
+                        @endif
                     </div>
             </div>
         </div>

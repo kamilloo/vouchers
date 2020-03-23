@@ -9,6 +9,7 @@ class BackgroundColorType
     const BLUE = 'blue';
     const GREEN = 'green';
     const BLACK = 'black';
+    const NO_BACKGROUND = 'none';
 
     public static function all(): array
     {
@@ -20,10 +21,23 @@ class BackgroundColorType
     {
         return [
             self::WHITE => 'rgba(255,255,255,0.8)',
-            self::RED => 'rgba(255,0,0,0.8)',
-            self::GREEN => 'rgba(0,255,0,0.8)',
-            self::BLUE => 'rgba(0,0,255,0.8)',
+            self::RED => 'rgba(204,0,0,0.8)',
+            self::GREEN => 'rgba(0,153,51,0.8)',
+            self::BLUE => 'rgba(51,153,255,0.8)',
             self::BLACK => 'rgba(0,0,0,0.8)',
+            self::NO_BACKGROUND => 'none',
+        ];
+    }
+
+    public static function description():array
+    {
+        return [
+            self::WHITE => __('white'),
+            self::RED => __('red'),
+            self::GREEN => __('green'),
+            self::BLUE => __('blue'),
+            self::BLACK => __('black'),
+            self::NO_BACKGROUND => __('colorless'),
         ];
     }
 

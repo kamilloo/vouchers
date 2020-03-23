@@ -2,7 +2,7 @@
     <div class="form-group" >
         <slot name="label"></slot>
         <select class="form-control" :id="name" :name="name" v-model="product" :dusk="name">
-            <option value="">Select {{ label }}</option>
+            <option value="">Wybierz {{ label }}</option>
             <option v-for="product in products" :value="product.id">{{ product.title }}</option>
         </select>
         <slot name="error"></slot>

@@ -42,9 +42,11 @@
                         <div class="form-group">
                             <label for="background-color">{{ __('Background Color') }}</label>
                             <select class="form-control" id="background-color" aria-describedby="background-color-help" name="background_color">
-                                <option value="">--</option>
+                                <option value="">{{ __('default') }}</option>
                             @foreach(\App\Models\Enums\BackgroundColorType::all() as $background)
-                                <option value="{{ $background }}" @if($shop_style->background_color == $background) selected @endif>{{ $background }}</option>
+                                <option value="{{ $background }}" @if($shop_style->background_color == $background) selected @endif>
+                                    {{ \App\Models\Enums\BackgroundColorType::description()[$background] }}
+                                </option>
                                 @endforeach
                             </select>
                             <small id="backgroudd-color-help" class="form-text text-muted">{{ __('You can choose page background color') }}.</small>

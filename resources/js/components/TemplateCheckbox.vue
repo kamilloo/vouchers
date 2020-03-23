@@ -8,7 +8,7 @@
                 <h4 class="card-title">
                     {{ template.title }}
                 </h4>
-                <h5>${{ template.price }}</h5>
+                <h5>{{ template.price }} zł</h5>
                 <p class="card-text">{{ template.description }}</p>
             </div>
             <div class="card-footer">

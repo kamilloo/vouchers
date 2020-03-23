@@ -3,7 +3,7 @@
         <slot name="label"></slot>
         <select class="form-control" id="type" name="type" v-model="inputValue"  @change="$emit('change', $event.target.value)">
 
-            <option value="">Select Type</option>
+            <option value="">Wybierz typ</option>
             <option v-for="(type) in voucherTypes" :value="type.value" >{{ type.label }}</option>
         </select>
         <slot name="error"></slot>

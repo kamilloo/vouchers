@@ -6,8 +6,8 @@
         </div>
         <div class="form-group col-6 tooltip1">
             <button type="button" @mouseout="outFunc" @click="copyShopLink" class="btn btn-primary mb-2">
-                <span class="tooltiptext" ref="myTooltip">Copy to clipboard</span>
-                Copy link
+                <span class="tooltiptext" ref="myTooltip">Skopiuj do schowka</span>
+                Kopiuj adres
             </button>
 
         </div>
@@ -35,11 +35,11 @@
                 document.execCommand("copy");
 
                 var tooltip = this.$refs.myTooltip;
-                tooltip.innerHTML = "Copied: <br>" + copyText.value;
+                tooltip.innerHTML = "Skopiowane: <br>" + copyText.value;
             },
             outFunc() {
                 var tooltip = this.$refs.myTooltip;
-                tooltip.innerHTML = "Copy to clipboard";
+                tooltip.innerHTML = "Skopiuj do schowka";
             }
         }
     }

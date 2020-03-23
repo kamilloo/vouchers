@@ -42,14 +42,19 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ route('services.index') }}">{{ __('Services') }}</a>
-                                <a class="dropdown-item" href="{{ route('service-categories.index') }}">{{ __('Service Categories') }}</a>
                                 <a class="dropdown-item" href="{{ route('service-packages.index') }}">{{ __('Service Packages') }}</a>
+                                <a class="dropdown-item" href="{{ route('service-categories.index') }}">{{ __('Service Categories') }}</a>
                             </div>
                         </li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('shop.index') }}">{{ __('Shop') }}</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('payments.index') }}">{{ __('Payments') }}</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('orders.index') }}">{{ __('Orders') }}</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('home') }}">{{ __('Home') }}</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link font-weight-bold" target="_blank" href="{{ auth()->user()->merchant->presenter->shopLink() }}">
+                                {{ __('My Shop') }}
+                            </a>
+                        </li>
                     </ul>
                     @endauth
                     <!-- Right Side Of Navbar -->

@@ -2208,11 +2208,11 @@ __webpack_require__.r(__webpack_exports__);
 
       document.execCommand("copy");
       var tooltip = this.$refs.myTooltip;
-      tooltip.innerHTML = "Copied: <br>" + copyText.value;
+      tooltip.innerHTML = "Skopiowane: <br>" + copyText.value;
     },
     outFunc: function outFunc() {
       var tooltip = this.$refs.myTooltip;
-      tooltip.innerHTML = "Copy to clipboard";
+      tooltip.innerHTML = "Skopiuj do schowka";
     }
   }
 });
@@ -46482,7 +46482,7 @@ var render = function() {
         },
         [
           _c("option", { attrs: { value: "" } }, [
-            _vm._v("Select " + _vm._s(_vm.label))
+            _vm._v("Wybierz " + _vm._s(_vm.label))
           ]),
           _vm._v(" "),
           _vm._l(_vm.products, function(product) {
@@ -46785,7 +46785,7 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("span", { staticClass: "upload-caption" }, [
-                _vm._v(_vm._s(_vm.hasImage ? "Replace Photo" : "Upload Photo"))
+                _vm._v(_vm._s(_vm.hasImage ? "Zmień obrazek" : "Dodaj obrazek"))
               ])
             ]
           )
@@ -46837,7 +46837,7 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _c("h5", [_vm._v("$" + _vm._s(_vm.myTemplate.price))]),
+            _c("h5", [_vm._v(_vm._s(_vm.myTemplate.price) + " zł")]),
             _vm._v(" "),
             _c("p", { staticClass: "card-text" }, [
               _vm._v(_vm._s(_vm.myTemplate.description))
@@ -46919,9 +46919,9 @@ var render = function() {
         },
         [
           _c("span", { ref: "myTooltip", staticClass: "tooltiptext" }, [
-            _vm._v("Copy to clipboard")
+            _vm._v("Skopiuj do schowka")
           ]),
-          _vm._v("\n            Copy link\n        ")
+          _vm._v("\n            Kopiuj adres\n        ")
         ]
       )
     ])
@@ -47011,7 +47011,7 @@ var render = function() {
           )
         ]),
         _vm._v(" "),
-        _c("h5", [_vm._v("$" + _vm._s(_vm.template.price))]),
+        _c("h5", [_vm._v(_vm._s(_vm.template.price) + " zł")]),
         _vm._v(" "),
         _c("p", { staticClass: "card-text" }, [
           _vm._v(_vm._s(_vm.template.description))
@@ -47167,7 +47167,7 @@ var render = function() {
           }
         },
         [
-          _c("option", { attrs: { value: "" } }, [_vm._v("Select Type")]),
+          _c("option", { attrs: { value: "" } }, [_vm._v("Wybierz typ")]),
           _vm._v(" "),
           _vm._l(_vm.voucherTypes, function(type) {
             return _c("option", { domProps: { value: type.value } }, [
