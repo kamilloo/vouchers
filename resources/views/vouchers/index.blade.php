@@ -12,7 +12,7 @@
             <thead class="thead-light">
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">{{__('Title')}}</th>
+                <th scope="col">{{__('Voucher')}}</th>
                 <th scope="col">{{__('Type')}}</th>
                 <th scope="col">{{__('Sample')}}</th>
                 <th scope="col">{{__('Price')}}&nbsp;w&nbsp;zł</th>
@@ -23,8 +23,15 @@
             @foreach($vouchers as $voucher)
                 <tr>
                     <th class="align-middle" scope="row">{{ $voucher->id }}</th>
-                    <td class="align-middle">{{ $voucher->title }}</td>
-                    <td class="align-middle">{{ $voucher->presenter->type() }}</td>
+                    <td class="align-middle">
+                        {!! $voucher->presenter->title() !!}
+                        @if($voucher->description)
+                        <br>({{ $voucher->description }})
+                        @endif
+                    </td>
+                    <td class="align-middle">
+                        {{ $voucher->presenter->type() }}
+                    </td>
                     <td class="align-middle">
                         <img class="img-thumbnail" width="80" src="@if($voucher->file){{ asset($voucher->file) }}@else{{ asset('images/placeholder_512_x_512.png') }}@endif">
 

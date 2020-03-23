@@ -57,7 +57,8 @@ const app = new Vue({
         translate: {
             wishList: "Lista życzeń",
             total: "Całość",
-        }
+        },
+        voucherType: ''
     },
     methods :{
         changeValue(value) {

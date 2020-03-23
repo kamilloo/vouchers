@@ -1,7 +1,7 @@
-<div slot="title" class="form-group">
-    <label for="title">{{ __('Title') }}</label>
-    <input type="text" class="form-control" id="title" name="title" dusk="title" placeholder="{{ __('Title') }}" value="{{ $title }}">
-    @if($errors->first('title'))
-        <span class="text-danger">{{ $errors->first('title') }}</span>
+<div slot="description" class="form-group">
+    <label for="description">{{ __('Extra Description') }}</label>
+    <input type="text" class="form-control" id="description" name="description" dusk="description" placeholder="{{ __('Extra Description') }}" value="{{ $description }}">
+    @if($errors->first('description'))
+        <span class="text-danger">{{ $errors->first('description') }}</span>
     @endif
 </div>

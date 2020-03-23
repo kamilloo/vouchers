@@ -10,7 +10,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 abstract class Model extends VendorModel
 {
-    protected $guarded = [''];
+    protected $guarded = [];
 
     public function scopeMine(Builder $query): Builder
     {

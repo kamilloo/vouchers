@@ -12,6 +12,7 @@ use App\Models\User;
 use App\Models\Voucher;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\Request;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -40,7 +41,7 @@ class VoucherControllerTest extends TestCase
     {
         parent::setUp();
         $this->file_factory = UploadedFile::fake();
-        $this->file = $this->file_factory->image('png');
+        $this->file = $this->file_factory->image('png.png');
         $this->createUserAndBe();
 
     }
@@ -89,7 +90,7 @@ class VoucherControllerTest extends TestCase
         $service = $this->createService();
 
         $incoming_data = [
-            'title' => 'title',
+            'description' => 'description',
             'type' => VoucherType::SERVICE,
             'product_id' => $service->id,
         ];
@@ -124,9 +125,10 @@ class VoucherControllerTest extends TestCase
 
         $voucher = Voucher::latest()->first();
 
-        $this->assertContains('public/vouchers', $voucher->file);
+        $this->assertContains('storage/vouchers', $voucher->file);
+        $file_path = Str::replaceFirst('storage','public', $voucher->file);
 
-        Storage::assertExists($voucher->file);
+        Storage::assertExists(Storage::disk()->path($file_path));
     }
 
     /**
@@ -136,7 +138,7 @@ class VoucherControllerTest extends TestCase
     {
         $product = $this->createServicePackage();
         $incoming_data = [
-            'title' => 'title',
+            'description' => 'description',
             'type' => VoucherType::SERVICE_PACKAGE,
             'product_id' => $product->id,
         ];
@@ -200,7 +202,7 @@ class VoucherControllerTest extends TestCase
            'merchant_id' => $this->createMerchant()->id
         ]);
         $incoming_data = [
-            'title' => 'title',
+            'description' => 'description',
             'type' => VoucherType::SERVICE,
             'product_id' => $product->id
         ];

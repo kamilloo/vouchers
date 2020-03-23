@@ -266,9 +266,9 @@
     "Sample": "Przykład",
     "Select channel": "Kanał",
     "Type": "Typ",
-    "Quote": "kwotowy",
-    "Service": "usługowy",
-    "Service Package":  "pakietowy",
+    "Quote": "Kwotowy",
+    "Service": "Usługowy",
+    "Service Package":  "Pakietowy",
     "white": "biały",
     "red": "czerwony",
     "green": "zielony",
@@ -278,7 +278,9 @@
     "colorless": "przeźroczyste",
     "No Payments": "Brak płatności",
     "No Clients": "Brak klientów",
-    "My Shop": "Mój sklep"
+    "My Shop": "Mój sklep",
+    "Extra Description": "Dodatkowy opis",
+    "Voucher on": "Bon na"
 }
 
 

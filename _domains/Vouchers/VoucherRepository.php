@@ -126,7 +126,7 @@ class VoucherRepository implements IVoucherRepository
     function getBaseVoucherParams(VoucherStore $request): array
     {
         $voucher_attributes = [
-            'title' => $request->getTitleParam(),
+            'description' => $request->getDescriptionParam(),
             'type' => $request->getTypeParam(),
             'price' => $request->getPriceParam(),
         ];

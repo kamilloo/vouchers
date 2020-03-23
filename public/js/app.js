@@ -2370,6 +2370,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "VoucherForm",
   data: function data() {
@@ -47068,8 +47069,6 @@ var render = function() {
       _vm._v(" "),
       _vm._t("csrf"),
       _vm._v(" "),
-      _vm._t("title"),
-      _vm._v(" "),
       _c(
         "voucher-type-select",
         {
@@ -47096,6 +47095,8 @@ var render = function() {
       _vm.activeService ? _c("div", [_vm._t("service")], 2) : _vm._e(),
       _vm._v(" "),
       _vm.activeServicePackage ? _c("div", [_vm._t("package")], 2) : _vm._e(),
+      _vm._v(" "),
+      _vm._t("description"),
       _vm._v(" "),
       _vm._t("file"),
       _vm._v(" "),
@@ -59387,7 +59388,8 @@ var app = new Vue({
     translate: {
       wishList: "Lista życzeń",
       total: "Całość"
-    }
+    },
+    voucherType: ''
   },
   methods: {
     changeValue: function changeValue(value) {

@@ -20,7 +20,7 @@
                     <div slot="csrf">
                         @csrf
                     </div>
-                    @include('vouchers.partials.title-group', ['title' => old('title') ])
+                    @include('vouchers.partials.title-group', ['description' => old('description') ])
                     @include('vouchers.partials.type-group')
                     @include('vouchers.partials.price-group', ['price' => old('price')])
                     @include('vouchers.partials.service-selection-group', ['product_id' => old('product_id')])

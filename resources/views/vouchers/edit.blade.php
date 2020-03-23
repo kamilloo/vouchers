@@ -21,7 +21,8 @@
                 <div slot="csrf">
                     @csrf
                 </div>
-                @include('vouchers.partials.title-group', ['title' => old('title') ?? $voucher->title ])
+                @include('vouchers.partials.title-group', ['description' => old('description') ?? $voucher->description ])
+
                 @include('vouchers.partials.type-group')
                 @include('vouchers.partials.price-group', ['price' => old('price') ?? $voucher->price])
                 @include('vouchers.partials.service-selection-group', ['product_id' => old('product_id') ?? $voucher->product_id])

@@ -2,7 +2,6 @@
     <form method="post" :action="action" enctype="multipart/form-data" role="form">
         <slot name="method"/>
         <slot name="csrf"/>
-        <slot name="title"/>
         <voucher-type-select :voucherTypes="voucherTypes" @change="changeVoucherType" v-model="voucherType">
                 <slot name="type-label" slot="label"/>
                 <slot name="type-error" slot="error"/>
@@ -16,6 +15,8 @@
         <div v-if="activeServicePackage">
             <slot name="package"/>
         </div>
+        <slot name="description"/>
+
         <slot name="file"/>
         <slot name="submit"/>
     </form>

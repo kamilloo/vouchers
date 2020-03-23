@@ -9,7 +9,7 @@ use Illuminate\Validation\Rule;
 /**
  * Class VoucherStore
  * @package App\Http\Requests
- * @method getTitleParam
+ * @method getDescriptionParam
  * @method getTypeParam
  * @method getPriceParam
  * @method getProductIdParam
@@ -24,7 +24,7 @@ class VoucherStore extends Request
     public function rules()
     {
         return [
-            'title' => ['required', 'string', 'max:256'],
+            'description' => ['nullable', 'string', 'max:256'],
             'type' => ['required', Rule::in(VoucherType::all())],
             'price' => ['nullable', Rule::requiredIf($this->isQuoteVoucher()), 'numeric'],
             'product_id' => ['nullable', Rule::requiredIf($this->isProductVoucher()), 'numeric'],
