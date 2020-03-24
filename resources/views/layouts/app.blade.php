@@ -72,7 +72,7 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    <img class="img-thumbnail rounded-circle" width="45" height="45" src="@if(Auth::user()->profile->avatar){{ asset(Auth::user()->profile->avatar) }}@else{{ asset('images/placeholder_512_x_512.png') }}@endif" alt=""/>
+                                    <img class="rounded-circle" width="40" height="40" src="@if(Auth::user()->profile->avatar){{ asset(Auth::user()->profile->avatar) }}@else{{ asset('images/placeholder_512_x_512.png') }}@endif" alt=""/>
                                     <span class="caret"></span>
                                 </a>
 
