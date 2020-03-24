@@ -52,10 +52,12 @@
                         </div>
 
                         <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
+                            <div class="col-lg-8 offset-lg-4 col-sm-12">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Login') }}
                                 </button>
+                                &nbsp;{{ __('or') }}&nbsp;
+                                <a class="btn btn-light" href="{{ route('register') }}">{{ __('Register') }}</a>
 
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
