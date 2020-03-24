@@ -33,6 +33,7 @@ Vue.component('shop-input', require('./components/ShopInput.vue').default);
 Vue.component('voucher-type-select', require('./components/VoucherTypeSelect.vue').default);
 Vue.component('add-voucher-service-select', require('./components/AddVoucherServiceSelect.vue').default);
 Vue.component('voucher-form', require('./components/VoucherForm.vue').default);
+Vue.component('checkout-voucher-option', require('./components/CheckoutVoucherOption.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -58,7 +59,8 @@ const app = new Vue({
             wishList: "Lista życzeń",
             total: "Całość",
         },
-        voucherType: ''
+        voucherType: '',
+        voucherTypes: ''
     },
     methods :{
         changeValue(value) {
@@ -66,6 +68,9 @@ const app = new Vue({
         },
         colsoling(value){
             console.log(value)
+        },
+        changeVoucherType(voucherType){
+            this.voucherType = voucherType;
         }
     }
 });
