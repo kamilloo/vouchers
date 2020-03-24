@@ -95,7 +95,7 @@
 
                             </table>
                         @else
-                            <h5 class="card-title">{{ __('No Orders') }}</h5>
+                            <h5 class="card-title">{{ __('No Clients') }}</h5>
                         @endif
                     </div>
             </div>
