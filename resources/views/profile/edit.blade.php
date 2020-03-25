@@ -2,7 +2,7 @@
 
 
 @section('logo')
-    <file-upload  file-preview-width="200" file-name="avatar" file-src="{{ asset($guard->user()->profile->avatar) }}"></file-upload>
+    <file-upload  file-preview-width="200" file-name="avatar" file-src="{{ $guard->user()->profile->presenter->avatar() }}"></file-upload>
 @endsection
 
 @section('form.button')
@@ -74,7 +74,13 @@
                 <label for="description">{{ __('Description') }}</label>
             </div>
             <div class="col-md-8">
-                <textarea type="text" id="description" class="form-control" placeholder="{{ __('Description') }}" name="description" rows="6">{{ $guard->user()->profile->description }}</textarea>
+                    <textarea-with-char-counter
+                        value="{{ $guard->user()->profile->description }}"
+                        name="description"
+                        placeholder="{{ __('Description') }}"
+                        max-length-text-helper="{{ __('Max length:') }}"
+                        left-text-helper="{{ __('Left:') }}"
+                    ></textarea-with-char-counter>
             </div>
         </div>
         <div class="row input-group mb-3">
@@ -96,7 +102,7 @@
                         <select class="form-control" id="social_media" name="social_media[{{$iterator}}][type]" >
                             <option value="">{{ __('Select channel') }}</option>
                             @foreach(config('social-media.list') as $social)
-                            <option @if(!empty($guard->user()->profile->social_media) &&  \Illuminate\Support\Arr::has($guard->user()->profile->social_media, $iterator.'type') && $social == $guard->user()->profile->social_media[$iterator]['type']) selected @endif value="{{ $social }}">{{ $social }}</option>
+                            <option @if(!empty($guard->user()->profile->social_media) &&  \Illuminate\Support\Arr::has($guard->user()->profile->social_media, $iterator.'.type') && $social == $guard->user()->profile->social_media[$iterator]['type']) selected @endif value="{{ $social }}">{{ $social }}</option>
                             @endforeach
                         </select>
                     </div>

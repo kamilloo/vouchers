@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Http\Presenters\OrderPresenter;
+use App\Http\Presenters\UserProfilePresenter;
 use App\Models\EntitySchemas\SocialMedia;
 use App\Models\User;
 
@@ -30,5 +32,13 @@ class UserProfile extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * @return UserProfilePresenter
+     */
+    public function getPresenterAttribute(): UserProfilePresenter
+    {
+        return new UserProfilePresenter($this);
     }
 }

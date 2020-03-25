@@ -1,6 +1,6 @@
 <template>
     <div id="image-uploader" class="text-center">
-        <img v-show="!hasImage && fileSrc" :src="fileSrc" :width="filePreviewWidth">
+        <img v-show="!hasImage && fileSrc" :src="fileSrc" :width="filePreviewWidth" class="rounded-circle">
 
         <image-uploader
                 :preview="true"

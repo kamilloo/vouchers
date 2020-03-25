@@ -47,7 +47,7 @@
     "Voucher will deliver to :recipient by Post": ":recipient otrzyma bon pocztą",
     "Waiting for payment confirmation.": "Oczekujemy na potwierdzenie płatności.",
     "On": "na",
-    "Your order was placed.": "Zamówienie zostało złozone.",
+    "Your order was placed.": "Zamówienie zostało złożone.",
     "You bought voucher successful.": "Transakcja zakończona sukcesem",
     "You bought voucher failed.": "Transakcja nieudana",
     "You can make order again": "Możesz złożyć nowe zamówienie",
@@ -282,7 +282,13 @@
     "Extra Description": "Dodatkowy opis",
     "Voucher on": "Bon na",
     "Select you voucher type": "Wybierz typ bonu",
-    "or": "lub"
+    "or": "lub",
+    "Max length:": "Maksymalna liczba znaków:",
+    "Left:": "Pozostało:",
+    "Add branch and press enter": "Dodaj branżę i potwierdź enter",
+    "Add skill and press enter":"Dodaj umiejętność i potwierdź enter",
+    "Add branch": "Dodaj branżę",
+    "Add skill":"Dodaj umiejętność"
 }
 
 
