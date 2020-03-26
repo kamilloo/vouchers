@@ -3,16 +3,16 @@
 namespace App\Http\Requests;
 
 use App\Models\Enums\BackgroundColorType;
+use App\Models\Enums\DeliveryType;
 use App\Models\Enums\VoucherType;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
 /**
  *
- *
- * @method getExpiryAfterParam
+ * @method getDeliveryParam
  */
-class ShopSettings extends Request
+class ShopDeliverySetting extends Request
 {
     /*
      * Get the validation rules that apply to the request.
@@ -22,7 +22,10 @@ class ShopSettings extends Request
     public function rules()
     {
         return [
-            'expiry_after' => ['required', 'integer',],
+            'delivery' => ['required', 'array',],
+            'delivery.*.type' => ['required', Rule::in(DeliveryType::all()),],
+            'delivery.*.cost' => ['nullable', 'numeric',],
+            'delivery.*.status' => ['required', 'boolean',],
         ];
     }
 }

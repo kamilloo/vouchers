@@ -17,7 +17,7 @@ class DeliveryManager
      */
     public function getForMerchant(Merchant $merchant): array
     {
-        $online_delivery = (new Delivery())->init(DeliveryType::ONLINE, DeliveryType::ONLINE_DELIVERY_COST);
+        $online_delivery = (new Delivery())->init(DeliveryType::ONLINE, DeliveryType::ZERO_DELIVERY_COST);
         $personal_delivery = (new Delivery())->init(DeliveryType::PERSONAL, DeliveryType::PERSONAL_DELIVERY_COST);
         $delivery = [$online_delivery, $personal_delivery];
 

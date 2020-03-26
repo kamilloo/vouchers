@@ -33,6 +33,7 @@ Route::middleware('auth')->group(function (){
     Route::post('/'.__('shop').'/'.__('change-images'), 'ShopController@changeImages')->name('shop.change-images');
     Route::post('/'.__('shop').'/'.__('gateway-settings'), 'ShopController@gatewaySettings')->name('shop.gateway-settings');
     Route::post('/'.__('shop').'/'.__('shop-settings'), 'ShopController@shopSettings')->name('shop.shop-settings');
+    Route::post('/'.__('shop').'/'.__('delivery-settings'), 'ShopController@deliverySettings')->name('shop.delivery-settings');
 
 
     Route::get('/'.__('vouchers'), 'VoucherController@index')->name('vouchers.index');

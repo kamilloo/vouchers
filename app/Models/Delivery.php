@@ -7,8 +7,9 @@ use App\Models\Enums\DeliveryType;
 use Illuminate\Contracts\Support\Jsonable;
 use Illuminate\Support\Arr;
 
-class Delivery implements \JsonSerializable
+class Delivery extends Model implements \JsonSerializable
 {
+    protected $table = 'delivery';
     /**
      * @var string
      */

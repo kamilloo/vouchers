@@ -44,11 +44,9 @@ class ShopControllerTest extends TestCase
     {
         $response = $this->postJson(route('shop.shop-settings'),[
             'expiry_after' => false,
-            'delivery_cost' => false,
         ])->assertStatus(422);
 
         $this->assertArrayHasKey('expiry_after', $response->decodeResponseJson('errors'));
-        $this->assertArrayHasKey('delivery_cost', $response->decodeResponseJson('errors'));
     }
 
     /**
@@ -58,7 +56,6 @@ class ShopControllerTest extends TestCase
     {
         $incoming_parameters = [
             'expiry_after' => 123465,
-            'delivery_cost' => 123132.11,
         ];
         $response = $this->postJson(route('shop.shop-settings'), $incoming_parameters);
 
@@ -74,7 +71,6 @@ class ShopControllerTest extends TestCase
     {
         $incoming_parameters = [
             'expiry_after' => 123465,
-            'delivery_cost' => 123132.11,
         ];
         $response = $this->postJson(route('shop.shop-settings'), $incoming_parameters)
             ->assertRedirect(route('shop.index'))

@@ -6,8 +6,11 @@ use App\Http\Requests\ProfileUpdate;
 use App\Http\Requests\ShopChangeImages;
 use App\Http\Requests\ShopChangeTemplate;
 use App\Http\Requests\ShopCustomTemplate;
+use App\Http\Requests\ShopDeliverySetting;
 use App\Http\Requests\ShopGatewaySetting;
 use App\Http\Requests\ShopSettings;
+use App\Models\Delivery;
+use App\Models\Enums\DeliveryStatus;
 use App\Models\Enums\GatewaySandbox;
 use App\Models\Merchant;
 use App\Models\ShopImage;
@@ -99,6 +102,26 @@ class ShopController extends Controller
             ->with('warning', __('Ups!, Something went wrong.'));
     }
 
+    public function deliverySettings(ShopDeliverySetting $request, Guard $guard)
+    {
+        if ($this->getUser($guard)->isMerchant())
+        {
+            $delivery = collect($request->getDeliveryParam())->filter(function ($raw_delivery){
+                return $raw_delivery['status'] == DeliveryStatus::ACTIVE;
+            })->map(function (array $raw_delivery){
+                return new Delivery(Arr::only($raw_delivery, ['type', 'cost']));
+            });
+            $merchant = $this->getMerchant($guard);
+            $merchant->delivery()->delete();
+            $merchant->delivery()->saveMany($delivery);
+
+            return redirect(route('shop.index'))
+                ->with('success', __('Well done!, you changed your shop design.'));
+        }
+        return redirect(route('shop.index'))
+            ->with('warning', __('Ups!, Something went wrong.'));
+    }
+
     public function shopSettings(ShopSettings $request, Guard $guard)
     {
         if ($this->getUser($guard)->isMerchant())
@@ -107,7 +130,6 @@ class ShopController extends Controller
             $voucher_style = $merchant->shopSettings()->first();
             $voucher_settings = [
                 'expiry_after' => $request->getExpiryAfterParam(),
-                'delivery_cost' => $request->getDeliveryCostParam(),
             ];
 
             if (empty($voucher_style))

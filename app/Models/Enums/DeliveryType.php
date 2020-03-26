@@ -10,7 +10,7 @@ class DeliveryType
 
     const PERSONAL = 'personal';
 
-    const ONLINE_DELIVERY_COST = 0;
+    const ZERO_DELIVERY_COST = 0;
     const PERSONAL_DELIVERY_COST = 0;
 
     public static function all(): array
