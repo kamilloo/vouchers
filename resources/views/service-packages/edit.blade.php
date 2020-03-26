@@ -47,6 +47,9 @@
                     @endif
                 </div>
 
+                @if(!$services->count())
+                    <h4 class="p-3 mb-2 bg-warning text-dark rounded "><a href="{{ route('services.create') }}">{{ __('Please add :items first.', ['items' => __('services')]) }}</a></h4>
+                @else
                 <div class="form-group">
                     <label for="categories">{{ __('Choose Services')}}</label>
                 @foreach($services as $service)
@@ -59,7 +62,8 @@
                         <span class="text-danger">{{ $errors->first('services') }}</span>
                     @endif
                 </div>
-
+                @endif
+                @if($service_categories->count())
                 <div class="form-group">
                     <label for="categories">{{ __('Choose Categories')}}</label>
                 @foreach($service_categories as $service_category)
@@ -72,7 +76,8 @@
                         <span class="text-danger">{{ $errors->first('categories') }}</span>
                     @endif
                 </div>
-                @include('partials.new-category-input')
+                @endif
+                @include('partials.new-category-input', ['service_categories' => $service_categories])
 
                 <button type="submit" class="btn btn-primary">{{__('Save')}}</button>
             </form>

@@ -18,13 +18,17 @@ class DeliveryManager
     public function getForMerchant(Merchant $merchant): array
     {
         $online_delivery = (new Delivery())->init(DeliveryType::ONLINE, DeliveryType::ONLINE_DELIVERY_COST);
+        $personal_delivery = (new Delivery())->init(DeliveryType::PERSONAL, DeliveryType::PERSONAL_DELIVERY_COST);
+        $delivery = [$online_delivery, $personal_delivery];
+
+
         if ($this->hasActivePostDelivery($merchant))
         {
             $post_delivery_cost = $this->getPostDeliveryCost($merchant);
             $post_delivery = (new Delivery())->init(DeliveryType::POST, $post_delivery_cost);
-            return [$online_delivery, $post_delivery];
+            $delivery[] = $post_delivery;
         }
-        return [$online_delivery];
+        return $delivery;
     }
 
     /**
@@ -54,6 +58,6 @@ class DeliveryManager
      */
     private function hasActivePostDelivery(Merchant $merchant):bool
     {
-        return $this->getShopSettings($merchant)->delivery_cost != null;
+        return $this->getShopSettings($merchant)->delivery_cost !== null;
     }
 }

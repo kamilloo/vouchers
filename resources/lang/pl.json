@@ -6,8 +6,11 @@
     "Online": "Online",
     "post": "poczta",
     "Post": "Poczta",
+    "personal": "osobisty",
+    "Personal": "Osobisty",
     "We send your Voucher online": "Bon wysyłamy online",
     "We send your Voucher by Post": "Bon wysyłamy pocztą tradycyjną",
+    "You can pick up Voucher personal": "Bon możesz odebrać osobiście",
     "Select delivery option": "Wybierz formę dostarczenia",
     "Your Recipient": "Osoba obdarowana",
     "Your details": "Twoje dane",
@@ -97,6 +100,7 @@
     "View Voucher": "Podgląd",
     "Your Sincerely,":"Pozdrawiamy,",
     "There is not any :items yet.": "Żadne :items nie zostały odnalezione do wyświetlenia",
+    "Please add :items first.": "W pierszej kolejności dodaj usługi.",
     "orders": "zamowienia",
     "Client": "Klient",
     "Delivery": "Forma dostawy",
@@ -288,7 +292,8 @@
     "Add branch and press enter": "Dodaj branżę i potwierdź enter",
     "Add skill and press enter":"Dodaj umiejętność i potwierdź enter",
     "Add branch": "Dodaj branżę",
-    "Add skill":"Dodaj umiejętność"
+    "Add skill":"Dodaj umiejętność",
+    "No found services, please add first": ""
 }
 
 

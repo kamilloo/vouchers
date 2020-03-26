@@ -71,7 +71,7 @@ class VoucherPresenter extends ModelPresenter implements \JsonSerializable, Arra
         return [
             'id' => $this->model->id,
             'price' => $this->price(),
-            'title' => $this->model->title
+            'title' => $this->label()
         ];
     }
 

@@ -47,10 +47,9 @@
                 <span class="text-danger">{{ $errors->first('active') }}</span>
                 @endif
         </div>
-
+        @if($service_categories->count())
         <div class="form-group">
             <label for="categories">{{ __('Choose Categories')}}</label>
-
         @foreach($service_categories as $service_category)
                 <div class="custom-control custom-checkbox">
                     <input type="checkbox" class="custom-control-input" id="category-{{ $service_category->id }}" name="categories[]" value="{{ $service_category->id }}" @if(in_array($service_category->id, $service->categories->pluck('id')->all()))checked @endif>
@@ -58,7 +57,8 @@
                 </div>
             @endforeach
         </div>
-        @include('partials.new-category-input')
+        @endif
+        @include('partials.new-category-input', ['service_categories' => $service_categories])
 
         <button type="submit" class="btn btn-primary">{{__('Submit')}}</button>
     </form>

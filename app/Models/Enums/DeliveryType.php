@@ -8,13 +8,17 @@ class DeliveryType
 
     const POST = 'post';
 
+    const PERSONAL = 'personal';
+
     const ONLINE_DELIVERY_COST = 0;
+    const PERSONAL_DELIVERY_COST = 0;
 
     public static function all(): array
     {
         return [
             self::ONLINE,
             self::POST,
+            self::PERSONAL,
         ];
     }
 
@@ -23,6 +27,7 @@ class DeliveryType
         return [
             self::ONLINE => __('We send your Voucher online'),
             self::POST => __('We send your Voucher by Post'),
+            self::PERSONAL => __('You can pick up Voucher personal'),
         ];
     }
 
@@ -31,6 +36,7 @@ class DeliveryType
         return [
             self::ONLINE => __('Online'),
             self::POST => __('Post'),
+            self::PERSONAL => __('Personal'),
         ];
     }
 }

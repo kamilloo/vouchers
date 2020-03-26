@@ -46,6 +46,7 @@
                     @endif
                 </div>
 
+                @if($service_categories->count())
 
                 <div class="form-group">
                     <label for="categories">{{ __('Choose Categories')}}</label>
@@ -57,8 +58,8 @@
                         </div>
                     @endforeach
                 </div>
-
-                @include('partials.new-category-input')
+                <@endif
+                @include('partials.new-category-input', ['service_categories' => $service_categories])
 
                 <button type="submit" class="btn btn-primary">{{__('Submit')}}</button>
             </form>
