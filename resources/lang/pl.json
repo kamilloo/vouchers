@@ -293,7 +293,8 @@
     "Add skill and press enter":"Dodaj umiejętność i potwierdź enter",
     "Add branch": "Dodaj branżę",
     "Add skill":"Dodaj umiejętność",
-    "No found services, please add first": ""
+    "required field": "pole wymagane",
+    "First and Last name": "Imię i nazwisko"
 }
 
 

@@ -19,20 +19,25 @@
             <h3 class="box-title">{{ __('Your Recipient') }}</h3>
             @include('templates.template-4.fields.text-input', [
                 'data_validate' => 'Name is required',
-                'name' => "first_name"
+                'name' => "first_name",
+                'required' => true,
             ])
             @include('templates.template-4.fields.text-input', [
                 'data_validate' => 'Last Name is required',
-                'name' => "last_name"
+                'name' => "last_name",
+                'required' => true,
             ])
             @include('templates.template-4.fields.text-input', [
                 'data_validate' => 'Email is required',
-                'name' => "email"
+                'name' => "email",
+                'required' => false,
             ])
             @include('templates.template-4.fields.text-input', [
                 'data_validate' => 'Phone is required',
-                'name' => "phone"
+                'name' => "phone",
+                'required' => false,
             ])
+            <small class="text-muted">*&nbsp;{{ __('required field')}}</small>
 
 
         </div>
@@ -51,6 +56,8 @@
                 'name' => "client",
                 'fields' => ['name', 'email', 'phone', 'city', 'address', 'postcode']
             ])
+            <small class="text-muted">*&nbsp;{{ __('required field')}}</small>
+
         </div>
         <div class="container-contact100-form-btn">
             @include('templates.template-4.buttons.button-previous')

@@ -19,20 +19,26 @@
             <h3 class="box-title">{{ __('Your Recipient') }}</h3>
             @include('templates.template-2.fields.text-input', [
                 'data_validate' => 'Name is required',
-                'name' => "first_name"
+                'name' => "first_name",
+                'required' => true,
             ])
             @include('templates.template-2.fields.text-input', [
                 'data_validate' => 'Last Name is required',
-                'name' => "last_name"
+                'name' => "last_name",
+                'required' => true,
             ])
             @include('templates.template-2.fields.text-input', [
                 'data_validate' => 'Email is required',
-                'name' => "email"
+                'name' => "email",
+                'required' => false,
             ])
             @include('templates.template-2.fields.text-input', [
                 'data_validate' => 'Phone is required',
-                'name' => "phone"
+                'name' => "phone",
+                'required' => false,
             ])
+            <small class="text-muted">*&nbsp;{{ __('required field')}}</small>
+
         </div>
         <div class="container-contact2-form-btn">
             @include('templates.template-2.buttons.button-previous')
@@ -46,8 +52,9 @@
             @include('templates.template-2.fields.text-input-table', [
                 'data_validate' => 'Country is required',
                 'name' => "client",
-                'fields' => ['name', 'email', 'phone', 'city', 'address', 'postcode']
+                'fields' => [['name', __('First and Last name')], 'email', 'phone', 'city', 'address', 'postcode']
             ])
+            <small class="text-muted">*&nbsp;{{ __('required field')}}</small>
         </div>
         <div class="container-contact2-form-btn">
             @include('templates.template-2.buttons.button-previous')
