@@ -178,4 +178,9 @@ class Merchant extends Model
     {
         return !empty($this->shopStyles->welcoming);
     }
+
+    public function hasDelivery(string $type):bool
+    {
+        return $this->delivery()->where('type',$type)->exists();
+    }
 }

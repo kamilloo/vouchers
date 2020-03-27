@@ -104,6 +104,11 @@ class ShopControllerTest extends TestCase
                     'type' => DeliveryType::PERSONAL,
                     'cost' => DeliveryType::ZERO_DELIVERY_COST,
                     'status' => DeliveryStatus::ACTIVE,
+                ],
+                [
+                    'type' => DeliveryType::PERSONAL,
+                    'cost' => null,
+                    'status' => DeliveryStatus::ACTIVE,
                 ]
             ],
         ];

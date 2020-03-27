@@ -6,11 +6,12 @@
         <div class="col-md-3">
 
             <div class="list-group"  id="design-list" role="tablist">
-                <a href="#designs" class="list-group-item list-group-item-action active" data-toggle="list"  role="tab">{{ __('Designs') }}</a>
+                <a href="#delivery" class="list-group-item list-group-item-action active" data-toggle="list"  role="tab">{{ __('Delivery Cost') }}</a>
+
+                <a href="#designs" class="list-group-item list-group-item-action" data-toggle="list"  role="tab">{{ __('Designs') }}</a>
                 <a href="#customs" class="list-group-item list-group-item-action" data-toggle="list"  role="tab">{{ __('Customs') }}</a>
                 <a href="#images" class="list-group-item list-group-item-action" data-toggle="list"  role="tab">{{ __('Images') }}</a>
                 <a href="#settings" class="list-group-item list-group-item-action" data-toggle="list"  role="tab">{{ __('Settings') }}</a>
-                <a href="#delivery" class="list-group-item list-group-item-action" data-toggle="list"  role="tab">{{ __('Delivery Cost') }}</a>
                 <a href="#gateway" class="list-group-item list-group-item-action" data-toggle="list"  role="tab">{{ __('Payment Gateway') }}</a>
             </div>
             <br>
@@ -22,7 +23,33 @@
         <div class="col-md-9 py-3 px-3 border bg-white rounded-sm">
 
             <div class="tab-content">
-                <div class="tab-pane active" id="designs" role="tabpanel">
+                <div class="tab-pane active" id="delivery" role="tabpanel">
+                    <h2>{{ __('Delivery Cost') }}</h2>
+                    <form method="post" action="{{ route('shop.delivery-settings') }}">
+                        @csrf
+                        @foreach(\App\Models\Enums\DeliveryType::titles() as $type => $description)
+                            <input type="hidden" name="delivery[{{ $loop->index }}][type]" value="{{ $type }}">
+                            <label for="delivery_cost_{{ $type }}">{{ $description }}</label>
+                            <div class="form-group">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="delivery-{{ $type }}-enabled" name="delivery[{{$loop->index}}][status]" class="custom-control-input" value="1" @if($merchant->hasDelivery($type)) checked @endif>
+                                    <label class="custom-control-label" for="delivery-{{ $type }}-enabled">{{ __('Enable') }}</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="front-{{ $type }}-disabled" name="delivery[{{$loop->index}}][status]" class="custom-control-input" value="0" @if(!$merchant->hasDelivery($type)) checked @endif>
+                                    <label class="custom-control-label" for="front-{{ $type }}-disabled">{{ __('Disable') }}</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="number" step="0.01" class="form-control" id="delivery_cost_{{ $type }}" aria-describedby="delivery_cost-help" name="delivery[{{ $loop->index }}][cost]" placeholder="{{ __('Delivery Cost') }}" value="{{ Arr::get($delivery, $type) }}">
+                                <small id="delivery_cost-help" class="form-text text-muted">{{ __('Set Delivery Cost') }}.</small>
+                            </div>
+                        @endforeach
+                        <button type="submit" class="btn btn-primary">{{ __('Save')}}</button>
+                    </form>
+                </div>
+
+                <div class="tab-pane" id="designs" role="tabpanel">
                     <form method="post" action="{{ route('shop.change-template') }}">
                         @csrf
                         <div class="row">
@@ -107,30 +134,6 @@
                             <small id="expiry_after-help" class="form-text text-muted">{{ __('Set Expiry After') }}.</small>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">{{ __('Save')}}</button>
-                    </form>
-                </div>
-                <div class="tab-pane" id="delivery" role="tabpanel">
-                    <h2>{{ __('Delivery Cost') }}</h2>
-                    <form method="post" action="{{ route('shop.delivery-settings') }}">
-                        @csrf
-                        @foreach(\App\Models\Enums\DeliveryType::titles() as $type => $description)
-                            <label for="delivery_cost_{{ $type }}">{{ $description }}</label>
-                            <div class="form-group">
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" id="delivery-{{ $type }}-enabled" name="delivery_type[]" class="custom-control-input" value="1" @if($shop_images->delivery_type[]) checked @endif>
-                                    <label class="custom-control-label" for="delivery-{{ $type }}-enabled">{{ __('Enable') }}</label>
-                                </div>
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" id="front-{{ $type }}-disabled" name="delivery_type[]" class="custom-control-input" value="0" @if(empty($shop_images->delivery_type[])) checked @endif>
-                                    <label class="custom-control-label" for="front-{{ $type }}-disabled">{{ __('Disable') }}</label>
-                                </div>
-                        </div>
-                        <div class="form-group">
-                            <input type="number" step="0.01" class="form-control" id="delivery_cost_{{ $type }}" aria-describedby="delivery_cost-help" name="delivery_cost" placeholder="{{ __('Delivery Cost') }}" value="{{ old('delivery_cost', $shop_settings->delivery_cost) }}">
-                            <small id="delivery_cost-help" class="form-text text-muted">{{ __('Set Delivery Cost') }}.</small>
-                        </div>
-                        @endforeach
                         <button type="submit" class="btn btn-primary">{{ __('Save')}}</button>
                     </form>
                 </div>

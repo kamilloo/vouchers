@@ -11,6 +11,7 @@ use App\Http\Requests\ShopGatewaySetting;
 use App\Http\Requests\ShopSettings;
 use App\Models\Delivery;
 use App\Models\Enums\DeliveryStatus;
+use App\Models\Enums\DeliveryType;
 use App\Models\Enums\GatewaySandbox;
 use App\Models\Merchant;
 use App\Models\ShopImage;
@@ -32,13 +33,14 @@ class ShopController extends Controller
     {
         $templates = Template::all();
 
-        $merchant = Merchant::mine()->first();
+        $merchant = $this->getMyMerchant();
         $my_template = optional($merchant)->template ?? Template::first();
         $shop_style = optional($merchant)->shopStyles ?? new ShopStyle;
         $shop_images = optional($merchant)->shopImages ?? new ShopImage();
         $shop_settings = optional($merchant)->shopSettings ?? new ShopSettings();
+        $delivery = $merchant->delivery()->get()->pluck('cost', 'type')->all();
 
-        return view('shop.index', compact('guard', 'templates', 'my_template', 'shop_style', 'shop_images', 'merchant', 'shop_settings'));
+        return view('shop.index', compact('guard', 'templates', 'my_template', 'shop_style', 'shop_images', 'merchant', 'shop_settings', 'delivery'));
     }
 
     public function changeTemplate(ShopChangeTemplate $request, Guard $guard)
@@ -106,10 +108,15 @@ class ShopController extends Controller
     {
         if ($this->getUser($guard)->isMerchant())
         {
-            $delivery = collect($request->getDeliveryParam())->filter(function ($raw_delivery){
+            $delivery = collect($request->getDeliveryParam())->filter(function (array $raw_delivery){
                 return $raw_delivery['status'] == DeliveryStatus::ACTIVE;
             })->map(function (array $raw_delivery){
-                return new Delivery(Arr::only($raw_delivery, ['type', 'cost']));
+                $type_and_cost = Arr::only($raw_delivery, ['type', 'cost']);
+                if (is_null($type_and_cost['cost']))
+                {
+                    $type_and_cost['cost'] = DeliveryType::ZERO_DELIVERY_COST;
+                }
+                return new Delivery($type_and_cost);
             });
             $merchant = $this->getMerchant($guard);
             $merchant->delivery()->delete();
@@ -214,4 +221,12 @@ class ShopController extends Controller
     {
         return $guard->user();
 }
+
+    /**
+     * @return \App\Models\Model|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|object|null
+     */
+    protected function getMyMerchant():Merchant
+    {
+        return Merchant::mine()->first();
+    }
 }
