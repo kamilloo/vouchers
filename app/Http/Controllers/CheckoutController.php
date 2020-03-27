@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\OrderWasPlaced;
 use App\Http\Requests\Checkout;
+use App\Http\ViewFactories\CheckoutViewFactory;
 use App\Http\ViewModels\OrderViewModel;
 use App\Http\ViewModels\CheckoutViewModel;
 use App\Managers\DeliveryManager;
@@ -21,10 +22,15 @@ class CheckoutController extends Controller
      * @var DeliveryManager
      */
     protected $delivery_manager;
+    /**
+     * @var CheckoutViewFactory
+     */
+    protected $view_factory;
 
-    public function __construct(DeliveryManager $delivery_manager)
+    public function __construct(DeliveryManager $delivery_manager, CheckoutViewFactory $view_factory)
     {
         $this->delivery_manager = $delivery_manager;
+        $this->view_factory = $view_factory;
     }
 
     public function start(Merchant $merchant, Voucher $voucher)
@@ -32,7 +38,7 @@ class CheckoutController extends Controller
 
         $view_model = new CheckoutViewModel($merchant, $voucher, $this->delivery_manager);
 
-        return view('templates.'. $view_model->templatePath(), $view_model);
+        return $this->view_factory->start($view_model);
     }
 
     public function proceed(Checkout $request, Merchant $merchant, Dispatcher $event_dispatcher)
@@ -49,7 +55,7 @@ class CheckoutController extends Controller
     {
         $view_model = new OrderViewModel($merchant, $order);
 
-        return view('checkout.confirmation.'. $view_model->templatePath(), $view_model);
+        return $this->view_factory->confirmation($view_model);
     }
 
     /**
