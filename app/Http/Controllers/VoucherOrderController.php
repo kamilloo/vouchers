@@ -6,13 +6,17 @@ use App\Events\VoucherWasDelivered;
 use App\Http\Requests\ProfileUpdate;
 use App\Http\Requests\VoucherStore;
 use App\Http\Requests\VoucherUpdate;
+use App\Http\ViewFactories\VoucherOrderViewFactory;
 use App\Http\ViewModels\OrderViewModel;
+use App\Http\ViewModels\PaymentFailedViewModel;
 use App\Http\ViewModels\PdfViewModel;
 use App\Models\Order;
 use App\Models\UserProfile;
 use App\Models\Voucher;
 use App\Notifications\SendVoucher;
 use Barryvdh\DomPDF\PDF;
+use Domain\Orders\Services\PrinterService;
+use Domain\Orders\Services\SendingService;
 use Domain\Vouchers\VoucherRepository;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Events\Dispatcher;
@@ -28,35 +32,37 @@ use Illuminate\Support\Facades\Notification;
 class VoucherOrderController extends Controller
 {
     /**
-     * @var PDF
+     * @var VoucherOrderViewFactory
      */
-    protected $generator;
+    protected $view_factory;
+    /**
+     * @var PrinterService
+     */
+    protected $printer_service;
+    /**
+     * @var SendingService
+     */
+    protected $sending_service;
 
-    public function __construct(PDF $generator)
+    public function __construct(VoucherOrderViewFactory $view_factory, PrinterService $printer_service, SendingService $sending_service)
     {
 
         $this->authorizeResource(Order::class);
-        $this->generator = $generator;
+        $this->view_factory = $view_factory;
+        $this->printer_service = $printer_service;
+        $this->sending_service = $sending_service;
     }
 
     public function download(Order $order)
     {
-        $pdf = $this->createPdf($order);
+        $voucher = $this->printer_service->print($order);
 
-        return $pdf->stream();
+        return $voucher->stream();
     }
 
-    public function send(Order $order, Dispatcher $event_dispatcher)
+    public function send(Order $order)
     {
-        $pdf = $this->createPdf($order);
-
-        $mailable = new \App\Mail\SendVoucher($order);
-        $mailable->attachData($pdf->output(), 'voucher.pdf');
-
-        Mail::to($order->email)->send($mailable);
-
-        $order->moveStatusToDeliver();
-        $event_dispatcher->dispatch(new VoucherWasDelivered($order));
+        $this->sending_service->send($order);
 
         return back()->with(['success' => __('Mail was send successful!')]);
     }
@@ -70,23 +76,8 @@ class VoucherOrderController extends Controller
     {
         $merchant = $order->merchant->fresh();
 
-        $view_model = new OrderViewModel($merchant, $order);
+        $view_model = new PaymentFailedViewModel($merchant, $order);
 
-        return view('payment.failed.'. $view_model->templatePath(), $view_model);
-    }
-
-    /**
-     * @param Order $order
-     * @param PDF $generator
-     *
-     * @return PDF
-     */
-    protected function createPdf(Order $order): PDF
-    {
-        $order = $order->load('merchant', 'voucher');
-
-        $view_model = new PdfViewModel($order->merchant, $order);
-
-        return $this->generator->loadView('pdf.voucher', $view_model);
+        return $this->view_factory->failed($view_model);
     }
 }

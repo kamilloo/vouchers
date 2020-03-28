@@ -11,9 +11,9 @@
             <div class="wrap-contact3 col-md-8 col-sm-12">
                 @include('payment.recap.template-3.greeting')
                 <section class="col">
-                    @include('payment.recap.common.box')
+                    @include('payment.recap.template-3.box', $box_content)
                 </section>
-                @include('payment.recap.common.buttons')
+                @include('payment.recap.template-3.buttons')
             </div>
         </div>
     </div>

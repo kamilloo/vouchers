@@ -10,18 +10,32 @@ use App\Events\PaymentWasConfirmed;
 use App\Exceptions\PaymentLinkNotAvailable;
 use App\Http\Requests\Checkout;
 use App\Http\Requests\PaymentCallbackStatus;
+use App\Http\ViewFactories\PaymentOrderViewFactory;
 use App\Http\ViewModels\OrderViewModel;
+use App\Http\ViewModels\PaymentRecapViewModel;
+use App\Http\ViewModels\PaymentReturnViewModel;
 use App\Models\Enums\StatusType;
 use App\Models\Merchant;
 use App\Models\Payment;
 use App\Models\Voucher;
 use App\Models\Order;
 use Carbon\Carbon;
+use Domain\Orders\Managers\OrderManager;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Http\Request;
 
 class PaymentOrderController extends Controller
 {
+    /**
+     * @var PaymentOrderViewFactory
+     */
+    protected $view_factory;
+
+    public function __construct(PaymentOrderViewFactory $view_factory)
+    {
+        $this->view_factory = $view_factory;
+    }
+
     public function create(Merchant $merchant, Order $order, IPaymentGateway $payment_gateway, Dispatcher $event_dispatcher)
     {
         try {
@@ -37,18 +51,14 @@ class PaymentOrderController extends Controller
 
     }
 
-    public function callbackReturn(Payment $payment, IPaymentGateway $payment_gateway, Dispatcher $event_dispatcher)
+    public function callbackReturn(Payment $payment, IPaymentGateway $payment_gateway, Dispatcher $event_dispatcher, OrderManager $order_manager)
     {
         $payment->order->moveStatusToWaiting();
         $verify = $payment_gateway->verify($payment);
-        $merchant = $payment->merchant->fresh();
 //        $event_dispatcher->dispatch(new PaymentWasCompleted($payment));
         if ($verify)
         {
-            $expired_at = $this->getVoucherExpiredDate($merchant);
-            $payment->order->generateQrCode($expired_at);
-            $payment->order->moveStatusToConfirmed();
-            $payment->order->checkAsPaid();
+            $order_manager->confirm($payment);
 
             return redirect()->route('payment.recap', [
                 'payment' => $payment,
@@ -62,10 +72,12 @@ class PaymentOrderController extends Controller
         }
 
         $order = $payment->order;
+        $merchant = $payment->merchant->fresh();
 
-        $view_model = new OrderViewModel($merchant, $order);
+        $view_model = new PaymentReturnViewModel($merchant, $order);
 
-        return view('payment.return.'. $view_model->templatePath(), $view_model)->with(['success' => __('You bought voucher successful.')]);
+        return $this->view_factory->callbackReturn($view_model);
+
     }
 
     public function callbackStatus(PaymentCallbackStatus $request, Payment $payment, IPaymentGateway $payment_gateway, Dispatcher $event_dispatcher)
@@ -81,27 +93,13 @@ class PaymentOrderController extends Controller
     {
         $order = $payment->order;
         $merchant = $payment->merchant->fresh();
-        $view_model = new OrderViewModel($merchant, $order);
+        $view_model = new PaymentRecapViewModel($merchant, $order);
 
-        return view('payment.recap.'. $view_model->templatePath(), $view_model);
+        return $this->view_factory->recap($view_model);
     }
 
     public function sandboxGateway(Payment $payment)
     {
         return redirect()->route('payment.return', $payment);
-    }
-
-    /**
-     * @param Merchant $merchant
-     *
-     * @return Carbon
-     */
-    protected function getVoucherExpiredDate(Merchant $merchant): Carbon
-    {
-        if ($merchant->hasShopSettings() && !empty($merchant->getVoucherExpireAfterSetting())) {
-            $expiry_after = $merchant->getVoucherExpireAfterSetting();
-            return Carbon::now()->addDays($expiry_after);
-        }
-        return Carbon::now();
     }
 }

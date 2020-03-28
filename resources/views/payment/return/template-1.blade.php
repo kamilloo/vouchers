@@ -15,8 +15,8 @@
             <div class="container-contact1 justify-content-center">
                 @include('payment.recap.template-1.greeting')
                 <div class="col-md-8 col-sm-12 p-b-160">
-                    @include('payment.return.common.box')
-                    @include('payment.recap.'.$template_path.'.button-homepage')
+                    @include('payment.recap.template-1.box', $box_content)
+                    @include('payment.recap.template-1.button-homepage')
                 </div>
             </div>
 

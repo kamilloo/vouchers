@@ -15,10 +15,9 @@
                 </div>
                 @include('payment.recap.template-2.greeting')
                 <section class="col">
-                    @include('payment.recap.common.box')
+                    @include('payment.recap.template-2.box', $box_content)
                 </section>
-                @include('payment.recap.common.buttons')
-
+                @include('payment.recap.template-2.buttons')
             </div>
         </div>
     </div>

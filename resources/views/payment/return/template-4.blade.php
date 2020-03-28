@@ -14,9 +14,9 @@
                 </div>
                 <section class="col">
                     @include('payment.recap.template-4.greeting')
-                    @include('payment.return.common.box')
+                    @include('payment.recap.template-4.box', $box_content)
                 </section>
-                @include('payment.recap.'.$template_path.'.button-homepage')
+                @include('payment.recap.template-4.button-homepage')
             </div>
         </div>
     </div>
