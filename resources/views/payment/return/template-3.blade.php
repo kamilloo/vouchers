@@ -12,6 +12,7 @@
                 @include('payment.recap.template-3.greeting')
                 <section class="col">
                     @include('payment.recap.template-3.box', $box_content)
+                    @include('payment.return.common.spinner')
                 </section>
                 @include('payment.recap.template-3.button-homepage')
             </div>
