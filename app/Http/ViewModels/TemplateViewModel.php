@@ -71,11 +71,17 @@ class TemplateViewModel implements Arrayable
             'custom_background' => $this->background(),
             'merchant' => $this->merchant,
             'template_path' => $this->templatePath(),
+            'box_content' => $this->boxContent(),
         ];
     }
 
     public function templatePath()
     {
         return $this->merchant->template->file_name;
+    }
+
+    protected function boxContent():array
+    {
+        return [];
     }
 }

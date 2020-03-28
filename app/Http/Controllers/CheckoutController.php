@@ -12,6 +12,7 @@ use App\Models\Client;
 use App\Models\Merchant;
 use App\Models\Voucher;
 use App\Models\Order;
+use Domain\Orders\Services\CheckoutService;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Http\Request;
 use Symfony\Contracts\EventDispatcher\Event;
@@ -41,14 +42,13 @@ class CheckoutController extends Controller
         return $this->view_factory->start($view_model);
     }
 
-    public function proceed(Checkout $request, Merchant $merchant, Dispatcher $event_dispatcher)
+    public function proceed(Checkout $request, Merchant $merchant, CheckoutService $checkout_service)
     {
-        $client = Client::create($request->getClientParam());
-        $order = $this->makeOrder($request, $merchant);
-        $order->client()->associate($client);
-        $order->save();
-        $event_dispatcher->dispatch(new OrderWasPlaced($order));
-        return redirect()->route('checkout.confirmation', compact('merchant', 'order'))->with('success', __('Your order was placed.'));
+        $order = $checkout_service->proceed($request, $merchant);
+
+        return redirect()
+            ->route('checkout.confirmation', compact('merchant', 'order'))
+            ->with('success', __('Your order was placed.'));
     }
 
     public function confirmation(Merchant $merchant, Order $order)
@@ -58,22 +58,4 @@ class CheckoutController extends Controller
         return $this->view_factory->confirmation($view_model);
     }
 
-    /**
-     * @param Checkout $request
-     * @param Merchant $merchant
-     *
-     * @return \Illuminate\Database\Eloquent\Model
-     */
-    protected function makeOrder(Checkout $request, Merchant $merchant): Order
-    {
-        return $merchant->orders()->make([
-            'voucher_id' => $request->getVoucherIdParam(),
-            'delivery' => $request->getDeliveryParam(),
-            'price' => $request->getPriceParam(),
-            'first_name' => $request->getFirstNameParam(),
-            'last_name' => $request->getLastNameParam(),
-            'phone' => $request->getPhoneParam(),
-            'email' => $request->getEmailParam(),
-        ]);
-}
 }

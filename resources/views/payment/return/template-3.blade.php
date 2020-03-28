@@ -9,7 +9,7 @@
                 </div>
             </div>
             <div class="wrap-contact3 col-md-8 col-sm-12">
-                @include('payment.return.common.greeting')
+                @include('payment.recap.template-3.greeting')
                 <section class="col">
                     @include('payment.return.common.box')
                 </section>

@@ -29,4 +29,13 @@ class OrderViewModel extends TemplateViewModel
             'order' => $this->order,
         ]);
     }
+
+    protected function boxContent():array
+    {
+        return [
+            'title' => __('Thanks for your order'),
+            'lead' => __('The Voucher will be wonderful Gift for :recipient', ['recipient' => $this->order->first_name]),
+            'help' => __('Please complete your payment and send Voucher to :recipient', ['recipient' => $this->order->first_name])
+        ];
+    }
 }

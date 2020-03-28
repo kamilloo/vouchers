@@ -13,7 +13,7 @@
                         @include('layouts.flash-message')
                     </div>
                 </div>
-                @include('payment.return.common.greeting')
+                @include('payment.recap.template-2.greeting')
                 <section class="col">
                     @include('payment.recap.common.box')
                 </section>

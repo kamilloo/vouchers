@@ -24,11 +24,6 @@ class CheckoutViewFactory
         return $this->factory->make('templates.'. $view_model->templatePath(), $view_model);
     }
 
-    public function proceed(TemplateViewModel $view_model):View
-    {
-        //
-    }
-
     public function confirmation(TemplateViewModel $view_model):View
     {
         return $this->factory->make('checkout.confirmation.'. $view_model->templatePath(), $view_model);

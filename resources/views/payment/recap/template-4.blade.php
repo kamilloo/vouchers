@@ -13,7 +13,7 @@
                     </div>
                 </div>
                 <section class="col">
-                    @include('payment.return.common.greeting')
+                    @include('payment.recap.template-4.greeting')
                     @include('payment.recap.common.box')
                 </section>
                 @include('payment.recap.common.buttons')
