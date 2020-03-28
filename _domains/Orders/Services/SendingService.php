@@ -22,6 +22,7 @@ use Illuminate\Support\Arr;
 use App\Models\UserProfile;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
+use Mail;
 
 class SendingService
 {

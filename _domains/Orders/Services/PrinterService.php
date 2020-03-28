@@ -32,11 +32,16 @@ class PrinterService
      * @var Dispatcher
      */
     protected $event_dispatcher;
+    /**
+     * @var PDF
+     */
+    protected $generator;
 
-    public function __construct(Guard $guard, Dispatcher $event_dispatcher)
+    public function __construct(PDF $generator, Guard $guard, Dispatcher $event_dispatcher)
     {
         $this->guard = $guard;
         $this->event_dispatcher = $event_dispatcher;
+        $this->generator = $generator;
     }
 
     /**

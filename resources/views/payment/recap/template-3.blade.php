@@ -13,7 +13,8 @@
                 <section class="col">
                     @include('payment.recap.template-3.box', $box_content)
                 </section>
-                @include('payment.recap.template-3.buttons')
+                @includeWhen($order->isOnline(),'payment.recap.template-3.buttons')
+                @includeWhen(!$order->isOnline(),'payment.recap.template-3.button-homepage')
             </div>
         </div>
     </div>

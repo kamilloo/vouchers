@@ -110,6 +110,11 @@ class Order extends Model implements IOrder
         return $this->delivery == DeliveryType::ONLINE;
     }
 
+    public function isPost():bool
+    {
+        return $this->delivery == DeliveryType::POST;
+    }
+
     public function isNew():bool
     {
         return $this->status === StatusType::NEW;

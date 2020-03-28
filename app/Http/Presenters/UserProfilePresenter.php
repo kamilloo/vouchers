@@ -51,6 +51,14 @@ class UserProfilePresenter extends ModelPresenter
         ]));
     }
 
+    public function fullAddressFlat():string
+    {
+        return implode(', ', array_map('ucfirst',array_filter([
+            $this->model->address,
+            $this->cityWithPostcode()
+        ])));
+    }
+
     public function description(): string
     {
         return nl2br($this->model->description);
@@ -61,7 +69,7 @@ class UserProfilePresenter extends ModelPresenter
      */
     protected function cityWithPostcode(): string
     {
-        return implode(', ', array_filter([$this->model->postcode, $this->model->city]));
+        return implode(', ', array_map('ucfirst',array_filter([$this->model->postcode, $this->model->city])));
     }
 
     /**

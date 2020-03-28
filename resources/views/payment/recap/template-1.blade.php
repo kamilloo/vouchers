@@ -16,7 +16,8 @@
                 @include('payment.recap.template-1.greeting')
                 <div class="col-md-8 col-sm-12 p-b-160">
                     @include('payment.recap.template-1.box', $box_content)
-                    @include('payment.recap.template-1.buttons')
+                    @includeWhen($order->isOnline(),'payment.recap.template-1.buttons')
+                    @includeWhen(!$order->isOnline(),'payment.recap.template-1.button-homepage')
                 </div>
             </div>
 

@@ -14,7 +14,7 @@
     {{--        'label' => __('Send SMS to:recipient', ['recipient' => $order->first_name])--}}
     {{--    ])--}}
     @include('payment.recap.template-3.button', [
-        'href' => route('welcome'),
+        'href' => $merchant->getHomepage(),
         'label' => __('Back to homepage')
     ])
 </div>
