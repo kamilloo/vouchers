@@ -1,18 +1,30 @@
-<div class="container-contact100-form-btn">
-    @include('payment.recap.template-4.button', [
+@if($order->isOnline())
+    <div class="container-contact100-form-btn">
+        <div class="col-5">
+
+        @include('payment.recap.template-4.button', [
     'href' => route('voucher.download', $order),
     'label' => __('Download')
     ])
-    @if($order->isOnline())
-    @include('payment.recap.template-4.button', [
-    'href' => route('voucher.send', $order),
-    'label' => __('Send to :recipient', ['recipient' => $order->first_name])
-    ])
+        </div>
+        <div class="col-5">
+            <form-lazy-loading
+                label="{{ __('Send to :recipient', ['recipient' => $order->first_name]) }}"
+                btn="contact100-form-btn"
+                action="{{ route('voucher.send', $order) }}"
+            >
+                @csrf
+                <input class="form-control" type="text" name="email" value="{{ $order->email }}">
+            </form-lazy-loading>
+        </div>
+    </div>
+    {{--    @include('payment.recap.template-4.button', [--}}
+    {{--        'href' => route('voucher.push', $order),--}}
+    {{--        'label' => __('Send SMS to:recipient', ['recipient' => $order->first_name])--}}
+    {{--    ])--}}
     @endif
-{{--    @include('payment.recap.template-4.button', [--}}
-{{--        'href' => route('voucher.push', $order),--}}
-{{--        'label' => __('Send SMS to:recipient', ['recipient' => $order->first_name])--}}
-{{--    ])--}}
+<div class="container-contact100-form-btn justify-content-center">
+
     @include('payment.recap.template-4.button', [
         'href' => $merchant->getHomepage(),
         'label' => __('Back to homepage')

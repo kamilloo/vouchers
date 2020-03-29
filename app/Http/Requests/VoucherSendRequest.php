@@ -7,12 +7,6 @@ use App\Models\ServiceCategory;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-/**
- * Class VoucherStore
- * @package App\Http\Requests
- * @method getEmailParam
- */
-class SubscribeRequest extends PassingEmailRequest
+class VoucherSendRequest extends PassingEmailRequest
 {
-    //
 }

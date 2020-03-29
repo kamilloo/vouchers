@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\VoucherWasDelivered;
 use App\Http\Requests\ProfileUpdate;
+use App\Http\Requests\VoucherSendRequest;
 use App\Http\Requests\VoucherStore;
 use App\Http\Requests\VoucherUpdate;
 use App\Http\ViewFactories\VoucherOrderViewFactory;
@@ -60,9 +61,9 @@ class VoucherOrderController extends Controller
         return $voucher->stream();
     }
 
-    public function send(Order $order)
+    public function send(VoucherSendRequest $request, Order $order)
     {
-        $this->sending_service->send($order);
+        $this->sending_service->send($request, $order);
 
         return back()->with(['success' => __('Mail was send successful!')]);
     }

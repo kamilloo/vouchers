@@ -3,6 +3,7 @@
 namespace Tests\Feature\App\Http\Controllers\VoucherOrderController\Send;
 
 use App\Mail\SendVoucher;
+use App\Models\Enums\StatusType;
 use App\Models\Enums\VoucherType;
 use App\Models\Order;
 use App\Models\User;
@@ -47,26 +48,50 @@ class VoucherOrderControllerTest extends TestCase
         $this->pdf_service = m::mock(PDF::class);
 
         $this->app->instance(PDF::class, $this->pdf_service);
-        $this->order = factory(Order::class)->create();
+        $this->order = factory(Order::class)->states(StatusType::CONFIRM)->create();
 
         Mail::fake();
     }
+
+
+    /**
+     * @test
+     */
+    public function store_validation_exception()
+    {
+        //When
+        $redirect_url = route('service-categories.create');
+
+        //Then
+        $response = $this->call(Request::METHOD_POST, route('voucher.send', $this->order), [
+            'email' => false,
+        ], [],[],['HTTP_REFERER' => $redirect_url]);
+
+        //Assert
+        $response->assertStatus(302)->assertRedirect($redirect_url);
+        $response->assertSessionHasErrors([
+            'email',
+        ]);
+    }
+
 
     /**
      * @test
      */
     public function send_pdf()
     {
-        $this->pdf_service->shouldReceive('loadView')
-            ->with('pdf.voucher', m::any())
-            ->once()
-            ->andReturnSelf();
-        $this->pdf_service->shouldReceive('output')
-            ->once();
+        //Given
+        $email = 'email@email.com';
 
-        $response = $this->get(route('voucher.send', $this->order));
+        //When
+        $this->loadViewAndRenderPdf();
+
+        //Then
+        $response = $this->sendVoucherSendRequest(compact('email'));
+
+        //Assert
         $response->assertStatus(302);
-        $response->assertSessionHas('success', 'Mail was send successful!');
+        $response->assertSessionHas('success', __('Mail was send successful!'));
     }
 
 
@@ -75,6 +100,33 @@ class VoucherOrderControllerTest extends TestCase
      */
     public function send_notification_was_sent()
     {
+        //Given
+        $email = 'email@email.com';
+
+        //When
+        $this->loadViewAndRenderPdf();
+
+        //Then
+        $response = $this->sendVoucherSendRequest(compact('email'));
+
+        //Assert
+        Mail::assertSent(SendVoucher::class, function (SendVoucher $mail) use ($email){
+            return $mail->hasTo($email)
+                && in_array('raw data', $mail->rawAttachments[0]);
+        });
+
+    }
+
+    /**
+     * @return \Illuminate\Foundation\Testing\TestResponse
+     */
+    protected function sendVoucherSendRequest(array $entry_data): \Illuminate\Foundation\Testing\TestResponse
+    {
+        return $this->post(route('voucher.send', $this->order), $entry_data);
+    }
+
+    protected function loadViewAndRenderPdf(): void
+    {
         $this->pdf_service->shouldReceive('loadView')
             ->with('pdf.voucher', m::any())
             ->once()
@@ -82,15 +134,6 @@ class VoucherOrderControllerTest extends TestCase
         $this->pdf_service->shouldReceive('output')
             ->once()
             ->andReturn('raw data');
-
-        $response = $this->get(route('voucher.send', $this->order));
-
-        Mail::assertSent(SendVoucher::class, function (SendVoucher $mail) use ($response){
-            return $mail->hasTo($this->order->email)
-                && in_array('raw data', $mail->rawAttachments[0]);
-        });
-
     }
-
 
 }

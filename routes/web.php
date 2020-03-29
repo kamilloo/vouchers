@@ -108,7 +108,7 @@ Route::get(__('voucher').'/'.__('order').'/{order}/'.__('failed'), 'VoucherOrder
 Route::group(['middleware' => ['orderIsActive', 'voucherIsWaiting']], function (){
 
     Route::get(__('voucher').'/'.__('order').'/{order}/'.__('download'), 'VoucherOrderController@download')->name('voucher.download');
-    Route::get(__('voucher').'/'.__('order').'/{order}/'.__('send'), 'VoucherOrderController@send')->name('voucher.send');
+    Route::post(__('voucher').'/'.__('order').'/{order}/'.__('send'), 'VoucherOrderController@send')->name('voucher.send');
     Route::get(__('voucher').'/'.__('order').'/{order}/'.__('push'), 'VoucherOrderController@push')->name('voucher.push');
 
 });

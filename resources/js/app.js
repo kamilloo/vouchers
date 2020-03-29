@@ -35,6 +35,7 @@ Vue.component('add-voucher-service-select', require('./components/AddVoucherServ
 Vue.component('voucher-form', require('./components/VoucherForm.vue').default);
 Vue.component('checkout-voucher-option', require('./components/CheckoutVoucherOption.vue').default);
 Vue.component('textarea-with-char-counter', require('./components/TextareaWithCharCounter.vue').default);
+Vue.component('form-lazy-loading', require('./components/FormLazyLoading.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
