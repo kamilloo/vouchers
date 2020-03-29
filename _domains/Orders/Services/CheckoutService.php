@@ -3,9 +3,12 @@ declare(strict_types=1);
 
 namespace Domain\Orders\Services;
 
+use App\Events\OrderWasPlaced;
 use App\Http\ContentTypes\Tag;
 use App\Http\Requests\Checkout;
 use App\Http\Requests\ProfileUpdate;
+use App\Models\Client;
+use App\Models\Merchant;
 use App\Models\Order;
 use App\Models\User;
 use Domain\Merchants\Models\Branch;
