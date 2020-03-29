@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Domain\Orders\Managers;
 
+use App\Events\PaymentWasConfirmed;
+use App\Events\VoucherWasSent;
 use App\Http\ContentTypes\Tag;
 use App\Http\Requests\ProfileUpdate;
 use App\Models\Merchant;
@@ -12,6 +14,7 @@ use Domain\Merchants\Models\Branch;
 use Domain\Merchants\Models\Skill;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Arr;
 use App\Models\UserProfile;
@@ -21,9 +24,15 @@ use Illuminate\Support\Str;
 class OrderManager
 {
 
-    public function __construct()
+    /**
+     * @var Dispatcher
+     */
+    protected $event_dispatcher;
+
+    public function __construct(Dispatcher $event_dispatcher)
     {
 
+        $this->event_dispatcher = $event_dispatcher;
     }
 
     public function confirm(\App\Models\Payment $payment)
@@ -33,6 +42,7 @@ class OrderManager
         $payment->order->generateQrCode($expired_at);
         $payment->order->moveStatusToConfirmed();
         $payment->order->checkAsPaid();
+        $this->event_dispatcher->dispatch(new VoucherWasSent($payment->order));
     }
 
 
