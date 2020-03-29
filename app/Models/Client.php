@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
+use Illuminate\Notifications\Notifiable;
+
 class Client extends Model
 {
+    use Notifiable;
     protected $guarded = [];
 
     public function order()

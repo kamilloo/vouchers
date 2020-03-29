@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Notifications;
+namespace App\Notifications\Client;
 
 use App\Models\Order;
+use App\Notifications\OrderNotification;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class VoucherWasSentNotification extends OrderNotification implements ShouldQueue
+class PaymentWasConfirmedNotification extends OrderNotification implements ShouldQueue
 {
 
     /**
@@ -20,15 +21,14 @@ class VoucherWasSentNotification extends OrderNotification implements ShouldQueu
     public function toMail($notifiable)
     {
         $client = $this->order->getClientEmail();
-        $voucher = $this->order->voucher->title;
+        $voucher = $this->order->voucher->getTable();
         return (new MailMessage)
-            ->subject(__('Voucher was sent.'))
-            ->line(__('Voucher was sent.'))
-            ->line(__('Your voucher: :voucher was sent to client :client', [
-                'client' => $client,
+            ->subject(__('Payment was confirmed.'))
+            ->line(__('Payment was confirmed.'))
+            ->line(__('Your payment for your voucher: :voucher was confirmed', [
                 'voucher' => $voucher
             ]))
-            ->action(__('You can visit details'), route('orders.index'))
+            ->action(__('Download'), route('voucher.download', $this->order))
             ->line(__('Thank you for using our application!'));
     }
 }

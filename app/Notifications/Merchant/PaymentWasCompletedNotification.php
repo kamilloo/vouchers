@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Notifications;
+namespace App\Notifications\Merchant;
 
 use App\Models\Order;
+use App\Notifications\OrderNotification;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class PaymentWasBeganNotification extends OrderNotification implements ShouldQueue
+class PaymentWasCompletedNotification extends OrderNotification implements ShouldQueue
 {
 
     /**
@@ -22,9 +23,9 @@ class PaymentWasBeganNotification extends OrderNotification implements ShouldQue
         $client = $this->order->getClientEmail();
         $voucher = $this->order->voucher->title;
         return (new MailMessage)
-            ->subject(__('Payment was began.'))
-            ->line(__('Payment was began.'))
-            ->line(__('Client :client began payment your voucher: :voucher', [
+            ->subject(__('Payment was completed.'))
+            ->line(__('Payment was completed.'))
+            ->line(__('Client :client completed payment your voucher: :voucher', [
                 'client' => $client,
                 'voucher' => $voucher
             ]))

@@ -255,7 +255,7 @@
     "Payment was completed.": "Płatność została zakończona",
     "Client :client completed payment your voucher: :voucher":"Klient :client zakończył płatność za Twój bon: :voucher",
     "Payment was confirmed.": "Płatność została potwierdzona",
-    "Client :client confiremed payment your voucher: :voucher":"Klient :client potwierdził płatność za Twój bon: :voucher",
+    "Client :client confirmed payment your voucher: :voucher":"Klient :client potwierdził płatność za Twój bon: :voucher",
     "Voucher was delivered.": "Bon został dostarczony",
     "Your voucher: :voucher was delived to client :client":"Twój bon :voucher został dostarczony do klienta :client",
     "Voucher was released.": "Bon został zrealizowany",
@@ -295,7 +295,11 @@
     "Add skill":"Dodaj umiejętność",
     "required field": "pole wymagane",
     "First and Last name": "Imię i nazwisko",
-    "Please, get voucher personal: :address": "Zapraszamy po odbiór bony: :address"
+    "Please, get voucher personal: :address": "Zapraszamy po odbiór bony: :address",
+    "Thank you for your Order :client": "Dziękujemy za Twoje zamówienie :client",
+    "Your ordered voucher: :voucher": "Twój zamówiony bon to: :voucher",
+    "Your voucher: :voucher was sent to you, please check you inbox :client": "Twój bon :voucher został wysłany do Ciebie, sprawdź proszę swoją skrzynkę odbiorczą :client",
+    "Your payment for your voucher: :voucher was confirmed": "Płatność za bon: :voucher została potwierdzona"
 }
 
 

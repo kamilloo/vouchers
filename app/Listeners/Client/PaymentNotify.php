@@ -1,27 +1,27 @@
 <?php
 
-namespace App\Listeners;
+namespace App\Listeners\Client;
 
 use App\Events\OrderEvent;
 use App\Events\OrderWasPlaced;
+use App\Events\PaymentEvent;
 use App\Models\Order;
-use App\Notifications\OrderWasPlaceNotification;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-abstract class OrderNotify
+abstract class PaymentNotify
 {
     /**
      * Handle the event.
      *
-     * @param  OrderEvent $event
+     * @param  PaymentEvent $event
      * @return void
      */
-    public function handle(OrderEvent $event)
+    public function handle(PaymentEvent $event)
     {
         $notification = $this->notification();
-        $order = $event->getOrder();;
-        $order->merchant->user->notify(new $notification($order));
+        $order = $event->getPayment()->order;;
+        $order->client->notify(new $notification($order));
     }
 
     abstract protected function notification(): string;
