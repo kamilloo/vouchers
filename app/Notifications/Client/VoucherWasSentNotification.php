@@ -25,10 +25,10 @@ class VoucherWasSentNotification extends OrderNotification implements ShouldQueu
         return (new MailMessage)
             ->subject(__('Voucher was sent.'))
             ->line(__('Voucher was sent.'))
-            ->line(__('Your voucher: :voucher was sent to you, please check you inbox :client', [
-                'client' => $client,
+            ->line(__('Your voucher: :voucher is ready to download, please check below link', [
                 'voucher' => $voucher
             ]))
+            ->action(__('Download'), route('voucher.download', $this->order))
             ->line(__('Thank you for using our application!'));
     }
 }

@@ -28,7 +28,10 @@ class PaymentWasConfirmedNotification extends OrderNotification implements Shoul
             ->line(__('Your payment for your voucher: :voucher was confirmed', [
                 'voucher' => $voucher
             ]))
-            ->action(__('Download'), route('voucher.download', $this->order))
+            ->action(__('Recap'), route('checkout.confirmation', [
+                'merchant' => $this->order->merchant,
+                'order' => $this->order
+            ]))
             ->line(__('Thank you for using our application!'));
     }
 }

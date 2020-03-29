@@ -298,8 +298,9 @@
     "Please, get voucher personal: :address": "Zapraszamy po odbiór bony: :address",
     "Thank you for your Order :client": "Dziękujemy za Twoje zamówienie :client",
     "Your ordered voucher: :voucher": "Twój zamówiony bon to: :voucher",
-    "Your voucher: :voucher was sent to you, please check you inbox :client": "Twój bon :voucher został wysłany do Ciebie, sprawdź proszę swoją skrzynkę odbiorczą :client",
-    "Your payment for your voucher: :voucher was confirmed": "Płatność za bon: :voucher została potwierdzona"
+    "Your payment for your voucher: :voucher was confirmed": "Płatność za bon: :voucher została potwierdzona",
+    "Recap": "Podsumowanie",
+    "Your voucher: :voucher is ready to download, please check below link": "Twój bon :voucher czeka na pobranie, poniżej pomożesz pobrać"
 }
 
 
