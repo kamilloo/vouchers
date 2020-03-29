@@ -1,33 +1,33 @@
 <template>
     <div>
-        <button type="button" v-bind:class="btnExtended" @click="toggleForm">{{ label }}</button>
-        <form method="post" :action="action" v-bind:class="formDisplay" class="d-none">
-            <slot></slot>
-            <button type="submit" v-bind:class="btn">{{ label }}</button>
+        <div v-bind:class="{'d-none': buttonHide}" @click="toggleForm">
+            <slot name="button"></slot>
+        </div>
+        <form method="post" :action="action" v-bind:class="formDisplay">
+            <slot name="form"></slot>
         </form>
     </div>
 
 </template>
 
+
 <script>
     export default {
         name: "FormLazyLoading",
         props: [
-            'label',
-            'btn',
             'action'
         ],
         data() {
             return {
                 formDisplay: "d-none",
-                btnExtended: this.btn
+                buttonHide: false,
             }
         },
         methods: {
             toggleForm()
             {
                 this.formDisplay = 'd-block';
-                this.btnExtended = 'd-none'
+                this.buttonHide = true
             }
         }
     }

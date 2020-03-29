@@ -280,7 +280,7 @@ textarea.input2 + .focus-input2::after {
   display: -ms-flexbox;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-around;
   padding-top: 13px;
 }
 

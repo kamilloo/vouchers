@@ -8,13 +8,21 @@
     ])
         </div>
         <div class="col-5">
-            <form-lazy-loading
-                label="{{ __('Send to :recipient', ['recipient' => $order->first_name]) }}"
-                btn="contact2-form-btn"
-                action="{{ route('voucher.send', $order) }}"
-            >
-                @csrf
-                <input class="form-control" type="text" name="email" value="{{ $order->email }}">
+            <form-lazy-loading action="{{ route('voucher.send', $order) }}">
+                <template v-slot:button>
+                    @include('payment.recap.template-2.button', [
+                        'href' => '#',
+                        'label' => __('Send to :recipient', ['recipient' => $order->first_name])
+                        ])
+                </template>
+                    <template v-slot:form>
+                    @csrf
+                    <input class="form-control" type="text" name="email" value="{{ $order->email }}">
+                        @include('payment.recap.template-2.submit', [
+                            'label' => __('Send to :recipient', ['recipient' => $order->first_name])
+                        ])
+                    </template>
+
             </form-lazy-loading>
         </div>
     </div>

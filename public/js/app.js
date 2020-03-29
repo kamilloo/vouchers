@@ -2159,19 +2159,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "FormLazyLoading",
-  props: ['label', 'btn', 'action'],
+  props: ['action'],
   data: function data() {
     return {
       formDisplay: "d-none",
-      btnExtended: this.btn
+      buttonHide: false
     };
   },
   methods: {
     toggleForm: function toggleForm() {
       this.formDisplay = 'd-block';
-      this.btnExtended = 'd-none';
+      this.buttonHide = true;
     }
   }
 });
@@ -47018,29 +47020,16 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c(
-      "button",
-      {
-        class: _vm.btnExtended,
-        attrs: { type: "button" },
-        on: { click: _vm.toggleForm }
-      },
-      [_vm._v(_vm._s(_vm.label))]
+      "div",
+      { class: { "d-none": _vm.buttonHide }, on: { click: _vm.toggleForm } },
+      [_vm._t("button")],
+      2
     ),
     _vm._v(" "),
     _c(
       "form",
-      {
-        staticClass: "d-none",
-        class: _vm.formDisplay,
-        attrs: { method: "post", action: _vm.action }
-      },
-      [
-        _vm._t("default"),
-        _vm._v(" "),
-        _c("button", { class: _vm.btn, attrs: { type: "submit" } }, [
-          _vm._v(_vm._s(_vm.label))
-        ])
-      ],
+      { class: _vm.formDisplay, attrs: { method: "post", action: _vm.action } },
+      [_vm._t("form")],
       2
     )
   ])

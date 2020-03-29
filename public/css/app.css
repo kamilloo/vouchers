@@ -37864,8 +37864,7 @@ h3 {
   display: -webkit-box;
   display: flex;
   flex-wrap: wrap;
-  -webkit-box-pack: center;
-          justify-content: center;
+  justify-content: space-around;
   padding-top: 13px;
 }
 .template-2 .wrap-contact2-form-btn {
