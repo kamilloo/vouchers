@@ -50,12 +50,15 @@ class PrinterService
      *
      * @return PDF
      */
-    public function print(Order $order): PDF
+//    public function print(Order $order): PDF
+    public function print(Order $order)
     {
         $order = $order->load('merchant', 'voucher');
 
         $view_model = new PdfViewModel($order->merchant, $order);
-
-        return $this->generator->loadView('pdf.voucher', $view_model);
+//return view('pdf.voucher', $view_model);
+        return $this->generator
+            ->loadView('pdf.voucher', $view_model)
+            ->setPaper('A4', 'landscape');
     }
 }
