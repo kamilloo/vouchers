@@ -6,6 +6,7 @@ namespace App\Http\Presenters;
 use App\Models\Enums\DeliveryType;
 use App\Models\Model;
 use App\Models\Order;
+use Carbon\Carbon;
 use phpDocumentor\Reflection\DocBlock\Tags\Property;
 
 class OrderPresenter extends ModelPresenter
@@ -38,4 +39,14 @@ class OrderPresenter extends ModelPresenter
     public function paid(): bool {
         return $this->model->paid();
     }
+
+    public function expitedAt(): string {
+        if (is_null($this->model->expired_at))
+        {
+            return __('unlimited');
+        }
+        return $this->model->expired_at->toDateString();
+    }
+
+
 }

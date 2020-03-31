@@ -8,7 +8,7 @@
             font-size: 36px;
             font-weight: normal;
             text-align: center;
-            line-height: 48px;
+            line-height: 36px;
             height: 48px;
             text-transform: capitalize;
             margin: 10px;
@@ -40,9 +40,9 @@
         }
         h3{
             font-size: 42px;
-            line-height: 60px;
-            padding-bottom: 25px;
-            margin: 10px 0 0 0;
+            line-height: 42px;
+            padding: 0px;
+            margin: 15px 0 0;
             font-weight: normal;
             text-align: center;
 
@@ -64,9 +64,21 @@
 
         }
         .footer{
-            height: 40px;
+            height: 60px;
             padding: 0;
             margin: 0;
+        }
+        .notice{
+            height: 30px;
+            padding: 0;
+            margin: 0;
+
+        }
+        .notice p{
+            font-size: 12px;
+            line-height: 16px;
+            padding: 0;
+            margin-left: 20px;
         }
         .small{
             font-size: 16px;
@@ -111,7 +123,7 @@
             font-size: 24px;
             line-height: 48px;
             vertical-align: middle;
-            border-color: #77bf00;
+            border-color: rgb(230,101,135);
             border-style: solid;
             border-width: 10px;
         }
@@ -134,9 +146,9 @@
             width: 40%;
         }
         .table td.vl {
-            background-color: #77bf00;
+            background-color: rgb(230,101,135);
             margin: 0;
-            padding: 0;
+            padding: 10px 5px;
         }
         .app-logo{
             text-align: right;
@@ -152,24 +164,19 @@
                 <table class="table-company-title">
                     <tr>
                         <td class="left">
-                            <img height="100" src="{{ $custom_logo ?? asset('checkout/template1/images/img-01.png') }}" alt="Company Logo">
+                            <img height="100" src="{{ $custom_logo ?? asset('images/placeholder_512_x_512.png') }}" alt="Company Logo">
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <h1>{{ $user_profile->company_name }}</h1>
+                            <h1>{{ $user_profile->presenter->company() }}</h1>
                         </td>
                     </tr>
                 </table>
                 <div class="left">
                 </div>
 
-
-                @if(!$order->voucher->isQuoteType())
-                    <h3>{!!  $order->voucher->title !!}</h3>
-                @endif
-
-                        <h3>{!!  $order->voucher->presenter->title() !!}</h3>
+                <h3>{!!  $order->voucher->presenter->title() !!}</h3>
 
                 <h2>{{ $full_name }}</h2>
 
@@ -179,7 +186,7 @@
                     </tr>
                     <tr>
                         <td rowspan="4" class="left" width="5%">
-                            <img height="100" src="{{ asset('checkout/template1/images/img-01.png') }}" alt="Company Logo">
+                            <img height="100" src="{{ asset('images/address_logo.png') }}" alt="Company Logo">
                         </td>
                         <td class="left">Telefon: {{$user_profile->phone}}</td>
                     </tr>
@@ -192,7 +199,11 @@
                 <div class="footer">
                     <p class="small">w celu uzgodnienia dogodnego terminu<br>prosimy o kontakt</p>
                 </div>
-
+                @if(1 || !$order->voucher->isQuoteType())
+                    <div class="notice">
+                        <p class="left">{{  $order->voucher->description }}</p>
+                    </div>
+                @endif
             </td>
             <td class="vl">
                 <img height="100" src="{{ asset('images/logo_vertical.png') }}" alt="Company Logo">
@@ -209,11 +220,12 @@
                     <p>{{ $order->qr_code }}</p>
                 </div>
                 <div class="footer">
-                    <p class="small">Termin realizacji bonu upływa: {{ \Carbon\Carbon::parse($order->expired_at)->toDateString() }}</p>
+                    <p class="small">Termin realizacji bonu upływa: {{ $order->presenter->expitedAt() }}</p>
                 </div>
             </td>
         </tr>
     </table>
+
 </div>
 </body>
 </html>
