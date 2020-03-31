@@ -301,7 +301,8 @@
     "Your payment for your voucher: :voucher was confirmed": "Płatność za bon: :voucher została potwierdzona",
     "Recap": "Podsumowanie",
     "Your voucher: :voucher is ready to download, please check below link": "Twój bon :voucher czeka na pobranie, poniżej pomożesz pobrać",
-    "unlimited": "bez limitu"
+    "unlimited": "bez limitu",
+    "no pay": "niezapłacone"
 }
 
 

@@ -14,8 +14,7 @@
             <th scope="col">#</th>
             <th scope="col">{{ __('Client') }}</th>
             <th scope="col">{{ __('Amount')}}&nbsp;w&nbsp;zł</th>
-            <th scope="col">{{ __('Paid At')}}</th>
-            <th scope="col">{{ __('Confirmed')}}</th>
+            <th scope="col">{{ __('Paid')}}</th>
             <th scope="col">{{ __('Order Status')}}</th>
 
 {{--            <th scope="col">Action</th>--}}
@@ -27,11 +26,10 @@
                 <th scope="row">{{ $loop->iteration }}</th>
                 <td class="align-middle">{{ $payment->order->presenter->fullName() }}</td>
                 <td>{{ $payment->presenter->amount() }}</td>
-                <td>{{ $payment->presenter->paid_at() }}</td>
                 <td>
-
                 @if($payment->presenter->paid())
                     <span class="badge-success px-2 py-1 rounded-circle"><span class="oi oi-check"></span></span>
+                        &nbsp;{{ $payment->presenter->paidAt() }}
 
                 @else
                     <span class="badge-danger px-2 py-1 rounded-circle"><span class="oi oi-x"></span></span>
