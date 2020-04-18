@@ -17,7 +17,10 @@ Route::get('/template-{id}', function ($id){
     return view('templates.template'.$id);
 });
 
-
+Route::get('/'. __('teams'), 'ToolController@teams')->name('teams');
+Route::get('/'. __('locations'), 'ToolController@locations')->name('locations');
+Route::get('/'. __('privacy'), 'ToolController@privacy')->name('privacy');
+Route::get('/'. __('terms'), 'ToolController@terms')->name('terms');
 Auth::routes();
 
 

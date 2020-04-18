@@ -304,7 +304,11 @@
     "unlimited": "bez limitu",
     "no pay": "niezapłacone",
     "Voucher for given amount": "Bon upominkowy",
-    "Client Voucher": "Bon upominkowy"
+    "Client Voucher": "Bon upominkowy",
+    "teams":  "zespol",
+    "locations": "kontakt",
+    "privacy":  "polityka-prywatnosci",
+    "terms": "regulamin"
 }
 
 

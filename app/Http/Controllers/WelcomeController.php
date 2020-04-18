@@ -11,7 +11,6 @@ class WelcomeController extends Controller
 {
     public function index(WelcomeRequest $request , TemplatesManager $templates_manager)
     {
-//        $templates = Template::all();
         $templates = '';
         return view('welcome', compact('templates'));
     }
