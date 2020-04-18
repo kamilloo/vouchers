@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Http\Presenters\MerchantPresenter;
 use App\Http\Presenters\OrderPresenter;
 use App\Models\Enums\BackgroundColorType;
+use foo\bar;
 
 class Merchant extends Model
 {
@@ -182,5 +183,10 @@ class Merchant extends Model
     public function hasDelivery(string $type):bool
     {
         return $this->delivery()->where('type',$type)->exists();
+    }
+
+    public function isTestMode():bool
+    {
+        return (bool)$this->sandbox;
     }
 }

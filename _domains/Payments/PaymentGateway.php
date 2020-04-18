@@ -97,7 +97,7 @@ class PaymentGateway implements IPaymentGateway
             ->setPosId($merchant->pos_id)
             ->setMerchantId($merchant->merchant_id)
             ->setCrc($merchant->crc)
-            ->setTestMode(true)
+            ->setTestMode($merchant->isTestMode())
             ->init();
 
         $payment_registered = $register_payment->isSuccess();

@@ -302,7 +302,9 @@
     "Recap": "Podsumowanie",
     "Your voucher: :voucher is ready to download, please check below link": "Twój bon :voucher czeka na pobranie, poniżej pomożesz pobrać",
     "unlimited": "bez limitu",
-    "no pay": "niezapłacone"
+    "no pay": "niezapłacone",
+    "Voucher for given amount": "Bon upominkowy",
+    "Client Voucher": "Bon upominkowy"
 }
 
 
