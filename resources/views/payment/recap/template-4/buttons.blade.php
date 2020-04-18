@@ -1,4 +1,4 @@
-@if($order->isOnline())
+@if($order->isAcvice() && $order->isOnline())
     <div class="container-contact100-form-btn">
         <div class="col-5">
 

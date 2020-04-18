@@ -46,7 +46,9 @@ class PaymentOrderController extends Controller
 
         }catch (PaymentLinkNotAvailable $exception)
         {
-            return redirect()->away($merchant->getHomepage());
+            return redirect()->route('voucher.failed', [
+                'order' => $order,
+            ])->with(['error' => __('You bought voucher failed.')]);
         }
 
     }
