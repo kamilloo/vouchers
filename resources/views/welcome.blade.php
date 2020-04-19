@@ -29,6 +29,9 @@
     <link rel="stylesheet" href="welcome/css/main.css">
 </head>
 <body>
+<div style="position: fixed; bottom: 0; width: 100%; background-color: orange">
+    @include('cookieConsent::index')
+</div>
 <div class="main-wrapper-first">
     <header>
         <div class="container">
@@ -40,8 +43,10 @@
                     <div class="main-menubar d-flex align-items-center">
                         <nav class="hide">
                             <a href="{{ route('home') }}">Home</a>
-{{--                            <a href="generic.html">Generic</a>--}}
-{{--                            <a href="elements.html">Elements</a>--}}
+                            <a href="{{ route('teams') }}">{{ __('Team') }}</a>
+                            <a href="{{ route('locations') }}">{{ __('Locations') }}</a>
+                            <a href="{{ route('privacy') }}">{{ __('Privacy') }}</a>
+                            <a href="{{ route('terms') }}">{{ __('Terms') }}</a>
                         </nav>
                         <div class="menu-bar"><span class="lnr lnr-menu"></span></div>
                     </div>
@@ -319,51 +324,52 @@
     </section>
     <!-- End Subscription Area -->
     <!-- Start Footer Widget Area -->
-{{--    <section class="footer-widget-area">--}}
-{{--        <div class="container">--}}
-{{--            <div class="row">--}}
-{{--                <div class="col-md-4">--}}
-{{--                    <div class="single-widget d-flex flex-wrap justify-content-between">--}}
-{{--                        <div class="icon d-flex align-items-center justify-content-center">--}}
-{{--                            <span class="lnr lnr-pushpin"></span>--}}
-{{--                        </div>--}}
-{{--                        <div class="desc">--}}
-{{--                            <h6 class="title text-uppercase">Address</h6>--}}
-{{--                            <p>56/8, panthapath, west <br> dhanmondi, kalabagan, <br>Dhaka - 1205</p>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--                <div class="col-md-4">--}}
-{{--                    <div class="single-widget d-flex flex-wrap justify-content-between">--}}
-{{--                        <div class="icon d-flex align-items-center justify-content-center">--}}
-{{--                            <span class="lnr lnr-earth"></span>--}}
-{{--                        </div>--}}
-{{--                        <div class="desc">--}}
-{{--                            <h6 class="title text-uppercase">Email Address</h6>--}}
-{{--                            <div class="contact">--}}
-{{--                                <a href="mailto:info@dataarc.com">info@dataarc.com</a> <br>--}}
-{{--                                <a href="mailto:support@dataarc.com">support@dataarc.com</a>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--                <div class="col-md-4">--}}
-{{--                    <div class="single-widget d-flex flex-wrap justify-content-between">--}}
-{{--                        <div class="icon d-flex align-items-center justify-content-center">--}}
-{{--                            <span class="lnr lnr-phone"></span>--}}
-{{--                        </div>--}}
-{{--                        <div class="desc">--}}
-{{--                            <h6 class="title text-uppercase">Phone Number</h6>--}}
-{{--                            <div class="contact">--}}
-{{--                                <a href="tel:1545">012 4562 982 3612</a> <br>--}}
-{{--                                <a href="tel:54512">012 6321 956 4587</a>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </section>--}}
+    <section class="footer-widget-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="single-widget d-flex flex-wrap justify-content-between">
+                        <div class="icon d-flex align-items-center justify-content-center">
+                            <span class="lnr lnr-pushpin"></span>
+                        </div>
+                        <div class="desc">
+                            <h6 class="title text-uppercase">Adres</h6>
+                            <p>ul. Mossego 2<br>Grodziks Wlkp.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="single-widget d-flex flex-wrap justify-content-between">
+                        <div class="icon d-flex align-items-center justify-content-center">
+                            <span class="lnr lnr-earth"></span>
+                        </div>
+                        <div class="desc">
+                            <h6 class="title text-uppercase">Email Adres</h6>
+                            <div class="contact">
+                                <a href="mailto:pietka.kasia3@gmail.com">pietka.kasia3@gmail.com</a> <br>
+                                <a href="mailto:kamil.pietka85@gmail.com">kamil.pietka85@gmail.com</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="single-widget d-flex flex-wrap justify-content-between">
+                        <div class="icon d-flex align-items-center justify-content-center">
+                            <span class="lnr lnr-phone"></span>
+                        </div>
+                        <div class="desc">
+                            <h6 class="title text-uppercase">Numer telefonu</h6>
+                            <div class="contact">
+                                <a href="tel:+48602139040">+48 602 139 040</a><br>
+                                <a href="tel:+48662362356">+48 662 362 356</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- End Footer Widget Area -->
     <!-- Start footer Area -->
     <footer>

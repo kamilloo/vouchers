@@ -29,6 +29,9 @@
     <link rel="stylesheet" href="welcome/css/main.css">
 </head>
 <body>
+<div style="position: fixed; bottom: 0; width: 100%; background-color: orange">
+        @include('cookieConsent::index')
+</div>
 <div class="main-wrapper-first">
     <header>
         <div class="container">
@@ -40,8 +43,10 @@
                     <div class="main-menubar d-flex align-items-center">
                         <nav class="hide">
                             <a href="{{ route('home') }}">Home</a>
-                            {{--                            <a href="generic.html">Generic</a>--}}
-                            {{--                            <a href="elements.html">Elements</a>--}}
+                            <a href="{{ route('teams') }}">{{ __('Team') }}</a>
+                            <a href="{{ route('locations') }}">{{ __('Locations') }}</a>
+                            <a href="{{ route('privacy') }}">{{ __('Privacy') }}</a>
+                            <a href="{{ route('terms') }}">{{ __('Terms') }}</a>
                         </nav>
                         <div class="menu-bar"><span class="lnr lnr-menu"></span></div>
                     </div>

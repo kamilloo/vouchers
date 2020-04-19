@@ -35,10 +35,10 @@
             <div class="row text-center mx-5">
                 <div class="col-sm text-center mb-3">
                     <ul class="list-unstyled text-small">
-                        <li><a class="text-muted" href="#">{{ __("Team") }}</a></li>
-                        <li><a class="text-muted" href="#">{{ __("Locations") }}</a></li>
-                        <li><a class="text-muted" href="#">{{ __("Privacy") }}</a></li>
-                        <li><a class="text-muted" href="#">{{ __("Terms") }}</a></li>
+                        <li><a class="text-muted" href="{{ route('teams') }}">{{ __('Team') }}</a></li>
+                        <li><a class="text-muted" href="{{ route('locations') }}">{{ __('Locations') }}</a></li>
+                        <li><a class="text-muted" href="{{ route('privacy') }}">{{ __('Privacy') }}</a></li>
+                        <li><a class="text-muted" href="{{ route('terms') }}">{{ __('Terms') }}</a></li>
                     </ul>
                 </div>
             </div>

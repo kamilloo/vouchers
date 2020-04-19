@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.8.36 on 2020-02-29 08:13:47.
+ * Generated for Laravel 5.8.36 on 2020-04-19 18:44:24.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -16162,6 +16162,160 @@ namespace SimpleSoftwareIO\QrCode\Facades {
  
 }
 
+namespace Vinkla\Hashids\Facades { 
+
+    /**
+     * This is the Hashids facade class.
+     *
+     * @author Vincent Klaiber <hello@doubledip.se>
+     * @method static string encode(mixed ...$numbers) Encode parameters to generate a hash.
+     * @method static array decode(string $hash) Decode a hash to the original parameter values.
+     * @method static string encodeHex(string $str) Encode hexadecimal values and generate a hash string.
+     * @method static string decodeHex(string $hash) Decode a hexadecimal hash.
+     */ 
+    class Hashids {
+        
+        /**
+         * Get the factory instance.
+         *
+         * @return \Vinkla\Hashids\HashidsFactory 
+         * @static 
+         */ 
+        public static function getFactory()
+        {
+                        /** @var \Vinkla\Hashids\HashidsManager $instance */
+                        return $instance->getFactory();
+        }
+        
+        /**
+         * Get a connection instance.
+         *
+         * @param string|null $name
+         * @return object 
+         * @static 
+         */ 
+        public static function connection($name = null)
+        {
+            //Method inherited from \GrahamCampbell\Manager\AbstractManager            
+                        /** @var \Vinkla\Hashids\HashidsManager $instance */
+                        return $instance->connection($name);
+        }
+        
+        /**
+         * Reconnect to the given connection.
+         *
+         * @param string|null $name
+         * @return object 
+         * @static 
+         */ 
+        public static function reconnect($name = null)
+        {
+            //Method inherited from \GrahamCampbell\Manager\AbstractManager            
+                        /** @var \Vinkla\Hashids\HashidsManager $instance */
+                        return $instance->reconnect($name);
+        }
+        
+        /**
+         * Disconnect from the given connection.
+         *
+         * @param string|null $name
+         * @return void 
+         * @static 
+         */ 
+        public static function disconnect($name = null)
+        {
+            //Method inherited from \GrahamCampbell\Manager\AbstractManager            
+                        /** @var \Vinkla\Hashids\HashidsManager $instance */
+                        $instance->disconnect($name);
+        }
+        
+        /**
+         * Get the configuration for a connection.
+         *
+         * @param string|null $name
+         * @throws \InvalidArgumentException
+         * @return array 
+         * @static 
+         */ 
+        public static function getConnectionConfig($name = null)
+        {
+            //Method inherited from \GrahamCampbell\Manager\AbstractManager            
+                        /** @var \Vinkla\Hashids\HashidsManager $instance */
+                        return $instance->getConnectionConfig($name);
+        }
+        
+        /**
+         * Get the default connection name.
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getDefaultConnection()
+        {
+            //Method inherited from \GrahamCampbell\Manager\AbstractManager            
+                        /** @var \Vinkla\Hashids\HashidsManager $instance */
+                        return $instance->getDefaultConnection();
+        }
+        
+        /**
+         * Set the default connection name.
+         *
+         * @param string $name
+         * @return void 
+         * @static 
+         */ 
+        public static function setDefaultConnection($name)
+        {
+            //Method inherited from \GrahamCampbell\Manager\AbstractManager            
+                        /** @var \Vinkla\Hashids\HashidsManager $instance */
+                        $instance->setDefaultConnection($name);
+        }
+        
+        /**
+         * Register an extension connection resolver.
+         *
+         * @param string $name
+         * @param callable $resolver
+         * @return void 
+         * @static 
+         */ 
+        public static function extend($name, $resolver)
+        {
+            //Method inherited from \GrahamCampbell\Manager\AbstractManager            
+                        /** @var \Vinkla\Hashids\HashidsManager $instance */
+                        $instance->extend($name, $resolver);
+        }
+        
+        /**
+         * Return all of the created connections.
+         *
+         * @return \GrahamCampbell\Manager\array<string,object> 
+         * @static 
+         */ 
+        public static function getConnections()
+        {
+            //Method inherited from \GrahamCampbell\Manager\AbstractManager            
+                        /** @var \Vinkla\Hashids\HashidsManager $instance */
+                        return $instance->getConnections();
+        }
+        
+        /**
+         * Get the config instance.
+         *
+         * @return \Illuminate\Contracts\Config\Repository 
+         * @static 
+         */ 
+        public static function getConfig()
+        {
+            //Method inherited from \GrahamCampbell\Manager\AbstractManager            
+                        /** @var \Vinkla\Hashids\HashidsManager $instance */
+                        return $instance->getConfig();
+        }
+         
+    }
+ 
+}
+
 namespace Tymon\JWTAuth\Facades { 
 
     /**
@@ -16717,160 +16871,6 @@ namespace Tymon\JWTAuth\Facades {
         {
                         /** @var \Tymon\JWTAuth\Factory $instance */
                         return $instance->setRefreshFlow($refreshFlow);
-        }
-         
-    }
- 
-}
-
-namespace Vinkla\Hashids\Facades { 
-
-    /**
-     * This is the Hashids facade class.
-     *
-     * @author Vincent Klaiber <hello@doubledip.se>
-     * @method static string encode(mixed ...$numbers) Encode parameters to generate a hash.
-     * @method static array decode(string $hash) Decode a hash to the original parameter values.
-     * @method static string encodeHex(string $str) Encode hexadecimal values and generate a hash string.
-     * @method static string decodeHex(string $hash) Decode a hexadecimal hash.
-     */ 
-    class Hashids {
-        
-        /**
-         * Get the factory instance.
-         *
-         * @return \Vinkla\Hashids\HashidsFactory 
-         * @static 
-         */ 
-        public static function getFactory()
-        {
-                        /** @var \Vinkla\Hashids\HashidsManager $instance */
-                        return $instance->getFactory();
-        }
-        
-        /**
-         * Get a connection instance.
-         *
-         * @param string|null $name
-         * @return object 
-         * @static 
-         */ 
-        public static function connection($name = null)
-        {
-            //Method inherited from \GrahamCampbell\Manager\AbstractManager            
-                        /** @var \Vinkla\Hashids\HashidsManager $instance */
-                        return $instance->connection($name);
-        }
-        
-        /**
-         * Reconnect to the given connection.
-         *
-         * @param string|null $name
-         * @return object 
-         * @static 
-         */ 
-        public static function reconnect($name = null)
-        {
-            //Method inherited from \GrahamCampbell\Manager\AbstractManager            
-                        /** @var \Vinkla\Hashids\HashidsManager $instance */
-                        return $instance->reconnect($name);
-        }
-        
-        /**
-         * Disconnect from the given connection.
-         *
-         * @param string|null $name
-         * @return void 
-         * @static 
-         */ 
-        public static function disconnect($name = null)
-        {
-            //Method inherited from \GrahamCampbell\Manager\AbstractManager            
-                        /** @var \Vinkla\Hashids\HashidsManager $instance */
-                        $instance->disconnect($name);
-        }
-        
-        /**
-         * Get the configuration for a connection.
-         *
-         * @param string|null $name
-         * @throws \InvalidArgumentException
-         * @return array 
-         * @static 
-         */ 
-        public static function getConnectionConfig($name = null)
-        {
-            //Method inherited from \GrahamCampbell\Manager\AbstractManager            
-                        /** @var \Vinkla\Hashids\HashidsManager $instance */
-                        return $instance->getConnectionConfig($name);
-        }
-        
-        /**
-         * Get the default connection name.
-         *
-         * @return string 
-         * @static 
-         */ 
-        public static function getDefaultConnection()
-        {
-            //Method inherited from \GrahamCampbell\Manager\AbstractManager            
-                        /** @var \Vinkla\Hashids\HashidsManager $instance */
-                        return $instance->getDefaultConnection();
-        }
-        
-        /**
-         * Set the default connection name.
-         *
-         * @param string $name
-         * @return void 
-         * @static 
-         */ 
-        public static function setDefaultConnection($name)
-        {
-            //Method inherited from \GrahamCampbell\Manager\AbstractManager            
-                        /** @var \Vinkla\Hashids\HashidsManager $instance */
-                        $instance->setDefaultConnection($name);
-        }
-        
-        /**
-         * Register an extension connection resolver.
-         *
-         * @param string $name
-         * @param callable $resolver
-         * @return void 
-         * @static 
-         */ 
-        public static function extend($name, $resolver)
-        {
-            //Method inherited from \GrahamCampbell\Manager\AbstractManager            
-                        /** @var \Vinkla\Hashids\HashidsManager $instance */
-                        $instance->extend($name, $resolver);
-        }
-        
-        /**
-         * Return all of the created connections.
-         *
-         * @return \GrahamCampbell\Manager\array<string,object> 
-         * @static 
-         */ 
-        public static function getConnections()
-        {
-            //Method inherited from \GrahamCampbell\Manager\AbstractManager            
-                        /** @var \Vinkla\Hashids\HashidsManager $instance */
-                        return $instance->getConnections();
-        }
-        
-        /**
-         * Get the config instance.
-         *
-         * @return \Illuminate\Contracts\Config\Repository 
-         * @static 
-         */ 
-        public static function getConfig()
-        {
-            //Method inherited from \GrahamCampbell\Manager\AbstractManager            
-                        /** @var \Vinkla\Hashids\HashidsManager $instance */
-                        return $instance->getConfig();
         }
          
     }
@@ -19679,11 +19679,11 @@ namespace  {
 
     class QrCode extends \SimpleSoftwareIO\QrCode\Facades\QrCode {}
 
+    class Hashids extends \Vinkla\Hashids\Facades\Hashids {}
+
     class JWTAuth extends \Tymon\JWTAuth\Facades\JWTAuth {}
 
     class JWTFactory extends \Tymon\JWTAuth\Facades\JWTFactory {}
-
-    class Hashids extends \Vinkla\Hashids\Facades\Hashids {}
  
 }
 

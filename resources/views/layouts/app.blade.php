@@ -21,6 +21,9 @@
     <link href="/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet">
 </head>
 <body>
+<div style="position: fixed; bottom: 0; width: 100%; background-color: orange">
+    @include('cookieConsent::index')
+</div>
     <div id="app" class="min-vh-100 pb-5">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
