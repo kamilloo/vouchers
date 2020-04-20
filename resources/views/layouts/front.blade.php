@@ -41,7 +41,7 @@
                         <a href="{{ route('welcome') }}"><img src="welcome/img/logo.png" alt=""></a>
                     </div>
                     <div class="main-menubar d-flex align-items-center">
-                        <nav class="hide">
+                        <nav>
                             <a href="{{ route('home') }}">Home</a>
                             <a href="{{ route('teams') }}">{{ __('Team') }}</a>
                             <a href="{{ route('locations') }}">{{ __('Locations') }}</a>
@@ -56,7 +56,7 @@
     </header>
     <div class="banner-area">
         <div class="container">
-            <div class="row justify-content-center height align-items-center">
+            <div class="row justify-content-center generic-height align-items-center">
                 <div class="col-lg-8">
                     <div class="banner-content text-center">
                         <h1 class="text-white text-uppercase">Sprzedajemy bony upominkowe</h1>
