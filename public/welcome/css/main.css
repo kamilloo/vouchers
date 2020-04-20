@@ -4,7 +4,7 @@
 /* Mobile Layout: 320px */
 /* Wide Mobile Layout: 480px */
 /* =================================== */
-/*  Basic Style 
+/*  Basic Style
 /* =================================== */
 ::-webkit-input-placeholder {
   /* WebKit, Blink, Edge */
@@ -1893,7 +1893,11 @@ nav a {
   font-weight: 500;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.7);
-  margin: 0 25px;
+  margin: 0 15px;
+}
+
+nav a:last-child {
+    margin: 0 0 0 15px;
 }
 
 nav a:hover {
@@ -2419,6 +2423,12 @@ body:after {
 
 .single-widget .desc {
   width: 72%;
+}
+
+@media (max-width: 1050px) {
+    .banner-content h1 {
+        font-size: 1em;
+    }
 }
 
 @media (max-width: 991px) {

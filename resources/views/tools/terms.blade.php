@@ -1,6 +1,6 @@
-@extends('layouts.front')
+@extends('front.partials.page')
 
-@section('content')
+@section('content-page')
     <section class="featured-area pb-0">
         <div class="container">
             <div class="row justify-content-center">
