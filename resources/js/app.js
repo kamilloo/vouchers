@@ -93,6 +93,20 @@ $('#confirm-delete').on('show.bs.modal', function(e) {
 });
 
 
+var url = document.URL;
+var hash = url.substring(url.indexOf('#'));
+
+$("#design-list").find("a").each(function(key, val) {
+    if (hash == $(val).attr('href')) {
+        $(val).click();
+    }
+
+    $(val).click(function(ky, vl) {
+        location.hash = $(this).attr('href');
+    });
+});
+
+
 var stepper;
 
 
