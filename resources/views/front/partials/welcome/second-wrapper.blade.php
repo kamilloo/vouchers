@@ -4,7 +4,7 @@
             <div class="col-lg-8">
                 <div class="section-title text-center">
                     <h3>Co wybierają nasi klienci</h3>
-                    <span class="text-uppercase">Jesteśmy dla Ciebie</span>
+                    <span class="text-uppercase">Znajdź swój styl</span>
                 </div>
             </div>
         </div>

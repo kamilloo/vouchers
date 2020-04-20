@@ -49,8 +49,8 @@
             <div class="row justify-content-center">
                 <div class="col-lg-8">
                     <div class="section-title text-center">
-                        <h3 class="text-white">Oferujemy bony upomnikowe</h3>
-                        <span class="text-white text-uppercase">Jesteśmy dla Ciebie</span>
+                        <h3 class="text-white">Zaufaj nam</h3>
+                        <span class="text-white text-uppercase">Internet nie ma granic</span>
                     </div>
                 </div>
             </div>
@@ -59,12 +59,12 @@
                     <div class="single-service">
                         <div class="thumb" style="background: url(welcome/img/s1.jpg);">
                             <div class="overlay overlay-content d-flex justify-content-center align-items-center">
-                                <a href="#" class="primary-btn hover d-inline-flex align-items-center"><span class="mr-10">Get Started</span><span class="lnr lnr-arrow-right"></span></a>
+                                <a href="{{ route('home') }}" class="primary-btn hover d-inline-flex align-items-center"><span class="mr-10">Get Started</span><span class="lnr lnr-arrow-right"></span></a>
                             </div>
                         </div>
                         <div class="desc">
-                            <h6 class="text-uppercase text-white">Creative Design</h6>
-                            <p class="text-white">WordPress, the premier free open-source blogging utility, has gone through several upgrades in</p>
+                            <h6 class="text-uppercase text-white">Fotografia</h6>
+{{--                            <p class="text-white">WordPress, the premier free open-source blogging utility, has gone through several upgrades in</p>--}}
                         </div>
                     </div>
                 </div>
@@ -72,12 +72,12 @@
                     <div class="single-service">
                         <div class="thumb" style="background: url(welcome/img/s2.jpg);">
                             <div class="overlay overlay-content d-flex justify-content-center align-items-center">
-                                <a href="#" class="primary-btn hover d-inline-flex align-items-center"><span class="mr-10">Get Started</span><span class="lnr lnr-arrow-right"></span></a>
+                                <a href="{{ route('home') }}" class="primary-btn hover d-inline-flex align-items-center"><span class="mr-10">Get Started</span><span class="lnr lnr-arrow-right"></span></a>
                             </div>
                         </div>
                         <div class="desc">
-                            <h6 class="text-uppercase text-white">Driving Lesson</h6>
-                            <p class="text-white">The buying of large-screen TVs has absolutely skyrocketed lately. It seems that everyone wants one – </p>
+                            <h6 class="text-uppercase text-white">Eventy</h6>
+{{--                            <p class="text-white">The buying of large-screen TVs has absolutely skyrocketed lately. It seems that everyone wants one – </p>--}}
                         </div>
                     </div>
                 </div>
@@ -85,12 +85,12 @@
                     <div class="single-service">
                         <div class="thumb" style="background: url(welcome/img/s3.jpg);">
                             <div class="overlay overlay-content d-flex justify-content-center align-items-center">
-                                <a href="#" class="primary-btn hover d-inline-flex align-items-center"><span class="mr-10">Get Started</span><span class="lnr lnr-arrow-right"></span></a>
+                                <a href="{{ route('home') }}" class="primary-btn hover d-inline-flex align-items-center"><span class="mr-10">Get Started</span><span class="lnr lnr-arrow-right"></span></a>
                             </div>
                         </div>
                         <div class="desc">
-                            <h6 class="text-uppercase text-white">Climbing Stairs</h6>
-                            <p class="text-white">Having used discount toner cartridges for twenty years, there have been a lot of changes in the </p>
+                            <h6 class="text-uppercase text-white">Kursy i szkolenia</h6>
+{{--                            <p class="text-white">Having used discount toner cartridges for twenty years, there have been a lot of changes in the </p>--}}
                         </div>
                     </div>
                 </div>
@@ -98,12 +98,12 @@
                     <div class="single-service">
                         <div class="thumb" style="background: url(welcome/img/s4.jpg);">
                             <div class="overlay overlay-content d-flex justify-content-center align-items-center">
-                                <a href="#" class="primary-btn hover d-inline-flex align-items-center"><span class="mr-10">Get Started</span><span class="lnr lnr-arrow-right"></span></a>
+                                <a href="{{ route('home') }}" class="primary-btn hover d-inline-flex align-items-center"><span class="mr-10">Get Started</span><span class="lnr lnr-arrow-right"></span></a>
                             </div>
                         </div>
                         <div class="desc">
-                            <h6 class="text-uppercase text-white">Bike Accident</h6>
-                            <p class="text-white">Every avid independent filmmaker has dre amed about making that special interest documentary, or </p>
+                            <h6 class="text-uppercase text-white">Podróże</h6>
+{{--                            <p class="text-white">Every avid independent filmmaker has dre amed about making that special interest documentary, or </p>--}}
                         </div>
                     </div>
                 </div>
@@ -111,12 +111,12 @@
                     <div class="single-service">
                         <div class="thumb" style="background: url(welcome/img/s5.jpg);">
                             <div class="overlay overlay-content d-flex justify-content-center align-items-center">
-                                <a href="#" class="primary-btn hover d-inline-flex align-items-center"><span class="mr-10">Get Started</span><span class="lnr lnr-arrow-right"></span></a>
+                                <a href="{{ route('home') }}" class="primary-btn hover d-inline-flex align-items-center"><span class="mr-10">Get Started</span><span class="lnr lnr-arrow-right"></span></a>
                             </div>
                         </div>
                         <div class="desc">
-                            <h6 class="text-uppercase text-white">Car Driving</h6>
-                            <p class="text-white">Looking to buy a new computer Overwhelmed by all of the options available to you? Stressed by the </p>
+                            <h6 class="text-uppercase text-white">Turystyka</h6>
+{{--                            <p class="text-white">Looking to buy a new computer Overwhelmed by all of the options available to you? Stressed by the </p>--}}
                         </div>
                     </div>
                 </div>
@@ -124,12 +124,12 @@
                     <div class="single-service">
                         <div class="thumb" style="background: url(welcome/img/s6.jpg);">
                             <div class="overlay overlay-content d-flex justify-content-center align-items-center">
-                                <a href="#" class="primary-btn hover d-inline-flex align-items-center"><span class="mr-10">Get Started</span><span class="lnr lnr-arrow-right"></span></a>
+                                <a href="{{ route('home') }}" class="primary-btn hover d-inline-flex align-items-center"><span class="mr-10">Get Started</span><span class="lnr lnr-arrow-right"></span></a>
                             </div>
                         </div>
                         <div class="desc">
-                            <h6 class="text-uppercase text-white">Beach HoTel</h6>
-                            <p class="text-white">Shure’s Music Phone Adapter (MPA) is our favorite iPhone solution, since it lets you use the headphones </p>
+                            <h6 class="text-uppercase text-white">Beauty i Spa</h6>
+{{--                            <p class="text-white">Shure’s Music Phone Adapter (MPA) is our favorite iPhone solution, since it lets you use the headphones </p>--}}
                         </div>
                     </div>
                 </div>
@@ -137,12 +137,12 @@
                     <div class="single-service">
                         <div class="thumb" style="background: url(welcome/img/s7.jpg);">
                             <div class="overlay overlay-content d-flex justify-content-center align-items-center">
-                                <a href="#" class="primary-btn hover d-inline-flex align-items-center"><span class="mr-10">Get Started</span><span class="lnr lnr-arrow-right"></span></a>
+                                <a href="{{ route('home') }}" class="primary-btn hover d-inline-flex align-items-center"><span class="mr-10">Get Started</span><span class="lnr lnr-arrow-right"></span></a>
                             </div>
                         </div>
                         <div class="desc">
-                            <h6 class="text-uppercase text-white">Under Passway</h6>
-                            <p class="text-white">Over 92% of computers are infected with Adware and spyware. Such software is rarely accompanied by</p>
+                            <h6 class="text-uppercase text-white">Holete</h6>
+{{--                            <p class="text-white">Over 92% of computers are infected with Adware and spyware. Such software is rarely accompanied by</p>--}}
                         </div>
                     </div>
                 </div>
@@ -150,12 +150,12 @@
                     <div class="single-service">
                         <div class="thumb" style="background: url(welcome/img/s8.jpg);">
                             <div class="overlay overlay-content d-flex justify-content-center align-items-center">
-                                <a href="#" class="primary-btn hover d-inline-flex align-items-center"><span class="mr-10">Get Started</span><span class="lnr lnr-arrow-right"></span></a>
+                                <a href="{{ route('home') }}" class="primary-btn hover d-inline-flex align-items-center"><span class="mr-10">Get Started</span><span class="lnr lnr-arrow-right"></span></a>
                             </div>
                         </div>
                         <div class="desc">
-                            <h6 class="text-uppercase text-white">Dawn to dusk</h6>
-                            <p class="text-white">Computers have become ubiquitous in almost every facet of our lives. At work, desk jockeys spend hours in </p>
+                            <h6 class="text-uppercase text-white">Rozrywka</h6>
+{{--                            <p class="text-white">Computers have become ubiquitous in almost every facet of our lives. At work, desk jockeys spend hours in </p>--}}
                         </div>
                     </div>
                 </div>
