@@ -1,7 +1,6 @@
 @extends('layouts.crud')
 
 @section('list')
-    <h1>{{ $tab }}</h1>
     <div class="row px-3">
 
         <div class="col-md-3">
