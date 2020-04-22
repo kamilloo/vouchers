@@ -46,7 +46,7 @@
                             <form action="{{ route('vouchers.destroy', $voucher) }}" method="post" >
                             @method('delete')
                             @csrf
-                            <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#confirm-delete">{{__('Delete')}}</button>
+                            <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#confirm-delete" data-title="{!! $voucher->presenter->title() !!}">{{__('Delete')}}</button>
                         </form>
                         </span>
 

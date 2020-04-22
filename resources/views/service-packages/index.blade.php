@@ -61,7 +61,7 @@
                         <form action="{{ route('service-packages.destroy', $service_package) }}" method="post" >
                             @method('delete')
                             @csrf
-                            <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#confirm-delete">{{ __('Delete') }}</button>
+                            <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#confirm-delete" data-title="{{ $service_package->title }}">{{ __('Delete') }}</button>
                         </form>
                         </span>
 

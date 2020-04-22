@@ -86,9 +86,16 @@ window.editButtonFocusOut = function(button) {
     button.style.background = "";
 };
 
+$("[data-target='#confirm-delete']").click(function () {
+    $("[data-removing]").removeAttr('data-removing');
+    let button = $(this);
+    button.attr('data-removing', '1');
+    $('.modal-body').html(button.attr('data-title'))
+});
+
 $('#confirm-delete').on('show.bs.modal', function(e) {
     $(this).find('.btn-ok').click(function () {
-        $('form').submit();
+        $("[data-removing]").closest('form').submit();
     })
 });
 
