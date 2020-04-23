@@ -22,7 +22,7 @@
                         <p>Użyte w Regulaminie definicje należy rozumieć następująco:</p>
                                 <ol>
                                     <li><strong>Serwis internetowy</strong> – Strona internetowa Sprzedawcy działająca pod adresem {{ route('welcome') }}</li>
-                                    <li><strong>Sprzedawca</strong> – będący oferentem bonów, osoba fizyczna posiadająca pełną zdolność do czynności prawnych lub osoba o ograniczonej zdolności do czynności prawnych, jeżeli posiada zgodę swojego przedstawiciela ustawowego na dokonanie czynności prawnych lub osoba prawna albo inna jednostka organizacyjna nieposiadająca osobowości prawnej, działająca przez osobę umocowaną, która korzysta z funkcjonalności Serwisu internetowego</li>
+                                    <li><strong>Sprzedawca</strong> – będący oferentem bonów, osoba fizyczna posiadająca pełną zdolność do czynności prawnych lub osoba o ograniczonej zdolności do czynności prawnych, jeżeli posiada zgodę swojego przedstawiciela ustawowego na dokonanie czynności prawnych lub osoba prawna albo inna jednostka organizacyjna nieposiadająca osobowości prawnej, działająca przez osobę umocowaną, która korzysta z funkcjonalności Serwisu internetowego. Pełna lista sprzedawców podana §13 niniejszego regulaminu.</li>
                                     <li><strong>Użytkownik </strong>– osoba fizyczna posiadająca pełną zdolność do czynności prawnych lub osoba o ograniczonej zdolności do czynności prawnych, jeżeli posiada zgodę swojego przedstawiciela ustawowego na dokonanie czynności prawnych lub osoba prawna albo inna jednostka organizacyjna nieposiadająca osobowości prawnej, działająca przez osobę umocowaną, która korzysta z funkcjonalności Serwisu internetowego.</li>
                                     <li><strong>Właściciel</strong> – Kamil Piętka, ul. Mossego 2, Grodzisk Wlkp.</li>
                                     <li><strong>Kupujący </strong>– Użytkownik, który korzysta z usług i funkcjonalności Serwisu, a w szczególności dokonujący zakupów za pośrednictwem Serwisu.</li>
@@ -188,7 +188,12 @@
 
                                 <p>Zasady przetwarzania danych osobowych oraz wykorzystywania plików cookies zostały opisane w Polityce prywatności i plików cookies dostępnej pod adresem <a href="{{ route('privacy') }}"><u>{{ route('privacy') }}</u><strong>&nbsp;</strong></a></p>
 
-                        <h6 class="title text-uppercase">§ 13 Postanowienia końcowe</h6>
+                        <h6 class="title text-uppercase" style="width: 100%">§ 13 Lista sprzedawców</h6>
+                        <ol>
+                            <li class="pb-2">Gabinet Kosmetyki Pielęgnacyjnej Katarzyna Piętka, ul. Mossego 2, Grodzisk Wlkp., NIP: 995-013-76-23, REGON: 302612554</li>
+                        </ol>
+
+                        <h6 class="title text-uppercase" style="width: 100%">§ 14 Postanowienia końcowe</h6>
 
                                 <ol>
                                     <li>Umowy zawierane poprzez Serwis internetowy zawierane są w języku polskim.</li>
