@@ -147,10 +147,10 @@ class PaymentGateway implements IPaymentGateway
     public function confirmation(IPayment $payment, PaymentCallbackStatus $request): void
     {
         $payment_response = $this->gateway
-            ->setPosId(98152)
-            ->setMerchantId(98152)
-            ->setCrc('9ce6c63b01df7132')
-            ->setTestMode(true)
+            ->setPosId($payment->merchant->pos_id)
+            ->setMerchantId($payment->merchant->merchant_id)
+            ->setCrc($payment->merchant->crc)
+            ->setTestMode($payment->merchant->isTestMode())
             ->receive($request);
 
         $success = $payment_response->isSuccess();
