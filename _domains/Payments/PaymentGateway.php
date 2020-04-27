@@ -115,10 +115,10 @@ class PaymentGateway implements IPaymentGateway
             $transaction->token = $token;
 
             $payment->payment_link = $this->gateway
-                ->setPosId(98152)
-                ->setMerchantId(98152)
-                ->setCrc('9ce6c63b01df7132')
-                ->setTestMode(true)
+                ->setPosId($merchant->pos_id)
+                ->setMerchantId($merchant->merchant_id)
+                ->setCrc($merchant->crc)
+                ->setTestMode($merchant->isTestMode())
                 ->execute($token);
             $payment->save();
 
