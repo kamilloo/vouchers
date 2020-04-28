@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Domain\Merchants\SocialFacebookAccountService;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Socialite;
 
@@ -23,27 +24,12 @@ class LoginFacebookController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function handleProviderCallback()
+    public function handleProviderCallback(SocialFacebookAccountService $service)
     {
         $user = Socialite::driver('facebook')->user();
+        $user = $service->createOrGetUser($user);
 
-
-// OAuth Two Providers
-        $token = $user->token;
-        $refreshToken = $user->refreshToken; // not always provided
-        $expiresIn = $user->expiresIn;
-
-// OAuth One Providers
-        $token = $user->token;
-        $tokenSecret = $user->tokenSecret;
-
-// All Providers
-        $user->getId();
-        $user->getNickname();
-        $user->getName();
-        $user->getEmail();
-        $user->getAvatar();
-        
-        // $user->token;
+        auth()->login($user);
+        return redirect()->route('home');
     }
 }

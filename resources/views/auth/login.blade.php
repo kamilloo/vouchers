@@ -59,6 +59,14 @@
                                 &nbsp;{{ __('or') }}&nbsp;
                                 <a class="btn btn-light" href="{{ route('register') }}">{{ __('Register') }}</a>
 
+                                <p style="margin: 0 145px;">&nbsp;{{ __('or') }}&nbsp;</p>
+                                <br />
+                                <div class="form-group">
+                                    <div class="col-md-8 col-md-offset-4">
+                                        <a href="{{ route('login-facebook') }}" class="btn btn-primary">Login with Facebook</a>
+                                    </div>
+                                </div>
+
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
                                         {{ __('Forgot Your Password?') }}

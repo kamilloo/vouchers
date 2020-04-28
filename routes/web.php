@@ -136,6 +136,6 @@ foreach ($hash_models as $model)
 }
 
 
-Route::get('login/facebook', 'Auth\LoginFacebookController@redirectToProvider');
-Route::get('login/facebook/callback', 'Auth\LoginFacebookController@handleProviderCallback');
+Route::get('login/facebook', 'Auth\LoginFacebookController@redirectToProvider')->name('login-facebook');
+Route::get('login/facebook/callback', 'Auth\LoginFacebookController@handleProviderCallback')->name('login-facebook-callback');
 
