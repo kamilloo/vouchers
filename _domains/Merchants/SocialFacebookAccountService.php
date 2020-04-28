@@ -30,7 +30,7 @@ class SocialFacebookAccountService
                 $user = User::create([
                     'email' => $providerUser->getEmail(),
                     'name' => $providerUser->getName(),
-                    'password' => Hash::make(md5(rand(1,10000))),
+                    'password' => Hash::make(bin2hex(openssl_random_pseudo_bytes(8))),
 //                    'name' => $data['name'],
 //                    'email' => $data['email'],
 //                    'password' => Hash::make($data['password']),
