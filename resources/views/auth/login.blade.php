@@ -59,11 +59,11 @@
                                 &nbsp;{{ __('or') }}&nbsp;
                                 <a class="btn btn-light" href="{{ route('register') }}">{{ __('Register') }}</a>
 
-                                <p style="margin: 0 145px;">&nbsp;{{ __('or') }}&nbsp;</p>
+                                <p style="margin: 0 145px;"></p>
                                 <br />
                                 <div class="form-group">
-                                    <div class="col-md-8 col-md-offset-4">
-                                        <a href="{{ route('login-facebook') }}" class="btn btn-primary">Login with Facebook</a>
+                                    <div class="col-md-10 col-sm-12 text-center">
+                                        <a href="{{ route('login-facebook') }}" class="btn btn-primary">{{ __('Login with Facebook') }}&nbsp;<span class="px-3 py-2 rounded-circle" style="background-color: #365899"><i class="fa fa-facebook"></i></span></a>
                                     </div>
                                 </div>
 
