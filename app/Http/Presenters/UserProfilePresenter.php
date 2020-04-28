@@ -61,7 +61,7 @@ class UserProfilePresenter extends ModelPresenter
 
     public function description(): string
     {
-        return nl2br($this->model->description);
+        return $this->model->description ? nl2br($this->model->description): '';
     }
 
     /**
