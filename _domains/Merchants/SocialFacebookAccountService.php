@@ -6,6 +6,7 @@ namespace Domain\Merchants;
 use App\Models\SocialFacebookAccount;
 use App\Models\Template;
 use App\Models\User;
+use Hash;
 use Laravel\Socialite\Contracts\User as ProviderUser;
 
 class SocialFacebookAccountService
