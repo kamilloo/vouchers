@@ -1,38 +1,39 @@
-@extends('layouts.crud')
+@extends('layouts.crud-list', [
+    'show_table' => $service_categories->count(),
+    'resource_name' => __('categories'),
 
+])
 
-@section('list')
-    <div class="row mb-4">
-        <div class="btn-group" role="group" aria-label="{{ __('Add Service Category') }}">
-            <a href="{{ route('service-categories.create') }}" type="button" class="btn btn-outline-info">{{ __('Add Service Category') }}</a>
-        </div>
-    </div>
-    @if($service_categories->count())
-        <table class="table table-bordered table-hover">
-            <thead class="thead-light">
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">{{ __('Title') }}</th>
-                <th scope="col">{{ __('Description') }}</th>
-                <th scope="col">{{ __('Active') }}</th>
-                <th scope="col">{{ __('Action') }}</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach($service_categories as $service_category)
-                <tr>
-                    <th class="align-middle" scope="row">{{ $service_category->id }}</th>
-                    <td class="align-middle">{{ $service_category->title }}</td>
-                    <td class="align-middle">{{ $service_category->description ?? '-' }}</td>
-                    <td class="align-middle">
-                        @if($service_category->active)
-                            <span class="badge-success px-2 py-1 rounded-circle"><span class="oi oi-check"></span></span>
+@section('button-group')
+    @include('partials.crud-list-add-button', [
+       'label' => __('Add Service Category'),
+       'href' => route('service-categories.create')
+    ])
+@endsection
 
-                        @else
-                            <span class="badge-danger px-2 py-1 rounded-circle"><span class="oi oi-x"></span></span>
-                        @endif
-                    </td>
-                    <td class="align-middle">
+@section('table-header')
+    <th scope="col">#</th>
+    <th scope="col">{{ __('Title') }}</th>
+    <th scope="col">{{ __('Description') }}</th>
+    <th scope="col">{{ __('Active') }}</th>
+    <th scope="col">{{ __('Action') }}</th>
+@endsection
+
+@section('table-content')
+    @foreach($service_categories as $service_category)
+        <tr>
+            <th class="align-middle" scope="row">{{ $service_category->id }}</th>
+            <td class="align-middle">{{ $service_category->title }}</td>
+            <td class="align-middle">{{ $service_category->description ?? '-' }}</td>
+            <td class="align-middle">
+                @if($service_category->active)
+                    <span class="badge-success px-2 py-1 rounded-circle"><span class="oi oi-check"></span></span>
+
+                @else
+                    <span class="badge-danger px-2 py-1 rounded-circle"><span class="oi oi-x"></span></span>
+                @endif
+            </td>
+            <td class="align-middle">
                     <span class="btn-toolbar" role="toolbar" aria-label="Toolbar for manage category">
                         <span class="btn-group mr-2" role="group" aria-label="Update button">
                             <a class="btn btn-outline-info" href="{{ route('service-categories.edit', $service_category) }}">{{ __('Edit') }}</a>
@@ -46,18 +47,13 @@
                         </span>
 
                     </span>
-                    </td>
-                </tr>
+            </td>
+        </tr>
 
-            @endforeach
-            </tbody>
+    @endforeach
 
-    </table>
-    <div class="m-auto col-6">
-        {{ $service_categories->links() }}
-    </div>
-    @else
-        <h4 class="p-3 mb-2 bg-warning text-dark rounded ">{{ __('There is not any :items yet.', ['items' => __('categories')]) }}</h4>
-    @endif
+@endsection
 
+@section('pagination')
+    {{ $service_categories->links() }}
 @endsection

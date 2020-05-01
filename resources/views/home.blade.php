@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center pb-md-5  pb-1">
-        <div class="col-md-8">
+        <div class="col-12 col-lg-8">
             <div class="card">
                 <div class="card-header">{{ __('Share your checkout shop') }}</div>
                 <div class="card-body">
@@ -19,7 +19,7 @@
                     @if(!$payments->count())
                     <img class="card-img-top" src="{{ asset('images/payments.png') }}">
                     @endif
-                    <div class="card-body">
+                    <div class="card-body table-responsive">
                         @if($payments->count())
                             <table class="table  table-bordered table-hover">
                                 <thead class="thead-light">
@@ -73,7 +73,7 @@
                 @if(!$orders->count())
                     <img class="card-img-top" src="{{ asset('images/clients.png') }}">
                 @endif
-                    <div class="card-body">
+                    <div class="card-body table-responsive">
                         @if($orders->count())
                             <table class="table  table-bordered table-hover">
                                 <thead>

@@ -1,10 +1,10 @@
 <template>
     <div class="form-inline">
-        <div class="form-group col-6">
+        <div class="form-group col-12 col-md-6">
             <label for="shopLinkInput" class="sr-only"></label>
             <input ref="shopLinkInput" type="text" class="form-control-plaintext" id="shopLinkInput" readonly v-model="shopLink">
         </div>
-        <div class="form-group col-6 tooltip1">
+        <div class="form-group col-12 col-md-6 tooltip1">
             <button type="button" @mouseout="outFunc" @click="copyShopLink" class="btn btn-primary mb-2">
                 <span class="tooltiptext" ref="myTooltip">Skopiuj do schowka</span>
                 Kopiuj adres

@@ -5,7 +5,7 @@
         @csrf
     <div class="container emp-profile">
 
-        <div class="row">
+        <div class="row pb-5">
             <div class="col-md-4">
                 @yield('logo')
             </div>

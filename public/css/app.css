@@ -54158,6 +54158,11 @@ main {
   margin: 50px;
 }
 
+@media (max-width: 576px) {
+  main {
+    margin: 0;
+  }
+}
 .emp-profile {
   padding: 3%;
   margin-top: 3%;

@@ -47121,7 +47121,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "form-inline" }, [
-    _c("div", { staticClass: "form-group col-6" }, [
+    _c("div", { staticClass: "form-group col-12 col-md-6" }, [
       _c("label", { staticClass: "sr-only", attrs: { for: "shopLinkInput" } }),
       _vm._v(" "),
       _c("input", {
@@ -47148,7 +47148,7 @@ var render = function() {
       })
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "form-group col-6 tooltip1" }, [
+    _c("div", { staticClass: "form-group col-12 col-md-6 tooltip1" }, [
       _c(
         "button",
         {
