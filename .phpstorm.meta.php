@@ -5,14 +5,13 @@ namespace PHPSTORM_META {
 
    /**
     * PhpStorm Meta file, to provide autocomplete information for PhpStorm
-    * Generated on 2020-04-28 17:03:51.
+    * Generated on 2020-05-04 18:16:43.
     *
     * @author Barry vd. Heuvel <barryvdh@gmail.com>
     * @see https://github.com/barryvdh/laravel-ide-helper
     */
     override(new \Illuminate\Contracts\Container\Container, map([
         '' => '@',
-        'App\Contractors\IPaymentGateway' => \Domain\Payments\SandboxGateway::class,
         'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
         'Illuminate\Bus\Dispatcher' => \Illuminate\Bus\Dispatcher::class,
         'Illuminate\Console\Scheduling\Schedule' => \Illuminate\Console\Scheduling\Schedule::class,
@@ -42,8 +41,6 @@ namespace PHPSTORM_META {
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'cache' => \Illuminate\Cache\CacheManager::class,
         'cache.store' => \Illuminate\Cache\Repository::class,
-        'command.app.name' => \Illuminate\Foundation\Console\AppNameCommand::class,
-        'command.auth.make' => \Illuminate\Auth\Console\AuthMakeCommand::class,
         'command.auth.resets.clear' => \Illuminate\Auth\Console\ClearResetsCommand::class,
         'command.cache.clear' => \Illuminate\Cache\Console\ClearCommand::class,
         'command.cache.forget' => \Illuminate\Cache\Console\ForgetCommand::class,
@@ -54,6 +51,7 @@ namespace PHPSTORM_META {
         'command.config.clear' => \Illuminate\Foundation\Console\ConfigClearCommand::class,
         'command.console.make' => \Illuminate\Foundation\Console\ConsoleMakeCommand::class,
         'command.controller.make' => \Illuminate\Routing\Console\ControllerMakeCommand::class,
+        'command.db.wipe' => \Illuminate\Database\Console\WipeCommand::class,
         'command.down' => \Illuminate\Foundation\Console\DownCommand::class,
         'command.dumpserver' => \BeyondCode\DumpServer\DumpServerCommand::class,
         'command.environment' => \Illuminate\Foundation\Console\EnvironmentCommand::class,
@@ -144,7 +142,7 @@ namespace PHPSTORM_META {
         'migrator' => \Illuminate\Database\Migrations\Migrator::class,
         'qrcode' => \SimpleSoftwareIO\QrCode\BaconQrCodeGenerator::class,
         'queue' => \Illuminate\Queue\QueueManager::class,
-        'queue.connection' => \Illuminate\Queue\SyncQueue::class,
+        'queue.connection' => \Illuminate\Queue\DatabaseQueue::class,
         'queue.failer' => \Illuminate\Queue\Failed\DatabaseFailedJobProvider::class,
         'queue.listener' => \Illuminate\Queue\Listener::class,
         'queue.worker' => \Illuminate\Queue\Worker::class,
@@ -179,7 +177,6 @@ namespace PHPSTORM_META {
     ]));
     override(\Illuminate\Container\Container::makeWith(0), map([
         '' => '@',
-        'App\Contractors\IPaymentGateway' => \Domain\Payments\SandboxGateway::class,
         'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
         'Illuminate\Bus\Dispatcher' => \Illuminate\Bus\Dispatcher::class,
         'Illuminate\Console\Scheduling\Schedule' => \Illuminate\Console\Scheduling\Schedule::class,
@@ -209,8 +206,6 @@ namespace PHPSTORM_META {
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'cache' => \Illuminate\Cache\CacheManager::class,
         'cache.store' => \Illuminate\Cache\Repository::class,
-        'command.app.name' => \Illuminate\Foundation\Console\AppNameCommand::class,
-        'command.auth.make' => \Illuminate\Auth\Console\AuthMakeCommand::class,
         'command.auth.resets.clear' => \Illuminate\Auth\Console\ClearResetsCommand::class,
         'command.cache.clear' => \Illuminate\Cache\Console\ClearCommand::class,
         'command.cache.forget' => \Illuminate\Cache\Console\ForgetCommand::class,
@@ -221,6 +216,7 @@ namespace PHPSTORM_META {
         'command.config.clear' => \Illuminate\Foundation\Console\ConfigClearCommand::class,
         'command.console.make' => \Illuminate\Foundation\Console\ConsoleMakeCommand::class,
         'command.controller.make' => \Illuminate\Routing\Console\ControllerMakeCommand::class,
+        'command.db.wipe' => \Illuminate\Database\Console\WipeCommand::class,
         'command.down' => \Illuminate\Foundation\Console\DownCommand::class,
         'command.dumpserver' => \BeyondCode\DumpServer\DumpServerCommand::class,
         'command.environment' => \Illuminate\Foundation\Console\EnvironmentCommand::class,
@@ -311,7 +307,7 @@ namespace PHPSTORM_META {
         'migrator' => \Illuminate\Database\Migrations\Migrator::class,
         'qrcode' => \SimpleSoftwareIO\QrCode\BaconQrCodeGenerator::class,
         'queue' => \Illuminate\Queue\QueueManager::class,
-        'queue.connection' => \Illuminate\Queue\SyncQueue::class,
+        'queue.connection' => \Illuminate\Queue\DatabaseQueue::class,
         'queue.failer' => \Illuminate\Queue\Failed\DatabaseFailedJobProvider::class,
         'queue.listener' => \Illuminate\Queue\Listener::class,
         'queue.worker' => \Illuminate\Queue\Worker::class,
@@ -346,7 +342,6 @@ namespace PHPSTORM_META {
     ]));
     override(\Illuminate\Contracts\Container\Container::make(0), map([
         '' => '@',
-        'App\Contractors\IPaymentGateway' => \Domain\Payments\SandboxGateway::class,
         'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
         'Illuminate\Bus\Dispatcher' => \Illuminate\Bus\Dispatcher::class,
         'Illuminate\Console\Scheduling\Schedule' => \Illuminate\Console\Scheduling\Schedule::class,
@@ -376,8 +371,6 @@ namespace PHPSTORM_META {
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'cache' => \Illuminate\Cache\CacheManager::class,
         'cache.store' => \Illuminate\Cache\Repository::class,
-        'command.app.name' => \Illuminate\Foundation\Console\AppNameCommand::class,
-        'command.auth.make' => \Illuminate\Auth\Console\AuthMakeCommand::class,
         'command.auth.resets.clear' => \Illuminate\Auth\Console\ClearResetsCommand::class,
         'command.cache.clear' => \Illuminate\Cache\Console\ClearCommand::class,
         'command.cache.forget' => \Illuminate\Cache\Console\ForgetCommand::class,
@@ -388,6 +381,7 @@ namespace PHPSTORM_META {
         'command.config.clear' => \Illuminate\Foundation\Console\ConfigClearCommand::class,
         'command.console.make' => \Illuminate\Foundation\Console\ConsoleMakeCommand::class,
         'command.controller.make' => \Illuminate\Routing\Console\ControllerMakeCommand::class,
+        'command.db.wipe' => \Illuminate\Database\Console\WipeCommand::class,
         'command.down' => \Illuminate\Foundation\Console\DownCommand::class,
         'command.dumpserver' => \BeyondCode\DumpServer\DumpServerCommand::class,
         'command.environment' => \Illuminate\Foundation\Console\EnvironmentCommand::class,
@@ -478,7 +472,7 @@ namespace PHPSTORM_META {
         'migrator' => \Illuminate\Database\Migrations\Migrator::class,
         'qrcode' => \SimpleSoftwareIO\QrCode\BaconQrCodeGenerator::class,
         'queue' => \Illuminate\Queue\QueueManager::class,
-        'queue.connection' => \Illuminate\Queue\SyncQueue::class,
+        'queue.connection' => \Illuminate\Queue\DatabaseQueue::class,
         'queue.failer' => \Illuminate\Queue\Failed\DatabaseFailedJobProvider::class,
         'queue.listener' => \Illuminate\Queue\Listener::class,
         'queue.worker' => \Illuminate\Queue\Worker::class,
@@ -513,7 +507,6 @@ namespace PHPSTORM_META {
     ]));
     override(\Illuminate\Contracts\Container\Container::makeWith(0), map([
         '' => '@',
-        'App\Contractors\IPaymentGateway' => \Domain\Payments\SandboxGateway::class,
         'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
         'Illuminate\Bus\Dispatcher' => \Illuminate\Bus\Dispatcher::class,
         'Illuminate\Console\Scheduling\Schedule' => \Illuminate\Console\Scheduling\Schedule::class,
@@ -543,8 +536,6 @@ namespace PHPSTORM_META {
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'cache' => \Illuminate\Cache\CacheManager::class,
         'cache.store' => \Illuminate\Cache\Repository::class,
-        'command.app.name' => \Illuminate\Foundation\Console\AppNameCommand::class,
-        'command.auth.make' => \Illuminate\Auth\Console\AuthMakeCommand::class,
         'command.auth.resets.clear' => \Illuminate\Auth\Console\ClearResetsCommand::class,
         'command.cache.clear' => \Illuminate\Cache\Console\ClearCommand::class,
         'command.cache.forget' => \Illuminate\Cache\Console\ForgetCommand::class,
@@ -555,6 +546,7 @@ namespace PHPSTORM_META {
         'command.config.clear' => \Illuminate\Foundation\Console\ConfigClearCommand::class,
         'command.console.make' => \Illuminate\Foundation\Console\ConsoleMakeCommand::class,
         'command.controller.make' => \Illuminate\Routing\Console\ControllerMakeCommand::class,
+        'command.db.wipe' => \Illuminate\Database\Console\WipeCommand::class,
         'command.down' => \Illuminate\Foundation\Console\DownCommand::class,
         'command.dumpserver' => \BeyondCode\DumpServer\DumpServerCommand::class,
         'command.environment' => \Illuminate\Foundation\Console\EnvironmentCommand::class,
@@ -645,7 +637,7 @@ namespace PHPSTORM_META {
         'migrator' => \Illuminate\Database\Migrations\Migrator::class,
         'qrcode' => \SimpleSoftwareIO\QrCode\BaconQrCodeGenerator::class,
         'queue' => \Illuminate\Queue\QueueManager::class,
-        'queue.connection' => \Illuminate\Queue\SyncQueue::class,
+        'queue.connection' => \Illuminate\Queue\DatabaseQueue::class,
         'queue.failer' => \Illuminate\Queue\Failed\DatabaseFailedJobProvider::class,
         'queue.listener' => \Illuminate\Queue\Listener::class,
         'queue.worker' => \Illuminate\Queue\Worker::class,
@@ -680,7 +672,6 @@ namespace PHPSTORM_META {
     ]));
     override(\App::make(0), map([
         '' => '@',
-        'App\Contractors\IPaymentGateway' => \Domain\Payments\SandboxGateway::class,
         'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
         'Illuminate\Bus\Dispatcher' => \Illuminate\Bus\Dispatcher::class,
         'Illuminate\Console\Scheduling\Schedule' => \Illuminate\Console\Scheduling\Schedule::class,
@@ -710,8 +701,6 @@ namespace PHPSTORM_META {
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'cache' => \Illuminate\Cache\CacheManager::class,
         'cache.store' => \Illuminate\Cache\Repository::class,
-        'command.app.name' => \Illuminate\Foundation\Console\AppNameCommand::class,
-        'command.auth.make' => \Illuminate\Auth\Console\AuthMakeCommand::class,
         'command.auth.resets.clear' => \Illuminate\Auth\Console\ClearResetsCommand::class,
         'command.cache.clear' => \Illuminate\Cache\Console\ClearCommand::class,
         'command.cache.forget' => \Illuminate\Cache\Console\ForgetCommand::class,
@@ -722,6 +711,7 @@ namespace PHPSTORM_META {
         'command.config.clear' => \Illuminate\Foundation\Console\ConfigClearCommand::class,
         'command.console.make' => \Illuminate\Foundation\Console\ConsoleMakeCommand::class,
         'command.controller.make' => \Illuminate\Routing\Console\ControllerMakeCommand::class,
+        'command.db.wipe' => \Illuminate\Database\Console\WipeCommand::class,
         'command.down' => \Illuminate\Foundation\Console\DownCommand::class,
         'command.dumpserver' => \BeyondCode\DumpServer\DumpServerCommand::class,
         'command.environment' => \Illuminate\Foundation\Console\EnvironmentCommand::class,
@@ -812,7 +802,7 @@ namespace PHPSTORM_META {
         'migrator' => \Illuminate\Database\Migrations\Migrator::class,
         'qrcode' => \SimpleSoftwareIO\QrCode\BaconQrCodeGenerator::class,
         'queue' => \Illuminate\Queue\QueueManager::class,
-        'queue.connection' => \Illuminate\Queue\SyncQueue::class,
+        'queue.connection' => \Illuminate\Queue\DatabaseQueue::class,
         'queue.failer' => \Illuminate\Queue\Failed\DatabaseFailedJobProvider::class,
         'queue.listener' => \Illuminate\Queue\Listener::class,
         'queue.worker' => \Illuminate\Queue\Worker::class,
@@ -847,7 +837,6 @@ namespace PHPSTORM_META {
     ]));
     override(\App::makeWith(0), map([
         '' => '@',
-        'App\Contractors\IPaymentGateway' => \Domain\Payments\SandboxGateway::class,
         'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
         'Illuminate\Bus\Dispatcher' => \Illuminate\Bus\Dispatcher::class,
         'Illuminate\Console\Scheduling\Schedule' => \Illuminate\Console\Scheduling\Schedule::class,
@@ -877,8 +866,6 @@ namespace PHPSTORM_META {
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'cache' => \Illuminate\Cache\CacheManager::class,
         'cache.store' => \Illuminate\Cache\Repository::class,
-        'command.app.name' => \Illuminate\Foundation\Console\AppNameCommand::class,
-        'command.auth.make' => \Illuminate\Auth\Console\AuthMakeCommand::class,
         'command.auth.resets.clear' => \Illuminate\Auth\Console\ClearResetsCommand::class,
         'command.cache.clear' => \Illuminate\Cache\Console\ClearCommand::class,
         'command.cache.forget' => \Illuminate\Cache\Console\ForgetCommand::class,
@@ -889,6 +876,7 @@ namespace PHPSTORM_META {
         'command.config.clear' => \Illuminate\Foundation\Console\ConfigClearCommand::class,
         'command.console.make' => \Illuminate\Foundation\Console\ConsoleMakeCommand::class,
         'command.controller.make' => \Illuminate\Routing\Console\ControllerMakeCommand::class,
+        'command.db.wipe' => \Illuminate\Database\Console\WipeCommand::class,
         'command.down' => \Illuminate\Foundation\Console\DownCommand::class,
         'command.dumpserver' => \BeyondCode\DumpServer\DumpServerCommand::class,
         'command.environment' => \Illuminate\Foundation\Console\EnvironmentCommand::class,
@@ -979,7 +967,7 @@ namespace PHPSTORM_META {
         'migrator' => \Illuminate\Database\Migrations\Migrator::class,
         'qrcode' => \SimpleSoftwareIO\QrCode\BaconQrCodeGenerator::class,
         'queue' => \Illuminate\Queue\QueueManager::class,
-        'queue.connection' => \Illuminate\Queue\SyncQueue::class,
+        'queue.connection' => \Illuminate\Queue\DatabaseQueue::class,
         'queue.failer' => \Illuminate\Queue\Failed\DatabaseFailedJobProvider::class,
         'queue.listener' => \Illuminate\Queue\Listener::class,
         'queue.worker' => \Illuminate\Queue\Worker::class,
@@ -1014,7 +1002,6 @@ namespace PHPSTORM_META {
     ]));
     override(\app(0), map([
         '' => '@',
-        'App\Contractors\IPaymentGateway' => \Domain\Payments\SandboxGateway::class,
         'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
         'Illuminate\Bus\Dispatcher' => \Illuminate\Bus\Dispatcher::class,
         'Illuminate\Console\Scheduling\Schedule' => \Illuminate\Console\Scheduling\Schedule::class,
@@ -1044,8 +1031,6 @@ namespace PHPSTORM_META {
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'cache' => \Illuminate\Cache\CacheManager::class,
         'cache.store' => \Illuminate\Cache\Repository::class,
-        'command.app.name' => \Illuminate\Foundation\Console\AppNameCommand::class,
-        'command.auth.make' => \Illuminate\Auth\Console\AuthMakeCommand::class,
         'command.auth.resets.clear' => \Illuminate\Auth\Console\ClearResetsCommand::class,
         'command.cache.clear' => \Illuminate\Cache\Console\ClearCommand::class,
         'command.cache.forget' => \Illuminate\Cache\Console\ForgetCommand::class,
@@ -1056,6 +1041,7 @@ namespace PHPSTORM_META {
         'command.config.clear' => \Illuminate\Foundation\Console\ConfigClearCommand::class,
         'command.console.make' => \Illuminate\Foundation\Console\ConsoleMakeCommand::class,
         'command.controller.make' => \Illuminate\Routing\Console\ControllerMakeCommand::class,
+        'command.db.wipe' => \Illuminate\Database\Console\WipeCommand::class,
         'command.down' => \Illuminate\Foundation\Console\DownCommand::class,
         'command.dumpserver' => \BeyondCode\DumpServer\DumpServerCommand::class,
         'command.environment' => \Illuminate\Foundation\Console\EnvironmentCommand::class,
@@ -1146,7 +1132,7 @@ namespace PHPSTORM_META {
         'migrator' => \Illuminate\Database\Migrations\Migrator::class,
         'qrcode' => \SimpleSoftwareIO\QrCode\BaconQrCodeGenerator::class,
         'queue' => \Illuminate\Queue\QueueManager::class,
-        'queue.connection' => \Illuminate\Queue\SyncQueue::class,
+        'queue.connection' => \Illuminate\Queue\DatabaseQueue::class,
         'queue.failer' => \Illuminate\Queue\Failed\DatabaseFailedJobProvider::class,
         'queue.listener' => \Illuminate\Queue\Listener::class,
         'queue.worker' => \Illuminate\Queue\Worker::class,
@@ -1181,7 +1167,6 @@ namespace PHPSTORM_META {
     ]));
     override(\resolve(0), map([
         '' => '@',
-        'App\Contractors\IPaymentGateway' => \Domain\Payments\SandboxGateway::class,
         'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
         'Illuminate\Bus\Dispatcher' => \Illuminate\Bus\Dispatcher::class,
         'Illuminate\Console\Scheduling\Schedule' => \Illuminate\Console\Scheduling\Schedule::class,
@@ -1211,8 +1196,6 @@ namespace PHPSTORM_META {
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'cache' => \Illuminate\Cache\CacheManager::class,
         'cache.store' => \Illuminate\Cache\Repository::class,
-        'command.app.name' => \Illuminate\Foundation\Console\AppNameCommand::class,
-        'command.auth.make' => \Illuminate\Auth\Console\AuthMakeCommand::class,
         'command.auth.resets.clear' => \Illuminate\Auth\Console\ClearResetsCommand::class,
         'command.cache.clear' => \Illuminate\Cache\Console\ClearCommand::class,
         'command.cache.forget' => \Illuminate\Cache\Console\ForgetCommand::class,
@@ -1223,6 +1206,7 @@ namespace PHPSTORM_META {
         'command.config.clear' => \Illuminate\Foundation\Console\ConfigClearCommand::class,
         'command.console.make' => \Illuminate\Foundation\Console\ConsoleMakeCommand::class,
         'command.controller.make' => \Illuminate\Routing\Console\ControllerMakeCommand::class,
+        'command.db.wipe' => \Illuminate\Database\Console\WipeCommand::class,
         'command.down' => \Illuminate\Foundation\Console\DownCommand::class,
         'command.dumpserver' => \BeyondCode\DumpServer\DumpServerCommand::class,
         'command.environment' => \Illuminate\Foundation\Console\EnvironmentCommand::class,
@@ -1313,7 +1297,7 @@ namespace PHPSTORM_META {
         'migrator' => \Illuminate\Database\Migrations\Migrator::class,
         'qrcode' => \SimpleSoftwareIO\QrCode\BaconQrCodeGenerator::class,
         'queue' => \Illuminate\Queue\QueueManager::class,
-        'queue.connection' => \Illuminate\Queue\SyncQueue::class,
+        'queue.connection' => \Illuminate\Queue\DatabaseQueue::class,
         'queue.failer' => \Illuminate\Queue\Failed\DatabaseFailedJobProvider::class,
         'queue.listener' => \Illuminate\Queue\Listener::class,
         'queue.worker' => \Illuminate\Queue\Worker::class,

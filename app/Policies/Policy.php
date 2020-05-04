@@ -17,6 +17,11 @@ class Policy
         return true;
     }
 
+    public function viewAny(User $user)
+    {
+        return true;
+    }
+
     public function edit(User $user, Model $model)
     {
         return $model->isOwn($user);
