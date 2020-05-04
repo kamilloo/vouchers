@@ -1904,6 +1904,12 @@ nav a:hover {
   color: white;
 }
 
+.nav-hamburger {
+    background-image: -webkit-linear-gradient( 0deg, rgb(230,101,135) 0%, rgb(240,148,88) 100%);
+    padding:20px;
+    z-index: 1;
+}
+
 body {
   background-attachment: fixed;
   background-image: url("../img/body-bg.jpg");

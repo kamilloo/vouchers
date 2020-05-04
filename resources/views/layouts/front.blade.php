@@ -4,7 +4,7 @@
     <!-- Mobile Specific Meta -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon-->
-    <link rel="shortcut icon" href="welcome/img/fav.png">
+    <link rel="shortcut icon" href="images/my-vouchers-icon.png">
     <!-- Author Meta -->
     <meta name="author" content="CodePixar">
     <!-- Meta Description -->
@@ -13,6 +13,13 @@
     <meta name="keywords" content="">
     <!-- meta character set -->
     <meta charset="UTF-8">
+
+    <meta property="og:url"                content="{{ route('welcome') }}" />
+    <meta property="og:type"               content="website" />
+    <meta property="og:title"              content="MyVouchers" />
+    <meta property="og:description"        content="Sprzedajemy bony upominkowe" />
+    <meta property="og:image"              content="{{ asset('welcome/img/body-bg.jpg') }}" />
+
     <!-- Site Title -->
     <title>MyVouchers</title>
 
