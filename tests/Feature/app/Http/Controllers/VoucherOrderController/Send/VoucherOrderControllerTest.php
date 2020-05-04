@@ -118,9 +118,9 @@ class VoucherOrderControllerTest extends TestCase
     }
 
     /**
-     * @return \Illuminate\Foundation\Testing\TestResponse
+     * @return \Illuminate\Testing\TestResponse
      */
-    protected function sendVoucherSendRequest(array $entry_data): \Illuminate\Foundation\Testing\TestResponse
+    protected function sendVoucherSendRequest(array $entry_data): \Illuminate\Testing\TestResponse
     {
         return $this->post(route('voucher.send', $this->order), $entry_data);
     }

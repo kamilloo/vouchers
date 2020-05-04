@@ -6,6 +6,7 @@ use App\Http\Middleware\CanOrderProceeded;
 use App\Http\Middleware\OrderIsActive;
 use App\Http\Middleware\PaymentOrderIsActive;
 use App\Http\Middleware\VoucherIsWaiting;
+use Fruitcake\Cors\HandleCors;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 use Spatie\Cors\Cors;
 
@@ -24,7 +25,7 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \App\Http\Middleware\TrustProxies::class,
-        Cors::class,
+        HandleCors::class,
     ];
 
     /**
