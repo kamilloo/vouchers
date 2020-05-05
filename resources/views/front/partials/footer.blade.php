@@ -47,8 +47,7 @@
                         <div class="desc">
                             <h6 class="title text-uppercase">Email Adres</h6>
                             <div class="contact">
-                                <a href="mailto:pietka.kasia3@gmail.com">pietka.kasia3@gmail.com</a> <br>
-                                <a href="mailto:kamil.pietka85@gmail.com">kamil.pietka85@gmail.com</a>
+                                <a href="mailto:myvouchers.pl@gmail.com">myvouchers.pl@gmail.com</a>
                             </div>
                         </div>
                     </div>
