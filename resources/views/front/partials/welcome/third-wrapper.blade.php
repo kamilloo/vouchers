@@ -22,30 +22,7 @@
     </section>
     <!-- End Story Area -->
     <!-- Start Subscription Area -->
-    <section class="subscription-area">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <div class="section-title text-center">
-                        <h3>Chcesz wiedzieć więcej, zapraszamy do kontaktu</h3>
-                        <span class="text-uppercase">Jesteśmy dla Ciebie</span>
-                    </div>
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-lg-6">
-                    <div id="mc_embed_signup">
-                        <form novalidate action="{{ route('subscribe') }}" method="post" class="subscription relative">
-                            @csrf
-                            <input type="email" name="email" placeholder="Podaj adres email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email address'" required>
-                            <button class="primary-btn hover d-inline-flex align-items-center"><span class="mr-10">Wyślij</span><span class="lnr lnr-arrow-right"></span></button>
-                            <div class="info"></div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    @include('front.partials.subscriber-form')
     <!-- End Subscription Area -->
     <!-- Start Footer Widget Area -->
     <section class="footer-widget-area">
