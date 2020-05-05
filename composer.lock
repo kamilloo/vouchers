@@ -282,12 +282,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kamilloo/laravel-przelewy24.git",
-                "reference": "a61d3537656c9c63b9f0ac2210365b8cb5816522"
+                "reference": "a290d8b4ac410f276e933d62dc435a7b57ac5d50"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kamilloo/laravel-przelewy24/zipball/a61d3537656c9c63b9f0ac2210365b8cb5816522",
-                "reference": "a61d3537656c9c63b9f0ac2210365b8cb5816522",
+                "url": "https://api.github.com/repos/kamilloo/laravel-przelewy24/zipball/a290d8b4ac410f276e933d62dc435a7b57ac5d50",
+                "reference": "a290d8b4ac410f276e933d62dc435a7b57ac5d50",
                 "shasum": ""
             },
             "require": {
@@ -323,7 +323,7 @@
             "support": {
                 "source": "https://github.com/kamilloo/laravel-przelewy24/tree/take_out_setting_provider_credentials"
             },
-            "time": "2020-05-01T19:00:09+00:00"
+            "time": "2020-05-04T19:21:01+00:00"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
