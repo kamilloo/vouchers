@@ -36,7 +36,7 @@
     <link rel="stylesheet" href="welcome/css/main.css">
 </head>
 <body>
-<div style="position: fixed; bottom: 0; width: 100%; background-color: orange">
+<div style="position: fixed; bottom: 0; width: 100%; background-color: orange; z-index: 3">
         @include('cookieConsent::index')
 </div>
 @yield('content')
