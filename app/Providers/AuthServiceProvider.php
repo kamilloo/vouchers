@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Payment;
 use App\Models\Service;
 use App\Models\ServiceCategory;
 use App\Models\ServicePackage;
@@ -24,6 +25,7 @@ class AuthServiceProvider extends ServiceProvider
         ServiceCategory::class => Policy::class,
         Service::class => Policy::class,
         ServicePackage::class => Policy::class,
+        Payment::class => Policy::class,
 
     ];
 

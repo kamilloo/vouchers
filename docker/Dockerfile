@@ -1,4 +1,4 @@
-FROM php:7.4-fpm-alpine
+FROM php:7.2-fpm-alpine
 
 ARG BUILD_DATE
 ARG VCS_REF
@@ -26,19 +26,19 @@ LABEL Maintainer="Zaher Ghaibeh <z@zah.me>" \
 RUN set -ex \
   	&& apk update \
     && apk add --no-cache git mysql-client curl openssh-client icu libpng libjpeg-turbo postgresql-dev libffi-dev \
-    && apk add --no-cache --virtual build-dependencies icu-dev libxml2-dev freetype-dev libpng-dev libjpeg-turbo-dev g++ make autoconf \
+    && apk add --no-cache --virtual build-dependencies icu-dev libxml2-dev freetype-dev libpng-dev libjpeg-turbo-dev g++ make autoconf zlib-dev libzip-dev zip unzip\
     && docker-php-source extract \
     && pecl install xdebug redis \
     && docker-php-ext-enable xdebug redis \
     && docker-php-source delete \
-    && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
-    && docker-php-ext-install pdo pgsql pdo_mysql pdo_pgsql intl zip gd bcmath \
+    && docker-php-ext-install pdo pdo_mysql intl zip gd bcmath \
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
     && cd  / && rm -fr /src \
     && apk del build-dependencies \
     && rm -rf /tmp/*
 
 COPY xdebug.ini /usr/local/etc/php/conf.d/xdebug-dev.ini
+COPY memory-limit-php.ini /usr/local/etc/php/conf.d/memory-limit-php.ini
 
 USER 1000:1000
 

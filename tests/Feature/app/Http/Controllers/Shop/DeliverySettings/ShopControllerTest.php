@@ -135,9 +135,9 @@ class ShopControllerTest extends TestCase
     }
 
     /**
-     * @return \Illuminate\Foundation\Testing\TestResponse
+     * @return \Illuminate\Testing\TestResponse
      */
-    protected function sendStoreDeliverySettingsRequest(array $entry_data): \Illuminate\Foundation\Testing\TestResponse
+    protected function sendStoreDeliverySettingsRequest(array $entry_data): \Illuminate\Testing\TestResponse
     {
         return $this->postJson(route('shop.delivery-settings'), $entry_data);
     }

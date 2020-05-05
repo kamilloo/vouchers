@@ -74,9 +74,9 @@ class SubscriberControllerTest extends TestCase
     /**
      * @param array $entry_data
      *
-     * @return \Illuminate\Foundation\Testing\TestResponse
+     * @return \Illuminate\Testing\TestResponse
      */
-    protected function sendAddSubscribeRequest(array $entry_data): \Illuminate\Foundation\Testing\TestResponse
+    protected function sendAddSubscribeRequest(array $entry_data): \Illuminate\Testing\TestResponse
     {
         return $this->postJson(route('subscribe'), $entry_data);
     }
