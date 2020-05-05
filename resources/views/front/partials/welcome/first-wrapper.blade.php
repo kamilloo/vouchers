@@ -59,7 +59,7 @@
                     <div class="single-service">
                         <div class="thumb" style="background: url(welcome/img/s1.jpg);">
                             <div class="overlay overlay-content d-flex justify-content-center align-items-center">
-                                <a href="{{ route('home') }}" class="primary-btn hover d-inline-flex align-items-center"><span class="mr-10">Get Started</span><span class="lnr lnr-arrow-right"></span></a>
+                                <a href="{{ route('home') }}" class="primary-btn hover d-inline-flex align-items-center"><span class="mr-10">Rozpocznij</span><span class="lnr lnr-arrow-right"></span></a>
                             </div>
                         </div>
                     </div>

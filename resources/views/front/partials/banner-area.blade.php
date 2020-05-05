@@ -9,7 +9,7 @@
 Przedsiębiorca po zarejestrowaniu konta otrzymuje dostęp do panelu zarządzania swoją platformą gdzie odnajdzie link do swojej platformy sprzedażowej.
 </span></p>
 
-                    <a href="{{ route('home') }}" class="primary-btn d-inline-flex align-items-center"><span class="mr-10">Get Started</span><span class="lnr lnr-arrow-right"></span></a>
+                    <a href="{{ route('home') }}" class="primary-btn d-inline-flex align-items-center"><span class="mr-10">Rozpocznij</span><span class="lnr lnr-arrow-right"></span></a>
                 </div>
             </div>
         </div>

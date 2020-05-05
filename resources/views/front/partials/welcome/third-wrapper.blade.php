@@ -14,7 +14,7 @@
                     <div class="story-box">
                         <h6 class="text-uppercase">Od początku...</h6>
                         <p>Internet łączy ludzi. Chcemy być częścią tego wspaniałego świata.</p>
-                        <a href="{{ route('home') }}" class="primary-btn hover d-inline-flex align-items-center"><span class="mr-10">Get Started</span><span class="lnr lnr-arrow-right"></span></a>
+                        <a href="{{ route('home') }}" class="primary-btn hover d-inline-flex align-items-center"><span class="mr-10">Rozpocznij</span><span class="lnr lnr-arrow-right"></span></a>
                     </div>
                 </div>
             </div>
@@ -58,7 +58,7 @@
                         </div>
                         <div class="desc">
                             <h6 class="title text-uppercase">Adres</h6>
-                            <p>ul. Mossego 2<br>Grodziks Wlkp.</p>
+                            <p>ul. Mossego 2<br>Grodzisk Wlkp.</p>
                         </div>
                     </div>
                 </div>

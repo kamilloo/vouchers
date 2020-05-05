@@ -35,7 +35,7 @@
                         </div>
                         <div class="desc">
                             <h6 class="title text-uppercase">Adres</h6>
-                            <p>ul. Mossego 2<br>Grodziks Wlkp.</p>
+                            <p>ul. Mossego 2<br>Grodzisk Wlkp.</p>
                         </div>
                     </div>
                 </div>
