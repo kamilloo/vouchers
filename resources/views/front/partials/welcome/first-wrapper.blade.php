@@ -13,7 +13,7 @@
                         </div>
                         <div class="desc">
                             <h6 class="title text-uppercase">Pełna personalizacja</h6>
-                            <p>Dopasuj platformę do swoich potrzeb, wybierz jedną z dostępnych templatek lub stwórz swoją stronę.</p>
+                            <p>Dopasuj platformę do swoich potrzeb, wybierz jedną z dostępnych szablonów lub stwórz swoją stronę.</p>
                         </div>
                     </div>
                 </div>
