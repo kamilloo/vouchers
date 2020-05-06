@@ -8,10 +8,20 @@ use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Http;
 
 class SubscriberControllerTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        Http::fake([
+            Http::response(['success' => true], 200)
+        ]);
+    }
+
     /**
      * @test
      */
@@ -22,6 +32,7 @@ class SubscriberControllerTest extends TestCase
         $response->assertStatus(422);
 
         $response->assertJsonValidationErrors('email');
+        $response->assertJsonValidationErrors('captcha');
     }
 
     /**
@@ -30,7 +41,8 @@ class SubscriberControllerTest extends TestCase
     public function subscribe_return_success_message()
     {
         $email = 'email@email.com';
-        $response = $this->sendAddSubscribeRequest(compact('email'));
+        $captcha = 'captcha';
+        $response = $this->sendAddSubscribeRequest(compact('email', 'captcha'));
 
         $response->assertOk();
     }
@@ -41,7 +53,8 @@ class SubscriberControllerTest extends TestCase
     public function subscriber_was_added_to_subscriber_list()
     {
         $email = 'email@email.com';
-        $response = $this->sendAddSubscribeRequest(compact('email'));
+        $captcha = 'captcha';
+        $response = $this->sendAddSubscribeRequest(compact('email', 'captcha'));
 
         $this->assertDatabaseHas('subscribers', [
             'email' => $email
@@ -55,8 +68,9 @@ class SubscriberControllerTest extends TestCase
     public function subscriber_already_exist_in_subscriber_list()
     {
         $email = 'email@email.com';
+        $captcha = 'captcha';
         $existing_subscriber = $this->createSubscriber(compact('email'));
-        $response = $this->sendAddSubscribeRequest(compact('email'));
+        $response = $this->sendAddSubscribeRequest(compact('email', 'captcha'));
 
         $this->assertDatabaseHas('subscribers', [
             'email' => $email

@@ -23,6 +23,7 @@
         "devpark/laravel-przelewy24": "dev-take_out_setting_provider_credentials",
         "fideloper/proxy": "^4.0",
         "fruitcake/laravel-cors": "^2.0",
+        "guzzlehttp/guzzle": "^6.5",
         "hashids/hashids": "^4.0",
         "jenssegers/optimus": "^1.0",
         "laravel/framework": "^7.0",

@@ -75,6 +75,7 @@ $(document).ready(function(){
                     type: form.attr('method'),
                     data: JSON.stringify({
                         email: $(form).find('input[name=email]').val(),
+                        captcha: $(form).find('input[name="g-recaptcha-response"]').val()
                     }),
                     success: (response) => {
                         let info = wrapper.find('.info');
