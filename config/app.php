@@ -173,6 +173,7 @@ return [
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
+        App\Providers\CanvasServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
         Devpark\Transfers24\Providers\Transfers24ServiceProvider::class,

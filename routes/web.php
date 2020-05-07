@@ -139,3 +139,13 @@ foreach ($hash_models as $model)
 Route::get('login/facebook', 'Auth\LoginFacebookController@redirectToProvider')->name('login-facebook');
 Route::get('login/facebook/callback', 'Auth\LoginFacebookController@handleProviderCallback')->name('login-facebook-callback');
 
+
+Route::get('login/admin', 'Auth\LoginAdminController@showLoginForm')->name('show-login-admin');
+Route::post('login/admin', 'Auth\LoginAdminController@login')->name('login-admin');
+
+Route::middleware('auth:admin')->namespace('Admin')->prefix('admin')->group(function () {
+    Route::get('dashboard', 'DashboardController@index')->name('admin.dashboard');
+    Route::get('users', 'UserController@index')->name('admin.users.index');
+    Route::get('subscribers', 'SubscriberController@index')->name('admin.subscribers.index');
+
+});
