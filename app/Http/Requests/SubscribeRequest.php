@@ -23,7 +23,7 @@ class SubscribeRequest extends PassingEmailRequest
     public function rules()
     {
         return array_merge(parent::rules(), [
-            'captcha' => ['required', 'string'],
+//            'captcha' => ['required', 'string'],
         ]);
     }
 }
