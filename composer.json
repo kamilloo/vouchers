@@ -20,6 +20,7 @@
         "ext-openssl": "*",
         "barryvdh/laravel-dompdf": "^0.8.5",
         "cnvs/canvas": "^5.3",
+        "cnvs/studio": "^1.0",
         "devpark/laravel-przelewy24": "dev-take_out_setting_provider_credentials",
         "fideloper/proxy": "^4.0",
         "fruitcake/laravel-cors": "^2.0",
