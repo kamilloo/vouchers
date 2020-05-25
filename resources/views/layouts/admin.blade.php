@@ -42,6 +42,7 @@
                         <li class="nav-item"><a class="nav-link" href="{{ route('admin.dashboard') }}">{{ __('Home') }}</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('admin.users.index') }}">{{ __('Users') }}</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('admin.subscribers.index') }}">{{ __('Subscribers') }}</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('canvas') }}">{{ __('Blog') }}</a></li>
                     </ul>
                     @endauth
                     <!-- Right Side Of Navbar -->
@@ -103,6 +104,7 @@
                         <li><a class="text-muted" href="{{ route('payments.index') }}">{{ __('Payments') }}</a></li>
                         <li><a class="text-muted" href="{{ route('orders.index') }}">{{ __('Orders') }}</a></li>
                         <li><a class="text-muted" href="{{ route('home') }}">{{ __('Home') }}</a></li>
+                        <li><a class="text-muted" href="{{ route('canvas') }}">{{ __('Blog') }}</a></li>
                     </ul>
                     @endauth
                 </div>
@@ -116,13 +118,7 @@
 {{--                    </ul>--}}
                 </div>
                 <div class="col-md">
-                    <h5>{{ __('About') }}</h5>
-                    <ul class="list-unstyled text-small">
-                        <li><a class="text-muted" href="{{ route('teams') }}">{{ __('Team') }}</a></li>
-                        <li><a class="text-muted" href="{{ route('locations') }}">{{ __('Locations') }}</a></li>
-                        <li><a class="text-muted" href="{{ route('privacy') }}">{{ __('Privacy') }}</a></li>
-                        <li><a class="text-muted" href="{{ route('terms') }}">{{ __('Terms') }}</a></li>
-                    </ul>
+                    @include('partials.footer')
                 </div>
             </div>
         </div>

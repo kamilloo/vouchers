@@ -2,54 +2,30 @@
     <div>
         <vue-headful
             v-if="isReady"
-            :title="post.title + ' — Studio'"
+            :title="post.title + ' — MyVouchers'"
             :description="post.summary"
             :image="post.featured_image"
             :url="meta.canonical_link"
         />
-
-        <navbar>
-            <router-link slot="extra" :to="{name: 'home'}" class="btn btn-sm btn-outline-secondary">
-                Go home
-            </router-link>
-
-            <div v-if="isReady && postBelongsToAuthUser" class="dropdown" slot="actions">
-                <a href="#" id="actionDropdownMenu" class="ml-3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="22" viewBox="0 0 24 24" class="icon-cog primary">
-                        <path d="M6.8 3.45c.87-.52 1.82-.92 2.83-1.17a2.5 2.5 0 0 0 4.74 0c1.01.25 1.96.65 2.82 1.17a2.5 2.5 0 0 0 3.36 3.36c.52.86.92 1.8 1.17 2.82a2.5 2.5 0 0 0 0 4.74c-.25 1.01-.65 1.96-1.17 2.82a2.5 2.5 0 0 0-3.36 3.36c-.86.52-1.8.92-2.82 1.17a2.5 2.5 0 0 0-4.74 0c-1.01-.25-1.96-.65-2.82-1.17a2.5 2.5 0 0 0-3.36-3.36 9.94 9.94 0 0 1-1.17-2.82 2.5 2.5 0 0 0 0-4.74c.25-1.01.65-1.96 1.17-2.82a2.5 2.5 0 0 0 3.36-3.36zM12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/>
-                        <circle cx="12" cy="12" r="2"/>
-                    </svg>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="actionDropdownMenu">
-                    <a :href="'/' + canvasPath + '/posts/' + post.id + '/edit'" class="dropdown-item">
-                        Edit post
-                    </a>
-                    <a :href="'/' + canvasPath + '/stats/' + post.id" class="dropdown-item">
-                        View stats
-                    </a>
-                </div>
-            </div>
-        </navbar>
-
-        <div v-if="isReady" class="mt-5">
-            <div class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1 col-md-12">
+        <div v-if="isReady">
+            <div class="col-lg-10 offset-lg-1 col-md-12 card px-4">
                 <h1 class="text-dark font-serif pt-5 mb-4">{{ post.title }}</h1>
 
-                <div class="media py-1">
-                    <router-link :to="{name: 'user', params: { identifier: publicIdentifier(post) }}">
-                        <img :src="avatar"
-                             class="mr-3 rounded-circle shadow-inner"
-                             style="width: 50px"
-                             :alt="user.name">
-                    </router-link>
+<!--                <div class="media py-1">-->
+<!--                    <router-link :to="{name: 'user', params: { identifier: publicIdentifier(post) }}">-->
+<!--                        <img :src="avatar"-->
+<!--                             class="mr-3 rounded-circle shadow-inner"-->
+<!--                             style="width: 50px"-->
+<!--                             :alt="user.name">-->
+<!--                    </router-link>-->
 
-                    <div class="media-body">
-                        <router-link :to="{name: 'user', params: { identifier: publicIdentifier(post) }}" class="text-decoration-none">
-                            <p class="my-0">{{ user.name }}</p>
-                        </router-link>
-                        <span class="text-secondary">{{ moment(post.published_at).format('MMM D, Y') }} — {{ post.read_time }}</span>
-                    </div>
-                </div>
+<!--                    <div class="media-body">-->
+<!--                        <router-link :to="{name: 'user', params: { identifier: publicIdentifier(post) }}" class="text-decoration-none">-->
+<!--                            <p class="my-0">{{ user.name }}</p>-->
+<!--                        </router-link>-->
+<!--                        <span class="text-secondary">{{ moment(post.published_at).format('MMM D, Y') }} — {{ post.read_time }}</span>-->
+<!--                    </div>-->
+<!--                </div>-->
 
                 <img v-if="post.featured_image"
                      :src="post.featured_image"

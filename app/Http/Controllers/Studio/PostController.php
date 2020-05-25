@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Studio;
 
-use App\User;
+use App\Models\User;
 use Canvas\Events\PostViewed;
 use Canvas\Post;
 use Canvas\UserMeta;
