@@ -29,7 +29,7 @@
     <footer class="pt-2 border-top bg-light mt-n5">
         <div class="container-fluid">
             <div class="col-sm text-center mb-3">
-                <img class="img-fluid" src="{{ config('app.name', 'Voucher') }}" alt="Voucher" width="24" height="24">
+                <img class="img-fluid" src="{{ asset('images/my-vouchers_logo.png') }}" alt="{{ config('app.name', 'Laravel') }}" width="24" height="24">
                 <span class="text-muted">© {{ \Carbon\Carbon::today()->year }}</span>
             </div>
             <div class="row text-center mx-5">
