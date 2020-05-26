@@ -66711,9 +66711,7 @@ var render = function() {
                       "p",
                       { staticClass: "text-center font-italic pt-3 my-5" },
                       [
-                        _vm._v(
-                          "\n                    This post was originally published on "
-                        ),
+                        _vm._v("\n                    Publikacja na stronie "),
                         _c(
                           "a",
                           {
@@ -66771,7 +66769,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("h4", { staticClass: "mb-4 border-bottom pb-2" }, [
       _c("span", { staticClass: "border-bottom border-dark pb-2" }, [
-        _vm._v("Related")
+        _vm._v("Powiązane")
       ])
     ])
   }

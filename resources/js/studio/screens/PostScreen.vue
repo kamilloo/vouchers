@@ -56,14 +56,14 @@
             <div v-if="meta.canonical_link" class="post-content position-relative align-items-center overflow-y-visible font-serif">
                 <hr>
                 <p class="text-center font-italic pt-3 my-5">
-                    This post was originally published on <a :href="meta.canonical_link" target="_blank" rel="noopener">{{ parseURL(meta.canonical_link).hostname }}</a>
+                    Publikacja na stronie <a :href="meta.canonical_link" target="_blank" rel="noopener">{{ parseURL(meta.canonical_link).hostname }}</a>
                 </p>
             </div>
 
             <main role="main" class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1 col-md-12">
                 <div v-if="related.length > 0">
                     <h4 class="mb-4 border-bottom pb-2">
-                        <span class="border-bottom border-dark pb-2">Related</span>
+                        <span class="border-bottom border-dark pb-2">Powiązane</span>
                     </h4>
 
                     <post-list :posts="related"></post-list>
