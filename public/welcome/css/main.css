@@ -1866,7 +1866,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 nav {
-  margin-right: 70px;
+  margin-right: 10px;
   -webkit-transition: all 0.3s ease 0s;
   -moz-transition: all 0.3s ease 0s;
   -o-transition: all 0.3s ease 0s;
@@ -1889,11 +1889,11 @@ nav.hide {
 }
 
 nav a {
-  font-size: 12px;
+  font-size: 16px;
   font-weight: 500;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.7);
-  margin: 0 15px;
+  margin: 0 10px;
 }
 
 nav a:last-child {

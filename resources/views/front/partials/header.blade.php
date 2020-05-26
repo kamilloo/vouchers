@@ -7,7 +7,7 @@
                 </div>
                 <div class="main-menubar d-none d-md-flex align-items-center">
                     <nav>
-                        <a href="{{ route('home') }}">Home</a>
+                        <a href="{{ route('home') }}">{{ __('Login') }}</a>
                         <a href="{{ route('studio') }}">{{ __('Blog') }}</a>
                         <a href="{{ route('teams') }}">{{ __('Team') }}</a>
                         <a href="{{ route('locations') }}">{{ __('Locations') }}</a>
@@ -17,7 +17,7 @@
                 </div>
                 <div class="main-menubar d-sm-flex align-items-center d-md-none">
                     <nav class="hide nav-hamburger">
-                        <a href="{{ route('home') }}">Home</a>
+                        <a href="{{ route('home') }}">{{ __('Login') }}</a>
                         <a href="{{ route('studio') }}">{{ __('Blog') }}</a>
                         <a href="{{ route('teams') }}">{{ __('Team') }}</a>
                         <a href="{{ route('locations') }}">{{ __('Locations') }}</a>
