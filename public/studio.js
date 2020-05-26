@@ -1841,6 +1841,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'post-list',
   props: {
@@ -66483,11 +66485,13 @@ var render = function() {
                           _c("p", { staticClass: "card-text" }, [
                             _c("small", { staticClass: "text-muted" }, [
                               _vm._v(
-                                _vm._s(
-                                  _vm.moment(post.published_at).format("MMM D")
-                                ) +
-                                  " — " +
-                                  _vm._s(post.read_time)
+                                "\n                                Opublikowane: " +
+                                  _vm._s(
+                                    _vm
+                                      .moment(post.published_at)
+                                      .format("DD.MM.YYYY")
+                                  ) +
+                                  "r.\n                            "
                               )
                             ])
                           ])
