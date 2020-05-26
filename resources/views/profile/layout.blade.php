@@ -17,14 +17,14 @@
                     <h6>
                         {{ $guard->user()->profile->company_name }}
                     </h6>
-                    <h5 class="proile-rating">{{ __('Homepage:') }}
+                    <h5 class="proile-rating">{{ __('Homepage') }}:
                         @if(!empty($guard->user()->profile->homepage))
                             &nbsp;<a href="{{ $guard->user()->profile->homepage }}" target="_blank"><span>{{ $guard->user()->profile->homepage }}</span></a>
                         @else
                         &nbsp;<a href="#"><span><i class="fa fa-close"></i></span></a>
                         @endif
                     </h5>
-                    <h5 class="proile-rating">{{ __('Social Media:') }}
+                    <h5 class="proile-rating">{{ __('Social Media') }}:
                     <div class="footer-social d-inline">
                         @if(!empty($guard->user()->profile->social_media) && count($guard->user()->profile->social_media))
                         @foreach($guard->user()->profile->social_media as $social_media)
