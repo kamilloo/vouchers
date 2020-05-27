@@ -6,7 +6,7 @@
     <meta property="og:type"               content="article" />
     <meta property="og:title"              content="{{ $post['title'] }}' — MyVouchers'" />
     <meta property="og:description"        content="{{ $post['summary'] }}" />
-    <meta property="og:image"              content="{{ $post['featured_image'] }}" />
+    <meta property="og:image"              content="{{ asset($post['featured_image']) }}" />
     <meta name="twitter:image" content="">
     <meta name="twitter:title" content="">
     <meta name="twitter:description" content="">
