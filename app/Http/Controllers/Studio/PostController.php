@@ -96,15 +96,27 @@ class PostController extends BaseController
             $post->append('read_time');
 
             event(new PostViewed($post));
-
-            return response()->json([
-                'post' => $post,
-                'user' => $post->user,
-                'username' => optional($this->userMeta)->username,
-                'avatar' => !empty(optional($this->userMeta)->avatar) ? optional($this->userMeta)->avatar : $this->generateDefaultGravatar($this->user->email, 200),
-                'meta' => $post->meta,
-                'related' => $this->showRelated ? $this->getRelatedViaTaxonomy($post, $posts) : [],
-            ]);
+            if ($request->expectsJson())
+            {
+                return response()->json([
+                    'post' => $post,
+                    'user' => $post->user,
+                    'username' => optional($this->userMeta)->username,
+                    'avatar' => !empty(optional($this->userMeta)->avatar) ? optional($this->userMeta)->avatar : $this->generateDefaultGravatar($this->user->email, 200),
+                    'meta' => $post->meta,
+                    'related' => $this->showRelated ? $this->getRelatedViaTaxonomy($post, $posts) : [],
+                ]);
+            }else{
+                return view('studio.show', [
+                    'scripts' => $this->scriptVariables(),
+                    'post' => $post,
+                    'user' => $post->user,
+                    'username' => optional($this->userMeta)->username,
+                    'avatar' => !empty(optional($this->userMeta)->avatar) ? optional($this->userMeta)->avatar : $this->generateDefaultGravatar($this->user->email, 200),
+                    'meta' => $post->meta,
+                    'related' => $this->showRelated ? $this->getRelatedViaTaxonomy($post, $posts) : [],
+                ]);
+            }
         } else {
             return response()->json(null, 404);
         }

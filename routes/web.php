@@ -172,5 +172,7 @@ Route::namespace('Studio')->prefix(config('studio.path'))->group(function () {
         });
     });
 
-    Route::get('/{view?}', 'ViewController')->where('view', '(.*)')->name('studio');
+//    Route::get('/{view?}', 'ViewController')->where('view', '(.*)')->name('studio');
+    Route::get('/', 'ViewController')->name('studio');
+    Route::get('{identifier}/{slug}', 'PostController@show')->middleware('Canvas\Http\Middleware\Session');
 });
