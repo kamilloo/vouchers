@@ -2,6 +2,16 @@
 
 @section('extra-head')
 
+    <meta property="og:url"                content="" />
+    <meta property="og:type"               content="" />
+    <meta property="og:title"              content="" />
+    <meta property="og:description"        content="" />
+    <meta property="og:image"              content="" />
+    <meta name="twitter:image" content="">
+    <meta name="twitter:title" content="">
+    <meta name="twitter:description" content="">
+    <meta name="twitter:card" content="summary">
+
     <link href="{{ mix('studio.css') }}" rel="stylesheet">
 
     <link rel="dns-prefetch" href="//fonts.gstatic.com">

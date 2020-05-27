@@ -14,15 +14,6 @@
 
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
-<meta property="og:url"                content="{{ route('welcome') }}" />
-<meta property="og:type"               content="website" />
-<meta property="og:title"              content="MyVouchers" />
-<meta property="og:description"        content="Sprzedajemy bony upominkowe" />
-<meta property="og:image"              content="{{ asset('welcome/img/body-bg.jpg') }}" />
-<meta name="twitter:image" content="">
-<meta name="twitter:title" content="">
-<meta name="twitter:description" content="">
-<meta name="twitter:card" content="summary">
 
 <link rel="canonical">
 
