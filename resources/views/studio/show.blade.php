@@ -2,11 +2,11 @@
 
 @section('extra-head')
 
-    <meta property="og:url"                content="" />
-    <meta property="og:type"               content="" />
-    <meta property="og:title"              content="" />
-    <meta property="og:description"        content="" />
-    <meta property="og:image"              content="" />
+    <meta property="og:url"                content="{{ $meta['canonical_link'] }}" />
+    <meta property="og:type"               content="article" />
+    <meta property="og:title"              content="{{ $post['title'] }}' — MyVouchers'" />
+    <meta property="og:description"        content="{{ $post['summary'] }}" />
+    <meta property="og:image"              content="{{ $post['featured_image'] }}" />
     <meta name="twitter:image" content="">
     <meta name="twitter:title" content="">
     <meta name="twitter:description" content="">
@@ -24,13 +24,6 @@
 
 
 @section('content')
-    <vue-headful
-        :title="post.title + ' — MyVouchers'"
-        :description="post.summary"
-        :image="post.featured_image"
-        :url="meta.canonical_link"
-    />
-
     <div class="main-wrapper-first">
         @include('front.partials.header')
         <section class="service-area">
