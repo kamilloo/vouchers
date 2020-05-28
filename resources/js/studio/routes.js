@@ -2,7 +2,7 @@ export default [
     {
         path: '/',
         name: 'home',
-        component: require('./screens/HomeScreen').default,
+        component: require('./components/HomeScreen').default,
     },
     // {
     //     path: '/tags',
@@ -32,7 +32,7 @@ export default [
     {
         path: '/:identifier/:slug',
         name: 'post',
-        component: require('./screens/PostScreen').default,
+        component: require('./components/PostScreen').default,
     },
     {
         path: '*',

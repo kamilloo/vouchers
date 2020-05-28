@@ -1,7 +1,7 @@
 <template>
     <div class="row row-cols-1 row-cols-md-2">
         <div v-for="post in availablePosts">
-            <router-link :to="{ name: 'post', params: { identifier: publicIdentifier(post), slug: post.slug } }" class="text-decoration-none">
+            <a  :href="hrefLink(post)" class="text-decoration-none">
                 <div class="col mb-4">
                     <div class="card shadow-sm">
                         <img v-if="post.featured_image" :src="post.featured_image" class="card-img-top" :alt="post.featured_image_caption">
@@ -15,7 +15,7 @@
                         </div>
                     </div>
                 </div>
-            </router-link>
+            </a>
         </div>
     </div>
 </template>
@@ -34,6 +34,12 @@
         data() {
             return {
                 availablePosts: this.posts,
+            }
+        },
+        methods:{
+            hrefLink(post)
+            {
+                return '/blog/' + this.publicIdentifier(post) + '/' +  post.slug;
             }
         }
     }

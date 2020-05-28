@@ -152,10 +152,6 @@ Route::middleware('auth:admin')->namespace('Admin')->prefix('admin')->group(func
 
 Route::namespace('Studio')->prefix(config('studio.path'))->group(function () {
     Route::prefix('api')->group(function () {
-        Route::prefix('posts')->group(function () {
-            Route::get('/', 'PostController@index');
-            Route::get('{identifier}/{slug}', 'PostController@show')->middleware('Canvas\Http\Middleware\Session');
-        });
 
         Route::prefix('tags')->group(function () {
             Route::get('/', 'TagController@index');
@@ -167,12 +163,8 @@ Route::namespace('Studio')->prefix(config('studio.path'))->group(function () {
             Route::get('{slug}', 'TopicController@show');
         });
 
-        Route::prefix('users')->group(function () {
-            Route::get('{identifier}', 'UserController@show');
-        });
     });
 
-//    Route::get('/{view?}', 'ViewController')->where('view', '(.*)')->name('studio');
-    Route::get('/', 'ViewController')->name('studio');
+    Route::get('/', 'PostController@index')->name('studio');
     Route::get('{identifier}/{slug}', 'PostController@show')->middleware('Canvas\Http\Middleware\Session');
 });

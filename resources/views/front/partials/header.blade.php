@@ -3,7 +3,7 @@
         <div class="header-wrap">
             <div class="header-top d-flex justify-content-between align-items-center">
                 <div class="logo">
-                    <a href="{{ route('welcome') }}"><img src="welcome/img/logo.png" alt=""></a>
+                    <a href="{{ route('welcome') }}"><img src="{{ asset('welcome/img/logo.png') }}" alt=""></a>
                 </div>
                 <div class="main-menubar d-none d-md-flex align-items-center">
                     <nav>

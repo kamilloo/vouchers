@@ -2,7 +2,7 @@
 <!-- Mobile Specific Meta -->
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <!-- Favicon-->
-<link rel="shortcut icon" href="images/my-vouchers-icon.png">
+<link rel="shortcut icon" href="{{ asset('images/my-vouchers-icon.png') }}">
 <!-- Author Meta -->
 <meta name="author" content="Kamil Pietka">
 <!-- Meta Description -->

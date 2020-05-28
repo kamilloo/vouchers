@@ -53,7 +53,7 @@
         <div class="container">
             <div class="footer-content d-flex justify-content-between align-items-center flex-wrap">
                 <div class="logo">
-                    <img src="welcome/img/logo.png" alt="">
+                    <img src="{{ asset('welcome/img/logo.png') }}" alt="">
                 </div>
                 <div class="copy-right-text">Copyright &copy; {{ \Carbon\Carbon::now()->year }}  |  All rights reserved to MyVouchers</div>
                 <div class="footer-social">

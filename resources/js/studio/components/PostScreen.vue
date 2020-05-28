@@ -43,13 +43,13 @@
                 </div>
 
                 <div v-if="tags" class="mt-5">
-                    <router-link
+                    <a
                         v-for="tag in tags"
                         :key="tag.id"
-                        :to="{ name: 'tag-posts', params: { slug: tag.slug } }"
+                        href="/blog"
                         class="badge badge-light p-2 my-1 mr-2 text-decoration-none text-uppercase">
                         {{ tag.name }}
-                    </router-link>
+                    </a>
                 </div>
             </div>
 
@@ -75,11 +75,11 @@
 
 <script>
     import hljs from 'highlight.js'
-    import PostList from "../components/PostList";
+    import PostList from "./PostList";
     import NProgress from 'nprogress'
     import vueHeadful from 'vue-headful'
     import mediumZoom from 'medium-zoom'
-    import Navbar from "../components/Navbar";
+    import Navbar from "./Navbar";
 
     export default {
         name: 'post-screen',
@@ -89,24 +89,29 @@
             PostList,
             vueHeadful
         },
-
+        props:[
+            'user',
+            'post',
+            'tags',
+            'topic',
+            'username',
+            'avatar',
+            'meta',
+            'related',
+        ],
         data() {
             return {
-                user: null,
-                post: null,
-                tags: null,
-                topic: null,
-                username: null,
-                avatar: null,
-                meta: null,
-                related: [],
-                isReady: false,
+                // user: null,
+                // post: null,
+                // tags: null,
+                // topic: null,
+                // username: null,
+                // avatar: null,
+                // meta: null,
+                // related: [],
+                isReady: true,
                 canvasPath: Studio.canvasPath,
             }
-        },
-
-        created() {
-            this.fetchData()
         },
 
         updated() {
@@ -129,38 +134,8 @@
             }
         },
 
-        watch: {
-            '$route.params.slug': function (slug) {
-                this.isReady = false
-                this.related = []
-                this.fetchData()
-            }
-        },
-
         methods: {
-            fetchData() {
-                this.request()
-                    .get(Studio.path + '/api/posts/' + this.$route.params.identifier + '/' + this.$route.params.slug)
-                    .then(response => {
-                        this.user = response.data.user
-                        this.post = response.data.post
-                        this.tags = response.data.post.tags
-                        this.topic = response.data.post.topic
-                        this.username = response.data.username
-                        this.avatar = response.data.avatar
-                        this.meta = response.data.meta
-                        this.related = response.data.related
-                        this.isReady = true
 
-                        NProgress.done()
-                    })
-                    .catch(error => {
-                        // Add any error debugging...
-                        this.$router.push({name: 'home'})
-
-                        NProgress.done()
-                    })
-            }
         },
 
         computed: {

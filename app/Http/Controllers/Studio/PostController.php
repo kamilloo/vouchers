@@ -6,6 +6,7 @@ use App\Models\User;
 use Canvas\Events\PostViewed;
 use Canvas\Post;
 use Canvas\UserMeta;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
 class PostController extends BaseController
@@ -53,8 +54,9 @@ class PostController extends BaseController
 
         $posts->each->append('read_time');
 
-        return response()->json([
-            'posts' => $posts,
+        return view('studio.app', [
+        'scripts' => $this->scriptVariables(),
+        'posts' => $posts,
         ]);
     }
 
@@ -64,7 +66,6 @@ class PostController extends BaseController
      * @param Request $request
      * @param string $identifier
      * @param string $slug
-     * @return \Illuminate\Http\JsonResponse
      */
     public function show(Request $request, string $identifier, string $slug = null)
     {
@@ -96,30 +97,19 @@ class PostController extends BaseController
             $post->append('read_time');
 
             event(new PostViewed($post));
-            if ($request->expectsJson())
-            {
-                return response()->json([
-                    'post' => $post,
-                    'user' => $post->user,
-                    'username' => optional($this->userMeta)->username,
-                    'avatar' => !empty(optional($this->userMeta)->avatar) ? optional($this->userMeta)->avatar : $this->generateDefaultGravatar($this->user->email, 200),
-                    'meta' => $post->meta,
-                    'related' => $this->showRelated ? $this->getRelatedViaTaxonomy($post, $posts) : [],
-                ]);
-            }else{
-                return view('studio.show', [
-                    'scripts' => $this->scriptVariables(),
-                    'post' => $post,
-                    'user' => $post->user,
-                    'username' => optional($this->userMeta)->username,
-                    'avatar' => !empty(optional($this->userMeta)->avatar) ? optional($this->userMeta)->avatar : $this->generateDefaultGravatar($this->user->email, 200),
-                    'meta' => $post->meta,
-                    'related' => $this->showRelated ? $this->getRelatedViaTaxonomy($post, $posts) : [],
-                ]);
-            }
-        } else {
-            return response()->json(null, 404);
+
+            return view('studio.show', [
+                'scripts' => $this->scriptVariables(),
+                'post' => $post,
+                'user' => $post->user,
+                'username' => optional($this->userMeta)->username,
+                'avatar' => !empty(optional($this->userMeta)->avatar) ? optional($this->userMeta)->avatar : $this->generateDefaultGravatar($this->user->email, 200),
+                'meta' => $post->meta,
+                'related' => $this->showRelated ? $this->getRelatedViaTaxonomy($post, $posts) : [],
+            ]);
         }
+
+        throw new ModelNotFoundException();
     }
 
     /**

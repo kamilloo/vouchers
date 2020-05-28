@@ -32,7 +32,9 @@
                 @yield('content-page')
 
                 <div id="studio">
-                    <router-view></router-view>
+                    <home-screen
+                    :posts="{{ $posts }}"
+                    ></home-screen>
                 </div>
             </div>
         </section>

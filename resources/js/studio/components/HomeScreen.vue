@@ -31,9 +31,9 @@
 <script>
     import NProgress from 'nprogress'
     import vueHeadful from 'vue-headful'
-    import Navbar from "../components/Navbar";
-    import PostList from '../components/PostList'
-    import FeaturedPostList from "../components/FeaturedPostList";
+    import Navbar from "./Navbar";
+    import PostList from './PostList'
+    import FeaturedPostList from "./FeaturedPostList";
 
     export default {
         name: 'home-screen',
@@ -44,34 +44,19 @@
             PostList,
             vueHeadful
         },
-
+        props: [
+            'posts',
+        ],
         data() {
             return {
                 featuredPostCount: 4,
-                posts: [],
             }
         },
 
         mounted() {
-            this.fetchPosts()
         },
 
         methods: {
-            fetchPosts() {
-                this.request()
-                    .get(Studio.path + '/api/posts')
-                    .then(response => {
-                        this.posts = response.data.posts
-
-                        NProgress.done()
-                    })
-                    .catch(error => {
-                        // Add any error debugging...
-                        this.$router.push({name: 'home'})
-
-                        NProgress.done()
-                    })
-            }
         }
     }
 </script>

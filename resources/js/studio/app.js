@@ -22,6 +22,8 @@ Vue.mixin(RequestMixin)
 Vue.config.productionTip = false
 
 Vue.use(VueRouter)
+Vue.component('post-screen', require('./components/PostScreen').default,)
+Vue.component('home-screen', require('./components/HomeScreen').default,)
 
 const router = new VueRouter({
     routes: Routes,
