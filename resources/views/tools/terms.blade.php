@@ -42,7 +42,7 @@
                                 <ol>
                                     <li>Kupujący może kontaktować się ze Właścicielem w szczególności:
                                         <ol>
-                                            <li>za pośrednictwem poczty elektronicznej, na adres: myvouchers.pl@gmail.com</li>
+                                            <li>za pośrednictwem poczty elektronicznej, na adres: myvouchers@myvouchers.pl</li>
                                             <li>pisemnie na adres: Kamil Pietka, ul. Mossego 2, 62-065 Grodzisk Wlkp.</li>
                                             <li>a także telefonicznie pod numerem: +48662362356 w godz. 9.00 – 17.00 w dni robocze.</li>
                                         </ol>

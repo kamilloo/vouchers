@@ -24,7 +24,7 @@
                         <div class="desc">
                             <h6 class="title text-uppercase">Email Adres</h6>
                             <div class="contact">
-                                <a href="mailto:myvouchers.pl@gmail.com">myvouchers.pl@gmail.com</a>
+                                <a href="mailto:myvouchers@myvouchers.pl">myvouchers@myvouchers.pl</a>
                             </div>
                         </div>
                     </div>
